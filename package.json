@@ -14,7 +14,7 @@
     "build": "electron-builder --win",
     "build:win": "electron-builder --win",
     "build:linux": "electron-builder --linux AppImage deb",
-    "build:mac": "electron-builder --mac dmg",
+    "build:mac": "electron-builder --mac dmg --x64 --arm64",
     "build:dir": "electron-builder --win --dir",
     "deploy:tempest": "node scripts/deploy-tempest.js",
     "deploy:launcher": "node scripts/deploy-launcher.js"
