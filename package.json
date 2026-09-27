@@ -1,0 +1,94 @@
+{
+  "name": "origins-launcher",
+  "version": "0.1.1",
+  "description": "Origins Launcher",
+  "main": "index.js",
+  "author": "Origins",
+  "license": "ISC",
+  "type": "commonjs",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win",
+    "build:win": "electron-builder --win",
+    "build:linux": "electron-builder --linux AppImage deb",
+    "build:mac": "electron-builder --mac dmg",
+    "build:dir": "electron-builder --win --dir",
+    "deploy:tempest": "node scripts/deploy-tempest.js",
+    "deploy:launcher": "node scripts/deploy-launcher.js"
+  },
+  "devDependencies": {
+    "electron": "^41.0.3",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "com.origins.launcher",
+    "productName": "Origins Launcher",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "index.js",
+      "tempest-updater.js",
+      "src/**/*",
+      "package.json"
+    ],
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://146.59.197.230/launcher/"
+      }
+    ],
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Game"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "category": "public.app-category.games"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Origins Launcher"
+    }
+  },
+  "dependencies": {
+    "@azure/msal-node": "^7.0.0",
+    "electron-updater": "^6.8.9",
+    "minecraft-launcher-core": "^3.18.2"
+  }
+}

@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <title>Origins Launcher</title>
+
+
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+
+<body>
+
+
+
+    <!-- =====================================================
+
+         ORIGINS CUSTOM TITLEBAR
+
+    ====================================================== -->
+
+
+
+    <header class="origins-titlebar">
+
+
+
+        <div class="origins-titlebar-brand">
+
+            <span class="origins-titlebar-mark"></span>
+
+            <span>ORIGINS</span>
+
+        </div>
+
+
+
+        <div class="origins-window-controls">
+
+
+
+            <button id="windowMinimize" class="origins-window-button" type="button" aria-label="Minimize">
+
+                <span class="window-icon window-icon-minimize"></span>
+
+            </button>
+
+
+
+            <button id="windowMaximize" class="origins-window-button" type="button" aria-label="Maximize">
+
+                <span class="window-icon window-icon-maximize"></span>
+
+            </button>
+
+
+
+            <button id="windowClose" class="origins-window-button origins-window-close" type="button" aria-label="Close">
+
+                <span class="window-icon window-icon-close"></span>
+
+            </button>
+
+
+
+        </div>
+
+
+
+    </header>
+
+
+
+
+    <!-- =====================================================
+         FIRST RUN / MICROSOFT ONBOARDING
+    ====================================================== -->
+    <section class="origins-onboarding is-visible" id="originsOnboarding" aria-live="polite">
+        <div class="origins-onboarding-shade"></div>
+
+        <div class="origins-onboarding-card">
+            <span class="origins-onboarding-kicker">ORIGINS LAUNCHER</span>
+
+            <div id="originsMicrosoftStep">
+                <h1>WELCOME TO ORIGINS</h1>
+                <p>
+                    Sign in with Microsoft to continue and connect your
+                    Origins profile to this launcher.
+                </p>
+
+                <button class="origins-microsoft-button" id="originsMicrosoftButton" type="button">
+                    <span class="origins-microsoft-mark" aria-hidden="true">
+                        <i></i><i></i><i></i><i></i>
+                    </span>
+                    <span>CONTINUE WITH MICROSOFT</span>
+                </button>
+
+                <span class="origins-onboarding-note">SECURE MICROSOFT SIGN-IN</span>
+            </div>
+
+            <div class="origins-profile-step" id="originsProfileStep" hidden>
+                <h1>CREATE YOUR PROFILE</h1>
+                <p>
+                    Microsoft is connected. Choose the name that will be
+                    displayed on Origins.
+                </p>
+
+                <label class="origins-profile-label" for="originsFirstProfileName">
+                    DISPLAY NAME
+                </label>
+                <input
+                    class="origins-profile-input"
+                    id="originsFirstProfileName"
+                    type="text"
+                    minlength="3"
+                    maxlength="32"
+                    autocomplete="off"
+                    placeholder="Your Origins name"
+                >
+
+                <button class="origins-profile-create-button" id="originsCreateProfileButton" type="button">
+                    CREATE PROFILE
+                </button>
+            </div>
+
+            <p class="origins-onboarding-status" id="originsOnboardingStatus" role="status"></p>
+        </div>
+    </section>
+
+    <div class="launcher">
+
+
+
+        <!-- =====================================================
+
+             SIDEBAR
+
+        ====================================================== -->
+
+
+
+        <aside class="sidebar">
+
+
+
+            <!-- Nouveau logo Origins -->
+
+            <button class="origins-logo origins-logo-v2" id="originsHomeButton" type="button" title="Origins">
+
+                <img src="assets/logos/origins-logo.png" alt="Origins">
+
+            </button>
+
+
+
+            <!-- Navigation principale centrée -->
+
+            <div class="sidebar-center-nav">
+
+
+
+                <button class="sidebar-button active" id="homeButton" type="button" title="Home" aria-label="Home">
+
+                    <span class="home-icon" aria-hidden="true">
+
+                        <svg viewBox="0 0 32 32" focusable="false" aria-hidden="true">
+
+                            <path d="M3.5 15.2 L16 4.5 L28.5 15.2"/>
+
+                            <path d="M7.2 12.1 V7.2 H10.1 V9.6"/>
+
+                            <path d="M6.7 12.5 L16 6.8 L25.3 12.5 V27 H19.3 V20.4 H12.7 V27 H6.7 Z"/>
+
+                        </svg>
+
+                    </span>
+
+                </button>
+
+
+
+                <button class="sidebar-button games-button" id="gamesButton" type="button" title="Games" aria-label="Games" aria-expanded="false">
+
+                    <svg class="games-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+
+                        <path d="M8.5 8.5h7a4.5 4.5 0 0 1 4.3 3.2l1.05 3.45a2.55 2.55 0 0 1-4.35 2.45l-1.55-1.7h-5.9L7.5 17.6a2.55 2.55 0 0 1-4.35-2.45L4.2 11.7a4.5 4.5 0 0 1 4.3-3.2Z"/>
+
+                        <path d="M7.2 11.3v3.2M5.6 12.9h3.2"/>
+
+                        <circle cx="16.2" cy="12" r=".8"/>
+
+                        <circle cx="18.2" cy="14" r=".8"/>
+
+                    </svg>
+
+                </button>
+
+
+
+                <button class="sidebar-button news-button" id="updatesButton" type="button" title="Actus" aria-label="Actus">
+
+                    <svg class="updates-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+
+                        <path d="M5 4.5h14a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 18V6A1.5 1.5 0 0 1 5 4.5Z"/>
+
+                        <path d="M7 8h4M7 11h4M7 14h4M14 8h3M14 11h3M14 14h3"/>
+
+                    </svg>
+
+                </button>
+
+
+
+                <button class="sidebar-button shop-button" id="shopButton" type="button" title="Shop" aria-label="Shop">
+
+                    <svg class="shop-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+
+                        <path d="M5 9.5h14l-1 10H6l-1-10Z"/>
+
+                        <path d="M8.5 9.5V7a3.5 3.5 0 0 1 7 0v2.5"/>
+
+                    </svg>
+
+                </button>
+
+
+
+                <button class="sidebar-button settings-button" id="settingsButton" type="button" title="Settings" aria-label="Settings">
+
+                    <svg class="settings-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+                        <circle cx="12" cy="12" r="3"/>
+
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/>
+
+                    </svg>
+
+                </button>
+
+
+
+            </div>
+
+
+
+            <!-- Bulle des jeux -->
+
+            <div class="games-popover" id="gamesPanel" aria-hidden="true">
+
+                <div class="games-popover-header">
+
+                    <div>
+
+                        <span class="games-popover-eyebrow">ORIGINS</span>
+
+                        <h2>JEUX</h2>
+
+                    </div>
+
+                    <button class="games-popover-close" id="gamesClose" type="button" aria-label="Fermer">×</button>
+
+                </div>
+
+
+
+                <button class="game-card" id="tempestButton" type="button">
+
+                    <img src="assets/logos/tempest-logo.png" alt="Tempest Origins" class="game-card-logo">
+
+                    <span class="game-card-copy">
+
+                        <strong>TEMPEST ORIGINS</strong>
+
+                        <small>Disponible</small>
+
+                    </span>
+
+                </button>
+
+
+
+                <div class="game-card game-card-coming">
+
+                    <span class="game-card-placeholder">+</span>
+
+                    <span class="game-card-copy">
+
+                        <strong>PROCHAIN JEU</strong>
+
+                        <small>Bientôt disponible</small>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+        </aside>
+
+
+
+        <!-- Floating Origins profile -->
+
+        <button class="account-button floating-profile-button" id="accountButton" type="button" title="Account" aria-label="Account">
+
+            <span class="account-icon"></span>
+
+        </button>
+
+
+
+
+
+        <!-- =====================================================
+
+             MAIN CONTENT
+
+        ====================================================== -->
+
+
+
+        <main class="main-content">
+
+
+
+
+
+            <!-- =================================================
+
+                 HOME ORIGINS
+
+            ================================================== -->
+
+
+
+            <section
+
+                class="launcher-page home-page active"
+
+                id="homePage"
+
+            >
+
+
+
+                <!-- Background forêt -->
+
+                <div class="home-background"></div>
+
+
+
+                <!-- Overlay -->
+
+                <div class="home-overlay"></div>
+
+
+
+
+
+                <!-- Contenu scrollable -->
+
+                <div class="home-scroll">
+
+
+
+
+
+                    <!-- HERO -->
+
+                    <section class="home-hero">
+
+
+
+<!-- Texte -->
+
+                        <div class="hero-copy">
+
+
+
+                            <span
+
+                                class="eyebrow"
+
+                                data-i18n="originsProject"
+
+                            >
+
+                                ORIGINS PROJECT
+
+                            </span>
+
+
+
+
+
+                            <h1 data-i18n="welcomeTitle">
+
+                                WELCOME TO ORIGINS
+
+                            </h1>
+
+
+
+
+
+                            <p data-i18n="welcomeText">
+
+                                Follow the development of Tempest Origins,
+
+                                discover project news and read the latest
+
+                                patch notes.
+
+                            </p>
+
+
+
+
+
+                            <button
+
+                                class="hero-button"
+
+                                id="discoverTempestButton"
+
+                                type="button"
+
+                                data-i18n="discoverTempest"
+
+                            >
+
+                                DISCOVER TEMPEST ORIGINS
+
+                            </button>
+
+
+
+                        </div>
+
+
+
+                    </section>
+
+
+
+
+
+                    <!-- =================================================
+
+                         NEWS
+
+                    ================================================== -->
+
+
+
+                    <section class="news-section">
+
+
+
+
+
+                        <div class="section-heading">
+
+
+
+                            <div>
+
+
+
+                                <span
+
+                                    class="eyebrow"
+
+                                    data-i18n="newsEyebrow"
+
+                                >
+
+                                    ORIGINS NETWORK
+
+                                </span>
+
+
+
+
+
+                                <h2 data-i18n="latestNews">
+
+                                    LATEST NEWS
+
+                                </h2>
+
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+
+                        <!--
+
+                            Les cartes d'actualité seront
+
+                            générées par renderer.js
+
+                        -->
+
+                        <div
+
+                            class="news-grid"
+
+                            id="newsGrid"
+
+                        ></div>
+
+
+
+
+
+                    </section>
+
+
+
+                </div>
+
+
+
+            </section>
+
+
+
+
+
+
+
+            <!-- =================================================
+
+                 ACTUS
+
+            ================================================== -->
+
+            <section class="launcher-page updates-page" id="updatesPage">
+
+                <div class="section-page-background"></div>
+
+                <div class="section-page-overlay"></div>
+
+                <div class="section-page-scroll">
+
+                    <header class="section-page-hero">
+
+                        <span class="eyebrow" data-i18n="newsEyebrow">ORIGINS NETWORK</span>
+
+                        <h1 data-i18n="updatesTitle">NEWS</h1>
+
+                        <p data-i18n="updatesLead">Find the history of launcher and Origins project updates here.</p>
+
+                    </header>
+
+                    <div class="updates-history" id="updatesHistory"></div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+
+                 SHOP
+
+            ================================================== -->
+
+            <section class="launcher-page shop-page" id="shopPage">
+
+                <div class="section-page-background"></div>
+
+                <div class="section-page-overlay"></div>
+
+                <div class="section-page-scroll">
+
+                    <header class="section-page-hero">
+
+                        <span class="eyebrow">ORIGINS</span>
+
+                        <h1>SHOP</h1>
+
+                        <p data-i18n="shopLead">The Origins shop is ready for future project content.</p>
+
+                    </header>
+
+
+
+                    <div class="shop-grid">
+
+                        <article class="shop-card shop-card-featured">
+
+                            <div class="shop-card-icon">✦</div>
+
+                            <span class="news-type">TEMPEST ORIGINS</span>
+
+                            <h3 data-i18n="shopTempestTitle">Tempest Content</h3>
+
+                            <p data-i18n="shopTempestText">Future Tempest Origins content will appear here.</p>
+
+                            <button type="button" disabled data-i18n="comingSoon">COMING SOON</button>
+
+                        </article>
+
+                        <article class="shop-card">
+
+                            <div class="shop-card-icon">◇</div>
+
+                            <span class="news-type">ORIGINS</span>
+
+                            <h3 data-i18n="shopOriginsTitle">Origins Collection</h3>
+
+                            <p data-i18n="shopOriginsText">A section planned for future Origins items and content.</p>
+
+                            <button type="button" disabled data-i18n="comingSoon">COMING SOON</button>
+
+                        </article>
+
+                        <article class="shop-card">
+
+                            <div class="shop-card-icon">☆</div>
+
+                            <span class="news-type" data-i18n="comingSoon">COMING SOON</span>
+
+                            <h3 data-i18n="shopComingTitle">Coming Soon</h3>
+
+                            <p data-i18n="shopComingText">More categories can be added without changing navigation.</p>
+
+                            <button type="button" disabled data-i18n="comingSoon">COMING SOON</button>
+
+                        </article>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+
+                 TEMPEST ORIGINS
+
+            ================================================== -->
+
+
+
+            <section class="launcher-page games-library-page" id="gamesLibraryPage">
+
+                <div class="games-library-shell">
+
+                    <span class="eyebrow" data-i18n="originsLibrary">ORIGINS LIBRARY</span>
+
+                    <h1 data-origins-games-title>GAMES</h1>
+
+                    <p class="games-library-lead" data-origins-games-lead>Your worlds, in one place.</p>
+
+                    <div class="games-library-grid">
+
+                        <button class="library-game-card available" id="libraryTempestButton" type="button">
+
+                            <img src="assets/logos/tempest-logo.png" alt="Tempest Origins">
+
+                            <span><strong>TEMPEST ORIGINS</strong><small data-origins-available>AVAILABLE</small></span>
+
+                        </button>
+
+                        <div class="library-game-card coming">
+
+                            <div class="coming-mark">+</div>
+
+                            <span><strong data-origins-coming>UPCOMING GAME</strong><small data-origins-coming-sub>Coming later</small></span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <section
+
+                class="launcher-page tempest-page"
+
+                id="tempestPage"
+
+            >
+
+
+
+
+
+                <!-- Background Tempest -->
+
+                <div class="game-background"></div>
+
+
+
+
+
+                <!-- Overlay -->
+
+                <div class="game-overlay"></div>
+
+
+
+
+
+                <!-- Topbar -->
+
+                <div class="topbar">
+
+
+
+                    <div class="game-name-small">
+
+                        TEMPEST ORIGINS
+
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+                <!-- Informations jeu -->
+
+                <section class="game-info">
+
+
+
+                    <h1>
+
+
+
+                        TEMPEST
+
+
+
+                        <span>
+
+                            ORIGINS
+
+                        </span>
+
+
+
+                    </h1>
+
+
+
+
+
+                    <div class="play-area">
+
+
+
+                        <button
+
+                            class="play-button"
+
+                            id="playButton"
+
+                            type="button"
+
+                            data-i18n="install"
+
+                        >
+
+                            INSTALL
+
+                        </button>
+
+
+
+                        <div
+
+                            class="install-progress"
+
+                            id="installProgress"
+
+                            aria-hidden="true"
+
+                        >
+
+                            <div class="install-progress-header">
+
+                                <span class="install-progress-status" id="installProgressStatus" data-i18n="preparingTempest">
+
+                                    PREPARING TEMPEST ORIGINS
+
+                                </span>
+
+                                <span class="install-progress-percent" id="installProgressPercent">
+
+                                    0%
+
+                                </span>
+
+                            </div>
+
+
+
+                            <div class="install-progress-track">
+
+                                <div class="install-progress-bar" id="installProgressBar"></div>
+
+                            </div>
+
+
+
+                            <div class="install-progress-detail" id="installProgressDetail" data-i18n="preparingInstallation">
+
+                                Preparing installation...
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+                </section>
+
+
+
+            </section>
+
+
+
+
+
+        </main>
+
+
+
+
+
+        <!-- Origins notifications -->
+
+        <button class="notifications-quick-access" id="notificationsQuickAccess" type="button" aria-label="Open notifications" title="Notifications">
+
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 9.5a5.5 5.5 0 0 1 11 0v3.2l1.8 3.1H4.7l1.8-3.1V9.5Z"/><path d="M10 18.2a2.2 2.2 0 0 0 4 0"/></svg>
+
+            <span class="notifications-badge" id="notificationsBadge" hidden>0</span>
+
+        </button>
+
+
+
+        <aside class="floating-tool-window notifications-panel" id="notificationsPanel" aria-hidden="true">
+
+            <div class="floating-window-header" data-drag-handle>
+
+                <strong data-i18n="notifications">NOTIFICATIONS</strong>
+
+                <button class="floating-window-close" id="notificationsClose" type="button" aria-label="Close notifications">×</button>
+
+            </div>
+
+            <div class="notifications-content" id="notificationsContent">
+
+                <div class="social-empty-state">
+
+                    <strong data-i18n="noNotifications">NO NOTIFICATIONS</strong>
+
+                    <span data-i18n="noNotificationsText">Friend requests will appear here.</span>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- =====================================================
+
+             FRIENDS QUICK ACCESS
+
+        ====================================================== -->
+
+
+
+        <button
+
+            class="friends-quick-access"
+
+            id="friendsQuickAccess"
+
+            type="button"
+
+            aria-label="Open contacts"
+
+            aria-expanded="false"
+
+            title="Contacts"
+
+        >
+
+            <span class="friends-bubble-icon" aria-hidden="true">
+
+                <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+
+                    <circle cx="9" cy="8" r="3"/><path d="M3.5 18c.5-3.2 2.4-5 5.5-5s5 1.8 5.5 5"/><circle cx="17" cy="9" r="2.4"/><path d="M15.3 13.6c2.8-.7 5 .8 5.4 3.4"/>
+
+                </svg>
+
+            </span>
+
+
+
+            <span class="friends-online-dot" aria-hidden="true"></span>
+
+
+
+            <span
+
+                class="friends-online-badge"
+
+                id="friendsMessageBadge"
+
+                aria-hidden="true"
+
+            >
+
+                0
+
+            </span>
+
+
+
+            <span class="friends-bubble-tooltip">
+
+                <strong data-i18n="friendsOnline">
+
+                    FRIENDS ONLINE
+
+                </strong>
+
+
+
+                <small>
+
+                    <span id="friendsOnlineCount">0</span>
+
+                    <span data-i18n="onlineShort">online</span>
+
+                </small>
+
+            </span>
+
+        </button>
+
+
+
+
+
+        <!-- =====================================================
+
+             FRIENDS PANEL
+
+        ====================================================== -->
+
+
+
+        <aside
+
+            class="social-panel"
+
+            id="socialPanel"
+
+        >
+
+
+
+
+
+            <div class="social-header" data-drag-handle>
+
+
+
+                <div
+
+                    class="social-title"
+
+                    data-i18n="contacts"
+
+                >
+
+                    CONTACTS
+
+                </div>
+
+
+
+
+
+                <button
+
+                    class="social-close"
+
+                    id="socialClose"
+
+                    type="button"
+
+                    aria-label="Close friends"
+
+                >
+
+                    ×
+
+                </button>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- Profile -->
+
+            <div class="profile">
+
+
+
+                <div class="avatar">
+
+                    ?
+
+                </div>
+
+
+
+
+
+                <div class="profile-info">
+
+
+
+                    <strong id="localProfileName">
+
+                        Origins Player
+
+                    </strong>
+
+
+
+                    <span
+
+                        class="local-profile-status"
+
+                        id="localProfileStatus"
+
+                    >
+
+                        Online
+
+                    </span>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+
+
+            <div class="social-separator"></div>
+
+
+
+
+
+            <!-- Friends header -->
+
+            <div class="friends-header">
+
+
+
+                <span data-i18n="contacts">
+
+                    CONTACTS
+
+                </span>
+
+
+
+
+
+                <button
+
+                    class="add-friend-button"
+
+                    id="addFriendButton"
+
+                    type="button"
+
+                    title="Add friend"
+
+                >
+
+                    +
+
+                </button>
+
+
+
+            </div>
+
+
+
+
+
+            <!-- Friends / private messages -->
+
+            <div class="friends-messages-ui">
+
+
+
+                <section
+
+                    class="friends-messages-view active"
+
+                    id="friendsListView"
+
+                >
+
+
+
+                    <div class="friends-list-heading">
+
+                        <span data-i18n="contacts">CONTACTS</span>
+
+                        <span class="friends-list-count">1</span>
+
+                    </div>
+
+
+
+                    <button
+
+                        class="friends-contact-row"
+
+                        id="originsTestFriend"
+
+                        type="button"
+
+                    >
+
+                        <span class="friends-contact-avatar">
+
+                            O
+
+                            <span class="friends-contact-presence"></span>
+
+                        </span>
+
+
+
+                        <span class="friends-contact-info">
+
+                            <strong>Origins Player</strong>
+
+                            <small data-i18n="playingTempest">Playing Tempest</small>
+
+                        </span>
+
+
+
+                        <span class="friends-contact-arrow">›</span>
+
+                    </button>
+
+
+
+                </section>
+
+
+
+            </div>
+
+
+
+
+
+        </aside>
+
+
+
+
+
+
+
+
+
+                <section
+
+                    class="friends-chat-window"
+
+                    id="friendsConversationView"
+
+                >
+
+
+
+                    <div class="friends-conversation-header" data-drag-handle>
+
+
+
+                        <button
+
+                            class="friends-conversation-back"
+
+                            id="friendsConversationBack"
+
+                            type="button"
+
+                            aria-label="Close"
+
+                        >
+
+                            ×
+
+                        </button>
+
+
+
+                        <span class="friends-contact-avatar compact">
+
+                            O
+
+                            <span class="friends-contact-presence"></span>
+
+                        </span>
+
+
+
+                        <span class="friends-contact-info">
+
+                            <strong>Origins Player</strong>
+
+                            <small data-i18n="playingTempest">Playing Tempest</small>
+
+                        </span>
+
+
+
+                    </div>
+
+
+
+
+
+                    <div
+
+                        class="friends-conversation-messages"
+
+                        id="friendsConversationMessages"
+
+                    >
+
+
+
+                        <div class="friends-conversation-empty">
+
+                            <strong data-i18n="privateMessages">
+
+                                PRIVATE MESSAGES
+
+                            </strong>
+
+
+
+                            <span data-i18n="conversationEmpty">
+
+                                Start a conversation from the launcher.
+
+                            </span>
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+                    <form
+
+                        class="friends-message-composer"
+
+                        id="friendsMessageComposer"
+
+                    >
+
+                        <input
+
+                            id="friendsMessageInput"
+
+                            type="text"
+
+                            maxlength="500"
+
+                            autocomplete="off"
+
+                            data-i18n-placeholder="messagePlaceholder"
+
+                            placeholder="Write a message..."
+
+                        >
+
+
+
+                        <button
+
+                            type="submit"
+
+                            aria-label="Send"
+
+                        >
+
+                            ➤
+
+                        </button>
+
+                    </form>
+
+
+
+                </section>
+
+
+
+
+
+        <aside class="floating-tool-window add-contact-panel" id="addContactPanel" aria-hidden="true">
+
+            <div class="floating-window-header" data-drag-handle>
+
+                <strong data-i18n="addContact">ADD A CONTACT</strong>
+
+                <button class="floating-window-close" id="addContactClose" type="button" aria-label="Close">×</button>
+
+            </div>
+
+            <div class="add-contact-content">
+
+                <label for="addContactId" data-i18n="originsId">ORIGINS ID</label>
+
+                <input id="addContactId" type="text" autocomplete="off" placeholder="ORG-XXXX-XXXX">
+
+                <button class="add-contact-search" id="addContactSearch" type="button" data-i18n="search">SEARCH</button>
+
+                <p class="add-contact-hint" data-i18n="socialBackendPending">Origins ID search will be connected to the social server.</p>
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- Friends backdrop -->
+
+        <div
+
+            class="drawer-backdrop"
+
+            id="drawerBackdrop"
+
+        ></div>
+
+
+
+
+
+        <!-- =====================================================
+
+             ACCOUNT
+
+        ====================================================== -->
+
+
+
+        <div
+
+            class="account-overlay"
+
+            id="accountOverlay"
+
+            aria-hidden="true"
+
+        >
+
+
+
+            <section class="account-panel">
+
+
+
+
+
+                <div class="account-panel-header">
+
+
+
+                    <div>
+
+
+
+                        <span class="panel-eyebrow">
+
+                            ORIGINS
+
+                        </span>
+
+
+
+
+
+                        <h2 data-i18n="account">
+
+                            ACCOUNT
+
+                        </h2>
+
+
+
+                    </div>
+
+
+
+
+
+                    <button
+
+                        class="account-close"
+
+                        id="accountClose"
+
+                        type="button"
+
+                        aria-label="Close account"
+
+                    >
+
+                        ×
+
+                    </button>
+
+
+
+                </div>
+
+
+
+
+
+                <div class="account-avatar-large">
+
+                    ?
+
+                </div>
+
+
+
+
+
+                <h3 id="accountProfileName">Not signed in</h3>
+
+
+                <div class="origins-id-card" id="originsIdCard" hidden>
+                    <span class="origins-id-label">ORIGINS ID</span>
+                    <button class="origins-id-copy" id="copyOriginsIdButton" type="button" title="Copy Origins ID">
+                        <span id="accountOriginsId">----</span>
+                        <span class="origins-id-copy-label" id="originsIdCopyLabel">COPY</span>
+                    </button>
+                </div>
+
+
+
+
+                <input id="profileNameInput" class="profile-name-input" maxlength="32" data-i18n-placeholder="displayName" placeholder="Display name">
+
+                <button id="saveProfileButton" class="account-signin" type="button" data-i18n="saveName">SAVE NAME</button>
+
+                <button id="changeAvatarButton" class="account-signin secondary" type="button" data-i18n="changeAvatar">CHANGE AVATAR</button>
+
+
+
+
+
+                <p
+
+                    class="account-description"
+
+                    data-i18n="accountDescription"
+
+                >
+
+                    Sign in to your account to access
+
+                    Tempest Origins and your friends.
+
+                </p>
+
+
+
+
+
+                <button
+
+                    class="account-signin"
+
+                    id="loginButton"
+
+                    type="button"
+
+                    data-i18n="signIn"
+
+                >
+
+                    SIGN IN
+
+                </button>
+
+
+
+
+
+            </section>
+
+
+
+        </div>
+
+
+
+
+
+        <!-- =====================================================
+
+             SETTINGS
+
+        ====================================================== -->
+
+
+
+        <div
+
+            class="settings-overlay"
+
+            id="settingsOverlay"
+
+            aria-hidden="true"
+
+        >
+
+
+
+            <section
+
+                class="settings-panel"
+
+                role="dialog"
+
+                aria-modal="true"
+
+                aria-labelledby="settingsTitle"
+
+            >
+
+
+
+
+
+                <!-- Header -->
+
+                <div class="settings-header">
+
+
+
+                    <div>
+
+
+
+                        <span class="settings-eyebrow">
+
+                            ORIGINS
+
+                        </span>
+
+
+
+
+
+                        <h2
+
+                            id="settingsTitle"
+
+                            data-i18n="settings"
+
+                        >
+
+                            SETTINGS
+
+                        </h2>
+
+
+
+                    </div>
+
+
+
+
+
+                    <button
+
+                        class="settings-close"
+
+                        id="settingsClose"
+
+                        type="button"
+
+                        aria-label="Close settings"
+
+                    >
+
+                        ×
+
+                    </button>
+
+
+
+                </div>
+
+
+
+
+
+                <!-- Origins language -->
+
+                <div class="settings-section">
+
+                    <label for="launcherLanguage" data-i18n="originsLanguage">ORIGINS LANGUAGE</label>
+
+                    <p data-i18n="originsLanguageDescription">One language for Origins Launcher and Tempest / Minecraft.</p>
+
+                    <select id="launcherLanguage">
+
+                        <option value="en">English</option>
+
+                        <option value="fr">Français</option>
+
+                    </select>
+
+                    <select id="gameLanguage" hidden aria-hidden="true">
+
+                        <option value="en">English</option><option value="fr">Français</option>
+
+                    </select>
+
+                </div>
+
+
+
+
+
+                <!-- Footer -->
+
+                <div class="settings-footer">
+
+
+
+                    <span>
+
+                        Origins Launcher
+
+                    </span>
+
+
+
+                    <span></span>
+
+
+
+                </div>
+
+
+
+
+
+            </section>
+
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+    <!-- =====================================================
+
+         JAVASCRIPT
+
+    ====================================================== -->
+
+
+
+    <script src="renderer.js"></script>
+
+
+
+</body>
+
+
+
+</html>
