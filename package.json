@@ -3,7 +3,10 @@
   "version": "0.1.1",
   "description": "Origins Launcher",
   "main": "index.js",
-  "author": "Origins",
+  "author": {
+    "name": "Origins",
+    "email": "midachi.zerko@gmail.com"
+  },
   "license": "ISC",
   "type": "commonjs",
   "scripts": {
@@ -68,6 +71,7 @@
       "category": "Game"
     },
     "mac": {
+      "icon": "build/icon.png",
       "target": [
         {
           "target": "dmg",
