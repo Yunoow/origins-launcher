@@ -4522,9 +4522,12 @@ ipcMain.handle(
 
 
 
+                // Java found on the system PATH, like detectJava():
+                // works with any Java install on Windows, Linux and macOS.
+                // javaw avoids an extra console window on Windows.
                 javaPath:
 
-                    "C:\\\Program Files\\\Common Files\\\Oracle\\\Java\\\javapath\\\javaw.exe",
+                    process.platform === "win32" ? "javaw" : "java",
 
 
 

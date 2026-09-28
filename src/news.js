@@ -12,6 +12,15 @@ const updateHistoryI18n = {
 
     fr: [
         {
+            version: "0.6.1", date: "28 SEPTEMBRE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
+            text: "Tempest se lance avec n’importe quel Java installé, et le launcher arrive sur Linux et Mac.",
+            changes: [
+                "Tempest utilise maintenant le Java installé sur ton PC, quelle que soit sa marque (Oracle, Temurin…)",
+                "Correction du lancement du jeu pour les joueurs dont Java n’était pas trouvé",
+                "Premières versions Linux (AppImage, .deb) et Mac (.dmg) du launcher"
+            ]
+        },
+        {
             version: "0.6.0", date: "28 SEPTEMBRE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.0",
             text: "Récap de rattrapage : tout ce qui a changé depuis la v0.5.7 (versions 0.5.8 et 0.6.0).",
             changes: [
@@ -122,6 +131,15 @@ const updateHistoryI18n = {
 
     en: [
         {
+            version: "0.6.1", date: "28 SEPTEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
+            text: "Tempest now starts with any installed Java, and the launcher comes to Linux and Mac.",
+            changes: [
+                "Tempest now uses the Java installed on your computer, whatever its vendor (Oracle, Temurin…)",
+                "Fixed game launch for players whose Java was not found",
+                "First Linux (AppImage, .deb) and Mac (.dmg) versions of the launcher"
+            ]
+        },
+        {
             version: "0.6.0", date: "28 SEPTEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.0",
             text: "Catch-up recap: everything that changed since v0.5.7 (versions 0.5.8 and 0.6.0).",
             changes: [
@@ -198,6 +216,15 @@ const updateHistoryI18n = {
     ],
 
     es: [
+        {
+            version: "0.6.1", date: "28 DE SEPTIEMBRE DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
+            text: "Tempest se inicia con cualquier Java instalado, y el launcher llega a Linux y Mac.",
+            changes: [
+                "Tempest ahora usa el Java instalado en tu equipo, sea cual sea su marca (Oracle, Temurin…)",
+                "Corregido el inicio del juego para los jugadores cuyo Java no se encontraba",
+                "Primeras versiones del launcher para Linux (AppImage, .deb) y Mac (.dmg)"
+            ]
+        },
         {
             version: "0.6.0", date: "28 DE SEPTIEMBRE DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.0",
             text: "Resumen para ponerse al día: todo lo que ha cambiado desde la v0.5.7 (versiones 0.5.8 y 0.6.0).",
@@ -276,6 +303,15 @@ const updateHistoryI18n = {
 
     de: [
         {
+            version: "0.6.1", date: "28. SEPTEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
+            text: "Tempest startet mit jedem installierten Java, und der Launcher kommt auf Linux und Mac.",
+            changes: [
+                "Tempest nutzt jetzt das auf deinem Computer installierte Java, egal von welchem Anbieter (Oracle, Temurin…)",
+                "Spielstart für Spieler behoben, deren Java nicht gefunden wurde",
+                "Erste Linux- (AppImage, .deb) und Mac-Versionen (.dmg) des Launchers"
+            ]
+        },
+        {
             version: "0.6.0", date: "28. SEPTEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.0",
             text: "Nachhol-Zusammenfassung: alles, was sich seit v0.5.7 geändert hat (Versionen 0.5.8 und 0.6.0).",
             changes: [
@@ -352,6 +388,15 @@ const updateHistoryI18n = {
     ],
 
     pt: [
+        {
+            version: "0.6.1", date: "28 DE SETEMBRO DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
+            text: "Tempest agora inicia com qualquer Java instalado, e o launcher chega ao Linux e Mac.",
+            changes: [
+                "Tempest agora usa o Java instalado no seu computador, seja qual for a marca (Oracle, Temurin…)",
+                "Corrigida a inicialização do jogo para jogadores cujo Java não era encontrado",
+                "Primeiras versões do launcher para Linux (AppImage, .deb) e Mac (.dmg)"
+            ]
+        },
         {
             version: "0.6.0", date: "28 DE SETEMBRO DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.0",
             text: "Resumo para colocar em dia: tudo o que mudou desde a v0.5.7 (versões 0.5.8 e 0.6.0).",
@@ -435,6 +480,7 @@ const updateHistory = updateHistoryI18n.fr;
 const newsContent = {
 
     fr: [
+        { version: "0.6.1", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.1", text: "Lancement de Tempest corrigé et arrivée sur Linux et Mac.", date: "VERSION 0.6.1" },
         { version: "0.6.0", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.0", text: "Rattrapage depuis la v0.5.7 : actus à jour et fenêtre « Quoi de neuf ? ».", date: "VERSION 0.6.0" },
         { version: "0.5.7", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.5.7", text: "Interface plus épurée : barres de défilement invisibles.", date: "VERSION 0.5.7" },
         { version: "0.5.5", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.5.5", text: "Mises à jour automatiques plus fiables, avec un bouton Redémarrer.", date: "VERSION 0.5.5" },
@@ -446,6 +492,7 @@ const newsContent = {
     ],
 
     en: [
+        { version: "0.6.1", type: "PATCH NOTES", title: "Launcher Update 0.6.1", text: "Tempest launch fixed, and the launcher arrives on Linux and Mac.", date: "VERSION 0.6.1" },
         { version: "0.6.0", type: "PATCH NOTES", title: "Launcher Update 0.6.0", text: "Catch-up since v0.5.7: up-to-date news and a “What’s new?” window.", date: "VERSION 0.6.0" },
         { version: "0.5.7", type: "PATCH NOTES", title: "Launcher Update 0.5.7", text: "Cleaner interface: invisible scrollbars.", date: "VERSION 0.5.7" },
         { version: "0.5.5", type: "PATCH NOTES", title: "Launcher Update 0.5.5", text: "More reliable automatic updates, with a Restart button.", date: "VERSION 0.5.5" },
@@ -457,6 +504,7 @@ const newsContent = {
     ],
 
     es: [
+        { version: "0.6.1", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.1", text: "Inicio de Tempest corregido y llegada a Linux y Mac.", date: "VERSIÓN 0.6.1" },
         { version: "0.6.0", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.0", text: "Al día desde la v0.5.7: noticias actualizadas y ventana «¿Qué hay de nuevo?».", date: "VERSIÓN 0.6.0" },
         { version: "0.5.7", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.5.7", text: "Interfaz más limpia: barras de desplazamiento invisibles.", date: "VERSIÓN 0.5.7" },
         { version: "0.5.5", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.5.5", text: "Actualizaciones automáticas más fiables, con un botón Reiniciar.", date: "VERSIÓN 0.5.5" },
@@ -468,6 +516,7 @@ const newsContent = {
     ],
 
     de: [
+        { version: "0.6.1", type: "PATCHNOTES", title: "Launcher Update 0.6.1", text: "Tempest-Start behoben, der Launcher kommt auf Linux und Mac.", date: "VERSION 0.6.1" },
         { version: "0.6.0", type: "PATCHNOTES", title: "Launcher Update 0.6.0", text: "Nachgeholt seit v0.5.7: aktuelle News und Fenster „Was ist neu?“.", date: "VERSION 0.6.0" },
         { version: "0.5.7", type: "PATCHNOTES", title: "Launcher Update 0.5.7", text: "Aufgeräumtere Oberfläche: unsichtbare Scrollleisten.", date: "VERSION 0.5.7" },
         { version: "0.5.5", type: "PATCHNOTES", title: "Launcher Update 0.5.5", text: "Zuverlässigere automatische Updates mit Neustart-Button.", date: "VERSION 0.5.5" },
@@ -479,6 +528,7 @@ const newsContent = {
     ],
 
     pt: [
+        { version: "0.6.1", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.6.1", text: "Inicialização do Tempest corrigida e chegada ao Linux e Mac.", date: "VERSÃO 0.6.1" },
         { version: "0.6.0", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.6.0", text: "Em dia desde a v0.5.7: notícias atualizadas e janela “O que há de novo?”.", date: "VERSÃO 0.6.0" },
         { version: "0.5.7", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.5.7", text: "Interface mais limpa: barras de rolagem invisíveis.", date: "VERSÃO 0.5.7" },
         { version: "0.5.5", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.5.5", text: "Atualizações automáticas mais confiáveis, com um botão Reiniciar.", date: "VERSÃO 0.5.5" },
