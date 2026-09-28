@@ -5986,3 +5986,391 @@ button.library-game-card:hover { transform:translateY(-4px); background:rgba(255
 .friend-request-actions .add-contact-search { width: auto; margin: 0; padding: 7px 9px; }
 .friend-request-actions .secondary { opacity: .72; }
 .friends-contact-avatar.has-profile-avatar { background-position: center; background-size: cover; background-repeat: no-repeat; font-size: 0; }
+
+/* =========================================================
+   ORIGINS — PRIVATE CHAT SCROLL FIX
+   Fixed conversation viewport: old messages scroll instead
+   of stacking / shrinking the bubbles.
+========================================================= */
+
+.friends-chat-window {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 520px !important;
+    max-height: calc(100vh - 150px) !important;
+    overflow: hidden !important;
+}
+
+/* Conversation header never shrinks. */
+.friends-conversation-header {
+    flex: 0 0 auto !important;
+}
+
+/* The message history becomes the scrollable viewport. */
+.friends-conversation-messages,
+.friends-messages,
+.friends-chat-messages,
+.friends-conversation-body {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+.friends-conversation-messages::-webkit-scrollbar,
+.friends-messages::-webkit-scrollbar,
+.friends-chat-messages::-webkit-scrollbar,
+.friends-conversation-body::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
+}
+
+/* Messages keep their natural readable size. */
+.friends-message,
+.friends-message-bubble,
+.friends-conversation-message,
+.friends-message-text {
+    flex: 0 0 auto !important;
+}
+
+/* Composer stays fixed at the bottom of the chat. */
+.friends-conversation-composer,
+.friends-chat-input,
+.friends-message-composer {
+    flex: 0 0 auto !important;
+}
+
+/* Presence dot in the private message header follows the real presence. */
+.friends-conversation-header[data-presence="away"] .friends-contact-presence {
+    background: #e0b04f !important;
+    box-shadow: 0 0 9px rgba(224,176,79,.42) !important;
+}
+.friends-conversation-header[data-presence="offline"] .friends-contact-presence {
+    background: #6b7785 !important;
+    box-shadow: none !important;
+}
+
+/* Contact context menu (right click on a contact). */
+.friend-context-menu {
+    position: fixed;
+    z-index: 5000;
+    min-width: 200px;
+    max-width: 260px;
+    padding: 6px;
+    border: 1px solid rgba(125,210,255,.16);
+    border-radius: 14px;
+    background: rgba(8,16,28,.97);
+    backdrop-filter: blur(28px);
+    box-shadow: 0 18px 40px rgba(0,0,0,.45);
+    color: #edf3f4;
+    animation: friendContextIn .12s ease-out;
+}
+@keyframes friendContextIn {
+    from { opacity: 0; transform: translateY(-4px) scale(.98); }
+    to { opacity: 1; transform: none; }
+}
+.friend-context-title {
+    padding: 8px 10px 6px;
+    color: #8edaff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.friend-context-item {
+    display: block;
+    width: 100%;
+    padding: 9px 10px;
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+    color: #dbe6ea;
+    font: inherit;
+    font-size: 12px;
+    text-align: left;
+    cursor: pointer;
+}
+.friend-context-item:hover:not(:disabled) { background: rgba(142,218,255,.1); color: white; }
+.friend-context-item.danger { color: #ff8a8a; }
+.friend-context-item.danger:hover:not(:disabled) { background: rgba(255,90,90,.12); color: #ffb0b0; }
+.friend-context-item:disabled { opacity: .5; cursor: default; }
+.friend-context-separator { height: 1px; margin: 5px 4px; background: rgba(255,255,255,.07); }
+.friend-context-confirm { margin: 6px 8px 4px; font-size: 12px; line-height: 1.5; color: #cbd5d8; }
+.friend-context-confirm strong { color: white; }
+.friend-context-error { display: block; margin: 0 8px; color: #ff8a8a; font-size: 10px; }
+.friend-context-error:empty { display: none; }
+.friend-context-actions { display: flex; gap: 6px; padding: 6px 4px 2px; }
+.friend-context-actions .friend-context-item {
+    flex: 1;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    border: 1px solid rgba(142,218,255,.18);
+    background: rgba(142,218,255,.08);
+    color: #aee5ff;
+}
+.friend-context-actions .friend-context-item.danger {
+    border-color: rgba(255,110,110,.3);
+    background: rgba(255,90,90,.12);
+    color: #ff9c9c;
+}
+
+/* Contacts bubble: count and green dot only when at least one friend is online. */
+.friends-quick-access:not(.has-online-friends) .friends-online-badge,
+.friends-quick-access:not(.has-online-friends) .friends-online-dot {
+    display: none !important;
+}
+
+/* =========================================================
+   ONBOARDING — LANGUAGE STEP
+========================================================= */
+.origins-language-step[hidden] { display: none; }
+
+.origins-language-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 0 0 22px;
+}
+.origins-language-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-height: 50px;
+    padding: 0 16px;
+    border: 1px solid rgba(143, 255, 211, 0.16);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    color: #e9f7f1;
+    font: inherit;
+    cursor: pointer;
+    transition: border-color 150ms ease, background 150ms ease, transform 150ms ease;
+}
+.origins-language-option:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.origins-language-option strong { font-size: 14px; font-weight: 700; }
+.origins-language-option small {
+    color: rgba(210, 238, 226, 0.45);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+}
+.origins-language-option:hover {
+    transform: translateY(-1px);
+    border-color: rgba(143, 255, 211, 0.4);
+}
+.origins-language-option.selected {
+    border-color: rgba(143, 255, 211, 0.7);
+    background: rgba(98, 255, 194, 0.14);
+    box-shadow: 0 0 0 1px rgba(143, 255, 211, 0.25) inset;
+}
+.origins-language-option.selected small { color: #9dffd6; }
+
+.origins-onboarding-link {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 4px 8px;
+    border: 0;
+    background: transparent;
+    color: rgba(190, 240, 220, 0.6);
+    font: inherit;
+    font-size: 11px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+.origins-onboarding-link:hover { color: #e9fff6; }
+
+/* =========================================================
+   FIRST-LOGIN TUTORIAL
+========================================================= */
+.origins-tutorial {
+    position: fixed;
+    inset: 0;
+    z-index: 11000;
+}
+.origins-tutorial[hidden] { display: none; }
+
+/* The spotlight's huge shadow darkens everything except the target. */
+.origins-tutorial-spotlight {
+    position: fixed;
+    border-radius: 16px;
+    box-shadow:
+        0 0 0 2px rgba(142, 218, 255, 0.75),
+        0 0 24px 4px rgba(62, 161, 238, 0.45),
+        0 0 0 9999px rgba(2, 8, 18, 0.74);
+    pointer-events: none;
+    transition: left 260ms ease, top 260ms ease, width 260ms ease, height 260ms ease;
+}
+.origins-tutorial.centered .origins-tutorial-spotlight {
+    left: 50% !important;
+    top: 50% !important;
+    width: 0 !important;
+    height: 0 !important;
+    box-shadow: 0 0 0 9999px rgba(2, 8, 18, 0.74);
+}
+
+.origins-tutorial-bubble {
+    position: fixed;
+    width: min(340px, calc(100vw - 32px));
+    padding: 20px 20px 16px;
+    border: 1px solid rgba(125, 210, 255, 0.22);
+    border-radius: 18px;
+    background: rgba(8, 16, 28, 0.97);
+    backdrop-filter: blur(28px);
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.5);
+    color: #edf3f4;
+    transition: left 260ms ease, top 260ms ease;
+    animation: originsTutorialIn 0.2s ease-out;
+}
+.origins-tutorial.centered .origins-tutorial-bubble {
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%);
+    width: min(400px, calc(100vw - 32px));
+    text-align: center;
+}
+@keyframes originsTutorialIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+.origins-tutorial-step {
+    color: #8edaff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+}
+.origins-tutorial-bubble h2 {
+    margin: 8px 0 6px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 21px;
+    font-weight: 400;
+    color: #ffffff;
+}
+.origins-tutorial-bubble p {
+    margin: 0 0 16px;
+    color: #b9c6cc;
+    font-size: 13px;
+    line-height: 1.55;
+}
+.origins-tutorial-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.origins-tutorial-spacer { flex: 1; }
+.origins-tutorial-skip {
+    padding: 6px 4px;
+    border: 0;
+    background: transparent;
+    color: #7f8b8f;
+    font: inherit;
+    font-size: 11px;
+    cursor: pointer;
+}
+.origins-tutorial-skip:hover { color: #dbe6ea; }
+.origins-tutorial-skip[hidden],
+.origins-tutorial-button[hidden] { display: none; }
+.origins-tutorial-button {
+    height: 36px;
+    padding: 0 14px;
+    border: 1px solid rgba(142, 218, 255, 0.35);
+    border-radius: 10px;
+    background: rgba(62, 161, 238, 0.22);
+    color: #e6f6ff;
+    font: inherit;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+.origins-tutorial-button:hover { background: rgba(62, 161, 238, 0.34); }
+.origins-tutorial-button.secondary {
+    border-color: rgba(142, 218, 255, 0.16);
+    background: rgba(142, 218, 255, 0.06);
+    color: #aee5ff;
+}
+
+.settings-tutorial-button {
+    width: 100%;
+    margin-top: 4px;
+}
+
+/* =========================================================
+   LAUNCHER UPDATE BANNER (bottom-left)
+========================================================= */
+.launcher-update-banner {
+    position: fixed;
+    left: 28px;
+    bottom: 28px;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: min(420px, calc(100vw - 56px));
+    padding: 9px 10px 9px 14px;
+    border: 1px solid rgba(125, 210, 255, 0.18);
+    border-radius: 14px;
+    background: rgba(8, 16, 28, 0.94);
+    backdrop-filter: blur(24px);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+    color: #cbd5d8;
+    font-size: 12px;
+    animation: launcherUpdateIn 0.25s ease-out;
+}
+.launcher-update-banner[hidden] { display: none; }
+@keyframes launcherUpdateIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+}
+.launcher-update-icon {
+    color: #8edaff;
+    font-size: 15px;
+    line-height: 1;
+}
+.launcher-update-banner:not(.ready) .launcher-update-icon {
+    animation: launcherUpdateSpin 1.6s linear infinite;
+}
+@keyframes launcherUpdateSpin {
+    to { transform: rotate(360deg); }
+}
+.launcher-update-banner.ready {
+    border-color: rgba(85, 214, 161, 0.4);
+    color: #e6f6ee;
+}
+.launcher-update-banner.ready .launcher-update-icon { color: #55d6a1; }
+.launcher-update-button {
+    height: 30px;
+    padding: 0 12px;
+    border: 1px solid rgba(85, 214, 161, 0.45);
+    border-radius: 9px;
+    background: rgba(85, 214, 161, 0.16);
+    color: #d9ffee;
+    font: inherit;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.launcher-update-button:hover:not(:disabled) { background: rgba(85, 214, 161, 0.26); }
+.launcher-update-button:disabled { opacity: 0.6; cursor: wait; }
+.launcher-update-button[hidden] { display: none; }
+
+/* Invisible scrollbars everywhere (scrolling still works with the wheel / trackpad). */
+* {
+    scrollbar-width: none !important;
+}
+*::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}

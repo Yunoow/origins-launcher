@@ -2,885 +2,9 @@
 
 // ORIGINS LAUNCHER
 
-// Renderer - Prototype 0.4
+// Renderer - Prototype 0.5
 
 // ==========================================
-
-
-
-
-
-/* ==========================================
-
-   TRANSLATIONS
-
-========================================== */
-
-
-
-const translations = {
-
-
-
-    en: {
-
-
-
-        home: "HOME",
-
-
-
-        originsProject: "ORIGINS PROJECT",
-
-
-
-        welcomeTitle: "WELCOME TO ORIGINS",
-
-
-
-        welcomeText:
-
-            "Follow the development of Tempest Origins, discover project news and read the latest patch notes.",
-
-
-
-        discoverTempest:
-
-            "DISCOVER TEMPEST ORIGINS",
-
-
-
-        newsEyebrow:
-
-            "ORIGINS NETWORK",
-
-
-
-        latestNews:
-
-            "LATEST NEWS",
-
-
-
-        localFeed:
-
-            "",
-
-
-
-        signIn:
-
-            "SIGN IN",
-
-
-
-        install:
-
-            "INSTALL",
-
-
-
-        account:
-
-            "ACCOUNT",
-
-
-
-        accountDescription:
-
-            "Sign in to your account to access Tempest Origins and your friends.",
-
-
-
-        openFriends:
-
-            "OPEN FRIENDS",
-
-
-
-        notSignedIn:
-
-            "Not signed in",
-
-
-
-        offline:
-
-            "Offline",
-
-
-
-        friends:
-
-            "FRIENDS",
-
-
-
-        signInFriends:
-
-            "Sign in to see your friends",
-
-
-
-        friendsDescription:
-
-            "Your Origins friends will appear here.",
-
-
-
-        friendsOnline:
-
-            "FRIENDS ONLINE",
-
-
-
-        onlineShort:
-
-            "online",
-
-
-
-        presenceOnline:
-
-            "Online",
-
-
-
-        presenceAway:
-
-            "Away",
-
-
-
-        presencePlayingTempest:
-
-            "Playing Tempest",
-
-
-
-        privateMessages:
-
-            "PRIVATE MESSAGES",
-
-
-
-        privateMessagesDescription:
-
-            "Chat directly with your friends from the launcher.",
-
-
-
-        comingSoon:
-
-            "COMING SOON",
-
-
-
-        conversationEmpty:
-
-            "Start a conversation from the launcher.",
-
-
-
-        messagePlaceholder:
-
-            "Write a message...",
-
-
-
-        settings:
-
-            "SETTINGS",
-
-
-
-        launcherLanguage:
-
-            "LAUNCHER LANGUAGE",
-
-
-
-        launcherLanguageDescription:
-
-            "Choose the language used by Origins Launcher.",
-
-
-
-        gameLanguage:
-
-            "TEMPEST ORIGINS LANGUAGE",
-
-
-
-        gameLanguageDescription:
-
-            "Choose the language used when Tempest Origins starts.",
-
-
-
-        updatesTitle: "NEWS",
-
-        updatesLead: "Find the history of launcher and Origins project updates here.",
-
-        shopLead: "The Origins shop is ready for future project content.",
-
-        shopTempestTitle: "Tempest Content",
-
-        shopTempestText: "Future Tempest Origins content will appear here.",
-
-        shopOriginsTitle: "Origins Collection",
-
-        shopOriginsText: "A section planned for future Origins items and content.",
-
-        shopComingTitle: "Coming Soon",
-
-        shopComingText: "More categories can be added without changing navigation.",
-
-        originsLibrary: "ORIGINS LIBRARY",
-
-        displayName: "Display name",
-
-        saveName: "SAVE NAME",
-
-        changeAvatar: "CHANGE AVATAR",
-
-        originsLanguage: "ORIGINS LANGUAGE",
-
-        originsLanguageDescription: "One language for Origins Launcher and Tempest / Minecraft.",
-
-        preparingTempest: "PREPARING TEMPEST ORIGINS",
-
-        preparingInstallation: "Preparing installation...",
-
-        latestUpdate: "LATEST UPDATE",
-
-        versionLabel: "VERSION",
-
-        signOut: "SIGN OUT",
-
-        devSignIn: "DEV SIGN IN",
-
-
-
-        languageNoteTitle:
-
-            "Game language",
-
-
-
-        languageNote:
-
-            "This setting will be applied when Tempest Origins is installed or launched."
-
-    },
-
-
-
-
-
-    fr: {
-
-
-
-        home:
-
-            "ACCUEIL",
-
-
-
-        originsProject:
-
-            "PROJET ORIGINS",
-
-
-
-        welcomeTitle:
-
-            "BIENVENUE DANS ORIGINS",
-
-
-
-        welcomeText:
-
-            "Suis le développement de Tempest Origins, découvre les actualités du projet et consulte les dernières notes de mise à jour.",
-
-
-
-        discoverTempest:
-
-            "DÉCOUVRIR TEMPEST ORIGINS",
-
-
-
-        newsEyebrow:
-
-            "RÉSEAU ORIGINS",
-
-
-
-        latestNews:
-
-            "DERNIÈRES ACTUALITÉS",
-
-
-
-        localFeed:
-
-            "FLUX LOCAL • PROTOTYPE",
-
-
-
-        signIn:
-
-            "SE CONNECTER",
-
-
-
-        install:
-
-            "INSTALLER",
-
-
-
-        account:
-
-            "COMPTE",
-
-
-
-        accountDescription:
-
-            "Connecte-toi à ton compte pour accéder à Tempest Origins et à tes amis.",
-
-
-
-        openFriends:
-
-            "OUVRIR LES AMIS",
-
-
-
-        notSignedIn:
-
-            "Non connecté",
-
-
-
-        offline:
-
-            "Hors ligne",
-
-
-
-        friends:
-
-            "AMIS",
-
-
-
-        signInFriends:
-
-            "Connecte-toi pour voir tes amis",
-
-
-
-        friendsDescription:
-
-            "Tes amis Origins apparaîtront ici.",
-
-
-
-        friendsOnline:
-
-            "AMIS EN LIGNE",
-
-
-
-        onlineShort:
-
-            "en ligne",
-
-
-
-        presenceOnline:
-
-            "En ligne",
-
-
-
-        presenceAway:
-
-            "Absent",
-
-
-
-        presencePlayingTempest:
-
-            "Joue à Tempest",
-
-
-
-        privateMessages:
-
-            "MESSAGES PRIVÉS",
-
-
-
-        privateMessagesDescription:
-
-            "Discute directement avec tes amis depuis le launcher.",
-
-
-
-        comingSoon:
-
-            "BIENTÔT",
-
-
-
-        conversationEmpty:
-
-            "Commence une conversation depuis le launcher.",
-
-
-
-        messagePlaceholder:
-
-            "Écrire un message...",
-
-
-
-        settings:
-
-            "PARAMÈTRES",
-
-
-
-        launcherLanguage:
-
-            "LANGUE DU LAUNCHER",
-
-
-
-        launcherLanguageDescription:
-
-            "Choisis la langue utilisée par Origins Launcher.",
-
-
-
-        gameLanguage:
-
-            "LANGUE DE TEMPEST ORIGINS",
-
-
-
-        gameLanguageDescription:
-
-            "Choisis la langue utilisée au lancement de Tempest Origins.",
-
-
-
-        updatesTitle: "ACTUALITÉS",
-
-        updatesLead: "Retrouve ici l'historique des mises à jour du launcher et des projets Origins.",
-
-        shopLead: "La boutique Origins est prête à accueillir les futurs contenus du projet.",
-
-        shopTempestTitle: "Contenus Tempest",
-
-        shopTempestText: "Les futurs contenus liés à Tempest Origins apparaîtront ici.",
-
-        shopOriginsTitle: "Collection Origins",
-
-        shopOriginsText: "Une section prévue pour les futurs objets et contenus Origins.",
-
-        shopComingTitle: "Prochainement",
-
-        shopComingText: "D'autres catégories pourront être ajoutées sans modifier la navigation.",
-
-        originsLibrary: "BIBLIOTHÈQUE ORIGINS",
-
-        displayName: "Nom d'affichage",
-
-        saveName: "ENREGISTRER LE NOM",
-
-        changeAvatar: "CHANGER L'AVATAR",
-
-        originsLanguage: "LANGUE ORIGINS",
-
-        originsLanguageDescription: "Une seule langue pour Origins Launcher et Tempest / Minecraft.",
-
-        preparingTempest: "PRÉPARATION DE TEMPEST ORIGINS",
-
-        preparingInstallation: "Préparation de l'installation...",
-
-        latestUpdate: "DERNIÈRE MISE À JOUR",
-
-        versionLabel: "VERSION",
-
-        signOut: "DÉCONNEXION",
-
-        devSignIn: "CONNEXION DEV",
-
-
-
-        languageNoteTitle:
-
-            "Langue du jeu",
-
-
-
-        languageNote:
-
-            "Ce réglage sera appliqué lors de l'installation ou du lancement de Tempest Origins."
-
-    }
-
-
-
-};
-
-
-
-
-
-
-
-/* ==========================================
-
-   UPDATE HISTORY
-
-   Pour une future MAJ : ajoute simplement une entrée
-
-   tout en haut de cette liste.
-
-========================================== */
-
-
-
-const updateHistory = [
-
-    {
-
-        version: "0.4",
-
-        date: "22 SEPTEMBRE 2026",
-
-        type: "LAUNCHER",
-
-        title: "Launcher Update 0.4",
-
-        text: "Nouvelle direction visuelle Origins, navigation améliorée et premières fonctions sociales.",
-
-        changes: [
-
-            "Nouvelle identité visuelle bleue Origins",
-
-            "Nouvelle barre latérale et navigation",
-
-            "Fenêtre Amis et messages privés",
-
-            "Présence en ligne et état de jeu",
-
-            "Détection de Tempest en cours d'exécution"
-
-        ]
-
-    },
-
-    {
-
-        version: "0.3",
-
-        date: "DÉVELOPPEMENT",
-
-        type: "TEMPEST ORIGINS",
-
-        title: "Point sur le développement",
-
-        text: "Première intégration de Tempest Origins au launcher et évolution du flux de lancement.",
-
-        changes: [
-
-            "Page dédiée à Tempest Origins",
-
-            "Installation et lancement depuis le launcher",
-
-            "Gestion de la langue du jeu"
-
-        ]
-
-    },
-
-    {
-
-        version: "0.2",
-
-        date: "PROTOTYPE",
-
-        type: "ORIGINS",
-
-        title: "Arrivée du réseau Origins",
-
-        text: "Mise en place des premières bases de l'écosystème Origins.",
-
-        changes: [
-
-            "Accueil Origins",
-
-            "Structure multi-pages",
-
-            "Premiers panneaux du launcher"
-
-        ]
-
-    },
-
-    {
-
-        version: "0.1",
-
-        date: "PREMIER PROTOTYPE",
-
-        type: "ORIGINS",
-
-        title: "Naissance du launcher",
-
-        text: "Première version locale du launcher Origins.",
-
-        changes: [
-
-            "Fenêtre Electron",
-
-            "Navigation initiale",
-
-            "Base du lancement de jeu"
-
-        ]
-
-    }
-
-];
-
-
-
-const updateHistoryI18n = {
-
-    fr: updateHistory,
-
-    en: [
-
-        { version:"0.4", date:"22 SEPTEMBER 2026", type:"LAUNCHER", title:"Launcher Update 0.4", text:"A new Origins visual direction, improved navigation and the first social features.", changes:["New blue Origins visual identity","New navigation dock","Friends and private messages interface","Online presence and game status","Detection of Tempest while running"] },
-
-        { version:"0.3", date:"DEVELOPMENT", type:"TEMPEST ORIGINS", title:"Development Update", text:"First integration of Tempest Origins into the launcher and improvements to the launch flow.", changes:["Dedicated Tempest Origins page","Install and launch from the launcher","Game language management"] },
-
-        { version:"0.2", date:"PROTOTYPE", type:"ORIGINS", title:"Origins Network Arrives", text:"The first foundations of the Origins ecosystem are now in place.", changes:["Origins home","Multi-page structure","First launcher panels"] },
-
-        { version:"0.1", date:"FIRST PROTOTYPE", type:"ORIGINS", title:"The Launcher Begins", text:"First local version of Origins Launcher.", changes:["Electron window","Initial navigation","Game launch foundation"] }
-
-    ]
-
-};
-
-
-
-/* ==========================================
-
-   NEWS CONTENT
-
-========================================== */
-
-
-
-const newsContent = {
-
-
-
-    en: [
-
-
-
-        {
-
-            type: "TEMPEST ORIGINS",
-
-
-
-            title:
-
-                "Development Update",
-
-
-
-            text:
-
-                "Follow the first steps of Tempest Origins and the evolution of the project.",
-
-
-
-            date:
-
-                "DEVELOPMENT"
-
-        },
-
-
-
-        {
-
-            type:
-
-                "PATCH NOTES",
-
-
-
-            title:
-
-                "Launcher Update 0.4",
-
-
-
-            text:
-
-                "A new Origins home page, page navigation and a first local news feed.",
-
-
-
-            date:
-
-                "VERSION 0.4"
-
-        },
-
-
-
-        {
-
-            type:
-
-                "ORIGINS",
-
-
-
-            title:
-
-                "Welcome to Origins",
-
-
-
-            text:
-
-                "This space will later receive announcements, project news and server information.",
-
-
-
-            date:
-
-                "COMING SOON"
-
-        }
-
-
-
-    ],
-
-
-
-
-
-    fr: [
-
-
-
-        {
-
-            type:
-
-                "TEMPEST ORIGINS",
-
-
-
-            title:
-
-                "Point sur le développement",
-
-
-
-            text:
-
-                "Suis les premières étapes de Tempest Origins et l'évolution du projet.",
-
-
-
-            date:
-
-                "DÉVELOPPEMENT"
-
-        },
-
-
-
-        {
-
-            type:
-
-                "NOTES DE MISE À JOUR",
-
-
-
-            title:
-
-                "Launcher Update 0.4",
-
-
-
-            text:
-
-                "Nouvel accueil Origins, navigation entre les pages et premier flux d'actualités local.",
-
-
-
-            date:
-
-                "VERSION 0.4"
-
-        },
-
-
-
-        {
-
-            type:
-
-                "ORIGINS",
-
-
-
-            title:
-
-                "Bienvenue dans Origins",
-
-
-
-            text:
-
-                "Cet espace accueillera plus tard les annonces, actualités des projets et informations serveurs.",
-
-
-
-            date:
-
-                "BIENTÔT"
-
-        }
-
-
-
-    ]
-
-
-
-};
 
 
 
@@ -1224,14 +348,6 @@ function renderLocalPresence(data) {
 
 
 
-    const t =
-
-        translations[currentLauncherLanguage] ||
-
-        translations.en;
-
-
-
     localProfileStatus.classList.remove(
 
         "playing",
@@ -1256,7 +372,7 @@ function renderLocalPresence(data) {
 
         localProfileStatus.textContent =
 
-            t.presenceAway;
+            t("presenceAway");
 
 
 
@@ -1272,9 +388,9 @@ function renderLocalPresence(data) {
 
         playing
 
-            ? t.presencePlayingTempest
+            ? t("presencePlayingTempest")
 
-            : t.presenceOnline;
+            : t("presenceOnline");
 
 }
 
@@ -1342,11 +458,10 @@ async function initializeLocalPresence() {
 
 
 
-        window.origins.presence.onChanged(
-
-            renderLocalPresence
-
-        );
+        window.origins.presence.onChanged((presence) => {
+            renderLocalPresence(presence);
+            sendLocalRealtimePresence(presence);
+        });
 
     }
 
@@ -1357,267 +472,214 @@ async function initializeLocalPresence() {
 
 
 /* ==========================================
-
-   FRIENDS — PRIVATE MESSAGE UI
-
-   Local interface only. No network/backend yet.
-
+   FRIENDS — PRIVATE MESSAGES
 ========================================== */
 
+let activeFriendsConversationProfile = null;
+let activeFriendsConversationRequest = 0;
 
-
-function openFriendsConversation() {
-
-
-
-    if (!friendsConversationView) {
-
-
-
-        return;
-
-    }
-
-
-
-    friendsConversationView.classList.add(
-
-        "open"
-
-    );
-
-
-
-    setTimeout(
-
-        () => {
-
-
-
-            friendsMessageInput?.focus();
-
-        },
-
-        100
-
-    );
-
+function normalizePrivateMessages(data) {
+    if (Array.isArray(data)) return data;
+    if (Array.isArray(data?.messages)) return data.messages;
+    return [];
 }
 
+function privateMessageText(message) {
+    return String(message?.content ?? message?.text ?? message?.message ?? "");
+}
 
+function privateMessageIsSent(message, profile) {
+    if (typeof message?.sent === "boolean") return message.sent;
+    if (typeof message?.isMine === "boolean") return message.isMine;
 
+    if (message?.direction) {
+        return String(message.direction).toLowerCase() === "sent";
+    }
 
+    const myProfileId = String(originsProfile?.id || "");
+    const otherProfileId = String(profile?.id || "");
+
+    const senderId = String(
+        message?.sender_profile_id ??
+        message?.senderProfileId ??
+        message?.senderId ??
+        message?.fromProfileId ??
+        message?.from?.id ??
+        message?.sender?.id ??
+        ""
+    );
+
+    const receiverId = String(
+        message?.receiver_profile_id ??
+        message?.receiverProfileId ??
+        message?.receiverId ??
+        message?.recipientId ??
+        message?.toProfileId ??
+        message?.to?.id ??
+        message?.recipient?.id ??
+        ""
+    );
+
+    // Priorité : comparer directement avec NOTRE profil Origins.
+    if (myProfileId && senderId) {
+        return senderId === myProfileId;
+    }
+
+    // Secours : dans cette conversation, si le destinataire est l'ami,
+    // alors le message a été envoyé par nous.
+    if (otherProfileId && receiverId) {
+        return receiverId === otherProfileId;
+    }
+
+    // Si l'expéditeur est l'ami, c'est un message reçu.
+    if (otherProfileId && senderId) {
+        return senderId !== otherProfileId;
+    }
+
+    return false;
+}
+
+function setConversationHeader(profile) {
+    if (!friendsConversationView || !profile) return;
+    const header = friendsConversationView.querySelector(".friends-conversation-header");
+    const name = friendsConversationView.querySelector("[data-friend-name]");
+    const activity = friendsConversationView.querySelector("[data-friend-activity]");
+    const avatar = friendsConversationView.querySelector("[data-friend-avatar]");
+    const initial = friendsConversationView.querySelector("[data-friend-initial]");
+
+    if (name) name.textContent = profile.displayName || profile.originsId || "Origins";
+
+    // Same avatar and presence sources as the contacts list.
+    if (avatar) {
+        const src = avatarSrc(profile);
+        avatar.style.backgroundImage = src ? `url("${src}")` : "";
+        avatar.classList.toggle("has-profile-avatar", Boolean(src));
+        if (initial) initial.textContent = src ? "" : (profile.displayName || "?").slice(0, 1).toUpperCase();
+    }
+
+    const { status, label } = friendPresenceInfo(profile.id);
+    if (activity) activity.textContent = label;
+    if (header) header.dataset.presence = status;
+}
+
+function createPrivateMessageBubble(message, profile) {
+    const text = privateMessageText(message);
+    if (!text) return null;
+    const bubble = document.createElement("div");
+    bubble.className = `friends-message-bubble ${privateMessageIsSent(message, profile) ? "sent" : "received"}`;
+    if (message?.id != null) bubble.dataset.messageId = String(message.id);
+    bubble.textContent = text;
+    return bubble;
+}
+
+// Appends one message (from POST response or message:new) without reloading
+// the whole history. The id check prevents duplicates.
+function appendPrivateMessage(message, profile) {
+    if (!friendsConversationMessages || !message) return;
+    if (message.id != null) {
+        const existing = friendsConversationMessages.querySelector(`[data-message-id="${CSS.escape(String(message.id))}"]`);
+        if (existing) return;
+    }
+    const bubble = createPrivateMessageBubble(message, profile);
+    if (!bubble) return;
+    friendsConversationMessages.querySelector(".friends-conversation-empty")?.remove();
+    friendsConversationMessages.appendChild(bubble);
+    friendsConversationMessages.scrollTop = friendsConversationMessages.scrollHeight;
+}
+
+function renderPrivateMessages(messages, profile) {
+    if (!friendsConversationMessages) return;
+    friendsConversationMessages.innerHTML = "";
+
+    if (!messages.length) {
+        const empty = document.createElement("div");
+        empty.className = "friends-conversation-empty";
+        empty.textContent = t("conversationStart");
+        friendsConversationMessages.appendChild(empty);
+        return;
+    }
+
+    messages.forEach((message) => {
+        const bubble = createPrivateMessageBubble(message, profile);
+        if (bubble) friendsConversationMessages.appendChild(bubble);
+    });
+
+    friendsConversationMessages.scrollTop = friendsConversationMessages.scrollHeight;
+}
+
+async function loadFriendsConversation(profile = activeFriendsConversationProfile) {
+    const token = localStorage.getItem("origins-token");
+    if (!token || !profile?.id || !window.origins?.messages) return;
+
+    const requestId = ++activeFriendsConversationRequest;
+
+    try {
+        const data = await window.origins.messages.list(token, profile.id);
+        if (requestId !== activeFriendsConversationRequest || activeFriendsConversationProfile?.id !== profile.id) return;
+        renderPrivateMessages(normalizePrivateMessages(data), profile);
+    } catch (error) {
+        console.error("Unable to load private messages:", error);
+        if (requestId !== activeFriendsConversationRequest || !friendsConversationMessages) return;
+        friendsConversationMessages.innerHTML = "";
+        const failed = document.createElement("div");
+        failed.className = "friends-conversation-empty";
+        failed.textContent = t("messagesLoadFailed");
+        friendsConversationMessages.appendChild(failed);
+    }
+}
+
+async function openFriendsConversation(eventOrProfile) {
+    const profile =
+        eventOrProfile?.currentTarget?.__originsProfile ||
+        eventOrProfile?.__originsProfile ||
+        (eventOrProfile?.id ? eventOrProfile : null);
+
+    if (profile) activeFriendsConversationProfile = profile;
+    if (!friendsConversationView || !activeFriendsConversationProfile) return;
+
+    setConversationHeader(activeFriendsConversationProfile);
+    if (typeof openFloatingWindow === "function") openFloatingWindow(friendsConversationView);
+    else friendsConversationView.classList.add("open");
+
+    await loadFriendsConversation(activeFriendsConversationProfile);
+    setTimeout(() => friendsMessageInput?.focus(), 100);
+}
 
 function closeFriendsConversation() {
-
-
-
-    if (!friendsConversationView) {
-
-
-
-        return;
-
-    }
-
-
-
-    friendsConversationView.classList.remove(
-
-        "open"
-
-    );
-
+    activeFriendsConversationRequest += 1;
+    if (!friendsConversationView) return;
+    if (typeof closeFloatingWindow === "function") closeFloatingWindow(friendsConversationView);
+    else friendsConversationView.classList.remove("open");
 }
 
-
-
-
-
-function addLocalPrivateMessage(
-
-    text
-
-) {
-
-
-
-    if (
-
-        !friendsConversationMessages
-
-    ) {
-
-
-
-        return;
-
-    }
-
-
-
-    const emptyState =
-
-        friendsConversationMessages.querySelector(
-
-            ".friends-conversation-empty"
-
-        );
-
-
-
-    if (emptyState) {
-
-
-
-        emptyState.remove();
-
-    }
-
-
-
-
-
-    const bubble =
-
-        document.createElement(
-
-            "div"
-
-        );
-
-
-
-    bubble.className =
-
-        "friends-message-bubble sent";
-
-
-
-    bubble.textContent =
-
-        text;
-
-
-
-
-
-    friendsConversationMessages.appendChild(
-
-        bubble
-
-    );
-
-
-
-
-
-    friendsConversationMessages.scrollTop =
-
-        friendsConversationMessages.scrollHeight;
-
-}
-
-
-
-
-
-originsTestFriend?.addEventListener(
-
-    "click",
-
-    openFriendsConversation
-
-);
-
-
-
-
-
-friendsConversationBack?.addEventListener(
-
-    "click",
-
-    closeFriendsConversation
-
-);
-
-
-
-
-
-friendsMessageComposer?.addEventListener(
-
-    "submit",
-
-    (event) => {
-
-
-
-        event.preventDefault();
-
-
-
-
-
-        const message =
-
-            friendsMessageInput
-
-                ? friendsMessageInput.value.trim()
-
-                : "";
-
-
-
-
-
-        if (!message) {
-
-
-
-            return;
-
+friendsConversationBack?.addEventListener("click", closeFriendsConversation);
+
+friendsMessageComposer?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const token = localStorage.getItem("origins-token");
+    const profile = activeFriendsConversationProfile;
+    const message = friendsMessageInput ? friendsMessageInput.value.trim() : "";
+
+    if (!token || !profile?.id || !message || !window.origins?.messages) return;
+
+    friendsMessageInput.disabled = true;
+    try {
+        const data = await window.origins.messages.send(token, profile.id, message);
+        friendsMessageInput.value = "";
+        // POST /messages returns the stored row: show it now, no full reload.
+        if (data?.message && activeFriendsConversationProfile?.id === profile.id) {
+            appendPrivateMessage(data.message, profile);
+        } else {
+            await loadFriendsConversation(profile);
         }
-
-
-
-
-
-        /*
-
-         * UI locale uniquement pour cette étape.
-
-         * Aucun envoi réseau n'est effectué.
-
-         */
-
-
-
-        addLocalPrivateMessage(
-
-            message
-
-        );
-
-
-
-
-
-        friendsMessageInput.value =
-
-            "";
-
-
-
+    } catch (error) {
+        console.error("Unable to send private message:", error);
+    } finally {
+        friendsMessageInput.disabled = false;
         friendsMessageInput.focus();
-
     }
-
-);
-
-
-
+});
 
 
 /* ==========================================
@@ -1712,7 +774,7 @@ let tempestUpdateInfo = null;
 
 
 
-if (!translations[currentLauncherLanguage]) {
+if (!isSupportedLanguage(currentLauncherLanguage)) {
 
 
 
@@ -1722,13 +784,7 @@ if (!translations[currentLauncherLanguage]) {
 
 
 
-if (
-
-    currentGameLanguage !== "en" &&
-
-    currentGameLanguage !== "fr"
-
-) {
+if (!isSupportedLanguage(currentGameLanguage)) {
 
 
 
@@ -1792,7 +848,6 @@ function renderUpdateHistory() {
 
 
 
-    const t = translations[currentLauncherLanguage] || translations.en;
 
     const history = updateHistoryI18n[currentLauncherLanguage] || updateHistoryI18n.en;
 
@@ -1826,7 +881,7 @@ function renderUpdateHistory() {
 
                     <span>${item.date}</span>
 
-                    ${index === 0 ? `<strong>${t.latestUpdate}</strong>` : ""}
+                    ${index === 0 ? `<strong>${t("latestUpdate")}</strong>` : ""}
 
                 </div>
 
@@ -1872,11 +927,7 @@ function updateTempestButton() {
 
         playButton.textContent =
 
-            currentLauncherLanguage === "fr"
-
-                ? "EN COURS"
-
-                : "RUNNING";
+            t("running");
 
 
 
@@ -1906,11 +957,7 @@ function updateTempestButton() {
 
         playButton.textContent =
 
-            currentLauncherLanguage === "fr"
-
-                ? "METTRE À JOUR"
-
-                : "UPDATE";
+            t("update");
 
 
 
@@ -1928,11 +975,7 @@ function updateTempestButton() {
 
         playButton.textContent =
 
-            currentLauncherLanguage === "fr"
-
-                ? "JOUER"
-
-                : "PLAY";
+            t("play");
 
 
 
@@ -1946,11 +989,7 @@ function updateTempestButton() {
 
     playButton.textContent =
 
-        currentLauncherLanguage === "fr"
-
-            ? "INSTALLER"
-
-            : "INSTALL";
+        t("install");
 
 }
 
@@ -1968,238 +1007,52 @@ function updateTempestButton() {
 
 function applyLanguage(language) {
 
-
-
-    const t =
-
-        translations[language] ||
-
-        translations.en;
-
-
-
-    document
-
-        .querySelectorAll("[data-i18n]")
-
-        .forEach((element) => {
-
-
-
-            const key =
-
-                element.getAttribute(
-
-                    "data-i18n"
-
-                );
-
-
-
-            if (t[key]) {
-
-
-
-                element.textContent =
-
-                    t[key];
-
-            }
-
-
-
-        });
-
-
-
-    document
-
-        .querySelectorAll(
-
-            "[data-i18n-placeholder]"
-
-        )
-
-        .forEach(
-
-            (element) => {
-
-
-
-                const key =
-
-                    element.getAttribute(
-
-                        "data-i18n-placeholder"
-
-                    );
-
-
-
-                if (t[key]) {
-
-
-
-                    element.placeholder =
-
-                        t[key];
-
-                }
-
-            }
-
-        );
-
-
-
-
-
-    document.documentElement.lang =
-
-        language;
-
-
-
-    renderNews(language);
-
-    renderUpdateHistory();
-
-    renderOriginsProfile(originsProfile);
-
-    refreshOrigins052Labels();
-
-
-
-    updateTempestButton();
-
-
-
-    const french =
-
-        language === "fr";
-
-
-
-    settingsButton.title =
-
-        french
-
-            ? "Paramètres"
-
-            : "Settings";
-
-
-
-    accountButton.title =
-
-        french
-
-            ? "Compte"
-
-            : "Account";
-
-
-
-    homeButton.title =
-
-        french
-
-            ? "Accueil"
-
-            : "Home";
-
-
-
-    tempestButton.title =
-
-        "Tempest Origins";
-
-
-
-    gamesButton.title =
-
-        french
-
-            ? "Jeux"
-
-            : "Games";
-
-
-
-    settingsClose.setAttribute(
-
-        "aria-label",
-
-
-
-        french
-
-            ? "Fermer les paramètres"
-
-            : "Close settings"
-
-    );
-
-
-
-    accountClose.setAttribute(
-
-        "aria-label",
-
-
-
-        french
-
-            ? "Fermer le compte"
-
-            : "Close account"
-
-    );
-
-
-
-    socialClose.setAttribute(
-
-        "aria-label",
-
-
-
-        french
-
-            ? "Fermer les contacts"
-
-            : "Close contacts"
-
-    );
-
-
-
-    const socialWords = {
-
-        contacts: french ? "CONTACTS" : "CONTACTS",
-
-        notifications: french ? "NOTIFICATIONS" : "NOTIFICATIONS",
-
-        noNotifications: french ? "AUCUNE NOTIFICATION" : "NO NOTIFICATIONS",
-
-        noNotificationsText: french ? "Les demandes d’ami apparaîtront ici." : "Friend requests will appear here.",
-
-        addContact: french ? "AJOUTER UN CONTACT" : "ADD A CONTACT",
-
-        originsId: "ORIGINS ID",
-
-        search: french ? "RECHERCHER" : "SEARCH",
-
-        socialBackendPending: french ? "La recherche par Origins ID sera connectée au serveur social." : "Origins ID search will be connected to the social server."
-
-    };
-
-    Object.entries(socialWords).forEach(([key, value]) => {
-
-        document.querySelectorAll(`[data-i18n="${key}"]`).forEach((node) => { node.textContent = value; });
-
+    if (isSupportedLanguage(language)) {
+        currentLauncherLanguage = language;
+    }
+
+    // Static texts, placeholders, tooltips and accessibility labels.
+    document.querySelectorAll("[data-i18n]").forEach((element) => {
+        element.textContent = t(element.getAttribute("data-i18n"));
     });
 
+    document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
+        element.placeholder = t(element.getAttribute("data-i18n-placeholder"));
+    });
+
+    document.querySelectorAll("[data-i18n-title]").forEach((element) => {
+        element.title = t(element.getAttribute("data-i18n-title"));
+    });
+
+    document.querySelectorAll("[data-i18n-aria]").forEach((element) => {
+        element.setAttribute("aria-label", t(element.getAttribute("data-i18n-aria")));
+    });
+
+    document.documentElement.lang = currentLauncherLanguage;
+
+    if (launcherLanguage) launcherLanguage.value = currentLauncherLanguage;
+    if (gameLanguage) gameLanguage.value = currentLauncherLanguage;
+
+    renderNews(currentLauncherLanguage);
+    renderUpdateHistory();
+    renderOriginsProfile(originsProfile);
+    refreshOrigins052Labels();
+    updateTempestButton();
+    renderFriendsList(originsFriendsCache);
+    renderLauncherUpdate();
+
+    settingsButton.title = t("titleSettings");
+    accountButton.title = t("titleAccount");
+    homeButton.title = t("titleHome");
+    tempestButton.title = "Tempest Origins";
+    gamesButton.title = t("titleGames");
+
+    settingsClose.setAttribute("aria-label", t("closeSettings"));
+    accountClose.setAttribute("aria-label", t("closeAccount"));
+    socialClose.setAttribute("aria-label", t("closeContacts"));
+
+    // Main process texts (tray menu, Microsoft sign-in page).
+    window.origins?.launcher?.setLanguage?.(currentLauncherLanguage);
 }
 
 
@@ -2970,6 +1823,14 @@ socialClose.addEventListener(
 
 
 
+// Language options come from ORIGINS_LANGUAGES (i18n.js).
+[launcherLanguage, gameLanguage].forEach((select) => {
+    if (!select) return;
+    select.innerHTML = "";
+    ORIGINS_LANGUAGES.forEach(({ code, name }) => select.add(new Option(name, code)));
+    select.value = currentLauncherLanguage;
+});
+
 launcherLanguage.addEventListener(
 
     "change",
@@ -3149,11 +2010,88 @@ function setOnboardingStatus(message = "", isError = false) {
 
 
 
+/* ---------- Step 1: language (first launch) ---------- */
+
+const originsLanguageStep = document.getElementById("originsLanguageStep");
+const originsLanguageGrid = document.getElementById("originsLanguageGrid");
+const originsLanguageContinue = document.getElementById("originsLanguageContinue");
+const originsChangeLanguage = document.getElementById("originsChangeLanguage");
+
+// The language step is shown until a language has been saved once.
+function hasChosenLanguage() {
+    return Boolean(localStorage.getItem("origins-language"));
+}
+
+// Same path as the Settings selector: saves, applies and syncs Minecraft.
+function chooseLauncherLanguage(code) {
+    if (!isSupportedLanguage(code) || !launcherLanguage) return;
+    launcherLanguage.value = code;
+    launcherLanguage.dispatchEvent(new Event("change"));
+}
+
+function renderOnboardingLanguages() {
+    if (!originsLanguageGrid) return;
+    originsLanguageGrid.innerHTML = "";
+
+    ORIGINS_LANGUAGES.forEach(({ code, name }) => {
+        const selected = code === currentLauncherLanguage;
+        const option = document.createElement("button");
+        option.type = "button";
+        option.className = "origins-language-option";
+        option.classList.toggle("selected", selected);
+        option.setAttribute("role", "radio");
+        option.setAttribute("aria-checked", String(selected));
+
+        const label = document.createElement("strong");
+        label.textContent = name;
+        const tag = document.createElement("small");
+        tag.textContent = code.toUpperCase();
+        option.append(label, tag);
+
+        // Preview instantly; saved when the player continues.
+        option.addEventListener("click", () => {
+            applyLanguage(code);
+            renderOnboardingLanguages();
+        });
+        originsLanguageGrid.appendChild(option);
+    });
+}
+
+function showLanguageOnboarding() {
+    if (!originsOnboarding) return;
+
+    originsOnboarding.classList.add("is-visible");
+    if (originsLanguageStep) originsLanguageStep.hidden = false;
+    originsMicrosoftStep.hidden = true;
+    originsProfileStep.hidden = true;
+    setOnboardingStatus("");
+    renderOnboardingLanguages();
+}
+
+originsLanguageContinue?.addEventListener("click", () => {
+    chooseLauncherLanguage(currentLauncherLanguage);
+    showMicrosoftOnboarding();
+});
+
+originsChangeLanguage?.addEventListener("click", showLanguageOnboarding);
+
+
+/* ---------- Step 2: Microsoft ---------- */
+
 function showMicrosoftOnboarding() {
 
     if (!originsOnboarding) return;
 
+    // New player: pick the language before anything else,
+    // pre-selected from the Windows language.
+    if (!hasChosenLanguage()) {
+        applyLanguage(detectSystemLanguage());
+        showLanguageOnboarding();
+        return;
+    }
+
     originsOnboarding.classList.add("is-visible");
+    if (originsLanguageStep) originsLanguageStep.hidden = true;
     originsMicrosoftStep.hidden = false;
     originsProfileStep.hidden = true;
     setOnboardingStatus("");
@@ -3161,12 +2099,14 @@ function showMicrosoftOnboarding() {
 }
 
 
+/* ---------- Step 3: profile ---------- */
 
 function showProfileOnboarding() {
 
     if (!originsOnboarding) return;
 
     originsOnboarding.classList.add("is-visible");
+    if (originsLanguageStep) originsLanguageStep.hidden = true;
     originsMicrosoftStep.hidden = true;
     originsProfileStep.hidden = false;
     setOnboardingStatus("");
@@ -3182,6 +2122,9 @@ function hideOriginsOnboarding() {
     originsOnboarding?.classList.remove("is-visible");
     setOnboardingStatus("");
 
+    // Every successful sign-in path ends here: first time -> guided tour.
+    maybeStartTutorial();
+
 }
 
 
@@ -3190,13 +2133,13 @@ async function signInWithMicrosoft() {
 
     if (!window.origins?.profile?.microsoftLogin) {
 
-        setOnboardingStatus("Microsoft sign-in is unavailable.", true);
+        setOnboardingStatus(t("onbMicrosoftUnavailable"), true);
         return;
 
     }
 
     originsMicrosoftButton.disabled = true;
-    setOnboardingStatus("Waiting for Microsoft sign-in...");
+    setOnboardingStatus(t("onbWaitingMicrosoft"));
 
     try {
 
@@ -3229,7 +2172,7 @@ async function signInWithMicrosoft() {
         localStorage.removeItem("origins-token");
         renderOriginsProfile(null);
         showMicrosoftOnboarding();
-        setOnboardingStatus("Microsoft sign-in failed. Please try again.", true);
+        setOnboardingStatus(t("onbMicrosoftFailed"), true);
         console.error("Origins Microsoft login failed:", error);
 
     } finally {
@@ -3256,14 +2199,14 @@ async function createFirstOriginsProfile() {
 
     if (displayName.length < 3 || displayName.length > 32) {
 
-        setOnboardingStatus("Display name must contain 3 to 32 characters.", true);
+        setOnboardingStatus(t("onbNameLength"), true);
         originsFirstProfileName?.focus();
         return;
 
     }
 
     originsCreateProfileButton.disabled = true;
-    setOnboardingStatus("Creating your Origins profile...");
+    setOnboardingStatus(t("onbCreatingProfile"));
 
     try {
 
@@ -3282,8 +2225,8 @@ async function createFirstOriginsProfile() {
 
         setOnboardingStatus(
             error?.message === "PROFILE_ALREADY_EXISTS"
-                ? "This Microsoft account already has an Origins profile."
-                : "Unable to create the profile. Please try again.",
+                ? t("onbProfileExists")
+                : t("onbProfileFailed"),
             true
         );
 
@@ -3373,15 +2316,11 @@ document.addEventListener("click", async (event) => {
         const label = document.getElementById("originsIdCopyLabel");
         if (label) {
             label.textContent =
-                currentLauncherLanguage === "fr"
-                    ? "COPIÉ"
-                    : "COPIED";
+                t("copied");
 
             window.setTimeout(() => {
                 label.textContent =
-                    currentLauncherLanguage === "fr"
-                        ? "COPIER"
-                        : "COPY";
+                    t("copy");
             }, 1200);
         }
     } catch (error) {
@@ -3404,7 +2343,7 @@ function renderOriginsProfile(profile) {
 
     originsProfile = profile || null;
 
-    const name = profile?.displayName || (currentLauncherLanguage === "fr" ? "Non connecté" : "Not signed in");
+    const name = profile?.displayName || (t("notSignedIn"));
 
     document.querySelectorAll("#localProfileName, #accountProfileName").forEach(el => el.textContent = name);
 
@@ -3424,9 +2363,9 @@ function renderOriginsProfile(profile) {
 
     if (accountButton) {
 
-        accountButton.title = profile ? name : "Origins profile";
+        accountButton.title = profile ? name : t("originsProfileTitle");
 
-        accountButton.setAttribute("aria-label", profile ? name : "Origins profile");
+        accountButton.setAttribute("aria-label", profile ? name : t("originsProfileTitle"));
 
     }
 
@@ -3445,7 +2384,10 @@ function renderOriginsProfile(profile) {
     if (profile) {
 
         refreshFriendsSocial();
+        connectOriginsRealtime();
 
+    } else {
+        disconnectOriginsRealtime();
     }
 
 }
@@ -3542,95 +2484,17 @@ if (changeAvatarButton) changeAvatarButton.addEventListener("click", async () =>
 
 
 function getInstallStageText(stage) {
-
-
-
-    const french =
-
-        currentLauncherLanguage === "fr";
-
-
-
-    const labels = {
-
-
-
-        PREPARING:
-
-            french
-
-                ? "PRÉPARATION DE TEMPEST ORIGINS"
-
-                : "PREPARING TEMPEST ORIGINS",
-
-
-
-        CREATING_INSTANCE:
-
-            french
-
-                ? "CRÉATION DE L'INSTANCE"
-
-                : "CREATING GAME INSTANCE",
-
-
-
-        CREATING_FILES:
-
-            french
-
-                ? "PRÉPARATION DES FICHIERS"
-
-                : "PREPARING FILES",
-
-
-
-        WRITING_CONFIGURATION:
-
-            french
-
-                ? "CONFIGURATION"
-
-                : "CONFIGURING",
-
-
-
-        VERIFYING:
-
-            french
-
-                ? "VÉRIFICATION DES FICHIERS"
-
-                : "VERIFYING FILES",
-
-
-
-        COMPLETE:
-
-            french
-
-                ? "INSTALLATION TERMINÉE"
-
-                : "INSTALLATION COMPLETE",
-
-
-
-        ERROR:
-
-            french
-
-                ? "ERREUR D'INSTALLATION"
-
-                : "INSTALLATION ERROR"
-
-
-
+    const keys = {
+        PREPARING: "stagePreparing",
+        CREATING_INSTANCE: "stageCreatingInstance",
+        CREATING_FILES: "stageCreatingFiles",
+        WRITING_CONFIGURATION: "stageConfiguring",
+        VERIFYING: "stageVerifying",
+        UPDATE: "stageUpdate",
+        COMPLETE: "stageComplete",
+        ERROR: "stageError"
     };
-
-
-
-    return labels[stage] || stage;
-
+    return keys[stage] ? t(keys[stage]) : stage;
 }
 
 
@@ -3735,9 +2599,10 @@ function updateInstallProgress(data) {
 
 
 
+    // index.js sends detailKey/detailParams so the detail follows the launcher language.
     installProgressDetail.textContent =
 
-        data.detail || "";
+        data.detailKey ? t(data.detailKey, data.detailParams) : (data.detail || "");
 
 }
 
@@ -3813,11 +2678,7 @@ playButton.addEventListener(
 
                 playButton.textContent =
 
-                    currentLauncherLanguage === "fr"
-
-                        ? "MISE À JOUR..."
-
-                        : "UPDATING...";
+                    t("updating");
 
 
 
@@ -3829,11 +2690,7 @@ playButton.addEventListener(
 
                     detail:
 
-                        currentLauncherLanguage === "fr"
-
-                            ? "Téléchargement de la mise à jour..."
-
-                            : "Downloading update..."
+                        t("detailDownloadingUpdate")
 
                 });
 
@@ -3903,11 +2760,7 @@ playButton.addEventListener(
 
                     detail:
 
-                        currentLauncherLanguage === "fr"
-
-                            ? "Mise à jour terminée."
-
-                            : "Update complete."
+                        t("detailUpdateComplete")
 
                 });
 
@@ -3983,11 +2836,7 @@ playButton.addEventListener(
 
                 playButton.textContent =
 
-                    currentLauncherLanguage === "fr"
-
-                        ? "RÉESSAYER"
-
-                        : "RETRY";
+                    t("retry");
 
 
 
@@ -4045,11 +2894,7 @@ playButton.addEventListener(
 
                 playButton.textContent =
 
-                    currentLauncherLanguage === "fr"
-
-                        ? "LANCEMENT..."
-
-                        : "LAUNCHING...";
+                    t("launching");
 
 
 
@@ -4129,11 +2974,7 @@ playButton.addEventListener(
 
                 playButton.textContent =
 
-                    currentLauncherLanguage === "fr"
-
-                        ? "RÉESSAYER"
-
-                        : "RETRY";
+                    t("retry");
 
 
 
@@ -4257,11 +3098,7 @@ playButton.addEventListener(
 
                 installProgressStatus.textContent =
 
-                    currentLauncherLanguage === "fr"
-
-                        ? "PRÉPARATION DE TEMPEST ORIGINS"
-
-                        : "PREPARING TEMPEST ORIGINS";
+                    t("preparingTempest");
 
             }
 
@@ -4273,11 +3110,7 @@ playButton.addEventListener(
 
                 installProgressDetail.textContent =
 
-                    currentLauncherLanguage === "fr"
-
-                        ? "Initialisation..."
-
-                        : "Initializing...";
+                    t("detailInitializing");
 
             }
 
@@ -4285,11 +3118,7 @@ playButton.addEventListener(
 
             playButton.textContent =
 
-                currentLauncherLanguage === "fr"
-
-                    ? "INSTALLATION..."
-
-                    : "INSTALLING...";
+                t("installing");
 
 
 
@@ -4365,11 +3194,7 @@ playButton.addEventListener(
 
                 detail:
 
-                    currentLauncherLanguage === "fr"
-
-                        ? "Tempest Origins est prêt."
-
-                        : "Tempest Origins is ready."
+                    t("detailTempestReady")
 
             });
 
@@ -4471,11 +3296,7 @@ playButton.addEventListener(
 
             playButton.textContent =
 
-                currentLauncherLanguage === "fr"
-
-                    ? "RÉESSAYER"
-
-                    : "RETRY";
+                t("retry");
 
 
 
@@ -4569,6 +3390,14 @@ const copyOriginsIdButton = document.getElementById("copyOriginsIdButton");
 const originsIdCopyLabel = document.getElementById("originsIdCopyLabel");
 const notificationsContent = document.getElementById("notificationsContent");
 
+// Realtime social state. The existing UI remains unchanged; these values only
+// keep contacts, presence and private messages synchronized.
+let originsFriendsCache = [];
+const originsFriendPresence = new Map();
+let originsRealtimeToken = null;
+let originsRealtimeUnsubscribeEvent = null;
+let originsRealtimeUnsubscribeStatus = null;
+
 function renderAccountOriginsId(profile) {
     const originsId = profile?.originsId || "";
     if (originsIdCard) originsIdCard.hidden = !originsId;
@@ -4616,12 +3445,24 @@ async function refreshFriendsSocial() {
             window.origins.friends.list(token),
             window.origins.friends.received(token)
         ]);
-        renderFriendsList(friendsData?.friends || []);
+        originsFriendsCache = friendsData?.friends || [];
+        renderFriendsList(originsFriendsCache);
         renderFriendRequests(receivedData?.requests || []);
+        return receivedData?.requests || [];
     } catch (error) {
         console.error("Unable to refresh friends:", error);
+        return [];
     }
 }
+
+// Windows notification (toast) through the main process.
+function showSocialNotification(title, body) {
+    if (!window.origins?.notifications?.show) return;
+    window.origins.notifications.show(title, body).catch?.(() => {});
+}
+
+// Requests accepted from this launcher: no "accepted" toast for our own click.
+const locallyAcceptedRequestIds = new Set();
 
 function renderFriendsList(friends) {
     if (!friendsListView) return;
@@ -4638,7 +3479,8 @@ function renderFriendsList(friends) {
             empty.className = "social-empty-state friends-empty-state";
             friendsListView.appendChild(empty);
         }
-        empty.innerHTML = `<strong>${currentLauncherLanguage === "fr" ? "AUCUN CONTACT" : "NO CONTACTS"}</strong><span>${currentLauncherLanguage === "fr" ? "Ajoutez un contact avec son Origins ID." : "Add a contact with their Origins ID."}</span>`;
+        empty.innerHTML = `<strong>${t("noContacts")}</strong><span>${t("noContactsText")}</span>`;
+        updateFriendsOnlineBadge();
         return;
     }
 
@@ -4655,7 +3497,12 @@ function renderFriendsList(friends) {
         const name = document.createElement("strong");
         name.textContent = profile.displayName;
         const id = document.createElement("small");
-        id.textContent = profile.originsId || "";
+        const { status, label } = friendPresenceInfo(profile.id);
+        id.textContent = label;
+
+        row.dataset.presence = status;
+        row.classList.toggle("is-online", status !== "offline");
+        row.classList.toggle("is-playing", status === "playing");
         info.append(name, id);
         row.appendChild(info);
 
@@ -4663,9 +3510,178 @@ function renderFriendsList(friends) {
         arrow.className = "friends-contact-arrow";
         arrow.textContent = "›";
         row.appendChild(arrow);
+        row.__originsProfile = profile;
         row.addEventListener("click", openFriendsConversation);
+        row.addEventListener("contextmenu", (event) => openFriendContextMenu(event, profile));
         friendsListView.appendChild(row);
     });
+
+    updateFriendsOnlineBadge();
+
+    // Keep the open conversation header in sync with the contact row.
+    if (activeFriendsConversationProfile) {
+        const fresh = friends.find(p => String(p.id) === String(activeFriendsConversationProfile.id));
+        if (fresh) activeFriendsConversationProfile = fresh;
+        setConversationHeader(activeFriendsConversationProfile);
+    }
+}
+
+/* ---------- Contact context menu (right click) ---------- */
+
+let friendContextMenu = null;
+
+function closeFriendContextMenu() {
+    friendContextMenu?.remove();
+    friendContextMenu = null;
+}
+
+function positionFriendContextMenu(menu, x, y) {
+    const margin = 8;
+    const rect = menu.getBoundingClientRect();
+    const left = Math.min(x, window.innerWidth - rect.width - margin);
+    const top = Math.min(y, window.innerHeight - rect.height - margin);
+    menu.style.left = `${Math.max(margin, left)}px`;
+    menu.style.top = `${Math.max(margin, top)}px`;
+}
+
+function friendMenuItem(label, onClick, danger = false) {
+    const item = document.createElement("button");
+    item.type = "button";
+    item.className = danger ? "friend-context-item danger" : "friend-context-item";
+    item.textContent = label;
+    item.addEventListener("click", onClick);
+    return item;
+}
+
+function openFriendContextMenu(event, profile) {
+    event.preventDefault();
+    event.stopPropagation();
+    closeFriendContextMenu();
+
+    const x = event.clientX;
+    const y = event.clientY;
+    const menu = document.createElement("div");
+    menu.className = "friend-context-menu";
+    menu.setAttribute("role", "menu");
+    menu.addEventListener("click", (e) => e.stopPropagation());
+    menu.addEventListener("contextmenu", (e) => e.preventDefault());
+
+    const renderActions = () => {
+        menu.innerHTML = "";
+        const title = document.createElement("div");
+        title.className = "friend-context-title";
+        title.textContent = profile.displayName || profile.originsId || "Origins";
+
+        const separator = document.createElement("div");
+        separator.className = "friend-context-separator";
+
+        menu.append(
+            title,
+            friendMenuItem(t("menuSendMessage"), () => {
+                closeFriendContextMenu();
+                openFriendsConversation(profile);
+            }),
+            friendMenuItem(t("copyOriginsId"), () => {
+                window.origins?.clipboard?.writeText(profile.originsId || "");
+                closeFriendContextMenu();
+            }),
+            separator,
+            friendMenuItem(t("menuRemoveFriend"), renderConfirm, true)
+        );
+    };
+
+    const renderConfirm = () => {
+        menu.innerHTML = "";
+        menu.classList.add("confirming");
+
+        const text = document.createElement("p");
+        text.className = "friend-context-confirm";
+        const name = document.createElement("strong");
+        name.textContent = profile.displayName || "Origins";
+        // "{name}" in the sentence is replaced by the bold name element.
+        const [before, after = ""] = t("removeConfirm").split("{name}");
+        text.append(before, name, after);
+
+        const error = document.createElement("small");
+        error.className = "friend-context-error";
+
+        const actions = document.createElement("div");
+        actions.className = "friend-context-actions";
+        const cancel = friendMenuItem(t("cancel"), closeFriendContextMenu);
+        const confirm = friendMenuItem(t("remove"), async () => {
+            const token = localStorage.getItem("origins-token");
+            if (!token || !window.origins?.friends?.remove) return;
+            confirm.disabled = true;
+            cancel.disabled = true;
+            try {
+                await window.origins.friends.remove(token, profile.id);
+                if (String(activeFriendsConversationProfile?.id) === String(profile.id)) {
+                    closeFriendsConversation();
+                    activeFriendsConversationProfile = null;
+                }
+                originsFriendPresence.delete(String(profile.id));
+                closeFriendContextMenu();
+                await refreshFriendsSocial();
+            } catch (err) {
+                console.error("Unable to remove friend:", err);
+                error.textContent = t("removeFailed");
+                confirm.disabled = false;
+                cancel.disabled = false;
+            }
+        }, true);
+        actions.append(cancel, confirm);
+
+        menu.append(text, error, actions);
+        positionFriendContextMenu(menu, x, y);
+        cancel.focus();
+    };
+
+    renderActions();
+    document.body.appendChild(menu);
+    friendContextMenu = menu;
+    positionFriendContextMenu(menu, x, y);
+}
+
+document.addEventListener("click", closeFriendContextMenu);
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeFriendContextMenu();
+});
+window.addEventListener("blur", closeFriendContextMenu);
+window.addEventListener("resize", closeFriendContextMenu);
+
+// Single source for a contact's presence: the realtime map fed by server.js.
+// Used by the contacts list and the private message header.
+function friendPresenceInfo(profileId) {
+    const presence = originsFriendPresence.get(String(profileId || ""));
+    const status = String(presence?.status || "offline").toLowerCase();
+    const game = presence?.game ? String(presence.game) : "";
+    let label;
+
+    if (status === "playing") {
+        label = game && game.toLowerCase() !== "tempest"
+            ? t("playingGame", { game })
+            : t("presencePlayingTempest");
+    } else if (status === "away") {
+        label = t("presenceAway");
+    } else if (status === "online") {
+        label = t("presenceOnline");
+    } else {
+        label = t("presenceOffline");
+    }
+
+    return { status, label };
+}
+
+function updateFriendsOnlineBadge() {
+    const onlineCount = originsFriendsCache.reduce((total, profile) => {
+        const { status } = friendPresenceInfo(profile.id);
+        return total + (status !== "offline" ? 1 : 0);
+    }, 0);
+
+    const badge = document.getElementById("friendsMessageBadge");
+    if (badge) badge.textContent = String(onlineCount);
+    // Green dot only when at least one friend is online.
+    friendsQuickAccess?.classList.toggle("has-online-friends", onlineCount > 0);
 }
 
 function renderFriendRequests(requests) {
@@ -4679,7 +3695,7 @@ function renderFriendRequests(requests) {
     if (!requests.length) {
         const empty = document.createElement("div");
         empty.className = "social-empty-state";
-        empty.innerHTML = `<strong>${currentLauncherLanguage === "fr" ? "AUCUNE NOTIFICATION" : "NO NOTIFICATIONS"}</strong><span>${currentLauncherLanguage === "fr" ? "Les demandes d’ami apparaîtront ici." : "Friend requests will appear here."}</span>`;
+        empty.innerHTML = `<strong>${t("noNotifications")}</strong><span>${t("noNotificationsText")}</span>`;
         notificationsContent.appendChild(empty);
         return;
     }
@@ -4701,12 +3717,13 @@ function renderFriendRequests(requests) {
         const actions = document.createElement("div");
         actions.className = "friend-request-actions";
         actions.append(
-            socialActionButton(currentLauncherLanguage === "fr" ? "ACCEPTER" : "ACCEPT", async () => {
+            socialActionButton(t("accept"), async () => {
                 const token = localStorage.getItem("origins-token");
+                locallyAcceptedRequestIds.add(String(request.id));
                 await window.origins.friends.accept(token, request.id);
                 await refreshFriendsSocial();
             }),
-            socialActionButton(currentLauncherLanguage === "fr" ? "REFUSER" : "REFUSE", async () => {
+            socialActionButton(t("refuse"), async () => {
                 const token = localStorage.getItem("origins-token");
                 await window.origins.friends.refuse(token, request.id);
                 await refreshFriendsSocial();
@@ -4724,7 +3741,7 @@ async function searchOriginsContact() {
     const hint = addContactPanel?.querySelector(".add-contact-hint");
     if (!token || !value || !result || !window.origins?.friends) return;
 
-    if (hint) hint.textContent = currentLauncherLanguage === "fr" ? "Recherche…" : "Searching…";
+    if (hint) hint.textContent = t("searching");
     result.innerHTML = "";
 
     try {
@@ -4746,18 +3763,20 @@ async function searchOriginsContact() {
         const action = document.createElement("div");
         action.className = "friend-request-actions";
         if (data.relation === "accepted") {
-            action.textContent = currentLauncherLanguage === "fr" ? "DÉJÀ AMI" : "ALREADY FRIENDS";
+            action.textContent = t("alreadyFriends");
         } else if (data.relation === "pending" && data.direction === "sent") {
-            action.textContent = currentLauncherLanguage === "fr" ? "DEMANDE ENVOYÉE" : "REQUEST SENT";
+            action.textContent = t("requestSent");
         } else if (data.relation === "pending" && data.direction === "received") {
-            action.appendChild(socialActionButton(currentLauncherLanguage === "fr" ? "ACCEPTER" : "ACCEPT", async () => {
+            action.appendChild(socialActionButton(t("accept"), async () => {
+                locallyAcceptedRequestIds.add(String(data.requestId));
                 await window.origins.friends.accept(token, data.requestId);
                 await refreshFriendsSocial();
                 await searchOriginsContact();
             }));
         } else {
-            action.appendChild(socialActionButton(currentLauncherLanguage === "fr" ? "AJOUTER" : "SEND REQUEST", async () => {
-                await window.origins.friends.send(token, profile.originsId);
+            action.appendChild(socialActionButton(t("sendRequest"), async () => {
+                const sent = await window.origins.friends.send(token, profile.originsId);
+                if (sent?.accepted && sent.requestId) locallyAcceptedRequestIds.add(String(sent.requestId));
                 await refreshFriendsSocial();
                 await searchOriginsContact();
             }));
@@ -4768,13 +3787,184 @@ async function searchOriginsContact() {
     } catch (error) {
         if (hint) {
             hint.textContent = error?.code === "PROFILE_NOT_FOUND"
-                ? (currentLauncherLanguage === "fr" ? "Aucun profil trouvé avec cet Origins ID." : "No profile found with this Origins ID.")
-                : (currentLauncherLanguage === "fr" ? "Impossible d’effectuer la recherche." : "Unable to search right now.");
+                ? (t("profileNotFound"))
+                : (t("searchFailed"));
         }
     }
 }
 
 
+/* =========================================================
+   ORIGINS REALTIME — FRIENDS / PRESENCE / PRIVATE MESSAGES
+   Uses the WebSocket bridge exposed by preload.js.
+========================================================= */
+
+function realtimePayload(event) {
+    return event?.payload ?? event?.data ?? event ?? {};
+}
+
+function applyFriendPresence(profileId, presence) {
+    if (!profileId) return;
+    originsFriendPresence.set(String(profileId), {
+        status: String(presence?.status || "offline").toLowerCase(),
+        game: presence?.game || null
+    });
+    renderFriendsList(originsFriendsCache);
+}
+
+function applyPresenceSnapshot(snapshot) {
+    const entries = Array.isArray(snapshot)
+        ? snapshot
+        : (Array.isArray(snapshot?.presences) ? snapshot.presences : []);
+
+    entries.forEach((entry) => {
+        const profileId = entry?.profileId ?? entry?.profile_id ?? entry?.id;
+        if (!profileId) return;
+        originsFriendPresence.set(String(profileId), {
+            status: String(entry?.status || "offline").toLowerCase(),
+            game: entry?.game || null
+        });
+    });
+
+    renderFriendsList(originsFriendsCache);
+}
+
+async function sendLocalRealtimePresence(presence = null) {
+    if (!window.origins?.realtime?.sendPresence) return;
+
+    try {
+        const current = presence || await window.origins?.presence?.get?.();
+        if (!current) return;
+        window.origins.realtime.sendPresence(
+            current.status || "online",
+            current.game || (current.status === "playing" ? "Tempest" : null)
+        );
+    } catch (error) {
+        console.warn("Unable to synchronize realtime presence:", error);
+    }
+}
+
+async function handleOriginsRealtimeEvent(event) {
+    const type = String(event?.type || event?.event || "");
+    const payload = realtimePayload(event);
+    console.log("[Realtime] event:", type, payload);
+
+    if (type === "presence:snapshot") {
+        applyPresenceSnapshot(payload);
+        return;
+    }
+
+    if (type === "presence:update" || type === "presence:changed") {
+        const profileId = payload?.profileId ?? payload?.profile_id ?? payload?.id;
+        applyFriendPresence(profileId, payload);
+        return;
+    }
+
+    if (type === "message:new") {
+        const message = payload?.message ?? payload;
+        const senderId = String(message?.senderProfileId ?? message?.sender_profile_id ?? "");
+        const receiverId = String(message?.receiverProfileId ?? message?.receiver_profile_id ?? "");
+        const activeId = String(activeFriendsConversationProfile?.id || "");
+        const conversationOpen = Boolean(friendsConversationView?.classList.contains("open"));
+
+        if (activeId && (senderId === activeId || receiverId === activeId)) {
+            appendPrivateMessage(message, activeFriendsConversationProfile);
+        }
+
+        // Conversation not visible: notify so the message is not missed.
+        if (!(conversationOpen && activeId === senderId && document.hasFocus())) {
+            const sender = originsFriendsCache.find(p => String(p.id) === senderId);
+            showSocialNotification(
+                sender?.displayName || "Origins",
+                privateMessageText(message).slice(0, 140)
+            );
+        }
+        return;
+    }
+
+    if (type === "friend:request") {
+        const requests = await refreshFriendsSocial();
+        const request = requests.find(r => String(r.id) === String(payload?.requestId));
+        const name = request?.profile?.displayName || "Origins";
+        showSocialNotification(
+            t("notifFriendRequestTitle"),
+            t("notifFriendRequestBody", { name })
+        );
+        return;
+    }
+
+    if (type === "friend:accepted") {
+        await refreshFriendsSocial();
+        const requestId = String(payload?.requestId || "");
+        if (locallyAcceptedRequestIds.has(requestId)) {
+            locallyAcceptedRequestIds.delete(requestId);
+            return;
+        }
+        const friend = originsFriendsCache.find(p => String(p.id) === String(payload?.profileId));
+        const name = friend?.displayName || "Origins";
+        showSocialNotification(
+            t("notifAcceptedTitle"),
+            t("notifAcceptedBody", { name })
+        );
+        return;
+    }
+
+    if (type === "friend:removed") {
+        const removedId = String(payload?.profileId || "");
+        originsFriendPresence.delete(removedId);
+        if (removedId && String(activeFriendsConversationProfile?.id) === removedId) {
+            closeFriendsConversation();
+            activeFriendsConversationProfile = null;
+        }
+        await refreshFriendsSocial();
+        return;
+    }
+
+    if (type === "friend:request-removed") {
+        await refreshFriendsSocial();
+    }
+}
+
+function connectOriginsRealtime() {
+    const token = localStorage.getItem("origins-token");
+    if (!token || !window.origins?.realtime?.connect) return;
+
+    if (!originsRealtimeUnsubscribeEvent && window.origins.realtime.onEvent) {
+        originsRealtimeUnsubscribeEvent = window.origins.realtime.onEvent((event) => {
+            handleOriginsRealtimeEvent(event).catch((error) => {
+                console.error("Origins realtime event failed:", error);
+            });
+        });
+    }
+
+    if (!originsRealtimeUnsubscribeStatus && window.origins.realtime.onStatus) {
+        originsRealtimeUnsubscribeStatus = window.origins.realtime.onStatus((status) => {
+            const value = String(status?.status ?? status ?? "").toLowerCase();
+            console.log("[Realtime] status:", value);
+            if (value === "connected" || value === "open") {
+                sendLocalRealtimePresence();
+                refreshFriendsSocial();
+            } else if (value === "disconnected" || value === "error") {
+                // Connection lost: presences are unknown until the next
+                // presence:snapshot, so do not keep friends shown as online.
+                originsFriendPresence.clear();
+                renderFriendsList(originsFriendsCache);
+            }
+        });
+    }
+
+    if (originsRealtimeToken !== token) {
+        originsRealtimeToken = token;
+        window.origins.realtime.connect(token);
+    }
+}
+
+function disconnectOriginsRealtime() {
+    originsRealtimeToken = null;
+    originsFriendPresence.clear();
+    window.origins?.realtime?.disconnect?.();
+    updateFriendsOnlineBadge();
+}
 
 
 let floatingZ = 400;
@@ -5218,6 +4408,207 @@ async function checkTempestInstallation() {
 
 
 /* ==========================================
+   FIRST-LOGIN TUTORIAL
+   Spotlight on the real launcher buttons, one step at a time.
+   Shown once (origins-tutorial-done), replayable from Settings.
+========================================== */
+
+const TUTORIAL_DONE_KEY = "origins-tutorial-done";
+
+const originsTutorial = document.getElementById("originsTutorial");
+const originsTutorialSpotlight = document.getElementById("originsTutorialSpotlight");
+const originsTutorialBubble = document.getElementById("originsTutorialBubble");
+const originsTutorialStep = document.getElementById("originsTutorialStep");
+const originsTutorialTitle = document.getElementById("originsTutorialTitle");
+const originsTutorialText = document.getElementById("originsTutorialText");
+const originsTutorialSkip = document.getElementById("originsTutorialSkip");
+const originsTutorialPrev = document.getElementById("originsTutorialPrev");
+const originsTutorialNext = document.getElementById("originsTutorialNext");
+const replayTutorialButton = document.getElementById("replayTutorialButton");
+
+// target = element to highlight (null = centered bubble).
+const TUTORIAL_STEPS = [
+    { target: null, title: "tutWelcomeTitle", text: "tutWelcomeText" },
+    { target: "#gamesButton", title: "tutGamesTitle", text: "tutGamesText" },
+    { target: "#updatesButton", title: "tutNewsTitle", text: "tutNewsText" },
+    { target: "#accountButton", title: "tutAccountTitle", text: "tutAccountText" },
+    { target: "#friendsQuickAccess", title: "tutContactsTitle", text: "tutContactsText" },
+    { target: "#notificationsQuickAccess", title: "tutNotificationsTitle", text: "tutNotificationsText" },
+    { target: "#settingsButton", title: "tutSettingsTitle", text: "tutSettingsText" },
+    { target: null, title: "tutDoneTitle", text: "tutDoneText" }
+];
+
+let tutorialIndex = 0;
+
+function tutorialIsDone() {
+    try {
+        return localStorage.getItem(TUTORIAL_DONE_KEY) === "1";
+    } catch (_) {
+        return false;
+    }
+}
+
+function maybeStartTutorial() {
+    if (tutorialIsDone() || !originsTutorial || !originsTutorial.hidden) return;
+    // Let the onboarding fade out first.
+    window.setTimeout(startTutorial, 450);
+}
+
+function startTutorial() {
+    if (!originsTutorial) return;
+    if (typeof closeAllPanels === "function") closeAllPanels();
+    tutorialIndex = 0;
+    originsTutorial.hidden = false;
+    document.addEventListener("keydown", onTutorialKeydown);
+    window.addEventListener("resize", renderTutorialStep);
+    renderTutorialStep();
+    originsTutorialNext?.focus();
+}
+
+function endTutorial() {
+    if (!originsTutorial) return;
+    originsTutorial.hidden = true;
+    document.removeEventListener("keydown", onTutorialKeydown);
+    window.removeEventListener("resize", renderTutorialStep);
+    try {
+        localStorage.setItem(TUTORIAL_DONE_KEY, "1");
+    } catch (_) {}
+}
+
+function goToTutorialStep(index) {
+    if (index < 0) return;
+    if (index >= TUTORIAL_STEPS.length) {
+        endTutorial();
+        return;
+    }
+    tutorialIndex = index;
+    renderTutorialStep();
+}
+
+function onTutorialKeydown(event) {
+    if (event.key === "Escape") endTutorial();
+    else if (event.key === "ArrowRight") goToTutorialStep(tutorialIndex + 1);
+    else if (event.key === "ArrowLeft") goToTutorialStep(tutorialIndex - 1);
+}
+
+function renderTutorialStep() {
+    if (!originsTutorial || originsTutorial.hidden) return;
+
+    const step = TUTORIAL_STEPS[tutorialIndex];
+    const isLast = tutorialIndex === TUTORIAL_STEPS.length - 1;
+    const name = originsProfile?.displayName || "Origins";
+
+    originsTutorialStep.textContent = `${tutorialIndex + 1} / ${TUTORIAL_STEPS.length}`;
+    originsTutorialTitle.textContent = t(step.title, { name });
+    originsTutorialText.textContent = t(step.text, { name });
+    originsTutorialPrev.hidden = tutorialIndex === 0;
+    originsTutorialSkip.hidden = isLast;
+    originsTutorialNext.textContent = isLast ? t("tutFinish") : t("tutNext");
+
+    const target = step.target ? document.querySelector(step.target) : null;
+    const rect = target?.getBoundingClientRect();
+    const visible = rect && rect.width > 0 && rect.height > 0;
+
+    originsTutorial.classList.toggle("centered", !visible);
+
+    if (!visible) {
+        originsTutorialBubble.style.left = "";
+        originsTutorialBubble.style.top = "";
+        return;
+    }
+
+    const pad = 8;
+    Object.assign(originsTutorialSpotlight.style, {
+        left: `${rect.left - pad}px`,
+        top: `${rect.top - pad}px`,
+        width: `${rect.width + pad * 2}px`,
+        height: `${rect.height + pad * 2}px`
+    });
+
+    // Bubble on the side of the target with the most room, kept on screen.
+    const bubble = originsTutorialBubble.getBoundingClientRect();
+    const margin = 16;
+    const gap = 18;
+    const below = rect.top + rect.height / 2 < window.innerHeight / 2;
+    let top = below ? rect.bottom + gap : rect.top - bubble.height - gap;
+    let left = rect.left + rect.width / 2 - bubble.width / 2;
+    top = Math.max(margin, Math.min(top, window.innerHeight - bubble.height - margin));
+    left = Math.max(margin, Math.min(left, window.innerWidth - bubble.width - margin));
+    originsTutorialBubble.style.left = `${left}px`;
+    originsTutorialBubble.style.top = `${top}px`;
+}
+
+originsTutorialNext?.addEventListener("click", () => goToTutorialStep(tutorialIndex + 1));
+originsTutorialPrev?.addEventListener("click", () => goToTutorialStep(tutorialIndex - 1));
+originsTutorialSkip?.addEventListener("click", endTutorial);
+
+replayTutorialButton?.addEventListener("click", () => {
+    if (typeof closeSettings === "function") closeSettings();
+    window.setTimeout(startTutorial, 250);
+});
+
+
+
+/* ==========================================
+   LAUNCHER UPDATE BANNER
+   Shows the download, then a RESTART button once the new
+   version is ready (instead of waiting for a real quit,
+   which never happens when the launcher lives in the tray).
+========================================== */
+
+const launcherUpdateBanner = document.getElementById("launcherUpdateBanner");
+const launcherUpdateText = document.getElementById("launcherUpdateText");
+const launcherUpdateRestart = document.getElementById("launcherUpdateRestart");
+
+let launcherUpdateStatus = { status: "idle" };
+
+function renderLauncherUpdate(state = launcherUpdateStatus) {
+    launcherUpdateStatus = state || { status: "idle" };
+    if (!launcherUpdateBanner) return;
+
+    const { status } = launcherUpdateStatus;
+    const downloading = status === "available" || status === "downloading";
+    const ready = status === "downloaded";
+
+    launcherUpdateBanner.hidden = !(downloading || ready);
+    launcherUpdateBanner.classList.toggle("ready", ready);
+    launcherUpdateRestart.hidden = !ready;
+
+    if (downloading) {
+        launcherUpdateText.textContent = t("updateDownloading", {
+            percent: Math.max(0, Math.min(100, Number(launcherUpdateStatus.percent) || 0))
+        });
+    } else if (ready) {
+        launcherUpdateText.textContent = t("updateReady", { version: launcherUpdateStatus.version || "" });
+        launcherUpdateRestart.textContent = t("updateRestart");
+        launcherUpdateRestart.disabled = false;
+    }
+}
+
+launcherUpdateRestart?.addEventListener("click", async () => {
+    launcherUpdateRestart.disabled = true;
+    launcherUpdateRestart.textContent = t("updateRestarting");
+    try {
+        const result = await window.origins?.launcher?.installUpdate?.();
+        if (!result?.success) throw new Error(result?.error || "UPDATE_INSTALL_FAILED");
+    } catch (error) {
+        console.error("Launcher update install failed:", error);
+        launcherUpdateText.textContent = t("updateFailed");
+        launcherUpdateRestart.disabled = false;
+        launcherUpdateRestart.textContent = t("updateRestart");
+    }
+});
+
+if (window.origins?.launcher?.onUpdateStatus) {
+    window.origins.launcher.onUpdateStatus(renderLauncherUpdate);
+    window.origins.launcher.getUpdateStatus?.()
+        .then(renderLauncherUpdate)
+        .catch(() => {});
+}
+
+
+
+/* ==========================================
 
    INITIALIZE LAUNCHER
 
@@ -5351,29 +4742,28 @@ document
 
 function refreshOrigins052Labels() {
 
-    const fr = currentLauncherLanguage === "fr";
 
     const map = [
 
-      ["[data-origins-games-title]", fr ? "JEUX" : "GAMES"],
+      ["[data-origins-games-title]", t("games")],
 
-      ["[data-origins-games-lead]", fr ? "Vos mondes, au même endroit." : "Your worlds, in one place."],
+      ["[data-origins-games-lead]", t("gamesLead")],
 
-      ["[data-origins-available]", fr ? "DISPONIBLE" : "AVAILABLE"],
+      ["[data-origins-available]", t("available")],
 
-      ["[data-origins-coming]", fr ? "JEU À VENIR" : "UPCOMING GAME"],
+      ["[data-origins-coming]", t("upcomingGame")],
 
-      ["[data-origins-coming-sub]", fr ? "Bientôt" : "Coming later"],
+      ["[data-origins-coming-sub]", t("comingLater")],
 
-      ["#gamesPanel .games-popover-header h2", fr ? "JEUX" : "GAMES"],
+      ["#gamesPanel .games-popover-header h2", t("games")],
 
-      ["#tempestButton small", fr ? "Disponible" : "Available"],
+      ["#tempestButton small", t("availableShort")],
 
-      ["#gamesPanel .game-card-coming strong", fr ? "PROCHAIN JEU" : "UPCOMING GAME"],
+      ["#gamesPanel .game-card-coming strong", t("upcomingGame")],
 
-      ["#gamesPanel .game-card-coming small", fr ? "Bientôt disponible" : "Coming soon"],
+      ["#gamesPanel .game-card-coming small", t("comingSoonShort")],
 
-      [".settings-section label[for='launcherLanguage']", fr ? "LANGUE ORIGINS" : "ORIGINS LANGUAGE"]
+      [".settings-section label[for='launcherLanguage']", t("originsLanguage")]
 
     ];
 

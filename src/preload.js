@@ -34,6 +34,20 @@ contextBridge.exposeInMainWorld("origins", {
 
     java: { detect: () => ipcRenderer.invoke("java:detect") },
 
+    launcher: {
+        // Tray menu and Microsoft sign-in page follow the launcher language.
+        setLanguage: (language) => ipcRenderer.send("origins:launcher-language", String(language || "en")),
+
+        // Launcher self-update (electron-updater in index.js).
+        getUpdateStatus: () => ipcRenderer.invoke("launcher:update-get-status"),
+        installUpdate: () => ipcRenderer.invoke("launcher:update-install"),
+        onUpdateStatus: (callback) => {
+            const listener = (_event, data) => callback(data);
+            ipcRenderer.on("launcher:update-status", listener);
+            return () => ipcRenderer.removeListener("launcher:update-status", listener);
+        }
+    },
+
     presence: {
         get: () => ipcRenderer.invoke("presence:get"),
         onChanged: (callback) => {
@@ -71,6 +85,37 @@ contextBridge.exposeInMainWorld("origins", {
         accept: (token, requestId) => originsApi(`/friends/requests/${encodeURIComponent(requestId)}/accept`, token, { method: "POST" }),
         refuse: (token, requestId) => originsApi(`/friends/requests/${encodeURIComponent(requestId)}`, token, { method: "DELETE" }),
         remove: (token, profileId) => originsApi(`/friends/${encodeURIComponent(profileId)}`, token, { method: "DELETE" })
+    },
+
+    messages: {
+        list: (token, profileId) =>
+            originsApi(`/messages/${encodeURIComponent(profileId)}`, token),
+        send: (token, profileId, content) =>
+            originsApi(`/messages/${encodeURIComponent(profileId)}`, token, {
+                method: "POST",
+                body: { content }
+            })
+    },
+
+    realtime: {
+        connect: (token) => ipcRenderer.send("origins:realtime-connect", token),
+        disconnect: () => ipcRenderer.send("origins:realtime-disconnect"),
+
+        sendPresence: (status, game = null) => {
+            ipcRenderer.send("origins:realtime-presence", { status, game });
+        },
+
+        onEvent: (callback) => {
+            const listener = (_event, data) => callback(data);
+            ipcRenderer.on("origins:realtime-event", listener);
+            return () => ipcRenderer.removeListener("origins:realtime-event", listener);
+        },
+
+        onStatus: (callback) => {
+            const listener = (_event, status) => callback(status);
+            ipcRenderer.on("origins:realtime-status", listener);
+            return () => ipcRenderer.removeListener("origins:realtime-status", listener);
+        }
     },
 
     tempest: {

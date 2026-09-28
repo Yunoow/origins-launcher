@@ -399,10 +399,10 @@ async function acquireMicrosoftSession() {
                         },
 
                     successTemplate:
-                        "<h1>Origins Launcher</h1><p>Connexion Microsoft réussie. Tu peux fermer cette fenêtre et revenir dans Origins Launcher.</p>",
+                        `<h1>Origins Launcher</h1><p>${mainText("authSuccess")}</p>`,
 
                     errorTemplate:
-                        "<h1>Origins Launcher</h1><p>La connexion Microsoft a échoué. Tu peux fermer cette fenêtre et revenir dans Origins Launcher.</p>"
+                        `<h1>Origins Launcher</h1><p>${mainText("authError")}</p>`
                 });
     }
 
@@ -461,6 +461,243 @@ async function originsApi(pathname, options = {}) {
 }
 
 
+
+
+/* ==========================================
+   ORIGINS REALTIME — WEBSOCKET
+========================================== */
+
+const ORIGINS_REALTIME_URL =
+    "ws://146.59.197.230/api/realtime";
+
+let originsRealtimeSocket = null;
+let originsRealtimeToken = null;
+let originsRealtimeReconnectTimer = null;
+let originsRealtimeReconnectAttempt = 0;
+let originsRealtimeManualClose = false;
+
+function sendRealtimeStatus(status, extra = {}) {
+    if (!mainWindow || mainWindow.isDestroyed()) return;
+
+    mainWindow.webContents.send(
+        "origins:realtime-status",
+        { status, ...extra }
+    );
+}
+
+function sendRealtimeEvent(data) {
+    if (!mainWindow || mainWindow.isDestroyed()) return;
+
+    mainWindow.webContents.send(
+        "origins:realtime-event",
+        data
+    );
+}
+
+function clearRealtimeReconnectTimer() {
+    if (originsRealtimeReconnectTimer) {
+        clearTimeout(originsRealtimeReconnectTimer);
+        originsRealtimeReconnectTimer = null;
+    }
+}
+
+function closeRealtimeSocket() {
+    clearRealtimeReconnectTimer();
+
+    if (!originsRealtimeSocket) return;
+
+    const socket = originsRealtimeSocket;
+    originsRealtimeSocket = null;
+
+    try {
+        socket.onopen = null;
+        socket.onmessage = null;
+        socket.onerror = null;
+        socket.onclose = null;
+        socket.close();
+    } catch (_) {}
+}
+
+function scheduleRealtimeReconnect() {
+    if (originsRealtimeManualClose || !originsRealtimeToken) return;
+
+    clearRealtimeReconnectTimer();
+
+    const delay = Math.min(
+        1000 * Math.pow(2, originsRealtimeReconnectAttempt),
+        15000
+    );
+
+    originsRealtimeReconnectAttempt += 1;
+
+    sendRealtimeStatus("reconnecting", { delay });
+
+    originsRealtimeReconnectTimer = setTimeout(
+        () => connectOriginsRealtime(originsRealtimeToken),
+        delay
+    );
+}
+
+function sendOriginsRealtimePayload(payload) {
+    if (
+        !originsRealtimeSocket ||
+        originsRealtimeSocket.readyState !== WebSocket.OPEN
+    ) {
+        return false;
+    }
+
+    try {
+        originsRealtimeSocket.send(JSON.stringify(payload));
+        return true;
+    } catch (error) {
+        console.error("Origins realtime send failed:", error);
+        return false;
+    }
+}
+
+function pushLocalPresenceToRealtime() {
+    const presence = getLocalPresence();
+
+    // server.js lit message.data.status / message.data.game.
+    return sendOriginsRealtimePayload({
+        type: "presence:update",
+        data: {
+            status: presence.status,
+            game: presence.game
+        }
+    });
+}
+
+function connectOriginsRealtime(token) {
+    const cleanToken = String(token || "").trim();
+    if (!cleanToken) return;
+
+    originsRealtimeToken = cleanToken;
+    originsRealtimeManualClose = false;
+
+    clearRealtimeReconnectTimer();
+    closeRealtimeSocket();
+
+    sendRealtimeStatus("connecting");
+
+    const url =
+        `${ORIGINS_REALTIME_URL}?token=${encodeURIComponent(cleanToken)}`;
+
+    let socket;
+
+    try {
+        socket = new WebSocket(url);
+    } catch (error) {
+        console.error("Origins realtime connection failed:", error);
+
+        sendRealtimeStatus("error", {
+            error: error.message
+        });
+
+        scheduleRealtimeReconnect();
+        return;
+    }
+
+    originsRealtimeSocket = socket;
+
+    socket.onopen = () => {
+        if (originsRealtimeSocket !== socket) return;
+
+        originsRealtimeReconnectAttempt = 0;
+        console.log("Origins realtime connected.");
+
+        sendRealtimeStatus("connected");
+        pushLocalPresenceToRealtime();
+    };
+
+    socket.onmessage = (event) => {
+        if (originsRealtimeSocket !== socket) return;
+
+        try {
+            const raw =
+                typeof event.data === "string"
+                    ? event.data
+                    : event.data?.toString?.() || "";
+
+            const message = JSON.parse(raw);
+
+            // Pushed by the API as soon as a new launcher is deployed.
+            if (message?.type === "launcher:update-available") {
+                checkLauncherUpdateNow();
+            }
+
+            sendRealtimeEvent(message);
+        } catch (error) {
+            console.error("Origins realtime invalid message:", error);
+        }
+    };
+
+    socket.onerror = (error) => {
+        if (originsRealtimeSocket !== socket) return;
+
+        console.error(
+            "Origins realtime socket error:",
+            error?.message || error
+        );
+
+        sendRealtimeStatus("error", {
+            error: error?.message || "REALTIME_SOCKET_ERROR"
+        });
+    };
+
+    socket.onclose = (event) => {
+        if (originsRealtimeSocket === socket) {
+            originsRealtimeSocket = null;
+        }
+
+        console.log(
+            `Origins realtime disconnected. code=${event.code}`
+        );
+
+        sendRealtimeStatus("disconnected", {
+            code: event.code,
+            reason: event.reason || ""
+        });
+
+        scheduleRealtimeReconnect();
+    };
+}
+
+ipcMain.on(
+    "origins:realtime-connect",
+    (_event, token) => {
+        connectOriginsRealtime(token);
+    }
+);
+
+ipcMain.on(
+    "origins:realtime-disconnect",
+    () => {
+        originsRealtimeManualClose = true;
+        originsRealtimeToken = null;
+        originsRealtimeReconnectAttempt = 0;
+        closeRealtimeSocket();
+        sendRealtimeStatus("disconnected");
+    }
+);
+
+ipcMain.on(
+    "origins:realtime-presence",
+    (_event, payload = {}) => {
+        sendOriginsRealtimePayload({
+            type: "presence:update",
+            data: {
+                status: String(
+                    payload.status || getLocalPresence().status
+                ),
+                game:
+                    payload.game == null
+                        ? null
+                        : String(payload.game)
+            }
+        });
+    }
+);
 
 
 ipcMain.handle("origins:clipboard-write-text", async (_event, text) => {
@@ -1444,6 +1681,89 @@ function getTrayIcon() {
 
 
 
+/* ==========================================
+   LAUNCHER LANGUAGE (main process)
+   The renderer sends its language through "origins:launcher-language".
+========================================== */
+
+const MINECRAFT_LANGUAGE_CODES = {
+    en: "en_us",
+    fr: "fr_fr",
+    es: "es_es",
+    de: "de_de",
+    pt: "pt_br"
+};
+
+const MAIN_TEXTS = {
+    en: {
+        trayOpen: "Open Origins Launcher",
+        trayQuit: "Quit",
+        authSuccess: "Microsoft sign-in successful. You can close this window and go back to Origins Launcher.",
+        authError: "Microsoft sign-in failed. You can close this window and go back to Origins Launcher.",
+        updateReadyBody: "Version {version} is ready. Restart the launcher to install it."
+    },
+    fr: {
+        trayOpen: "Ouvrir Origins Launcher",
+        trayQuit: "Quitter",
+        authSuccess: "Connexion Microsoft réussie. Tu peux fermer cette fenêtre et revenir dans Origins Launcher.",
+        authError: "La connexion Microsoft a échoué. Tu peux fermer cette fenêtre et revenir dans Origins Launcher.",
+        updateReadyBody: "La version {version} est prête. Redémarre le launcher pour l’installer."
+    },
+    es: {
+        trayOpen: "Abrir Origins Launcher",
+        trayQuit: "Salir",
+        authSuccess: "Inicio de sesión con Microsoft correcto. Puedes cerrar esta ventana y volver a Origins Launcher.",
+        authError: "El inicio de sesión con Microsoft ha fallado. Puedes cerrar esta ventana y volver a Origins Launcher.",
+        updateReadyBody: "La versión {version} está lista. Reinicia el launcher para instalarla."
+    },
+    de: {
+        trayOpen: "Origins Launcher öffnen",
+        trayQuit: "Beenden",
+        authSuccess: "Microsoft-Anmeldung erfolgreich. Du kannst dieses Fenster schließen und zu Origins Launcher zurückkehren.",
+        authError: "Microsoft-Anmeldung fehlgeschlagen. Du kannst dieses Fenster schließen und zu Origins Launcher zurückkehren.",
+        updateReadyBody: "Version {version} ist bereit. Starte den Launcher neu, um sie zu installieren."
+    },
+    pt: {
+        trayOpen: "Abrir Origins Launcher",
+        trayQuit: "Sair",
+        authSuccess: "Login da Microsoft concluído. Você pode fechar esta janela e voltar ao Origins Launcher.",
+        authError: "O login da Microsoft falhou. Você pode fechar esta janela e voltar ao Origins Launcher.",
+        updateReadyBody: "A versão {version} está pronta. Reinicie o launcher para instalá-la."
+    }
+};
+
+let launcherUiLanguage = "en";
+
+function mainText(key) {
+    return (MAIN_TEXTS[launcherUiLanguage] || MAIN_TEXTS.en)[key] || MAIN_TEXTS.en[key];
+}
+
+function buildTrayMenu() {
+    return Menu.buildFromTemplate([
+        {
+            label: mainText("trayOpen"),
+            click: showMainWindow
+        },
+        {
+            type: "separator"
+        },
+        {
+            label: mainText("trayQuit"),
+            click: () => {
+                isQuitting = true;
+                app.quit();
+            }
+        }
+    ]);
+}
+
+ipcMain.on("origins:launcher-language", (_event, language) => {
+    const code = String(language || "");
+    if (!MAIN_TEXTS[code]) return;
+    launcherUiLanguage = code;
+    if (tray) tray.setContextMenu(buildTrayMenu());
+});
+
 function createTray() {
 
 
@@ -1464,43 +1784,7 @@ function createTray() {
 
 
 
-    tray.setContextMenu(
-
-        Menu.buildFromTemplate([
-
-            {
-
-                label: "Open Origins Launcher",
-
-                click: showMainWindow
-
-            },
-
-            {
-
-                type: "separator"
-
-            },
-
-            {
-
-                label: "Quit",
-
-                click: () => {
-
-
-
-                    isQuitting = true;
-
-                    app.quit();
-
-                }
-
-            }
-
-        ])
-
-    );
+    tray.setContextMenu(buildTrayMenu());
 
 
 
@@ -1602,6 +1886,9 @@ function sendPresence() {
 
     );
 
+
+
+    pushLocalPresenceToRealtime();
 }
 
 
@@ -1638,11 +1925,7 @@ function applyMinecraftLanguage(
 
     const minecraftLanguage =
 
-        language === "fr"
-
-            ? "fr_fr"
-
-            : "en_us";
+        MINECRAFT_LANGUAGE_CODES[language] || "en_us";
 
 
 
@@ -2044,7 +2327,9 @@ function sendInstallProgress(
 
     stage,
 
-    detail = ""
+    detail = "",
+
+    detailI18n = null
 
 ) {
 
@@ -2078,7 +2363,12 @@ function sendInstallProgress(
 
             stage,
 
-            detail
+            detail,
+
+            // Lets the renderer show the detail in the launcher language.
+            detailKey: detailI18n?.key || null,
+
+            detailParams: detailI18n?.params || null
 
         }
 
@@ -2586,7 +2876,9 @@ ipcMain.handle(
 
                 "PREPARING",
 
-                "Préparation de Tempest Origins..."
+                "Préparation de Tempest Origins...",
+
+                { key: "detailPreparing" }
 
             );
 
@@ -2632,7 +2924,9 @@ ipcMain.handle(
 
                 "CREATING_INSTANCE",
 
-                "Création de l'instance Tempest Origins..."
+                "Création de l'instance Tempest Origins...",
+
+                { key: "detailCreatingInstance" }
 
             );
 
@@ -2916,7 +3210,9 @@ ipcMain.handle(
 
 
 
-                    `Installation du mod ${index + 1}/${modFiles.length} : ${file}`
+                    `Installation du mod ${index + 1}/${modFiles.length} : ${file}`,
+
+                { key: "detailInstallingMod", params: { current: index + 1, total: modFiles.length, file } }
 
                 );
 
@@ -2974,7 +3270,9 @@ ipcMain.handle(
 
                             "CREATING_FILES",
 
-                            `Installation du mod ${index + 1}/${modFiles.length} : ${file}`
+                            `Installation du mod ${index + 1}/${modFiles.length} : ${file}`,
+
+                { key: "detailInstallingMod", params: { current: index + 1, total: modFiles.length, file } }
 
                         );
 
@@ -3002,7 +3300,9 @@ ipcMain.handle(
 
                 "VERIFYING",
 
-                "Vérification des mods..."
+                "Vérification des mods...",
+
+                { key: "detailVerifyingMods" }
 
             );
 
@@ -3270,7 +3570,9 @@ ipcMain.handle(
 
                 "WRITING_CONFIGURATION",
 
-                `Installation de Fabric Loader ${FABRIC_LOADER_VERSION}...`
+                `Installation de Fabric Loader ${FABRIC_LOADER_VERSION}...`,
+
+                { key: "detailInstallingFabric", params: { version: FABRIC_LOADER_VERSION } }
 
             );
 
@@ -3298,7 +3600,9 @@ ipcMain.handle(
 
                 "WRITING_CONFIGURATION",
 
-                "Finalisation de Tempest Origins..."
+                "Finalisation de Tempest Origins...",
+
+                { key: "detailFinalizing" }
 
             );
 
@@ -3452,7 +3756,9 @@ ipcMain.handle(
 
                 "COMPLETE",
 
-                `${modFiles.length} mods installés — Fabric ${FABRIC_LOADER_VERSION} prêt.`
+                `${modFiles.length} mods installés — Fabric ${FABRIC_LOADER_VERSION} prêt.`,
+
+                { key: "detailInstallComplete", params: { count: modFiles.length, version: FABRIC_LOADER_VERSION } }
 
             );
 
@@ -3620,7 +3926,9 @@ ipcMain.handle(
 
                 "UPDATE",
 
-                "Vérification des fichiers..."
+                "Vérification des fichiers...",
+
+                { key: "detailCheckingFiles" }
 
             );
 
@@ -3646,7 +3954,9 @@ ipcMain.handle(
 
                 "COMPLETE",
 
-                "Mise à jour terminée."
+                "Mise à jour terminée.",
+
+                { key: "detailUpdateComplete" }
 
             );
 
@@ -4744,9 +5054,35 @@ ipcMain.handle(
 
 let launcherUpdateDownloaded = false;
 
+// Last known state, so the renderer can show the banner even if the
+// event was sent before the page was ready.
+let launcherUpdateState = { status: "idle" };
+
+// Fallback when the realtime push is unavailable (not signed in, offline).
+const LAUNCHER_UPDATE_INTERVAL_MS = 10 * 60 * 1000;
+
+// Spreads downloads when every launcher is notified at the same second.
+const LAUNCHER_UPDATE_PUSH_JITTER_MS = 15 * 1000;
+
+let launcherUpdatePushTimer = null;
+
+// Called when server.js announces a new version over the WebSocket.
+function checkLauncherUpdateNow() {
+    if (!app.isPackaged || launcherUpdateDownloaded || launcherUpdatePushTimer) return;
+
+    launcherUpdatePushTimer = setTimeout(() => {
+        launcherUpdatePushTimer = null;
+        autoUpdater.checkForUpdates().catch((error) => {
+            console.error("Impossible de vérifier la mise à jour du launcher :", error);
+        });
+    }, Math.floor(Math.random() * LAUNCHER_UPDATE_PUSH_JITTER_MS));
+}
+
 
 
 function sendLauncherUpdateStatus(status, payload = {}) {
+
+    launcherUpdateState = { status, ...payload };
 
 
 
@@ -5030,7 +5366,7 @@ function setupLauncherAutoUpdater() {
 
                         body:
 
-                            `La version ${info.version} est prête. Elle sera installée à la fermeture du launcher.`
+                            mainText("updateReadyBody").replace("{version}", info.version)
 
                     });
 
@@ -5140,7 +5476,22 @@ function setupLauncherAutoUpdater() {
 
     );
 
+
+
+    // Re-check regularly while the launcher stays open or in the tray.
+    setInterval(() => {
+        if (launcherUpdateDownloaded) return;
+        autoUpdater.checkForUpdates().catch((error) => {
+            console.error("Impossible de vérifier la mise à jour du launcher :", error);
+        });
+    }, LAUNCHER_UPDATE_INTERVAL_MS);
+
 }
+
+
+
+// Lets the renderer restore the update banner after (re)loading.
+ipcMain.handle("launcher:update-get-status", () => launcherUpdateState);
 
 
 
@@ -5278,9 +5629,10 @@ ipcMain.handle(
 
 
 
+                // Silent install (same as install-on-quit), then relaunch.
                 autoUpdater.quitAndInstall(
 
-                    false,
+                    true,
 
                     true
 
@@ -5313,6 +5665,12 @@ ipcMain.handle(
 ========================================== */
 
 
+
+// Windows n'affiche les notifications que si l'AppUserModelId correspond
+// au raccourci créé par l'installeur (build.appId dans package.json).
+if (process.platform === "win32") {
+    app.setAppUserModelId("com.origins.launcher");
+}
 
 app.whenReady().then(
 
@@ -5398,6 +5756,11 @@ app.on(
 
         isQuitting = true;
 
-    }
+    
+        originsRealtimeManualClose = true;
+        originsRealtimeToken = null;
+        clearRealtimeReconnectTimer();
+        closeRealtimeSocket();
+}
 
 );
