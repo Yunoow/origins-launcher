@@ -42,6 +42,43 @@ function run(command, args, options = {}) {
     }
 }
 
+/*
+ * Garde-fou : chaque version publiée doit avoir son récap joueurs
+ * EN PREMIER dans src/news.js, pour toutes les langues du launcher.
+ * Sinon les actus affichées ont une version de retard.
+ */
+function checkNewsForVersion(version) {
+    const vm = require("vm");
+    const context = { navigator: {} };
+    vm.createContext(context);
+
+    const read = (file) => fs.readFileSync(path.join(PROJECT_ROOT, "src", file), "utf8");
+    vm.runInContext(`${read("i18n.js")}\n;this.__languages = ORIGINS_LANGUAGES;`, context);
+    vm.runInContext(`${read("news.js")}\n;this.__history = updateHistoryI18n; this.__news = newsContent;`, context);
+
+    const missing = [];
+
+    for (const { code } of context.__languages) {
+        const history = context.__history[code] || [];
+        const cards = context.__news[code] || [];
+
+        if (history[0]?.version !== version) {
+            missing.push(`${code} : historique (en tête : ${history[0]?.version || "rien"})`);
+        }
+        if (cards[0]?.version !== version) {
+            missing.push(`${code} : carte d'accueil (en tête : ${cards[0]?.version || "rien"})`);
+        }
+    }
+
+    if (missing.length) {
+        throw new Error(
+            `Les actus de la version ${version} manquent dans src/news.js :\n` +
+            missing.map((line) => `  - ${line}`).join("\n") +
+            `\nAjoute le récap ${version} en haut de chaque langue avant de publier.`
+        );
+    }
+}
+
 function readPackage() {
     if (!fs.existsSync(PACKAGE_PATH)) {
         throw new Error(`package.json introuvable : ${PACKAGE_PATH}`);
@@ -240,6 +277,10 @@ async function main() {
     } else {
         console.log("Version VPS    : aucune version détectée.");
     }
+
+    console.log("\nVérification des actus (src/news.js)...");
+    checkNewsForVersion(version);
+    console.log(`Actus ${version} présentes dans toutes les langues.`);
 
     console.log("\nBuild du launcher...");
     run("npm.cmd", ["run", "build"]);

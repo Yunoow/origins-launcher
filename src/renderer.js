@@ -2122,8 +2122,10 @@ function hideOriginsOnboarding() {
     originsOnboarding?.classList.remove("is-visible");
     setOnboardingStatus("");
 
-    // Every successful sign-in path ends here: first time -> guided tour.
+    // Every successful sign-in path ends here: first time -> guided tour,
+    // after an update -> "What's new".
     maybeStartTutorial();
+    maybeShowWhatsNew();
 
 }
 
@@ -4605,6 +4607,115 @@ if (window.origins?.launcher?.onUpdateStatus) {
         .then(renderLauncherUpdate)
         .catch(() => {});
 }
+
+
+
+/* ==========================================
+   WHAT'S NEW
+   After an update, lists every change between the last version
+   this player saw and the installed one (e.g. 0.5.5 -> 0.5.8).
+   The installed version is the first entry of news.js: the deploy
+   script refuses to publish a version without its recap.
+========================================== */
+
+const LAST_SEEN_VERSION_KEY = "origins-last-seen-version";
+
+const originsWhatsNew = document.getElementById("originsWhatsNew");
+const originsWhatsNewVersions = document.getElementById("originsWhatsNewVersions");
+const originsWhatsNewList = document.getElementById("originsWhatsNewList");
+const originsWhatsNewAll = document.getElementById("originsWhatsNewAll");
+const originsWhatsNewClose = document.getElementById("originsWhatsNewClose");
+
+function compareLauncherVersions(a, b) {
+    const pa = String(a || "0").split(".").map(Number);
+    const pb = String(b || "0").split(".").map(Number);
+    for (let i = 0; i < 3; i++) {
+        const diff = (pa[i] || 0) - (pb[i] || 0);
+        if (diff) return diff;
+    }
+    return 0;
+}
+
+function installedLauncherVersion() {
+    return updateHistoryI18n.en?.[0]?.version || null;
+}
+
+function rememberSeenVersion(version) {
+    try {
+        localStorage.setItem(LAST_SEEN_VERSION_KEY, version);
+    } catch (_) {}
+}
+
+function maybeShowWhatsNew() {
+    const current = installedLauncherVersion();
+    if (!current || !originsWhatsNew || !originsWhatsNew.hidden) return;
+
+    let lastSeen = null;
+    try {
+        lastSeen = localStorage.getItem(LAST_SEEN_VERSION_KEY);
+    } catch (_) {}
+
+    // New player: the tutorial already presents the launcher.
+    if (!tutorialIsDone()) {
+        rememberSeenVersion(current);
+        return;
+    }
+
+    // Player from before this window existed: show the current version only.
+    if (!lastSeen) {
+        lastSeen = updateHistoryI18n.en?.[1]?.version || current;
+    }
+
+    if (compareLauncherVersions(current, lastSeen) <= 0) return;
+
+    const history = updateHistoryI18n[currentLauncherLanguage] || updateHistoryI18n.en;
+    const entries = history.filter((entry) =>
+        compareLauncherVersions(entry.version, lastSeen) > 0 &&
+        compareLauncherVersions(entry.version, current) <= 0
+    );
+    if (!entries.length) {
+        rememberSeenVersion(current);
+        return;
+    }
+
+    originsWhatsNewVersions.textContent = `v${lastSeen}  →  v${current}`;
+    originsWhatsNewList.innerHTML = "";
+    entries.forEach((entry) => {
+        const block = document.createElement("section");
+        const title = document.createElement("h3");
+        title.textContent = entry.title;
+        const list = document.createElement("ul");
+        entry.changes.forEach((change) => {
+            const item = document.createElement("li");
+            item.textContent = change;
+            list.appendChild(item);
+        });
+        block.append(title, list);
+        originsWhatsNewList.appendChild(block);
+    });
+
+    rememberSeenVersion(current);
+    window.setTimeout(() => {
+        originsWhatsNew.hidden = false;
+        originsWhatsNewClose?.focus();
+    }, 600);
+}
+
+function closeWhatsNew() {
+    if (originsWhatsNew) originsWhatsNew.hidden = true;
+}
+
+originsWhatsNewClose?.addEventListener("click", closeWhatsNew);
+originsWhatsNewAll?.addEventListener("click", () => {
+    closeWhatsNew();
+    showPage("updates");
+});
+originsWhatsNew?.addEventListener("click", (event) => {
+    if (event.target === originsWhatsNew) closeWhatsNew();
+});
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && originsWhatsNew && !originsWhatsNew.hidden) closeWhatsNew();
+});
 
 
 

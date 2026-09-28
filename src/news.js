@@ -12,6 +12,16 @@ const updateHistoryI18n = {
 
     fr: [
         {
+            version: "0.6.0", date: "28 SEPTEMBRE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.0",
+            text: "Récap de rattrapage : tout ce qui a changé depuis la v0.5.7 (versions 0.5.8 et 0.6.0).",
+            changes: [
+                "v0.5.8 — Page Actus remise à jour avec les dernières nouveautés",
+                "v0.6.0 — Nouvelle fenêtre « Quoi de neuf ? » au premier lancement après une mise à jour",
+                "v0.6.0 — Si tu as raté plusieurs versions, tous les changements sont regroupés au même endroit",
+                "v0.6.0 — Les actus sont maintenant toujours à jour à chaque nouvelle version"
+            ]
+        },
+        {
             version: "0.5.7", date: "28 SEPTEMBRE 2026", type: "LAUNCHER", title: "Launcher Update 0.5.7",
             text: "Petites finitions pour une interface plus propre.",
             changes: [
@@ -112,6 +122,16 @@ const updateHistoryI18n = {
 
     en: [
         {
+            version: "0.6.0", date: "28 SEPTEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.0",
+            text: "Catch-up recap: everything that changed since v0.5.7 (versions 0.5.8 and 0.6.0).",
+            changes: [
+                "v0.5.8 — News page updated with the latest changes",
+                "v0.6.0 — New “What’s new?” window on the first launch after an update",
+                "v0.6.0 — Missed a few versions? All the changes are grouped in one place",
+                "v0.6.0 — News is now always up to date with every new version"
+            ]
+        },
+        {
             version: "0.5.7", date: "28 SEPTEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.5.7",
             text: "Small touches for a cleaner interface.",
             changes: [
@@ -178,6 +198,16 @@ const updateHistoryI18n = {
     ],
 
     es: [
+        {
+            version: "0.6.0", date: "28 DE SEPTIEMBRE DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.0",
+            text: "Resumen para ponerse al día: todo lo que ha cambiado desde la v0.5.7 (versiones 0.5.8 y 0.6.0).",
+            changes: [
+                "v0.5.8 — Página de noticias actualizada con las últimas novedades",
+                "v0.6.0 — Nueva ventana «¿Qué hay de nuevo?» al abrirlo tras una actualización",
+                "v0.6.0 — ¿Te perdiste varias versiones? Todos los cambios aparecen juntos",
+                "v0.6.0 — Las noticias ahora están siempre al día con cada nueva versión"
+            ]
+        },
         {
             version: "0.5.7", date: "28 DE SEPTIEMBRE DE 2026", type: "LAUNCHER", title: "Launcher Update 0.5.7",
             text: "Pequeños retoques para una interfaz más limpia.",
@@ -246,6 +276,16 @@ const updateHistoryI18n = {
 
     de: [
         {
+            version: "0.6.0", date: "28. SEPTEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.0",
+            text: "Nachhol-Zusammenfassung: alles, was sich seit v0.5.7 geändert hat (Versionen 0.5.8 und 0.6.0).",
+            changes: [
+                "v0.5.8 — News-Seite mit den neuesten Änderungen aktualisiert",
+                "v0.6.0 — Neues Fenster „Was ist neu?“ beim ersten Start nach einem Update",
+                "v0.6.0 — Mehrere Versionen verpasst? Alle Änderungen stehen gesammelt an einem Ort",
+                "v0.6.0 — Die News sind jetzt bei jeder neuen Version aktuell"
+            ]
+        },
+        {
             version: "0.5.7", date: "28. SEPTEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.5.7",
             text: "Kleine Verbesserungen für eine aufgeräumtere Oberfläche.",
             changes: [
@@ -312,6 +352,16 @@ const updateHistoryI18n = {
     ],
 
     pt: [
+        {
+            version: "0.6.0", date: "28 DE SETEMBRO DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.0",
+            text: "Resumo para colocar em dia: tudo o que mudou desde a v0.5.7 (versões 0.5.8 e 0.6.0).",
+            changes: [
+                "v0.5.8 — Página de notícias atualizada com as últimas novidades",
+                "v0.6.0 — Nova janela “O que há de novo?” na primeira abertura após uma atualização",
+                "v0.6.0 — Perdeu algumas versões? Todas as mudanças aparecem juntas",
+                "v0.6.0 — As notícias agora ficam sempre em dia a cada nova versão"
+            ]
+        },
         {
             version: "0.5.7", date: "28 DE SETEMBRO DE 2026", type: "LAUNCHER", title: "Launcher Update 0.5.7",
             text: "Pequenos ajustes para uma interface mais limpa.",
@@ -385,6 +435,7 @@ const updateHistory = updateHistoryI18n.fr;
 const newsContent = {
 
     fr: [
+        { version: "0.6.0", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.0", text: "Rattrapage depuis la v0.5.7 : actus à jour et fenêtre « Quoi de neuf ? ».", date: "VERSION 0.6.0" },
         { version: "0.5.7", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.5.7", text: "Interface plus épurée : barres de défilement invisibles.", date: "VERSION 0.5.7" },
         { version: "0.5.5", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.5.5", text: "Mises à jour automatiques plus fiables, avec un bouton Redémarrer.", date: "VERSION 0.5.5" },
         { version: "0.5.4", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.5.4", text: "5 langues au choix et un tutoriel pour bien démarrer.", date: "VERSION 0.5.4" },
@@ -395,6 +446,7 @@ const newsContent = {
     ],
 
     en: [
+        { version: "0.6.0", type: "PATCH NOTES", title: "Launcher Update 0.6.0", text: "Catch-up since v0.5.7: up-to-date news and a “What’s new?” window.", date: "VERSION 0.6.0" },
         { version: "0.5.7", type: "PATCH NOTES", title: "Launcher Update 0.5.7", text: "Cleaner interface: invisible scrollbars.", date: "VERSION 0.5.7" },
         { version: "0.5.5", type: "PATCH NOTES", title: "Launcher Update 0.5.5", text: "More reliable automatic updates, with a Restart button.", date: "VERSION 0.5.5" },
         { version: "0.5.4", type: "PATCH NOTES", title: "Launcher Update 0.5.4", text: "5 languages to choose from and a tutorial to get started.", date: "VERSION 0.5.4" },
@@ -405,6 +457,7 @@ const newsContent = {
     ],
 
     es: [
+        { version: "0.6.0", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.0", text: "Al día desde la v0.5.7: noticias actualizadas y ventana «¿Qué hay de nuevo?».", date: "VERSIÓN 0.6.0" },
         { version: "0.5.7", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.5.7", text: "Interfaz más limpia: barras de desplazamiento invisibles.", date: "VERSIÓN 0.5.7" },
         { version: "0.5.5", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.5.5", text: "Actualizaciones automáticas más fiables, con un botón Reiniciar.", date: "VERSIÓN 0.5.5" },
         { version: "0.5.4", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.5.4", text: "5 idiomas a elegir y un tutorial para empezar.", date: "VERSIÓN 0.5.4" },
@@ -415,6 +468,7 @@ const newsContent = {
     ],
 
     de: [
+        { version: "0.6.0", type: "PATCHNOTES", title: "Launcher Update 0.6.0", text: "Nachgeholt seit v0.5.7: aktuelle News und Fenster „Was ist neu?“.", date: "VERSION 0.6.0" },
         { version: "0.5.7", type: "PATCHNOTES", title: "Launcher Update 0.5.7", text: "Aufgeräumtere Oberfläche: unsichtbare Scrollleisten.", date: "VERSION 0.5.7" },
         { version: "0.5.5", type: "PATCHNOTES", title: "Launcher Update 0.5.5", text: "Zuverlässigere automatische Updates mit Neustart-Button.", date: "VERSION 0.5.5" },
         { version: "0.5.4", type: "PATCHNOTES", title: "Launcher Update 0.5.4", text: "5 Sprachen zur Auswahl und ein Tutorial für den Einstieg.", date: "VERSION 0.5.4" },
@@ -425,6 +479,7 @@ const newsContent = {
     ],
 
     pt: [
+        { version: "0.6.0", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.6.0", text: "Em dia desde a v0.5.7: notícias atualizadas e janela “O que há de novo?”.", date: "VERSÃO 0.6.0" },
         { version: "0.5.7", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.5.7", text: "Interface mais limpa: barras de rolagem invisíveis.", date: "VERSÃO 0.5.7" },
         { version: "0.5.5", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.5.5", text: "Atualizações automáticas mais confiáveis, com um botão Reiniciar.", date: "VERSÃO 0.5.5" },
         { version: "0.5.4", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.5.4", text: "5 idiomas para escolher e um tutorial para começar.", date: "VERSÃO 0.5.4" },

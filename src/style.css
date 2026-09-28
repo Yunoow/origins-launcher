@@ -6374,3 +6374,85 @@ button.library-game-card:hover { transform:translateY(-4px); background:rgba(255
     width: 0 !important;
     height: 0 !important;
 }
+
+/* =========================================================
+   WHAT'S NEW (after an update)
+========================================================= */
+.origins-whats-new {
+    position: fixed;
+    inset: 0;
+    z-index: 10500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(2, 8, 18, 0.72);
+    backdrop-filter: blur(4px);
+}
+.origins-whats-new[hidden] { display: none; }
+.origins-whats-new-card {
+    width: min(520px, 100%);
+    max-height: min(620px, calc(100vh - 48px));
+    display: flex;
+    flex-direction: column;
+    padding: 26px 26px 20px;
+    border: 1px solid rgba(125, 210, 255, 0.22);
+    border-radius: 20px;
+    background: rgba(8, 16, 28, 0.97);
+    box-shadow: 0 26px 60px rgba(0, 0, 0, 0.55);
+    color: #edf3f4;
+    animation: originsTutorialIn 0.2s ease-out;
+}
+.origins-whats-new-kicker {
+    color: #8edaff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+}
+.origins-whats-new-card h2 {
+    margin: 8px 0 4px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: #ffffff;
+}
+.origins-whats-new-versions {
+    margin: 0 0 16px;
+    color: #7f8b8f;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+.origins-whats-new-list {
+    flex: 1;
+    overflow-y: auto;
+    display: grid;
+    gap: 14px;
+    padding-right: 4px;
+}
+.origins-whats-new-list section {
+    padding: 14px 16px;
+    border: 1px solid rgba(125, 210, 255, 0.1);
+    border-radius: 14px;
+    background: rgba(16, 42, 68, 0.35);
+}
+.origins-whats-new-list h3 {
+    margin: 0 0 8px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #ffffff;
+}
+.origins-whats-new-list ul {
+    margin: 0;
+    padding-left: 18px;
+    color: #b9c6cc;
+    font-size: 12.5px;
+    line-height: 1.6;
+}
+.origins-whats-new-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 18px;
+}

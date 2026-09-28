@@ -1788,6 +1788,20 @@
         <button class="launcher-update-button" id="launcherUpdateRestart" type="button" hidden></button>
     </div>
 
+    <!-- "What's new" after an update: every change since the last version seen -->
+    <div class="origins-whats-new" id="originsWhatsNew" hidden>
+        <div class="origins-whats-new-card" role="dialog" aria-modal="true" aria-labelledby="originsWhatsNewTitle">
+            <span class="origins-whats-new-kicker" data-i18n="whatsNewKicker">UPDATE INSTALLED</span>
+            <h2 id="originsWhatsNewTitle" data-i18n="whatsNewTitle">What’s new?</h2>
+            <p class="origins-whats-new-versions" id="originsWhatsNewVersions"></p>
+            <div class="origins-whats-new-list" id="originsWhatsNewList"></div>
+            <div class="origins-whats-new-actions">
+                <button class="origins-tutorial-button secondary" id="originsWhatsNewAll" type="button" data-i18n="whatsNewAll">SEE ALL NEWS</button>
+                <button class="origins-tutorial-button" id="originsWhatsNewClose" type="button" data-i18n="whatsNewClose">GOT IT!</button>
+            </div>
+        </div>
+    </div>
+
     <!-- First-login guided tour (filled by renderer.js) -->
     <div class="origins-tutorial" id="originsTutorial" hidden>
         <div class="origins-tutorial-spotlight" id="originsTutorialSpotlight"></div>

@@ -241,7 +241,13 @@ const translations = {
         updateReady: "Version {version} is ready",
         updateRestart: "RESTART",
         updateRestarting: "Restarting…",
-        updateFailed: "Unable to install the update."
+        updateFailed: "Unable to install the update.",
+
+        // "What's new" window after an update
+        whatsNewKicker: "UPDATE INSTALLED",
+        whatsNewTitle: "What’s new?",
+        whatsNewAll: "SEE ALL NEWS",
+        whatsNewClose: "GOT IT!"
     },
 
     fr: {
@@ -451,7 +457,13 @@ const translations = {
         updateReady: "La version {version} est prête",
         updateRestart: "REDÉMARRER",
         updateRestarting: "Redémarrage…",
-        updateFailed: "Impossible d’installer la mise à jour."
+        updateFailed: "Impossible d’installer la mise à jour.",
+
+        // "What's new" window after an update
+        whatsNewKicker: "MISE À JOUR INSTALLÉE",
+        whatsNewTitle: "Quoi de neuf ?",
+        whatsNewAll: "VOIR TOUTES LES ACTUS",
+        whatsNewClose: "SUPER !"
     },
 
     es: {
@@ -661,7 +673,13 @@ const translations = {
         updateReady: "La versión {version} está lista",
         updateRestart: "REINICIAR",
         updateRestarting: "Reiniciando…",
-        updateFailed: "No se puede instalar la actualización."
+        updateFailed: "No se puede instalar la actualización.",
+
+        // "What's new" window after an update
+        whatsNewKicker: "ACTUALIZACIÓN INSTALADA",
+        whatsNewTitle: "¿Qué hay de nuevo?",
+        whatsNewAll: "VER TODAS LAS NOTICIAS",
+        whatsNewClose: "¡GENIAL!"
     },
 
     de: {
@@ -871,7 +889,13 @@ const translations = {
         updateReady: "Version {version} ist bereit",
         updateRestart: "NEU STARTEN",
         updateRestarting: "Neustart…",
-        updateFailed: "Das Update kann nicht installiert werden."
+        updateFailed: "Das Update kann nicht installiert werden.",
+
+        // "What's new" window after an update
+        whatsNewKicker: "UPDATE INSTALLIERT",
+        whatsNewTitle: "Was ist neu?",
+        whatsNewAll: "ALLE NEWS ANSEHEN",
+        whatsNewClose: "ALLES KLAR!"
     },
 
     pt: {
@@ -1081,7 +1105,13 @@ const translations = {
         updateReady: "A versão {version} está pronta",
         updateRestart: "REINICIAR",
         updateRestarting: "Reiniciando…",
-        updateFailed: "Não foi possível instalar a atualização."
+        updateFailed: "Não foi possível instalar a atualização.",
+
+        // "What's new" window after an update
+        whatsNewKicker: "ATUALIZAÇÃO INSTALADA",
+        whatsNewTitle: "O que há de novo?",
+        whatsNewAll: "VER TODAS AS NOTÍCIAS",
+        whatsNewClose: "LEGAL!"
     }
 };
 
