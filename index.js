@@ -4600,6 +4600,20 @@ ipcMain.handle(
 
 
             /*
+             * Origins Chat (mod) : le jeu hérite des variables d'environnement
+             * du launcher. On lui passe le jeton Origins pour les MP en jeu,
+             * sur la même API et le même WebSocket que le launcher.
+             */
+            if (originsRealtimeToken) {
+                process.env.ORIGINS_TOKEN = originsRealtimeToken;
+                process.env.ORIGINS_API_URL = ORIGINS_API_BASE;
+            } else {
+                delete process.env.ORIGINS_TOKEN;
+            }
+
+
+
+            /*
 
              * On attend le démarrage du processus
 

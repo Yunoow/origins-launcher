@@ -12,9 +12,11 @@ const updateHistoryI18n = {
 
     fr: [
         {
-            version: "0.6.1", date: "28 SEPTEMBRE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
-            text: "Tempest se lance avec n’importe quel Java installé, et le launcher arrive sur Linux et Mac.",
+            version: "0.6.1", date: "29 SEPTEMBRE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
+            text: "Nouveau chat en jeu avec tes messages privés, Tempest se lance avec n’importe quel Java, et le launcher arrive sur Linux et Mac.",
             changes: [
+                "Nouveau chat en jeu : onglets par conversation, look moderne et heure des messages",
+                "Messages privés avec tes amis du launcher directement en jeu, dans les deux sens",
                 "Tempest utilise maintenant le Java installé sur ton PC, quelle que soit sa marque (Oracle, Temurin…)",
                 "Correction du lancement du jeu pour les joueurs dont Java n’était pas trouvé",
                 "Premières versions Linux (AppImage, .deb) et Mac (.dmg) du launcher"
@@ -131,9 +133,11 @@ const updateHistoryI18n = {
 
     en: [
         {
-            version: "0.6.1", date: "28 SEPTEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
-            text: "Tempest now starts with any installed Java, and the launcher comes to Linux and Mac.",
+            version: "0.6.1", date: "29 SEPTEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
+            text: "A new in-game chat with your private messages, Tempest starts with any installed Java, and the launcher comes to Linux and Mac.",
             changes: [
+                "New in-game chat: a tab per conversation, a modern look and message times",
+                "Private messages with your launcher friends right in the game, both ways",
                 "Tempest now uses the Java installed on your computer, whatever its vendor (Oracle, Temurin…)",
                 "Fixed game launch for players whose Java was not found",
                 "First Linux (AppImage, .deb) and Mac (.dmg) versions of the launcher"
@@ -217,9 +221,11 @@ const updateHistoryI18n = {
 
     es: [
         {
-            version: "0.6.1", date: "28 DE SEPTIEMBRE DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
-            text: "Tempest se inicia con cualquier Java instalado, y el launcher llega a Linux y Mac.",
+            version: "0.6.1", date: "29 DE SEPTIEMBRE DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
+            text: "Nuevo chat en el juego con tus mensajes privados, Tempest se inicia con cualquier Java, y el launcher llega a Linux y Mac.",
             changes: [
+                "Nuevo chat en el juego: una pestaña por conversación, aspecto moderno y hora de los mensajes",
+                "Mensajes privados con tus amigos del launcher directamente en el juego, en ambos sentidos",
                 "Tempest ahora usa el Java instalado en tu equipo, sea cual sea su marca (Oracle, Temurin…)",
                 "Corregido el inicio del juego para los jugadores cuyo Java no se encontraba",
                 "Primeras versiones del launcher para Linux (AppImage, .deb) y Mac (.dmg)"
@@ -303,9 +309,11 @@ const updateHistoryI18n = {
 
     de: [
         {
-            version: "0.6.1", date: "28. SEPTEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
-            text: "Tempest startet mit jedem installierten Java, und der Launcher kommt auf Linux und Mac.",
+            version: "0.6.1", date: "29. SEPTEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
+            text: "Neuer Chat im Spiel mit deinen privaten Nachrichten, Tempest startet mit jedem Java, und der Launcher kommt auf Linux und Mac.",
             changes: [
+                "Neuer Chat im Spiel: ein Tab pro Unterhaltung, modernes Aussehen und Uhrzeit der Nachrichten",
+                "Private Nachrichten mit deinen Launcher-Freunden direkt im Spiel, in beide Richtungen",
                 "Tempest nutzt jetzt das auf deinem Computer installierte Java, egal von welchem Anbieter (Oracle, Temurin…)",
                 "Spielstart für Spieler behoben, deren Java nicht gefunden wurde",
                 "Erste Linux- (AppImage, .deb) und Mac-Versionen (.dmg) des Launchers"
@@ -389,9 +397,11 @@ const updateHistoryI18n = {
 
     pt: [
         {
-            version: "0.6.1", date: "28 DE SETEMBRO DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
-            text: "Tempest agora inicia com qualquer Java instalado, e o launcher chega ao Linux e Mac.",
+            version: "0.6.1", date: "29 DE SETEMBRO DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
+            text: "Novo chat no jogo com suas mensagens privadas, Tempest inicia com qualquer Java, e o launcher chega ao Linux e Mac.",
             changes: [
+                "Novo chat no jogo: uma aba por conversa, visual moderno e horário das mensagens",
+                "Mensagens privadas com seus amigos do launcher direto no jogo, nos dois sentidos",
                 "Tempest agora usa o Java instalado no seu computador, seja qual for a marca (Oracle, Temurin…)",
                 "Corrigida a inicialização do jogo para jogadores cujo Java não era encontrado",
                 "Primeiras versões do launcher para Linux (AppImage, .deb) e Mac (.dmg)"
@@ -480,7 +490,7 @@ const updateHistory = updateHistoryI18n.fr;
 const newsContent = {
 
     fr: [
-        { version: "0.6.1", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.1", text: "Lancement de Tempest corrigé et arrivée sur Linux et Mac.", date: "VERSION 0.6.1" },
+        { version: "0.6.1", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.1", text: "Nouveau chat en jeu et MP avec tes amis du launcher, directement en jeu.", date: "VERSION 0.6.1" },
         { version: "0.6.0", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.0", text: "Rattrapage depuis la v0.5.7 : actus à jour et fenêtre « Quoi de neuf ? ».", date: "VERSION 0.6.0" },
         { version: "0.5.7", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.5.7", text: "Interface plus épurée : barres de défilement invisibles.", date: "VERSION 0.5.7" },
         { version: "0.5.5", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.5.5", text: "Mises à jour automatiques plus fiables, avec un bouton Redémarrer.", date: "VERSION 0.5.5" },
@@ -492,7 +502,7 @@ const newsContent = {
     ],
 
     en: [
-        { version: "0.6.1", type: "PATCH NOTES", title: "Launcher Update 0.6.1", text: "Tempest launch fixed, and the launcher arrives on Linux and Mac.", date: "VERSION 0.6.1" },
+        { version: "0.6.1", type: "PATCH NOTES", title: "Launcher Update 0.6.1", text: "New in-game chat, and private messages with your launcher friends right in the game.", date: "VERSION 0.6.1" },
         { version: "0.6.0", type: "PATCH NOTES", title: "Launcher Update 0.6.0", text: "Catch-up since v0.5.7: up-to-date news and a “What’s new?” window.", date: "VERSION 0.6.0" },
         { version: "0.5.7", type: "PATCH NOTES", title: "Launcher Update 0.5.7", text: "Cleaner interface: invisible scrollbars.", date: "VERSION 0.5.7" },
         { version: "0.5.5", type: "PATCH NOTES", title: "Launcher Update 0.5.5", text: "More reliable automatic updates, with a Restart button.", date: "VERSION 0.5.5" },
@@ -504,7 +514,7 @@ const newsContent = {
     ],
 
     es: [
-        { version: "0.6.1", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.1", text: "Inicio de Tempest corregido y llegada a Linux y Mac.", date: "VERSIÓN 0.6.1" },
+        { version: "0.6.1", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.1", text: "Nuevo chat en el juego y mensajes privados con tus amigos del launcher, directamente en el juego.", date: "VERSIÓN 0.6.1" },
         { version: "0.6.0", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.0", text: "Al día desde la v0.5.7: noticias actualizadas y ventana «¿Qué hay de nuevo?».", date: "VERSIÓN 0.6.0" },
         { version: "0.5.7", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.5.7", text: "Interfaz más limpia: barras de desplazamiento invisibles.", date: "VERSIÓN 0.5.7" },
         { version: "0.5.5", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.5.5", text: "Actualizaciones automáticas más fiables, con un botón Reiniciar.", date: "VERSIÓN 0.5.5" },
@@ -516,7 +526,7 @@ const newsContent = {
     ],
 
     de: [
-        { version: "0.6.1", type: "PATCHNOTES", title: "Launcher Update 0.6.1", text: "Tempest-Start behoben, der Launcher kommt auf Linux und Mac.", date: "VERSION 0.6.1" },
+        { version: "0.6.1", type: "PATCHNOTES", title: "Launcher Update 0.6.1", text: "Neuer Chat im Spiel und private Nachrichten mit deinen Launcher-Freunden direkt im Spiel.", date: "VERSION 0.6.1" },
         { version: "0.6.0", type: "PATCHNOTES", title: "Launcher Update 0.6.0", text: "Nachgeholt seit v0.5.7: aktuelle News und Fenster „Was ist neu?“.", date: "VERSION 0.6.0" },
         { version: "0.5.7", type: "PATCHNOTES", title: "Launcher Update 0.5.7", text: "Aufgeräumtere Oberfläche: unsichtbare Scrollleisten.", date: "VERSION 0.5.7" },
         { version: "0.5.5", type: "PATCHNOTES", title: "Launcher Update 0.5.5", text: "Zuverlässigere automatische Updates mit Neustart-Button.", date: "VERSION 0.5.5" },
@@ -528,7 +538,7 @@ const newsContent = {
     ],
 
     pt: [
-        { version: "0.6.1", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.6.1", text: "Inicialização do Tempest corrigida e chegada ao Linux e Mac.", date: "VERSÃO 0.6.1" },
+        { version: "0.6.1", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.6.1", text: "Novo chat no jogo e mensagens privadas com seus amigos do launcher, direto no jogo.", date: "VERSÃO 0.6.1" },
         { version: "0.6.0", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.6.0", text: "Em dia desde a v0.5.7: notícias atualizadas e janela “O que há de novo?”.", date: "VERSÃO 0.6.0" },
         { version: "0.5.7", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.5.7", text: "Interface mais limpa: barras de rolagem invisíveis.", date: "VERSÃO 0.5.7" },
         { version: "0.5.5", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.5.5", text: "Atualizações automáticas mais confiáveis, com um botão Reiniciar.", date: "VERSÃO 0.5.5" },
