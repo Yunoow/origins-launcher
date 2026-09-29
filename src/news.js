@@ -13,7 +13,7 @@ const updateHistoryI18n = {
     fr: [
         {
             version: "0.6.1", date: "29 SEPTEMBRE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
-            text: "Nouveau chat en jeu avec tes messages privés, Tempest se lance avec n’importe quel Java, et le launcher arrive sur Linux et Mac.",
+            text: "Nouveau chat en jeu avec tes messages privés, Tempest se lance avec le Java 21 installé sur ton PC, et le launcher arrive sur Linux et Mac.",
             changes: [
                 "Nouveau chat en jeu : onglets par conversation, look moderne et heure des messages",
                 "Messages privés avec tes amis du launcher directement en jeu, dans les deux sens",
@@ -134,7 +134,7 @@ const updateHistoryI18n = {
     en: [
         {
             version: "0.6.1", date: "29 SEPTEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
-            text: "A new in-game chat with your private messages, Tempest starts with any installed Java, and the launcher comes to Linux and Mac.",
+            text: "A new in-game chat with your private messages, Tempest starts with the Java 21 installed on your computer, and the launcher comes to Linux and Mac.",
             changes: [
                 "New in-game chat: a tab per conversation, a modern look and message times",
                 "Private messages with your launcher friends right in the game, both ways",
@@ -222,7 +222,7 @@ const updateHistoryI18n = {
     es: [
         {
             version: "0.6.1", date: "29 DE SEPTIEMBRE DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
-            text: "Nuevo chat en el juego con tus mensajes privados, Tempest se inicia con cualquier Java, y el launcher llega a Linux y Mac.",
+            text: "Nuevo chat en el juego con tus mensajes privados, Tempest se inicia con el Java 21 instalado en tu equipo, y el launcher llega a Linux y Mac.",
             changes: [
                 "Nuevo chat en el juego: una pestaña por conversación, aspecto moderno y hora de los mensajes",
                 "Mensajes privados con tus amigos del launcher directamente en el juego, en ambos sentidos",
@@ -310,7 +310,7 @@ const updateHistoryI18n = {
     de: [
         {
             version: "0.6.1", date: "29. SEPTEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
-            text: "Neuer Chat im Spiel mit deinen privaten Nachrichten, Tempest startet mit jedem Java, und der Launcher kommt auf Linux und Mac.",
+            text: "Neuer Chat im Spiel mit deinen privaten Nachrichten, Tempest startet mit dem auf deinem Computer installierten Java 21, und der Launcher kommt auf Linux und Mac.",
             changes: [
                 "Neuer Chat im Spiel: ein Tab pro Unterhaltung, modernes Aussehen und Uhrzeit der Nachrichten",
                 "Private Nachrichten mit deinen Launcher-Freunden direkt im Spiel, in beide Richtungen",
@@ -398,7 +398,7 @@ const updateHistoryI18n = {
     pt: [
         {
             version: "0.6.1", date: "29 DE SETEMBRO DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
-            text: "Novo chat no jogo com suas mensagens privadas, Tempest inicia com qualquer Java, e o launcher chega ao Linux e Mac.",
+            text: "Novo chat no jogo com suas mensagens privadas, Tempest inicia com o Java 21 instalado no seu computador, e o launcher chega ao Linux e Mac.",
             changes: [
                 "Novo chat no jogo: uma aba por conversa, visual moderno e horário das mensagens",
                 "Mensagens privadas com seus amigos do launcher direto no jogo, nos dois sentidos",
