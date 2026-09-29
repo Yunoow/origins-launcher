@@ -2886,25 +2886,9 @@ ipcMain.handle(
 
 
 
-            if (
-
-                !fs.existsSync(
-
-                    bundledModsPath
-
-                )
-
-            ) {
-
-
-
-                throw new Error(
-
-                    `Dossier des mods introuvable : ${bundledModsPath}`
-
-                );
-
-            }
+            // Mods livrés avec le launcher : seulement en développement (assets/ n'est pas empaqueté).
+            const useBundledFiles =
+                fs.existsSync(bundledModsPath);
 
 
 
@@ -3016,6 +3000,11 @@ ipcMain.handle(
 
 
 
+            let modFiles = [];
+            let shaderpackFiles = [];
+
+            if (useBundledFiles) {
+
             /* ------------------------------------------
 
                3. FIND MODS
@@ -3024,7 +3013,7 @@ ipcMain.handle(
 
 
 
-            const modFiles =
+            modFiles =
 
                 fs.readdirSync(
 
@@ -3426,7 +3415,7 @@ ipcMain.handle(
 
 
 
-            let shaderpackFiles = [];
+            shaderpackFiles = [];
 
 
 
@@ -3554,6 +3543,28 @@ ipcMain.handle(
 
                 }
 
+            }
+
+            } else {
+                /*
+                 * Launcher installé : les mods ne sont pas livrés avec lui.
+                 * On télécharge Tempest depuis le manifest, comme une mise à jour.
+                 */
+                sendInstallProgress(
+                    10,
+                    "CREATING_FILES",
+                    "Téléchargement des fichiers de Tempest...",
+                    { key: "detailDownloadingUpdate" }
+                );
+                await syncTempest(gamePath);
+                modFiles = fs.readdirSync(modsDestination)
+                    .filter((file) => file.toLowerCase().endsWith(".jar"));
+                shaderpackFiles = fs.existsSync(shaderpacksDestination)
+                    ? fs.readdirSync(shaderpacksDestination)
+                    : [];
+                if (modFiles.length === 0) {
+                    throw new Error("Aucun mod Tempest téléchargé depuis le serveur.");
+                }
             }
 
             /* ------------------------------------------

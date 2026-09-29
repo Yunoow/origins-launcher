@@ -19,6 +19,7 @@ const updateHistoryI18n = {
                 "Messages privés avec tes amis du launcher directement en jeu, dans les deux sens",
                 "Tempest utilise maintenant le Java installé sur ton PC, quelle que soit sa marque (Oracle, Temurin…)",
                 "Correction du lancement du jeu pour les joueurs dont Java n’était pas trouvé",
+                "Correction de la première installation de Tempest (erreur « Dossier des mods introuvable »)",
                 "Premières versions Linux (AppImage, .deb) et Mac (.dmg) du launcher"
             ]
         },
@@ -140,6 +141,7 @@ const updateHistoryI18n = {
                 "Private messages with your launcher friends right in the game, both ways",
                 "Tempest now uses the Java installed on your computer, whatever its vendor (Oracle, Temurin…)",
                 "Fixed game launch for players whose Java was not found",
+                "Fixed the first installation of Tempest (\"Mods folder not found\" error)",
                 "First Linux (AppImage, .deb) and Mac (.dmg) versions of the launcher"
             ]
         },
@@ -228,6 +230,7 @@ const updateHistoryI18n = {
                 "Mensajes privados con tus amigos del launcher directamente en el juego, en ambos sentidos",
                 "Tempest ahora usa el Java instalado en tu equipo, sea cual sea su marca (Oracle, Temurin…)",
                 "Corregido el inicio del juego para los jugadores cuyo Java no se encontraba",
+                "Corregida la primera instalación de Tempest (error «Carpeta de mods no encontrada»)",
                 "Primeras versiones del launcher para Linux (AppImage, .deb) y Mac (.dmg)"
             ]
         },
@@ -316,6 +319,7 @@ const updateHistoryI18n = {
                 "Private Nachrichten mit deinen Launcher-Freunden direkt im Spiel, in beide Richtungen",
                 "Tempest nutzt jetzt das auf deinem Computer installierte Java, egal von welchem Anbieter (Oracle, Temurin…)",
                 "Spielstart für Spieler behoben, deren Java nicht gefunden wurde",
+                "Erste Installation von Tempest behoben (Fehler „Mod-Ordner nicht gefunden“)",
                 "Erste Linux- (AppImage, .deb) und Mac-Versionen (.dmg) des Launchers"
             ]
         },
@@ -404,6 +408,7 @@ const updateHistoryI18n = {
                 "Mensagens privadas com seus amigos do launcher direto no jogo, nos dois sentidos",
                 "Tempest agora usa o Java instalado no seu computador, seja qual for a marca (Oracle, Temurin…)",
                 "Corrigida a inicialização do jogo para jogadores cujo Java não era encontrado",
+                "Corrigida a primeira instalação do Tempest (erro “Pasta de mods não encontrada”)",
                 "Primeiras versões do launcher para Linux (AppImage, .deb) e Mac (.dmg)"
             ]
         },
