@@ -808,7 +808,8 @@ function renderNews(language) {
 
 
 
-    const items = (newsContent[language] || newsContent.en).slice(0, 3);
+    // Actus en direct (une par push) d'abord, puis celles livrées avec le launcher.
+    const items = [...liveNewsItems(language), ...(newsContent[language] || newsContent.en)].slice(0, 3);
 
 
 
@@ -849,7 +850,10 @@ function renderUpdateHistory() {
 
 
 
-    const history = updateHistoryI18n[currentLauncherLanguage] || updateHistoryI18n.en;
+    const history = [
+        ...liveNewsItems(currentLauncherLanguage),
+        ...(updateHistoryI18n[currentLauncherLanguage] || updateHistoryI18n.en)
+    ];
 
 
 
@@ -869,7 +873,7 @@ function renderUpdateHistory() {
 
                     </div>
 
-                    <span class="update-version">v${item.version}</span>
+                    ${item.version ? `<span class="update-version">v${item.version}</span>` : ""}
 
                 </div>
 
@@ -4983,3 +4987,66 @@ async function applyTempestUpdateNow() {
 
 window.origins?.tempest?.onRemoteUpdate?.(() => applyTempestUpdateNow());
 setInterval(applyTempestUpdateNow, TEMPEST_UPDATE_RECHECK_MS);
+
+
+/* ==========================================
+   ACTUS EN DIRECT
+   Chaque push qui change quelque chose pour les joueurs publie une actu courte
+   (5 langues) : lue au démarrage, puis reçue en direct (news:new). Elles passent
+   devant les actus livrées avec le launcher, sur l'accueil et dans les Actus.
+   Le texte vient de l'API : il est échappé avant d'aller dans la page.
+========================================== */
+
+window.originsLiveNews = window.originsLiveNews || [];
+
+function escapeNewsHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+}
+
+function liveNewsDate(iso, language) {
+    try {
+        const locale = { fr: "fr-FR", en: "en-GB", es: "es-ES", de: "de-DE", pt: "pt-BR" }[language] || "en-GB";
+        return new Date(iso).toLocaleDateString(locale, { day: "numeric", month: "long", year: "numeric" }).toUpperCase();
+    } catch (error) {
+        return "";
+    }
+}
+
+/** Actus en direct au format des actus du launcher, dans la langue voulue (anglais, puis français à défaut). */
+function liveNewsItems(language) {
+    return (window.originsLiveNews || []).map((news) => {
+        const text = news.content?.[language] || news.content?.en || news.content?.fr;
+        if (!text) return null;
+        return {
+            version: news.version ? escapeNewsHtml(news.version) : "",
+            date: escapeNewsHtml(liveNewsDate(news.createdAt, language)),
+            type: escapeNewsHtml(news.type || "TEMPEST"),
+            title: escapeNewsHtml(text.title),
+            text: escapeNewsHtml(text.text),
+            changes: (text.changes || []).map(escapeNewsHtml)
+        };
+    }).filter(Boolean);
+}
+
+function setLiveNews(list) {
+    window.originsLiveNews = (Array.isArray(list) ? list : []).slice(0, 15);
+    renderNews(currentLauncherLanguage);
+    renderUpdateHistory();
+}
+
+async function loadLiveNews() {
+    try {
+        const data = await window.origins?.news?.list?.();
+        if (data?.news) setLiveNews(data.news);
+    } catch (error) {
+        console.error("Actus en direct indisponibles :", error);
+    }
+}
+
+window.origins?.realtime?.onEvent?.((event) => {
+    const news = event?.data?.news;
+    if (event?.type !== "news:new" || !news) return;
+    setLiveNews([news, ...window.originsLiveNews.filter((item) => item.slug !== news.slug)]);
+});
+
+loadLiveNews();

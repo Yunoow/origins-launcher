@@ -23,6 +23,15 @@ async function originsApi(path, token, options = {}) {
 }
 
 contextBridge.exposeInMainWorld("origins", {
+    // Actus publiées à chaque push (annonces du dépôt Tempest), lecture publique.
+    news: {
+        list: async () => {
+            const response = await fetch(`${ORIGINS_API_BASE}/news?game=tempest`);
+            if (!response.ok) throw new Error(`HTTP_${response.status}`);
+            return response.json();
+        }
+    },
+
     minimize: () => ipcRenderer.send("window:minimize"),
     maximize: () => ipcRenderer.send("window:maximize"),
     close: () => ipcRenderer.send("window:close"),
