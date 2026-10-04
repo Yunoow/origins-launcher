@@ -12,6 +12,16 @@ const updateHistoryI18n = {
 
     fr: [
         {
+            version: "0.6.2", date: "4 OCTOBRE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.2",
+            text: "Choisis la mémoire du jeu, et laisse les mises à jour et les actus arriver toutes seules.",
+            changes: [
+                "Nouveau réglage « Mémoire du jeu » dans les Paramètres",
+                "Les mises à jour de Tempest s'installent toutes seules, sans redémarrer le launcher",
+                "Les nouvelles versions du launcher s'installent et redémarrent toutes seules (jamais pendant une partie)",
+                "Les actus du projet arrivent en direct sur l'accueil"
+            ]
+        },
+        {
             version: "0.6.1", date: "29 SEPTEMBRE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
             text: "Nouveau chat en jeu avec tes messages privés, Tempest se lance avec le Java 21 installé sur ton PC, et le launcher arrive sur Linux et Mac.",
             changes: [
@@ -134,6 +144,16 @@ const updateHistoryI18n = {
 
     en: [
         {
+            version: "0.6.2", date: "OCTOBER 4, 2026", type: "LAUNCHER", title: "Launcher Update 0.6.2",
+            text: "Choose the game memory, and let updates and news arrive on their own.",
+            changes: [
+                "New “Game memory” setting in Settings",
+                "Tempest updates install on their own, no launcher restart needed",
+                "New launcher versions install and restart on their own (never during a game)",
+                "Project news arrives live on the home page"
+            ]
+        },
+        {
             version: "0.6.1", date: "29 SEPTEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
             text: "A new in-game chat with your private messages, Tempest starts with the Java 21 installed on your computer, and the launcher comes to Linux and Mac.",
             changes: [
@@ -222,6 +242,16 @@ const updateHistoryI18n = {
     ],
 
     es: [
+        {
+            version: "0.6.2", date: "4 DE OCTUBRE DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.2",
+            text: "Elige la memoria del juego y deja que las actualizaciones y las noticias lleguen solas.",
+            changes: [
+                "Nuevo ajuste «Memoria del juego» en los Ajustes",
+                "Las actualizaciones de Tempest se instalan solas, sin reiniciar el launcher",
+                "Las nuevas versiones del launcher se instalan y se reinician solas (nunca durante una partida)",
+                "Las noticias del proyecto llegan en directo a la página de inicio"
+            ]
+        },
         {
             version: "0.6.1", date: "29 DE SEPTIEMBRE DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
             text: "Nuevo chat en el juego con tus mensajes privados, Tempest se inicia con el Java 21 instalado en tu equipo, y el launcher llega a Linux y Mac.",
@@ -312,6 +342,16 @@ const updateHistoryI18n = {
 
     de: [
         {
+            version: "0.6.2", date: "4. OKTOBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.2",
+            text: "Wähle den Spielspeicher und lass Updates und News von selbst kommen.",
+            changes: [
+                "Neue Einstellung „Spielspeicher“ in den Einstellungen",
+                "Tempest-Updates installieren sich selbst, ohne Neustart des Launchers",
+                "Neue Launcher-Versionen installieren sich und starten selbst neu (nie während eines Spiels)",
+                "Projekt-News kommen live auf die Startseite"
+            ]
+        },
+        {
             version: "0.6.1", date: "29. SEPTEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
             text: "Neuer Chat im Spiel mit deinen privaten Nachrichten, Tempest startet mit dem auf deinem Computer installierten Java 21, und der Launcher kommt auf Linux und Mac.",
             changes: [
@@ -400,6 +440,16 @@ const updateHistoryI18n = {
     ],
 
     pt: [
+        {
+            version: "0.6.2", date: "4 DE OUTUBRO DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.2",
+            text: "Escolha a memória do jogo e deixe as atualizações e as novidades chegarem sozinhas.",
+            changes: [
+                "Nova opção “Memória do jogo” nas Configurações",
+                "As atualizações do Tempest se instalam sozinhas, sem reiniciar o launcher",
+                "Novas versões do launcher se instalam e reiniciam sozinhas (nunca durante uma partida)",
+                "As novidades do projeto chegam ao vivo na página inicial"
+            ]
+        },
         {
             version: "0.6.1", date: "29 DE SETEMBRO DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.1",
             text: "Novo chat no jogo com suas mensagens privadas, Tempest inicia com o Java 21 instalado no seu computador, e o launcher chega ao Linux e Mac.",
@@ -495,6 +545,7 @@ const updateHistory = updateHistoryI18n.fr;
 const newsContent = {
 
     fr: [
+        { version: "0.6.2", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.2", text: "Mémoire du jeu réglable, mises à jour et actus qui arrivent toutes seules.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.1", text: "Nouveau chat en jeu et MP avec tes amis du launcher, directement en jeu.", date: "VERSION 0.6.1" },
         { version: "0.6.0", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.0", text: "Rattrapage depuis la v0.5.7 : actus à jour et fenêtre « Quoi de neuf ? ».", date: "VERSION 0.6.0" },
         { version: "0.5.7", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.5.7", text: "Interface plus épurée : barres de défilement invisibles.", date: "VERSION 0.5.7" },
@@ -507,6 +558,7 @@ const newsContent = {
     ],
 
     en: [
+        { version: "0.6.2", type: "PATCH NOTES", title: "Launcher Update 0.6.2", text: "Adjustable game memory, updates and news that arrive on their own.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "PATCH NOTES", title: "Launcher Update 0.6.1", text: "New in-game chat, and private messages with your launcher friends right in the game.", date: "VERSION 0.6.1" },
         { version: "0.6.0", type: "PATCH NOTES", title: "Launcher Update 0.6.0", text: "Catch-up since v0.5.7: up-to-date news and a “What’s new?” window.", date: "VERSION 0.6.0" },
         { version: "0.5.7", type: "PATCH NOTES", title: "Launcher Update 0.5.7", text: "Cleaner interface: invisible scrollbars.", date: "VERSION 0.5.7" },
@@ -519,6 +571,7 @@ const newsContent = {
     ],
 
     es: [
+        { version: "0.6.2", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.2", text: "Memoria del juego ajustable, actualizaciones y noticias que llegan solas.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.1", text: "Nuevo chat en el juego y mensajes privados con tus amigos del launcher, directamente en el juego.", date: "VERSIÓN 0.6.1" },
         { version: "0.6.0", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.0", text: "Al día desde la v0.5.7: noticias actualizadas y ventana «¿Qué hay de nuevo?».", date: "VERSIÓN 0.6.0" },
         { version: "0.5.7", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.5.7", text: "Interfaz más limpia: barras de desplazamiento invisibles.", date: "VERSIÓN 0.5.7" },
@@ -531,6 +584,7 @@ const newsContent = {
     ],
 
     de: [
+        { version: "0.6.2", type: "PATCH-NOTIZEN", title: "Launcher Update 0.6.2", text: "Einstellbarer Spielspeicher, Updates und News, die von selbst kommen.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "PATCHNOTES", title: "Launcher Update 0.6.1", text: "Neuer Chat im Spiel und private Nachrichten mit deinen Launcher-Freunden direkt im Spiel.", date: "VERSION 0.6.1" },
         { version: "0.6.0", type: "PATCHNOTES", title: "Launcher Update 0.6.0", text: "Nachgeholt seit v0.5.7: aktuelle News und Fenster „Was ist neu?“.", date: "VERSION 0.6.0" },
         { version: "0.5.7", type: "PATCHNOTES", title: "Launcher Update 0.5.7", text: "Aufgeräumtere Oberfläche: unsichtbare Scrollleisten.", date: "VERSION 0.5.7" },
@@ -543,6 +597,7 @@ const newsContent = {
     ],
 
     pt: [
+        { version: "0.6.2", type: "NOTAS DA ATUALIZAÇÃO", title: "Launcher Update 0.6.2", text: "Memória do jogo ajustável, atualizações e novidades que chegam sozinhas.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.6.1", text: "Novo chat no jogo e mensagens privadas com seus amigos do launcher, direto no jogo.", date: "VERSÃO 0.6.1" },
         { version: "0.6.0", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.6.0", text: "Em dia desde a v0.5.7: notícias atualizadas e janela “O que há de novo?”.", date: "VERSÃO 0.6.0" },
         { version: "0.5.7", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.5.7", text: "Interface mais limpa: barras de rolagem invisíveis.", date: "VERSÃO 0.5.7" },
