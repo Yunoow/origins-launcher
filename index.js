@@ -4189,6 +4189,35 @@ ipcMain.handle(
 
 
 
+/* ------------------------------------------
+   MÉMOIRE DU JEU (Options)
+------------------------------------------ */
+
+const GAME_MEMORY_MIN_GB = 2;
+const GAME_MEMORY_DEFAULT_GB = 4;
+
+/** Mémoire du PC en Go, et le maximum qu'on laisse donner au jeu (2 Go gardés pour Windows et le launcher, 16 Go au plus : Minecraft n'en tire rien de plus). */
+function systemMemory() {
+    const totalGb = Math.floor(require("os").totalmem() / 1024 ** 3);
+    const maxGb = Math.max(GAME_MEMORY_MIN_GB, Math.min(16, totalGb - 2));
+    return {
+        totalGb,
+        minGb: GAME_MEMORY_MIN_GB,
+        maxGb,
+        defaultGb: Math.min(GAME_MEMORY_DEFAULT_GB, maxGb)
+    };
+}
+
+/** Arguments mémoire de Minecraft : -Xmx = choix du joueur, -Xms = la moitié (au moins 1 Go, au plus 2). */
+function gameMemory(requestedGb) {
+    const { minGb, maxGb, defaultGb } = systemMemory();
+    const wanted = Number.parseInt(requestedGb, 10);
+    const gb = Number.isFinite(wanted) ? Math.min(maxGb, Math.max(minGb, wanted)) : defaultGb;
+    return { max: `${gb}G`, min: `${Math.min(2, Math.max(1, Math.floor(gb / 2)))}G` };
+}
+
+ipcMain.handle("tempest:system-memory", () => systemMemory());
+
 ipcMain.handle(
 
     "tempest:launch",
@@ -4199,7 +4228,9 @@ ipcMain.handle(
 
         _event,
 
-        gameLanguage = "en"
+        gameLanguage = "en",
+
+        memoryGb = null
 
     ) => {
 
@@ -4566,21 +4597,8 @@ ipcMain.handle(
 
 
 
-                memory: {
-
-
-
-                    max:
-
-                        "4G",
-
-
-
-                    min:
-
-                        "2G"
-
-                },
+                // Mémoire choisie dans les Options (Go), bornée par la RAM du PC.
+                memory: gameMemory(memoryGb),
 
 
 

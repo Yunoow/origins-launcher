@@ -1040,6 +1040,7 @@ function applyLanguage(language) {
     updateTempestButton();
     renderFriendsList(originsFriendsCache);
     renderLauncherUpdate();
+    window.originsRenderGameMemory?.();
 
     settingsButton.title = t("titleSettings");
     accountButton.title = t("titleAccount");
@@ -2924,7 +2925,7 @@ playButton.addEventListener(
 
                 const result =
 
-                    await window.origins.tempest.launch(currentLauncherLanguage);
+                    await window.origins.tempest.launch(currentLauncherLanguage, savedGameMemory());
 
 
 
@@ -4885,3 +4886,64 @@ function refreshOrigins052Labels() {
 refreshOrigins052Labels();
 
 launcherLanguage?.addEventListener("change", () => setTimeout(refreshOrigins052Labels, 0));
+
+/* ==========================================
+   OPTIONS — MÉMOIRE DU JEU
+   Curseur en Go, borné par la RAM du PC (lue par le processus principal).
+   Le choix reste dans ce launcher et part avec chaque lancement (-Xmx).
+========================================== */
+
+const GAME_MEMORY_KEY = "origins-game-memory";
+const gameMemoryInput = document.getElementById("gameMemory");
+const gameMemoryValue = document.getElementById("gameMemoryValue");
+const gameMemoryHint = document.getElementById("gameMemoryHint");
+let gameMemoryInfo = null;
+
+function savedGameMemory() {
+    try {
+        const value = Number.parseInt(localStorage.getItem(GAME_MEMORY_KEY), 10);
+        return Number.isFinite(value) ? value : null;
+    } catch (error) {
+        return null;
+    }
+}
+
+function renderGameMemory() {
+    if (!gameMemoryInput) return;
+    const min = Number(gameMemoryInput.min), max = Number(gameMemoryInput.max);
+    const value = Number(gameMemoryInput.value);
+    gameMemoryInput.style.setProperty("--fill", `${max > min ? ((value - min) / (max - min)) * 100 : 100}%`);
+    gameMemoryValue.textContent = t("gameMemoryValue", { gb: value });
+    if (gameMemoryInfo) {
+        gameMemoryHint.textContent = t("gameMemoryHint", { total: gameMemoryInfo.totalGb, recommended: gameMemoryInfo.defaultGb });
+    }
+}
+
+async function initGameMemory() {
+    if (!gameMemoryInput || !window.origins?.tempest?.systemMemory) return;
+    try {
+        gameMemoryInfo = await window.origins.tempest.systemMemory();
+    } catch (error) {
+        console.error("Mémoire du PC illisible :", error);
+        return;
+    }
+    gameMemoryInput.min = String(gameMemoryInfo.minGb);
+    gameMemoryInput.max = String(gameMemoryInfo.maxGb);
+    const saved = savedGameMemory();
+    const value = saved === null ? gameMemoryInfo.defaultGb : Math.min(gameMemoryInfo.maxGb, Math.max(gameMemoryInfo.minGb, saved));
+    gameMemoryInput.value = String(value);
+    renderGameMemory();
+}
+
+gameMemoryInput?.addEventListener("input", () => {
+    renderGameMemory();
+    try {
+        localStorage.setItem(GAME_MEMORY_KEY, gameMemoryInput.value);
+    } catch (error) {
+        console.error("Impossible d'enregistrer la mémoire du jeu :", error);
+    }
+});
+
+// Appelé par applyLanguage (défini plus haut, avant ces constantes).
+window.originsRenderGameMemory = renderGameMemory;
+initGameMemory();

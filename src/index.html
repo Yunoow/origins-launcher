@@ -1715,6 +1715,23 @@
 
                 </div>
 
+                <!-- Game memory -->
+
+                <div class="settings-section">
+
+                    <label for="gameMemory" data-i18n="gameMemory">GAME MEMORY</label>
+
+                    <p data-i18n="gameMemoryDescription">RAM given to Minecraft. More helps with shaders and big areas; too much slows down the rest of the PC.</p>
+
+                    <div class="memory-row">
+                        <input type="range" id="gameMemory" min="2" max="8" step="1" value="4">
+                        <output id="gameMemoryValue" for="gameMemory">4 GB</output>
+                    </div>
+
+                    <span class="memory-hint" id="gameMemoryHint"></span>
+
+                </div>
+
                 <!-- Tutorial -->
 
                 <div class="settings-section">

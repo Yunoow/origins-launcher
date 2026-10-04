@@ -21,6 +21,11 @@ const ORIGINS_LANGUAGES = [
 const translations = {
 
     en: {
+        // Options — game memory
+        gameMemory: "GAME MEMORY",
+        gameMemoryDescription: "RAM given to Minecraft. More helps with shaders and big areas; too much slows down the rest of the PC.",
+        gameMemoryValue: "{gb} GB",
+        gameMemoryHint: "Your PC has {total} GB. Recommended: {recommended} GB.",
         // Home
         home: "HOME",
         originsProject: "ORIGINS PROJECT",
@@ -251,6 +256,11 @@ const translations = {
     },
 
     fr: {
+        // Options — game memory
+        gameMemory: "MÉMOIRE DU JEU",
+        gameMemoryDescription: "RAM donnée à Minecraft. Plus aide avec les shaders et les grandes zones ; trop ralentit le reste du PC.",
+        gameMemoryValue: "{gb} Go",
+        gameMemoryHint: "Ton PC a {total} Go. Conseillé : {recommended} Go.",
         home: "ACCUEIL",
         originsProject: "PROJET ORIGINS",
         welcomeTitle: "BIENVENUE DANS ORIGINS",
@@ -467,6 +477,11 @@ const translations = {
     },
 
     es: {
+        // Options — game memory
+        gameMemory: "MEMORIA DEL JUEGO",
+        gameMemoryDescription: "RAM asignada a Minecraft. Más ayuda con los shaders y las zonas grandes; demasiada ralentiza el resto del PC.",
+        gameMemoryValue: "{gb} GB",
+        gameMemoryHint: "Tu PC tiene {total} GB. Recomendado: {recommended} GB.",
         home: "INICIO",
         originsProject: "PROYECTO ORIGINS",
         welcomeTitle: "BIENVENIDO A ORIGINS",
@@ -683,6 +698,11 @@ const translations = {
     },
 
     de: {
+        // Options — game memory
+        gameMemory: "SPIELSPEICHER",
+        gameMemoryDescription: "RAM für Minecraft. Mehr hilft bei Shadern und großen Gebieten; zu viel bremst den Rest des PCs.",
+        gameMemoryValue: "{gb} GB",
+        gameMemoryHint: "Dein PC hat {total} GB. Empfohlen: {recommended} GB.",
         home: "START",
         originsProject: "PROJEKT ORIGINS",
         welcomeTitle: "WILLKOMMEN BEI ORIGINS",
@@ -899,6 +919,11 @@ const translations = {
     },
 
     pt: {
+        // Options — game memory
+        gameMemory: "MEMÓRIA DO JOGO",
+        gameMemoryDescription: "RAM dada ao Minecraft. Mais ajuda com shaders e áreas grandes; demais deixa o resto do PC lento.",
+        gameMemoryValue: "{gb} GB",
+        gameMemoryHint: "Seu PC tem {total} GB. Recomendado: {recommended} GB.",
         home: "INÍCIO",
         originsProject: "PROJETO ORIGINS",
         welcomeTitle: "BEM-VINDO AO ORIGINS",
