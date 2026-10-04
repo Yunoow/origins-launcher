@@ -4572,8 +4572,10 @@ function renderLauncherUpdate(state = launcherUpdateStatus) {
     const { status } = launcherUpdateStatus;
     const downloading = status === "available" || status === "downloading";
     const ready = status === "downloaded";
+    // Installation automatique (deploy:launcher) : le launcher se relance seul dans quelques secondes.
+    const installing = status === "installing";
 
-    launcherUpdateBanner.hidden = !(downloading || ready);
+    launcherUpdateBanner.hidden = !(downloading || ready || installing);
     launcherUpdateBanner.classList.toggle("ready", ready);
     launcherUpdateRestart.hidden = !ready;
 
@@ -4581,6 +4583,9 @@ function renderLauncherUpdate(state = launcherUpdateStatus) {
         launcherUpdateText.textContent = t("updateDownloading", {
             percent: Math.max(0, Math.min(100, Number(launcherUpdateStatus.percent) || 0))
         });
+    } else if (installing) {
+        launcherUpdateText.textContent = t("updateRestarting");
+        launcherUpdateRestart.hidden = true;
     } else if (ready) {
         launcherUpdateText.textContent = t("updateReady", { version: launcherUpdateStatus.version || "" });
         launcherUpdateRestart.textContent = t("updateRestart");
@@ -4947,3 +4952,34 @@ gameMemoryInput?.addEventListener("input", () => {
 // Appelé par applyLanguage (défini plus haut, avant ces constantes).
 window.originsRenderGameMemory = renderGameMemory;
 initGameMemory();
+
+
+/* ==========================================
+   TEMPEST — MISE À JOUR AUTOMATIQUE
+   L'API prévient dès qu'un deploy:tempest publie de nouveaux fichiers (et on
+   revérifie toutes les 10 minutes au cas où le temps réel serait coupé) : si
+   rien n'est en cours, la mise à jour se fait seule, sans redémarrer le launcher.
+========================================== */
+
+const TEMPEST_UPDATE_RECHECK_MS = 10 * 60 * 1000;
+let tempestAutoUpdateRetry = null;
+
+async function applyTempestUpdateNow() {
+    clearTimeout(tempestAutoUpdateRetry);
+    // Installation, mise à jour ou lancement en cours : on réessaie un peu plus tard.
+    if (!playButton || playButton.disabled) {
+        tempestAutoUpdateRetry = setTimeout(applyTempestUpdateNow, 30 * 1000);
+        return;
+    }
+    try {
+        await checkTempestInstallation();
+    } catch (error) {
+        console.error("Vérification Tempest impossible :", error);
+        return;
+    }
+    // Même chemin que le bouton « Mettre à jour ».
+    if (tempestInstalled && tempestUpdateAvailable && !playButton.disabled) playButton.click();
+}
+
+window.origins?.tempest?.onRemoteUpdate?.(() => applyTempestUpdateNow());
+setInterval(applyTempestUpdateNow, TEMPEST_UPDATE_RECHECK_MS);

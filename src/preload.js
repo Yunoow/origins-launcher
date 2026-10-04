@@ -126,6 +126,11 @@ contextBridge.exposeInMainWorld("origins", {
         setLanguage: (gameLanguage = "en") => ipcRenderer.invoke("tempest:set-language", gameLanguage),
         launch: (gameLanguage = "en", memoryGb = null) => ipcRenderer.invoke("tempest:launch", gameLanguage, memoryGb),
         systemMemory: () => ipcRenderer.invoke("tempest:system-memory"),
+        onRemoteUpdate: (callback) => {
+            const listener = () => callback();
+            ipcRenderer.on("tempest:remote-update", listener);
+            return () => ipcRenderer.removeListener("tempest:remote-update", listener);
+        },
         onInstallProgress: (callback) => {
             const listener = (_event, data) => callback(data);
             ipcRenderer.on("tempest:install-progress", listener);

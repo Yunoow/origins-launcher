@@ -626,6 +626,11 @@ function connectOriginsRealtime(token) {
                 checkLauncherUpdateNow();
             }
 
+            // Pushed by the API as soon as deploy:tempest publishes new mods / packs.
+            if (message?.type === "tempest:update-available") {
+                announceTempestUpdate();
+            }
+
             sendRealtimeEvent(message);
         } catch (error) {
             console.error("Origins realtime invalid message:", error);
@@ -1907,6 +1912,47 @@ function setTempestRunning(running) {
 
     sendPresence();
 
+    // Jeu fermé : les mises à jour arrivées pendant la partie s'appliquent maintenant.
+    if (!tempestRunning) {
+        if (tempestUpdatePending) announceTempestUpdate();
+        if (launcherUpdateDownloaded) installLauncherUpdateSoon();
+    }
+
+}
+
+/* ------------------------------------------
+   MISES À JOUR SANS REDÉMARRER LE LAUNCHER
+   deploy:tempest  -> l'API prévient (tempest:update-available) -> le renderer
+                      met Tempest à jour tout seul, jeu fermé ; pendant une
+                      partie, ça attend la fin de la partie.
+   deploy:launcher -> téléchargement, puis le launcher s'installe et se relance
+                      seul en quelques secondes (jamais pendant une partie).
+------------------------------------------ */
+
+let tempestUpdatePending = false;
+
+function announceTempestUpdate() {
+    if (tempestRunning || !mainWindow || mainWindow.isDestroyed()) {
+        tempestUpdatePending = true;
+        return;
+    }
+    tempestUpdatePending = false;
+    mainWindow.webContents.send("tempest:remote-update");
+}
+
+const LAUNCHER_AUTO_INSTALL_DELAY_MS = 4000;
+let launcherAutoInstallTimer = null;
+
+function installLauncherUpdateSoon() {
+    if (!app.isPackaged || !launcherUpdateDownloaded || tempestRunning || launcherAutoInstallTimer) return;
+    sendLauncherUpdateStatus("installing", { version: launcherUpdateState?.version });
+    launcherAutoInstallTimer = setTimeout(() => {
+        launcherAutoInstallTimer = null;
+        // Partie lancée entre-temps : on attend sa fin.
+        if (tempestRunning) return;
+        isQuitting = true;
+        autoUpdater.quitAndInstall(true, true);
+    }, LAUNCHER_AUTO_INSTALL_DELAY_MS);
 }
 
 
@@ -5395,6 +5441,9 @@ function setupLauncherAutoUpdater() {
                 }
 
             );
+
+            // Pas de clic à faire : installation et relance automatiques (après la partie si elle est en cours).
+            installLauncherUpdateSoon();
 
 
 
