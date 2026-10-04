@@ -4442,10 +4442,14 @@ const TUTORIAL_STEPS = [
     { target: "#friendsQuickAccess", title: "tutContactsTitle", text: "tutContactsText" },
     { target: "#notificationsQuickAccess", title: "tutNotificationsTitle", text: "tutNotificationsText" },
     { target: "#settingsButton", title: "tutSettingsTitle", text: "tutSettingsText" },
+    // Ouvre les Paramètres le temps de l'étape, pour montrer le réglage lui-même.
+    { target: "#gameMemorySection", title: "tutMemoryTitle", text: "tutMemoryText", panel: "settings" },
     { target: null, title: "tutDoneTitle", text: "tutDoneText" }
 ];
 
 let tutorialIndex = 0;
+// Paramètres ouverts par une étape du tutoriel (refermés en la quittant).
+let tutorialOpenedSettings = false;
 
 function tutorialIsDone() {
     try {
@@ -4475,6 +4479,10 @@ function startTutorial() {
 function endTutorial() {
     if (!originsTutorial) return;
     originsTutorial.hidden = true;
+    if (tutorialOpenedSettings) {
+        tutorialOpenedSettings = false;
+        closeSettings();
+    }
     document.removeEventListener("keydown", onTutorialKeydown);
     window.removeEventListener("resize", renderTutorialStep);
     try {
@@ -4511,6 +4519,17 @@ function renderTutorialStep() {
     originsTutorialPrev.hidden = tutorialIndex === 0;
     originsTutorialSkip.hidden = isLast;
     originsTutorialNext.textContent = isLast ? t("tutFinish") : t("tutNext");
+
+    // Étape dans les Paramètres : on les ouvre, puis on attend la fin de leur animation pour viser le réglage.
+    if (step.panel === "settings" && !tutorialOpenedSettings) {
+        tutorialOpenedSettings = true;
+        openSettings();
+        window.setTimeout(renderTutorialStep, 350);
+    } else if (step.panel !== "settings" && tutorialOpenedSettings) {
+        tutorialOpenedSettings = false;
+        closeSettings();
+        window.setTimeout(renderTutorialStep, 350);
+    }
 
     const target = step.target ? document.querySelector(step.target) : null;
     const rect = target?.getBoundingClientRect();
