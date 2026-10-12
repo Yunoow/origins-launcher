@@ -3878,6 +3878,10 @@ async function handleOriginsRealtimeEvent(event) {
             appendPrivateMessage(message, activeFriendsConversationProfile);
         }
 
+        // My own message sent from the game (or another launcher): shown above, no notification.
+        const myProfileId = String(originsProfile?.id || "");
+        if (myProfileId && senderId === myProfileId) return;
+
         // Conversation not visible: notify so the message is not missed.
         if (!(conversationOpen && activeId === senderId && document.hasFocus())) {
             const sender = originsFriendsCache.find(p => String(p.id) === senderId);
