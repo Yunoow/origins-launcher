@@ -12,6 +12,15 @@ const updateHistoryI18n = {
 
     fr: [
         {
+            version: "0.6.3", date: "12 OCTOBRE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.3",
+            text: "Tes MP sont reliés en direct entre le jeu et le launcher.",
+            changes: [
+                "Un MP envoyé en jeu apparaît aussitôt dans la conversation du launcher",
+                "Un MP reçu arrive en même temps dans le jeu et dans le launcher, sans doublon",
+                "Plus de notification pour tes propres messages envoyés depuis le jeu"
+            ]
+        },
+        {
             version: "0.6.2", date: "4 OCTOBRE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.2",
             text: "Choisis la mémoire du jeu, et laisse les mises à jour et les actus arriver toutes seules.",
             changes: [
@@ -144,6 +153,15 @@ const updateHistoryI18n = {
 
     en: [
         {
+            version: "0.6.3", date: "OCTOBER 12, 2026", type: "LAUNCHER", title: "Launcher Update 0.6.3",
+            text: "Your DMs are now linked live between the game and the launcher.",
+            changes: [
+                "A DM sent in game shows up right away in the launcher conversation",
+                "A DM you receive arrives in the game and the launcher at the same time, with no duplicate",
+                "No more notification for your own messages sent from the game"
+            ]
+        },
+        {
             version: "0.6.2", date: "OCTOBER 4, 2026", type: "LAUNCHER", title: "Launcher Update 0.6.2",
             text: "Choose the game memory, and let updates and news arrive on their own.",
             changes: [
@@ -242,6 +260,15 @@ const updateHistoryI18n = {
     ],
 
     es: [
+        {
+            version: "0.6.3", date: "12 DE OCTUBRE DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.3",
+            text: "Tus MP están conectados en directo entre el juego y el launcher.",
+            changes: [
+                "Un MP enviado en el juego aparece al instante en la conversación del launcher",
+                "Un MP recibido llega a la vez al juego y al launcher, sin duplicados",
+                "Ya no hay notificación para tus propios mensajes enviados desde el juego"
+            ]
+        },
         {
             version: "0.6.2", date: "4 DE OCTUBRE DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.2",
             text: "Elige la memoria del juego y deja que las actualizaciones y las noticias lleguen solas.",
@@ -342,6 +369,15 @@ const updateHistoryI18n = {
 
     de: [
         {
+            version: "0.6.3", date: "12. OKTOBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.3",
+            text: "Deine PNs sind jetzt live zwischen Spiel und Launcher verbunden.",
+            changes: [
+                "Eine im Spiel gesendete PN erscheint sofort im Gespräch im Launcher",
+                "Eine empfangene PN kommt gleichzeitig im Spiel und im Launcher an, ohne Doppelung",
+                "Keine Benachrichtigung mehr für deine eigenen Nachrichten aus dem Spiel"
+            ]
+        },
+        {
             version: "0.6.2", date: "4. OKTOBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.2",
             text: "Wähle den Spielspeicher und lass Updates und News von selbst kommen.",
             changes: [
@@ -440,6 +476,15 @@ const updateHistoryI18n = {
     ],
 
     pt: [
+        {
+            version: "0.6.3", date: "12 DE OUTUBRO DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.3",
+            text: "Suas MPs agora estão ligadas ao vivo entre o jogo e o launcher.",
+            changes: [
+                "Uma MP enviada no jogo aparece na hora na conversa do launcher",
+                "Uma MP recebida chega ao mesmo tempo no jogo e no launcher, sem duplicar",
+                "Sem notificação para suas próprias mensagens enviadas do jogo"
+            ]
+        },
         {
             version: "0.6.2", date: "4 DE OUTUBRO DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.2",
             text: "Escolha a memória do jogo e deixe as atualizações e as novidades chegarem sozinhas.",
@@ -545,6 +590,7 @@ const updateHistory = updateHistoryI18n.fr;
 const newsContent = {
 
     fr: [
+        { version: "0.6.3", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.3", text: "MP reliés en direct entre le jeu et le launcher.", date: "VERSION 0.6.3" },
         { version: "0.6.2", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.2", text: "Mémoire du jeu réglable, mises à jour et actus qui arrivent toutes seules.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.1", text: "Nouveau chat en jeu et MP avec tes amis du launcher, directement en jeu.", date: "VERSION 0.6.1" },
         { version: "0.6.0", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.0", text: "Rattrapage depuis la v0.5.7 : actus à jour et fenêtre « Quoi de neuf ? ».", date: "VERSION 0.6.0" },
@@ -558,6 +604,7 @@ const newsContent = {
     ],
 
     en: [
+        { version: "0.6.3", type: "PATCH NOTES", title: "Launcher Update 0.6.3", text: "DMs linked live between the game and the launcher.", date: "VERSION 0.6.3" },
         { version: "0.6.2", type: "PATCH NOTES", title: "Launcher Update 0.6.2", text: "Adjustable game memory, updates and news that arrive on their own.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "PATCH NOTES", title: "Launcher Update 0.6.1", text: "New in-game chat, and private messages with your launcher friends right in the game.", date: "VERSION 0.6.1" },
         { version: "0.6.0", type: "PATCH NOTES", title: "Launcher Update 0.6.0", text: "Catch-up since v0.5.7: up-to-date news and a “What’s new?” window.", date: "VERSION 0.6.0" },
@@ -571,6 +618,7 @@ const newsContent = {
     ],
 
     es: [
+        { version: "0.6.3", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.3", text: "MP conectados en directo entre el juego y el launcher.", date: "VERSION 0.6.3" },
         { version: "0.6.2", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.2", text: "Memoria del juego ajustable, actualizaciones y noticias que llegan solas.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.1", text: "Nuevo chat en el juego y mensajes privados con tus amigos del launcher, directamente en el juego.", date: "VERSIÓN 0.6.1" },
         { version: "0.6.0", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.0", text: "Al día desde la v0.5.7: noticias actualizadas y ventana «¿Qué hay de nuevo?».", date: "VERSIÓN 0.6.0" },
@@ -584,6 +632,7 @@ const newsContent = {
     ],
 
     de: [
+        { version: "0.6.3", type: "PATCH-NOTIZEN", title: "Launcher Update 0.6.3", text: "PNs live zwischen Spiel und Launcher verbunden.", date: "VERSION 0.6.3" },
         { version: "0.6.2", type: "PATCH-NOTIZEN", title: "Launcher Update 0.6.2", text: "Einstellbarer Spielspeicher, Updates und News, die von selbst kommen.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "PATCHNOTES", title: "Launcher Update 0.6.1", text: "Neuer Chat im Spiel und private Nachrichten mit deinen Launcher-Freunden direkt im Spiel.", date: "VERSION 0.6.1" },
         { version: "0.6.0", type: "PATCHNOTES", title: "Launcher Update 0.6.0", text: "Nachgeholt seit v0.5.7: aktuelle News und Fenster „Was ist neu?“.", date: "VERSION 0.6.0" },
@@ -597,6 +646,7 @@ const newsContent = {
     ],
 
     pt: [
+        { version: "0.6.3", type: "NOTAS DA ATUALIZAÇÃO", title: "Launcher Update 0.6.3", text: "MPs ligadas ao vivo entre o jogo e o launcher.", date: "VERSION 0.6.3" },
         { version: "0.6.2", type: "NOTAS DA ATUALIZAÇÃO", title: "Launcher Update 0.6.2", text: "Memória do jogo ajustável, atualizações e novidades que chegam sozinhas.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.6.1", text: "Novo chat no jogo e mensagens privadas com seus amigos do launcher, direto no jogo.", date: "VERSÃO 0.6.1" },
         { version: "0.6.0", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.6.0", text: "Em dia desde a v0.5.7: notícias atualizadas e janela “O que há de novo?”.", date: "VERSÃO 0.6.0" },
