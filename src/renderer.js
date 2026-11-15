@@ -2977,7 +2977,15 @@ playButton.addEventListener(
 
                 );
 
-
+                // Le joueur doit voir pourquoi le jeu ne se lance pas
+                // (Java introuvable, jeu pas installé…) et pouvoir réessayer :
+                // avant, le bouton restait désactivé et l'erreur invisible.
+                updateInstallProgress({
+                    percent: 0,
+                    stage: "ERROR",
+                    detail: error.message
+                });
+                playButton.disabled = false;
 
                 playButton.textContent =
 

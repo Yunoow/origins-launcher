@@ -12,6 +12,15 @@ const updateHistoryI18n = {
 
     fr: [
         {
+            version: "0.6.4", date: "4 NOVEMBRE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.4",
+            text: "Un seul launcher à la fois.",
+            changes: [
+                "Rouvrir le launcher pendant une partie ne lance plus un deuxième launcher : celui qui tourne déjà revient à l'écran",
+                "Fini les icônes du launcher en double à côté de l'horloge",
+                "Si le jeu ne se lance pas, le launcher affiche maintenant pourquoi, et le bouton Réessayer marche à nouveau"
+            ]
+        },
+        {
             version: "0.6.3", date: "12 OCTOBRE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.3",
             text: "Tes MP sont reliés en direct entre le jeu et le launcher.",
             changes: [
@@ -153,6 +162,15 @@ const updateHistoryI18n = {
 
     en: [
         {
+            version: "0.6.4", date: "NOVEMBER 4, 2026", type: "LAUNCHER", title: "Launcher Update 0.6.4",
+            text: "Only one launcher at a time.",
+            changes: [
+                "Opening the launcher again during a game no longer starts a second launcher: the one already running comes back on screen",
+                "No more duplicate launcher icons next to the clock",
+                "If the game doesn't start, the launcher now shows why, and the Retry button works again"
+            ]
+        },
+        {
             version: "0.6.3", date: "OCTOBER 12, 2026", type: "LAUNCHER", title: "Launcher Update 0.6.3",
             text: "Your DMs are now linked live between the game and the launcher.",
             changes: [
@@ -260,6 +278,15 @@ const updateHistoryI18n = {
     ],
 
     es: [
+        {
+            version: "0.6.4", date: "4 DE NOVIEMBRE DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.4",
+            text: "Un solo launcher a la vez.",
+            changes: [
+                "Volver a abrir el launcher durante una partida ya no abre un segundo launcher: vuelve a la pantalla el que ya estaba abierto",
+                "Se acabaron los iconos del launcher duplicados junto al reloj",
+                "Si el juego no arranca, el launcher ahora muestra el motivo, y el botón Reintentar vuelve a funcionar"
+            ]
+        },
         {
             version: "0.6.3", date: "12 DE OCTUBRE DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.3",
             text: "Tus MP están conectados en directo entre el juego y el launcher.",
@@ -369,6 +396,15 @@ const updateHistoryI18n = {
 
     de: [
         {
+            version: "0.6.4", date: "4. NOVEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.4",
+            text: "Nur noch ein Launcher gleichzeitig.",
+            changes: [
+                "Wird der Launcher während einer Partie erneut geöffnet, startet kein zweiter Launcher mehr: der bereits laufende kommt wieder in den Vordergrund",
+                "Keine doppelten Launcher-Symbole mehr neben der Uhr",
+                "Startet das Spiel nicht, zeigt der Launcher jetzt den Grund an, und die Schaltfläche „Erneut versuchen“ funktioniert wieder"
+            ]
+        },
+        {
             version: "0.6.3", date: "12. OKTOBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.3",
             text: "Deine PNs sind jetzt live zwischen Spiel und Launcher verbunden.",
             changes: [
@@ -476,6 +512,15 @@ const updateHistoryI18n = {
     ],
 
     pt: [
+        {
+            version: "0.6.4", date: "4 DE NOVEMBRO DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.4",
+            text: "Só um launcher de cada vez.",
+            changes: [
+                "Abrir o launcher de novo durante uma partida não abre mais um segundo launcher: o que já está aberto volta para a tela",
+                "Chega de ícones do launcher duplicados ao lado do relógio",
+                "Se o jogo não abrir, o launcher agora mostra o motivo, e o botão Tentar novamente volta a funcionar"
+            ]
+        },
         {
             version: "0.6.3", date: "12 DE OUTUBRO DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.3",
             text: "Suas MPs agora estão ligadas ao vivo entre o jogo e o launcher.",
@@ -590,6 +635,7 @@ const updateHistory = updateHistoryI18n.fr;
 const newsContent = {
 
     fr: [
+        { version: "0.6.4", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.4", text: "Un seul launcher à la fois, plus d'icônes en double.", date: "VERSION 0.6.4" },
         { version: "0.6.3", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.3", text: "MP reliés en direct entre le jeu et le launcher.", date: "VERSION 0.6.3" },
         { version: "0.6.2", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.2", text: "Mémoire du jeu réglable, mises à jour et actus qui arrivent toutes seules.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.1", text: "Nouveau chat en jeu et MP avec tes amis du launcher, directement en jeu.", date: "VERSION 0.6.1" },
@@ -604,6 +650,7 @@ const newsContent = {
     ],
 
     en: [
+        { version: "0.6.4", type: "PATCH NOTES", title: "Launcher Update 0.6.4", text: "Only one launcher at a time, no more duplicate icons.", date: "VERSION 0.6.4" },
         { version: "0.6.3", type: "PATCH NOTES", title: "Launcher Update 0.6.3", text: "DMs linked live between the game and the launcher.", date: "VERSION 0.6.3" },
         { version: "0.6.2", type: "PATCH NOTES", title: "Launcher Update 0.6.2", text: "Adjustable game memory, updates and news that arrive on their own.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "PATCH NOTES", title: "Launcher Update 0.6.1", text: "New in-game chat, and private messages with your launcher friends right in the game.", date: "VERSION 0.6.1" },
@@ -618,6 +665,7 @@ const newsContent = {
     ],
 
     es: [
+        { version: "0.6.4", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.4", text: "Un solo launcher a la vez, sin iconos duplicados.", date: "VERSIÓN 0.6.4" },
         { version: "0.6.3", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.3", text: "MP conectados en directo entre el juego y el launcher.", date: "VERSION 0.6.3" },
         { version: "0.6.2", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.2", text: "Memoria del juego ajustable, actualizaciones y noticias que llegan solas.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.1", text: "Nuevo chat en el juego y mensajes privados con tus amigos del launcher, directamente en el juego.", date: "VERSIÓN 0.6.1" },
@@ -632,6 +680,7 @@ const newsContent = {
     ],
 
     de: [
+        { version: "0.6.4", type: "PATCH-NOTIZEN", title: "Launcher Update 0.6.4", text: "Nur ein Launcher gleichzeitig, keine doppelten Symbole mehr.", date: "VERSION 0.6.4" },
         { version: "0.6.3", type: "PATCH-NOTIZEN", title: "Launcher Update 0.6.3", text: "PNs live zwischen Spiel und Launcher verbunden.", date: "VERSION 0.6.3" },
         { version: "0.6.2", type: "PATCH-NOTIZEN", title: "Launcher Update 0.6.2", text: "Einstellbarer Spielspeicher, Updates und News, die von selbst kommen.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "PATCHNOTES", title: "Launcher Update 0.6.1", text: "Neuer Chat im Spiel und private Nachrichten mit deinen Launcher-Freunden direkt im Spiel.", date: "VERSION 0.6.1" },
@@ -646,6 +695,7 @@ const newsContent = {
     ],
 
     pt: [
+        { version: "0.6.4", type: "NOTAS DA ATUALIZAÇÃO", title: "Launcher Update 0.6.4", text: "Só um launcher de cada vez, sem ícones duplicados.", date: "VERSÃO 0.6.4" },
         { version: "0.6.3", type: "NOTAS DA ATUALIZAÇÃO", title: "Launcher Update 0.6.3", text: "MPs ligadas ao vivo entre o jogo e o launcher.", date: "VERSION 0.6.3" },
         { version: "0.6.2", type: "NOTAS DA ATUALIZAÇÃO", title: "Launcher Update 0.6.2", text: "Memória do jogo ajustável, atualizações e novidades que chegam sozinhas.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.6.1", text: "Novo chat no jogo e mensagens privadas com seus amigos do launcher, direto no jogo.", date: "VERSÃO 0.6.1" },

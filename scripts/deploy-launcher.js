@@ -12,6 +12,7 @@ const VPS_HOST = "146.59.197.230";
 const VPS_USER = "ubuntu";
 const VPS_ROOT = "/var/www/origins/launcher";
 const UPDATE_URL = `http://${VPS_HOST}/launcher/latest.yml`;
+const LIEN_FIXE = "Origins-Launcher-Setup.exe";
 
 function run(command, args, options = {}) {
     const isWindows = process.platform === "win32";
@@ -317,6 +318,10 @@ async function main() {
             "set -e",
             `rm -rf '${remoteBackup}'`,
             `if [ -d '${VPS_ROOT}' ]; then mv '${VPS_ROOT}' '${remoteBackup}'; fi`,
+            // Lien de téléchargement fixe pour les joueurs : il pointe
+            // toujours sur la dernière version (le nom de l'installeur,
+            // lui, change à chaque version et l'ancien disparaît).
+            `cp '${remoteStage}/${releaseFiles[1]}' '${remoteStage}/${LIEN_FIXE}'`,
             `mv '${remoteStage}' '${VPS_ROOT}'`,
             `find '${VPS_ROOT}' -type d -exec chmod 755 {} \\;`,
             `find '${VPS_ROOT}' -type f -exec chmod 644 {} \\;`,
@@ -327,6 +332,7 @@ async function main() {
     console.log("\nPublication Origins Launcher terminée avec succès.");
     console.log(`Version publiée : ${version}`);
     console.log(`Flux public     : ${UPDATE_URL}`);
+    console.log(`Lien joueurs    : http://${VPS_HOST}/launcher/${LIEN_FIXE}`);
 }
 
 main().catch((error) => {

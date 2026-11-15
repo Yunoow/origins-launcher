@@ -5767,7 +5767,28 @@ if (process.platform === "win32") {
     app.setAppUserModelId("com.origins.launcher");
 }
 
-app.whenReady().then(
+/*
+ * Un seul launcher à la fois. Sans ce verrou, rouvrir le launcher pendant
+ * qu'il est caché dans le tray (il s'y cache au lancement du jeu) en
+ * démarrait un deuxième : deux icônes dans le tray, deux launchers.
+ * Le deuxième se ferme tout de suite et réaffiche le premier.
+ */
+const launcherSeul = app.requestSingleInstanceLock();
+
+if (!launcherSeul) {
+    app.quit();
+} else {
+    app.on(
+        "second-instance",
+        () => {
+            if (app.isReady()) {
+                showMainWindow();
+            }
+        }
+    );
+}
+
+if (launcherSeul) app.whenReady().then(
 
     () => {
 
