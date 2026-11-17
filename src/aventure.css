@@ -1839,3 +1839,68 @@ body.av-design .site-login-status { margin: 0 0 10px; font-size: 12px; color: va
 body.av-design .av-profile-discord { border: 0; background: transparent; padding: 0; margin-top: 2px; color: var(--av-accent); font-family: Nunito, sans-serif; font-size: 11.5px; font-weight: 800; cursor: pointer; }
 body.av-design .av-profile-discord:hover { text-decoration: underline; }
 body.av-design .av-profile-discord[hidden] { display: none; }
+
+/* ---------------------------------------------------------------------
+   TUTORIEL : même DA que « Quoi de neuf ? » (verre du thème, Baloo, accent, boutons blancs)
+   Suit le thème choisi (Or et ébène, Argent nuit…) par les variables --av-*.
+   --------------------------------------------------------------------- */
+body.av-design .origins-tutorial-spotlight {
+    border-radius: 16px !important;
+    box-shadow:
+        0 0 0 2px var(--av-accent),
+        0 0 26px 4px color-mix(in srgb, var(--av-accent) 45%, transparent),
+        0 0 0 9999px color-mix(in srgb, var(--av-barre) 80%, transparent) !important;
+}
+body.av-design .origins-tutorial.centered .origins-tutorial-spotlight {
+    box-shadow: 0 0 0 9999px color-mix(in srgb, var(--av-barre) 80%, transparent) !important;
+}
+body.av-design .origins-tutorial-bubble {
+    width: min(360px, calc(100vw - 32px)) !important;
+    padding: 20px 22px 18px !important;
+    border-radius: 18px !important;
+    border: 1px solid color-mix(in srgb, var(--av-accent) 45%, transparent) !important;
+    background: linear-gradient(160deg, var(--av-verre1), var(--av-verre2)) !important;
+    backdrop-filter: blur(18px);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55) !important;
+    color: var(--av-texte) !important;
+}
+body.av-design .origins-tutorial.centered .origins-tutorial-bubble { width: min(420px, calc(100vw - 32px)) !important; }
+/* Étapes d'accueil et de fin (au centre) : l'œil d'Origins au-dessus du titre */
+body.av-design .origins-tutorial.centered .origins-tutorial-bubble::before {
+    content: ""; display: block; width: 64px; height: 64px; margin: 0 auto 10px;
+    background: url("assets/logos/origins-oeil-regard.svg") center / contain no-repeat;
+    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.45));
+}
+body.av-design .origins-tutorial-step {
+    color: var(--av-accent) !important;
+    font-family: var(--av-texte-police) !important; font-size: 11.5px !important; font-weight: 800 !important;
+    letter-spacing: 0.2em !important;
+}
+body.av-design .origins-tutorial-bubble h2 {
+    margin: 6px 0 6px !important;
+    font-family: var(--av-titre) !important; font-weight: 800 !important; font-size: 22px !important; line-height: 1.15 !important;
+    color: #fff !important;
+}
+body.av-design .origins-tutorial-bubble p {
+    margin: 0 0 16px !important;
+    color: var(--av-texte) !important; font-size: 13.5px !important; line-height: 1.5 !important;
+}
+body.av-design .origins-tutorial-actions { gap: 8px !important; }
+body.av-design .origins-tutorial-skip {
+    color: var(--av-doux) !important;
+    font-family: var(--av-texte-police) !important; font-size: 12px !important; font-weight: 700 !important;
+}
+body.av-design .origins-tutorial-skip:hover { color: #fff !important; }
+body.av-design .origins-tutorial-actions .origins-tutorial-button {
+    height: 36px !important; padding: 0 16px !important;
+    border-radius: 10px !important; border: 0 !important;
+    background: #fff !important; color: var(--av-jouer) !important;
+    font-family: var(--av-texte-police) !important; font-weight: 800 !important; font-size: 12px !important;
+    letter-spacing: 0.06em !important; text-transform: uppercase;
+    box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25) !important;
+}
+body.av-design .origins-tutorial-actions .origins-tutorial-button:hover { filter: brightness(0.95); }
+body.av-design .origins-tutorial-actions .origins-tutorial-button.secondary {
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    background: transparent !important; color: #fff !important; box-shadow: none !important;
+}
