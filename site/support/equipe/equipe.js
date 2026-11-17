@@ -69,7 +69,7 @@
   }
 
   async function ouvrir(id, silencieux) {
-    const r = await Site.appel(`/site/tickets/${id}`).catch(() => ({ ok: false }));
+    const r = await Site.appel(`/site/tickets/${id}?vue=staff`).catch(() => ({ ok: false }));
     if (!r.ok) return;
     const avant = detail && detail.ticket.id === id ? detail.messages.length : -1;
     detail = r.json; courant = id;
@@ -143,7 +143,7 @@
     const texte = $("reponse").value.trim();
     if (!texte && !captures.liste().length) return;
     $("envoyer-reponse").disabled = true;
-    const r = await Tickets.envoyer(`/site/tickets/${courant}/messages`, { texte, interne: mode === "note" ? "1" : undefined }, captures.liste()).catch(() => ({ ok: false }));
+    const r = await Tickets.envoyer(`/site/tickets/${courant}/messages`, { texte, commeStaff: "1", interne: mode === "note" ? "1" : undefined }, captures.liste()).catch(() => ({ ok: false }));
     $("envoyer-reponse").disabled = false;
     if (!r.ok) { const p = $("erreur-reponse"); p.textContent = r.json && r.json.error === "TOO_MANY_MESSAGES" ? "Trop de messages d'un coup : attends un peu." : "L'envoi n'a pas marché."; p.hidden = false; return; }
     $("reponse").value = ""; captures.vider();
