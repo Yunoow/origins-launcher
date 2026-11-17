@@ -954,6 +954,7 @@ body.av-design .social-panel > .profile {
 }
 body.av-design .social-panel > .profile .avatar {
     width: 34px !important; height: 34px !important; min-width: 34px !important;
+    flex: 0 0 34px !important; /* sinon l'ancien flex 42px l'étire en ovale */
     border-radius: 50% !important;
     font-family: var(--av-titre) !important; font-weight: 800 !important; font-size: 15px !important;
     background-color: var(--av-reglages) !important;
