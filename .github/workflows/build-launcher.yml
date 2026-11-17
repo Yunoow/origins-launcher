@@ -3,6 +3,12 @@ name: Build Origins Launcher
 on:
   workflow_dispatch:
 
+# Les fichiers fabriqués vont dans une Release GitHub « build-<version> » (pré-version), un zip par système :
+# les Releases ne comptent pas dans le quota des artefacts (plein le 17/11), et le zip garde les noms exacts
+# des fichiers (latest-linux.yml en dépend). scripts/deploy-launcher.js les récupère là.
+permissions:
+  contents: write
+
 # Les artefacts portent la version du launcher (package.json) dans leur nom,
 # par exemple Origins-Launcher-Linux-0.6.5 : scripts/deploy-launcher.js les retrouve
 # ainsi pour mettre en ligne les fichiers Mac et Linux de la même version que Windows.
@@ -33,13 +39,16 @@ jobs:
       - name: Build Windows
         run: npm run build:win
 
-      - name: Upload Windows installer
-        uses: actions/upload-artifact@v4
-        with:
-          name: Origins-Launcher-Windows-${{ steps.version.outputs.value }}
-          path: |
-            release/*.exe
-          if-no-files-found: error
+      - name: Release : installeur Windows
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.value }}
+        run: |
+          ZIP="$PWD/Origins-Launcher-Windows-$VERSION.zip"
+          (cd release && 7z a -tzip -bd "$ZIP" *.exe)
+          gh release view "build-$VERSION" > /dev/null 2>&1 || gh release create "build-$VERSION" --prerelease --target "$GITHUB_SHA" --title "Fabrication $VERSION" --notes "Fichiers fabriqués par « Build Origins Launcher », récupérés par scripts/deploy-launcher.js." || true
+          gh release upload "build-$VERSION" "$ZIP" --clobber
 
   build-linux:
     name: Linux
@@ -67,16 +76,16 @@ jobs:
         run: npm run build:linux
 
       # latest-linux.yml et le .blockmap permettent à l'AppImage de se mettre à jour toute seule.
-      - name: Upload Linux packages
-        uses: actions/upload-artifact@v4
-        with:
-          name: Origins-Launcher-Linux-${{ steps.version.outputs.value }}
-          path: |
-            release/*.AppImage
-            release/*.deb
-            release/*.blockmap
-            release/latest-linux.yml
-          if-no-files-found: error
+      - name: Release : paquets Linux
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.value }}
+        run: |
+          ZIP="$PWD/Origins-Launcher-Linux-$VERSION.zip"
+          (cd release && zip -q "$ZIP" *.AppImage *.deb *.blockmap latest-linux.yml)
+          gh release view "build-$VERSION" > /dev/null 2>&1 || gh release create "build-$VERSION" --prerelease --target "$GITHUB_SHA" --title "Fabrication $VERSION" --notes "Fichiers fabriqués par « Build Origins Launcher », récupérés par scripts/deploy-launcher.js." || true
+          gh release upload "build-$VERSION" "$ZIP" --clobber
 
   build-macos:
     name: macOS
@@ -106,11 +115,13 @@ jobs:
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
 
       # Sans signature Apple, le Mac ne se met pas à jour tout seul : seulement les .dmg (et leurs .blockmap).
-      - name: Upload macOS packages
-        uses: actions/upload-artifact@v4
-        with:
-          name: Origins-Launcher-macOS-${{ steps.version.outputs.value }}
-          path: |
-            release/*.dmg
-            release/*.blockmap
-          if-no-files-found: error
+      - name: Release : paquets macOS
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.value }}
+        run: |
+          ZIP="$PWD/Origins-Launcher-macOS-$VERSION.zip"
+          (cd release && zip -q "$ZIP" *.dmg *.blockmap)
+          gh release view "build-$VERSION" > /dev/null 2>&1 || gh release create "build-$VERSION" --prerelease --target "$GITHUB_SHA" --title "Fabrication $VERSION" --notes "Fichiers fabriqués par « Build Origins Launcher », récupérés par scripts/deploy-launcher.js." || true
+          gh release upload "build-$VERSION" "$ZIP" --clobber

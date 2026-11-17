@@ -274,6 +274,22 @@ function capture(command, args) {
  * Rend { files: [chemins absolus à envoyer], fixed: [{ source, fixed }] }.
  * Ne lève jamais d'erreur : en cas de souci, prévient et rend ce qui a pu être récupéré.
  */
+/** Le zip « <base>-<version>.zip » de la Release « build-<version> », décompressé dans dir/base. Rend true si c'est fait. */
+function downloadFromRelease(base, version, dir) {
+    const zip = `${base}-${version}.zip`;
+    try {
+        capture("gh", ["release", "download", `build-${version}`, "-R", GITHUB_REPO, "-p", zip, "-D", dir, "--clobber"]);
+        const cible = path.join(dir, base);
+        fs.mkdirSync(cible, { recursive: true });
+        capture("tar", ["-xf", path.join(dir, zip), "-C", cible]);
+        fs.rmSync(path.join(dir, zip), { force: true });
+        console.log(`Récupéré : ${zip} (Release build-${version}).`);
+        return true;
+    } catch (_) {
+        return false;
+    }
+}
+
 function fetchDesktopBuilds(version) {
     const empty = { files: [], fixed: [] };
     const dir = path.join(RELEASE_ROOT, `mac-linux-${version}`);
@@ -283,15 +299,16 @@ function fetchDesktopBuilds(version) {
         const json = capture("gh", ["api", `repos/${GITHUB_REPO}/actions/artifacts?per_page=100`]);
         artifacts = JSON.parse(json).artifacts || [];
     } catch (error) {
-        console.warn(`ATTENTION : impossible de lister les builds GitHub (${error.message}).`);
-        console.warn("Mac et Linux ne seront pas mis en ligne : la page affichera « Bientôt ».");
-        return empty;
+        console.warn(`ATTENTION : impossible de lister les artefacts GitHub (${error.message}) ; on essaie la Release.`);
+        artifacts = [];
     }
 
     fs.rmSync(dir, { recursive: true, force: true });
     fs.mkdirSync(dir, { recursive: true });
 
     for (const base of DESKTOP_ARTIFACTS) {
+        // D'abord la Release « build-<version> » (un zip par système) ; sinon, les anciens artefacts.
+        if (downloadFromRelease(base, version, dir)) continue;
         const name = `${base}-${version}`;
         const artifact = artifacts
             .filter((item) => item.name === name && !item.expired)
