@@ -1821,3 +1821,21 @@ body.av-design .av-problem-status:empty { display: none; }
 /* Discord d'Origins mis en avant dans la barre du haut : couleur d'accent du thème */
 body.av-design .av-icon-btn.av-discord-btn { color: var(--av-accent); }
 body.av-design .av-icon-btn.av-discord-btn:hover { color: #fff; filter: none; background: rgba(255, 255, 255, 0.06); }
+
+/* Site Origins : demande de connexion du site dans la cloche (maquette Aventure-Accueil, onglet Demandes) */
+body.av-design .site-login-request {
+    display: flex; flex-direction: column; gap: 8px; margin: 0 0 10px; padding: 12px; border-radius: 12px;
+    background: color-mix(in srgb, var(--av-accent) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--av-accent) 35%, transparent);
+}
+body.av-design .site-login-request strong { display: flex; align-items: center; gap: 7px; font-weight: 800; font-size: 13px; color: var(--av-texte, #f2f4f8); }
+body.av-design .site-login-request .site-login-text { font-size: 11.5px; line-height: 1.45; color: var(--av-doux); }
+body.av-design .site-login-request .site-login-code { font-family: "Baloo 2", sans-serif; font-weight: 800; font-size: 20px; letter-spacing: 0.14em; color: var(--av-accent); text-align: center; }
+body.av-design .site-login-request .friend-request-actions { display: flex; gap: 8px; }
+body.av-design .site-login-request .friend-request-actions button { flex: 1; }
+body.av-design .site-login-status { margin: 0 0 10px; font-size: 12px; color: var(--av-doux); text-align: center; }
+
+/* Site Origins : « Discord : facultatif · Lier », sous « Connecté avec Microsoft » (maquette Aventure-Profil) */
+body.av-design .av-profile-discord { border: 0; background: transparent; padding: 0; margin-top: 2px; color: var(--av-accent); font-family: Nunito, sans-serif; font-size: 11.5px; font-weight: 800; cursor: pointer; }
+body.av-design .av-profile-discord:hover { text-decoration: underline; }
+body.av-design .av-profile-discord[hidden] { display: none; }

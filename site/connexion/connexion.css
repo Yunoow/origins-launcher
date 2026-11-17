@@ -1,0 +1,64 @@
+/* Pages de connexion (maquette « Site Origins · Connexion », design/site/Site-Connexion.dc.html). */
+.scene {
+  min-height: 100vh; padding: 120px var(--gouttiere) 60px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;
+  background: linear-gradient(180deg, rgba(15, 11, 8, 0.15), rgba(15, 11, 8, 0.35) 70%, var(--ebene)), url("/telecharger/fond.jpg") center 30% / cover no-repeat;
+}
+.carte-connexion {
+  width: min(520px, 100%); padding: 34px 38px 30px; border-radius: 22px; text-align: center;
+  background: var(--verre); border: 1px solid rgba(201, 161, 74, 0.45);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5); backdrop-filter: blur(6px);
+}
+.carte-connexion h1 { margin: 10px 0 0; font: 800 34px/1.1 var(--titre); color: #fff; }
+.carte-connexion .texte { margin: 14px auto 0; max-width: 440px; font-size: 15px; color: var(--texte); }
+.carte-connexion .bas { margin: 18px 0 0; font-size: 14px; color: var(--doux); }
+.carte-connexion .bas.discret { font-size: 13px; }
+.message { margin: 16px 0 0; padding: 10px 14px; border-radius: 12px; background: rgba(226, 87, 76, 0.14); border: 1px solid rgba(226, 87, 76, 0.4); color: #ffd9d4; font-size: 14px; }
+
+form { margin-top: 20px; text-align: left; }
+.etiquette-champ { display: block; margin-bottom: 8px; text-align: center; font: 800 11.5px var(--police); letter-spacing: 0.16em; color: var(--doux); }
+.champ {
+  width: 100%; height: 48px; padding: 0 14px; border-radius: 12px; border: 1.5px solid rgba(255, 255, 255, 0.22);
+  background: rgba(15, 11, 8, 0.45); color: #fff; font: 700 16px var(--police);
+}
+.champ:focus { outline: none; border-color: var(--or); box-shadow: 0 0 0 3px rgba(201, 161, 74, 0.25); }
+.bouton.large { width: 100%; margin-top: 16px; height: 54px; }
+.bouton:disabled { opacity: 0.6; cursor: wait; }
+
+.ou { display: flex; align-items: center; gap: 14px; margin: 20px 0 16px; font: 800 12px var(--police); letter-spacing: 0.18em; color: var(--doux); }
+.ou::before, .ou::after { content: ""; flex: 1; height: 1px; background: rgba(255, 255, 255, 0.14); }
+.astuce { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-radius: 14px; background: rgba(15, 11, 8, 0.45); text-align: left; }
+.astuce img { flex: none; }
+.astuce p { margin: 0; font-size: 13.5px; color: var(--texte); }
+.astuce strong { color: #fff; }
+
+/* Attente : le code à comparer */
+.code {
+  display: inline-block; margin: 22px 0 6px; padding: 14px 26px; border-radius: 16px;
+  background: rgba(15, 11, 8, 0.55); border: 1.5px dashed rgba(201, 161, 74, 0.6);
+  font: 800 38px/1 var(--mono); letter-spacing: 0.12em; color: #fff;
+}
+.decompte { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 10px 0 18px; font-size: 14px; color: var(--doux); }
+.point { width: 8px; height: 8px; border-radius: 50%; background: var(--or); animation: battre 1.2s ease-in-out infinite; }
+@keyframes battre { 50% { opacity: 0.3; } }
+
+/* Connecté */
+.avatar-grand { display: flex; justify-content: center; }
+.avatar.avatar-xl { width: 88px; height: 88px; border: 3px solid var(--or); font-size: 36px; }
+.identifiant-origins { margin: 16px 0 0; display: inline-flex; gap: 10px; align-items: center; padding: 8px 14px; border-radius: 12px; background: rgba(15, 11, 8, 0.5); font-weight: 800; color: #fff; }
+.identifiant-origins code { font: 700 14px var(--mono); letter-spacing: 0.08em; color: var(--or-clair); }
+.carte-connexion .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+
+/* Équipe */
+.bouton-discord { background: #5865f2; color: #fff; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 22px; }
+.bouton-discord:hover { filter: brightness(1.08); }
+.lien-equipe { display: inline-flex; align-items: center; gap: 8px; color: #fff; font: 800 14px var(--titre); text-decoration: none; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6); }
+.lien-equipe .icone { color: var(--or); }
+.lien-equipe:hover { color: var(--or-clair); }
+
+@media (max-width: 860px) {
+  .scene { padding: 90px 16px 40px; justify-content: flex-start; }
+  .carte-connexion { padding: 26px 20px 22px; }
+  .carte-connexion h1 { font-size: 28px; }
+  .code { font-size: 30px; padding: 12px 18px; }
+}

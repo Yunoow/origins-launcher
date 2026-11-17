@@ -2653,13 +2653,14 @@ function renderOriginsProfile(profile) {
     renderAccountOriginsId(profile);
 
     if (profile) {
-
         refreshFriendsSocial();
         connectOriginsRealtime();
-
+        refreshSiteLoginRequests();
     } else {
         disconnectOriginsRealtime();
+        siteLoginRequests = [];
     }
+    renderSiteProfileEntries(profile);
 
 }
 
@@ -3974,15 +3975,105 @@ function updateFriendsOnlineBadge() {
     friendsQuickAccess?.classList.toggle("has-online-friends", onlineCount > 0);
 }
 
+/* ==========================================
+   SITE ORIGINS : demandes de connexion (cloche), « Ouvrir sur le site », Discord facultatif
+   (design/site/CONNEXION.md ; maquettes Aventure-Accueil et Aventure-Profil)
+========================================== */
+
+let lastFriendRequests = [];
+let siteLoginRequests = [];          // [{ id, code, navigateur, expire }]
+let siteLoginStatus = null;          // message après Accepter / Refuser
+const siteLoginTimers = new Map();
+
+function removeSiteLoginRequest(id) {
+    const key = String(id);
+    clearTimeout(siteLoginTimers.get(key));
+    siteLoginTimers.delete(key);
+    const before = siteLoginRequests.length;
+    siteLoginRequests = siteLoginRequests.filter((d) => String(d.id) !== key);
+    if (siteLoginRequests.length !== before) renderFriendRequests(lastFriendRequests);
+}
+
+function addSiteLoginRequest(demande) {
+    if (!demande?.id || !demande.code) return;
+    const left = Date.parse(demande.expire) - Date.now();
+    if (!(left > 0)) return;
+    siteLoginRequests = [demande, ...siteLoginRequests.filter((d) => String(d.id) !== String(demande.id))];
+    clearTimeout(siteLoginTimers.get(String(demande.id)));
+    // Retirée de la cloche à son expiration (2 minutes), même sans nouvelle du serveur.
+    siteLoginTimers.set(String(demande.id), setTimeout(() => removeSiteLoginRequest(demande.id), left + 500));
+    siteLoginStatus = null;
+    renderFriendRequests(lastFriendRequests);
+}
+
+async function refreshSiteLoginRequests() {
+    const token = localStorage.getItem("origins-token");
+    if (!token || !window.origins?.site) return;
+    try {
+        const data = await window.origins.site.demandes(token);
+        siteLoginRequests = [];
+        (data?.demandes || []).forEach(addSiteLoginRequest);
+        renderFriendRequests(lastFriendRequests);
+    } catch (_) {
+        // API sans les routes du site (ancienne version) : rien à afficher.
+    }
+}
+
+async function answerSiteLoginRequest(demande, accept) {
+    const token = localStorage.getItem("origins-token");
+    if (!token) return;
+    try {
+        await (accept ? window.origins.site.accepter(token, demande.id) : window.origins.site.refuser(token, demande.id));
+        siteLoginStatus = t(accept ? "siteLoginAccepted" : "siteLoginRefused");
+    } catch (_) {
+        siteLoginStatus = t("siteLoginRefused");
+    }
+    removeSiteLoginRequest(demande.id);
+    renderFriendRequests(lastFriendRequests);
+}
+
+function siteLoginRequestRow(demande) {
+    const row = document.createElement("div");
+    row.className = "site-login-request";
+    const title = document.createElement("strong");
+    title.innerHTML = `<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 3.9 5.7 3.9 9s-1.3 6.3-3.9 9c-2.6-2.7-3.9-5.7-3.9-9S9.4 5.7 12 3z"/></svg>`;
+    title.append(t("siteLoginTitle"));
+    const body = document.createElement("span");
+    body.className = "site-login-text";
+    body.textContent = t("siteLoginBody", { browser: demande.navigateur || "?" });
+    const code = document.createElement("span");
+    code.className = "site-login-code";
+    code.textContent = demande.code;
+    const actions = document.createElement("div");
+    actions.className = "friend-request-actions";
+    actions.append(
+        socialActionButton(t("accept"), () => answerSiteLoginRequest(demande, true)),
+        socialActionButton(t("refuse"), () => answerSiteLoginRequest(demande, false), true)
+    );
+    row.append(title, body, code, actions);
+    return row;
+}
+
 function renderFriendRequests(requests) {
     if (!notificationsContent) return;
+    lastFriendRequests = requests || [];
+    requests = lastFriendRequests;
+    const total = requests.length + siteLoginRequests.length;
     if (notificationsBadge) {
-        notificationsBadge.hidden = requests.length === 0;
-        notificationsBadge.textContent = String(requests.length);
+        notificationsBadge.hidden = total === 0;
+        notificationsBadge.textContent = String(total);
     }
     notificationsContent.innerHTML = "";
+    siteLoginRequests.forEach((demande) => notificationsContent.appendChild(siteLoginRequestRow(demande)));
+    if (siteLoginStatus) {
+        const status = document.createElement("p");
+        status.className = "site-login-status";
+        status.setAttribute("role", "status");
+        status.textContent = siteLoginStatus;
+        notificationsContent.appendChild(status);
+    }
 
-    if (!requests.length) {
+    if (!total) {
         const empty = document.createElement("div");
         empty.className = "social-empty-state";
         empty.innerHTML = `<strong>${t("noNotifications")}</strong><span>${t("noNotificationsText")}</span>`;
@@ -4217,6 +4308,17 @@ async function handleOriginsRealtimeEvent(event) {
 
     if (type === "friend:request-removed") {
         await refreshFriendsSocial();
+        return;
+    }
+
+    if (type === "site:demande-connexion") {
+        addSiteLoginRequest(payload);
+        showSocialNotification(t("notifSiteLoginTitle"), t("notifSiteLoginBody", { code: payload?.code || "" }));
+        return;
+    }
+
+    if (type === "site:demande-fermee") {
+        removeSiteLoginRequest(payload?.id);
     }
 }
 
@@ -5703,6 +5805,54 @@ profileNameInput?.addEventListener("keydown", (event) => {
     if (event.key === "Escape") setProfileNameEditing(false);
 });
 accountButton?.addEventListener("click", () => setProfileNameEditing(false));
+
+/* « Ouvrir sur le site » et « Discord : facultatif · Lier » : un lien à usage unique (2 min), ouvert dans le navigateur. */
+let siteDiscordLinked = false;
+
+async function renderSiteProfileEntries(profile) {
+    const openSite = document.getElementById("profileOpenSiteButton");
+    const discordLine = document.getElementById("profileDiscordLine");
+    const discordText = document.getElementById("profileDiscordText");
+    const token = localStorage.getItem("origins-token");
+    const available = Boolean(profile && token && window.origins?.site);
+    if (openSite) openSite.hidden = !available;
+    if (!discordLine) return;
+    if (!available) { discordLine.hidden = true; return; }
+    try {
+        const data = await window.origins.site.discord(token);
+        siteDiscordLinked = Boolean(data?.lie);
+        discordLine.hidden = false;
+        if (discordText) {
+            discordText.dataset.i18n = siteDiscordLinked ? "discordLinked" : "discordOptionalLink";
+            discordText.textContent = t(discordText.dataset.i18n);
+        }
+    } catch (_) {
+        discordLine.hidden = true;   // API sans les routes du site : pas de ligne Discord
+    }
+}
+
+async function openOriginsSite(suite) {
+    const token = localStorage.getItem("origins-token");
+    if (!token || !window.origins?.site) return;
+    try {
+        const data = await window.origins.site.lien(token, suite);
+        const result = await window.origins.site.ouvrir(data?.adresse);
+        if (!result?.success) throw new Error(result?.error || "SITE_URL_REFUSED");
+    } catch (error) {
+        console.error("Open on the website failed:", error);
+        showSocialNotification(t("siteLoginTitle"), t("siteOpenError"));
+    }
+}
+
+document.getElementById("profileOpenSiteButton")?.addEventListener("click", () => {
+    closeAccount();
+    openOriginsSite("/profil/");
+});
+document.getElementById("profileDiscordLine")?.addEventListener("click", () => {
+    closeAccount();
+    // Lié : Mon profil (Délier y est). Pas lié : le navigateur passe directement à Discord.
+    openOriginsSite(siteDiscordLinked ? "/profil/#discord" : "/api/site/discord/lier");
+});
 
 document.getElementById("profileContactsButton")?.addEventListener("click", () => {
     closeAccount();

@@ -146,6 +146,31 @@ a.carte:hover, .carte.cliquable:hover { transform: translateY(-4px); border-colo
 .langue li button[aria-selected="true"] { background: rgba(201, 161, 74, 0.18); }
 .langue li small { font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; color: var(--doux); }
 
+/* Compte (connexion par le launcher) : Board pour l'équipe, puis l'avatar et son menu */
+.zone-compte { display: flex; align-items: center; gap: 10px; }
+.zone-compte:empty { display: none; }
+.avatar { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex: none; display: inline-flex; align-items: center; justify-content: center; }
+.avatar-lettre { background: linear-gradient(160deg, var(--or), var(--or-fonce)); color: var(--sur-or); font: 800 14px var(--titre); }
+.bouton-board {
+  height: 40px; padding: 0 14px; border-radius: 12px; background: var(--or); color: var(--sur-or);
+  display: inline-flex; align-items: center; gap: 8px; font: 800 14.5px var(--titre); text-decoration: none;
+}
+.bouton-board:hover { filter: brightness(1.08); }
+.compte { position: relative; }
+.bouton-compte { padding: 0 10px 0 6px; gap: 8px; }
+.bouton-compte .nom-compte { max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14.5px; }
+.menu-compte {
+  position: absolute; right: 0; top: 48px; z-index: 30; width: 230px; margin: 0; padding: 6px; list-style: none;
+  border-radius: 14px; background: var(--panneau); border: 1px solid rgba(255, 255, 255, 0.12); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+}
+.menu-compte a, .menu-compte button {
+  width: 100%; height: 40px; padding: 0 12px; border: 0; border-radius: 9px; background: transparent; color: #fff;
+  display: flex; align-items: center; gap: 10px; font: 700 14.5px var(--police); text-decoration: none; cursor: pointer; text-align: left;
+}
+.menu-compte a:hover, .menu-compte button:hover { background: rgba(255, 255, 255, 0.07); }
+.menu-compte li:last-child { margin-top: 4px; padding-top: 4px; border-top: 1px solid var(--filet); }
+.menu-compte button { color: var(--or-clair); }
+
 /* Bouton du menu sur téléphone */
 .bouton-menu { display: none; }
 
@@ -195,7 +220,9 @@ a.carte:hover, .carte.cliquable:hover { transform: translateY(-4px); border-colo
   .site-menu a { padding: 12px 4px; font-size: 16px; border-bottom: 1px solid var(--filet); }
   .site-menu a[aria-current="page"]::after { left: 4px; margin-left: 0; bottom: 8px; }
   .site-actions { gap: 6px; }
-  .bouton-connexion span { display: none; }
+  .bouton-connexion span, .bouton-board span, .bouton-compte .nom-compte, .bouton-compte > .icone { display: none; }
+  .bouton-board { width: 40px; padding: 0; justify-content: center; }
+  .bouton-compte { padding: 0; width: 40px; }
   .bouton-connexion { width: 40px; padding: 0; justify-content: center; }
   .section { padding: 48px 0; }
   .grille-actus { grid-template-columns: 1fr; }

@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Se connecter · Origins</title>
+<meta name="description" content="Connecte-toi au site Origins avec ton profil du launcher.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0f0b08">
+<link rel="icon" href="/commun/images/oeil.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="/commun/site.css">
+<link rel="stylesheet" href="/connexion/connexion.css">
+</head>
+<body data-page="connexion" data-titre="titrePage">
+<div id="site-tete"></div>
+
+<main class="scene">
+  <!-- 1. Choix : pseudo ou Origins ID, envoyé au launcher -->
+  <section class="carte-connexion" id="etat-choix" aria-labelledby="titre-choix" hidden>
+    <div class="kicker" data-t="kicker">TON PROFIL ORIGINS</div>
+    <h1 id="titre-choix" data-t="titreChoix">Connecte-toi</h1>
+    <p class="texte" data-t="texteChoix">Avec le profil créé dans le launcher : pas de mot de passe, c'est ton launcher qui confirme.</p>
+    <p class="message" id="message" role="alert" hidden></p>
+    <form id="formulaire" novalidate>
+      <label class="etiquette-champ" for="identifiant" data-t="champ">PSEUDO MINECRAFT OU ORIGINS ID</label>
+      <input class="champ" id="identifiant" name="identifiant" autocomplete="username" autocapitalize="off" spellcheck="false" maxlength="32" required>
+      <button class="bouton bouton-blanc large" type="submit" id="envoyer"><svg class="icone" aria-hidden="true"><use href="#i-envoyer"/></svg><span data-t="envoyer">ENVOYER AU LAUNCHER</span></button>
+    </form>
+    <div class="ou"><span data-t="ou">OU</span></div>
+    <div class="astuce">
+      <img src="/commun/images/oeil-regard.svg" alt="" width="34" height="34">
+      <p><span data-t="astuce1">Déjà dans le launcher ? Clique sur ton avatar, puis</span> <strong data-t="astuce2">« Ouvrir sur le site »</strong><span data-t="astuce3"> : tu arrives ici déjà connecté.</span></p>
+    </div>
+    <p class="bas"><span data-t="pasDeProfil">Pas encore de profil ?</span> <a class="lien-or" href="/telecharger/" data-t="telechargeLauncher">Télécharge le launcher</a></p>
+  </section>
+
+  <!-- 2. Demande envoyée : le code à comparer dans le launcher -->
+  <section class="carte-connexion" id="etat-attente" aria-labelledby="titre-attente" aria-live="polite" hidden>
+    <div class="kicker" data-t="kicker">TON PROFIL ORIGINS</div>
+    <h1 id="titre-attente" data-t="titreAttente">Regarde ton launcher</h1>
+    <p class="texte"><span data-t="texteAttente1">On a envoyé une demande au launcher de</span> <strong id="attente-qui"></strong><span data-t="texteAttente2">. Vérifie que le code est le même, puis accepte.</span></p>
+    <div class="code" id="code" aria-label=""></div>
+    <p class="decompte"><span class="point" aria-hidden="true"></span><span id="decompte"></span></p>
+    <button class="bouton bouton-contour" type="button" id="annuler" data-t="annuler">Annuler</button>
+    <p class="bas discret" data-t="aideAttente">Le launcher doit être ouvert et connecté. La demande est dans la cloche, onglet Demandes.</p>
+  </section>
+
+  <!-- 3. Connecté -->
+  <section class="carte-connexion" id="etat-connecte" aria-labelledby="titre-connecte" hidden>
+    <div class="avatar-grand" id="connecte-avatar"></div>
+    <h1 id="titre-connecte"></h1>
+    <p class="texte" data-t="texteConnecte">Tu es connecté avec ton profil Origins, le même que dans le launcher.</p>
+    <p class="identifiant-origins"><span data-t="originsId">Origins ID</span> <code id="connecte-id"></code></p>
+    <div class="actions">
+      <a class="bouton bouton-blanc" id="connecte-suite" href="/profil/" data-t="monProfilMaj">MON PROFIL</a>
+      <a class="bouton bouton-contour" href="/" data-t="accueil">Accueil</a>
+    </div>
+  </section>
+
+  <!-- 4. Équipe : le Board, avec Discord -->
+  <section class="carte-connexion" id="etat-equipe" aria-labelledby="titre-equipe" hidden>
+    <div class="kicker" data-t="kickerEquipe">ÉQUIPE ORIGINS</div>
+    <h1 id="titre-equipe" data-t="titreEquipe">Board de l'équipe</h1>
+    <p class="texte" data-t="texteEquipe">Le Board est réservé à l'équipe : il vérifie ton grade sur le Discord d'Origins, comme la Console aujourd'hui.</p>
+    <a class="bouton bouton-discord large" id="board-discord" href="#"><svg class="icone" aria-hidden="true"><use href="#i-bulle"/></svg><span data-t="discordBouton">SE CONNECTER AVEC DISCORD</span></a>
+    <p class="bas discret" data-t="secours">Discord en panne ? Le lien de secours se demande sur le VPS.</p>
+    <p class="bas"><a class="lien-or" href="#" id="retour-choix" data-t="retourJoueur">← Retour à la connexion joueur</a></p>
+  </section>
+
+  <a class="lien-equipe" href="#equipe" id="lien-equipe" hidden><svg class="icone" aria-hidden="true"><use href="#i-bouclier"/></svg><span data-t="lienEquipe">Tu fais partie de l'équipe ? Board avec Discord</span></a>
+</main>
+
+<div id="site-pied"></div>
+
+<script>
+window.TEXTES_PAGE = {
+  fr: {
+    titrePage: "Se connecter", kicker: "TON PROFIL ORIGINS", titreChoix: "Connecte-toi",
+    texteChoix: "Avec le profil créé dans le launcher : pas de mot de passe, c'est ton launcher qui confirme.",
+    champ: "PSEUDO MINECRAFT OU ORIGINS ID", envoyer: "ENVOYER AU LAUNCHER", ou: "OU",
+    astuce1: "Déjà dans le launcher ? Clique sur ton avatar, puis", astuce2: "« Ouvrir sur le site »", astuce3: " : tu arrives ici déjà connecté.",
+    pasDeProfil: "Pas encore de profil ?", telechargeLauncher: "Télécharge le launcher",
+    titreAttente: "Regarde ton launcher", texteAttente1: "On a envoyé une demande au launcher de", texteAttente2: ". Vérifie que le code est le même, puis accepte.",
+    expireDans: "La demande expire dans {t}.", annuler: "Annuler",
+    aideAttente: "Le launcher doit être ouvert et connecté. La demande est dans la cloche, onglet Demandes.",
+    bienvenue: "Bienvenue, {nom} !", texteConnecte: "Tu es connecté avec ton profil Origins, le même que dans le launcher.",
+    originsId: "Origins ID", monProfilMaj: "MON PROFIL", continuer: "CONTINUER", accueil: "Accueil",
+    kickerEquipe: "ÉQUIPE ORIGINS", titreEquipe: "Board de l'équipe",
+    texteEquipe: "Le Board est réservé à l'équipe : il vérifie ton grade sur le Discord d'Origins, comme la Console aujourd'hui.",
+    discordBouton: "SE CONNECTER AVEC DISCORD", secours: "Discord en panne ? Le lien de secours se demande sur le VPS.",
+    retourJoueur: "← Retour à la connexion joueur", lienEquipe: "Tu fais partie de l'équipe ? Board avec Discord",
+    vide: "Écris ton pseudo Minecraft ou ton Origins ID.", refusee: "La demande a été refusée dans le launcher.",
+    expiree: "La demande a expiré. Renvoie-la, et accepte-la dans les 2 minutes.", annulee: "Demande annulée.",
+    tropDeDemandes: "Trop de demandes depuis ce réseau. Réessaie dans quelques minutes.",
+    erreur: "Le site ne répond pas. Réessaie dans un instant.", lienExpire: "Ce lien a expiré ou a déjà servi. Ouvre à nouveau le site depuis le launcher.",
+    minutes: "{m} min {s} s", secondes: "{s} s"
+  },
+  en: {
+    titrePage: "Sign in", kicker: "YOUR ORIGINS PROFILE", titreChoix: "Sign in",
+    texteChoix: "With the profile created in the launcher: no password, your launcher confirms it's you.",
+    champ: "MINECRAFT NAME OR ORIGINS ID", envoyer: "SEND TO THE LAUNCHER", ou: "OR",
+    astuce1: "Already in the launcher? Click your avatar, then", astuce2: "“Open on the website”", astuce3: ": you arrive here already signed in.",
+    pasDeProfil: "No profile yet?", telechargeLauncher: "Download the launcher",
+    titreAttente: "Check your launcher", texteAttente1: "We sent a request to the launcher of", texteAttente2: ". Check that the code is the same, then accept.",
+    expireDans: "The request expires in {t}.", annuler: "Cancel",
+    aideAttente: "The launcher must be open and signed in. The request is under the bell, Requests tab.",
+    bienvenue: "Welcome, {nom}!", texteConnecte: "You're signed in with your Origins profile, the same as in the launcher.",
+    originsId: "Origins ID", monProfilMaj: "MY PROFILE", continuer: "CONTINUE", accueil: "Home",
+    kickerEquipe: "ORIGINS TEAM", titreEquipe: "Team board",
+    texteEquipe: "The Board is for the team only: it checks your role on the Origins Discord, like the Console does today.",
+    discordBouton: "SIGN IN WITH DISCORD", secours: "Discord down? The backup link is requested on the VPS.",
+    retourJoueur: "← Back to player sign-in", lienEquipe: "Part of the team? Board with Discord",
+    vide: "Type your Minecraft name or your Origins ID.", refusee: "The request was declined in the launcher.",
+    expiree: "The request expired. Send it again and accept it within 2 minutes.", annulee: "Request cancelled.",
+    tropDeDemandes: "Too many requests from this network. Try again in a few minutes.",
+    erreur: "The website isn't answering. Try again in a moment.", lienExpire: "This link expired or was already used. Open the website again from the launcher.",
+    minutes: "{m} min {s} s", secondes: "{s} s"
+  },
+  es: {
+    titrePage: "Iniciar sesión", kicker: "TU PERFIL DE ORIGINS", titreChoix: "Inicia sesión",
+    texteChoix: "Con el perfil creado en el launcher: sin contraseña, tu launcher confirma que eres tú.",
+    champ: "NOMBRE DE MINECRAFT U ORIGINS ID", envoyer: "ENVIAR AL LAUNCHER", ou: "O",
+    astuce1: "¿Ya estás en el launcher? Haz clic en tu avatar y luego en", astuce2: "«Abrir en la web»", astuce3: ": llegas aquí con la sesión ya iniciada.",
+    pasDeProfil: "¿Aún no tienes perfil?", telechargeLauncher: "Descarga el launcher",
+    titreAttente: "Mira tu launcher", texteAttente1: "Hemos enviado una solicitud al launcher de", texteAttente2: ". Comprueba que el código es el mismo y acepta.",
+    expireDans: "La solicitud caduca en {t}.", annuler: "Cancelar",
+    aideAttente: "El launcher debe estar abierto y con la sesión iniciada. La solicitud está en la campana, pestaña Solicitudes.",
+    bienvenue: "¡Bienvenido, {nom}!", texteConnecte: "Has iniciado sesión con tu perfil de Origins, el mismo que en el launcher.",
+    originsId: "Origins ID", monProfilMaj: "MI PERFIL", continuer: "CONTINUAR", accueil: "Inicio",
+    kickerEquipe: "EQUIPO DE ORIGINS", titreEquipe: "Board del equipo",
+    texteEquipe: "El Board es solo para el equipo: comprueba tu rol en el Discord de Origins, como la Consola hoy.",
+    discordBouton: "INICIAR SESIÓN CON DISCORD", secours: "¿Discord caído? El enlace de emergencia se pide en el VPS.",
+    retourJoueur: "← Volver al inicio de sesión de jugador", lienEquipe: "¿Eres del equipo? Board con Discord",
+    vide: "Escribe tu nombre de Minecraft o tu Origins ID.", refusee: "La solicitud fue rechazada en el launcher.",
+    expiree: "La solicitud caducó. Envíala de nuevo y acéptala en 2 minutos.", annulee: "Solicitud cancelada.",
+    tropDeDemandes: "Demasiadas solicitudes desde esta red. Inténtalo en unos minutos.",
+    erreur: "La web no responde. Inténtalo en un momento.", lienExpire: "Este enlace caducó o ya se usó. Abre de nuevo la web desde el launcher.",
+    minutes: "{m} min {s} s", secondes: "{s} s"
+  },
+  de: {
+    titrePage: "Anmelden", kicker: "DEIN ORIGINS-PROFIL", titreChoix: "Melde dich an",
+    texteChoix: "Mit dem im Launcher erstellten Profil: kein Passwort, dein Launcher bestätigt.",
+    champ: "MINECRAFT-NAME ODER ORIGINS-ID", envoyer: "AN DEN LAUNCHER SENDEN", ou: "ODER",
+    astuce1: "Schon im Launcher? Klicke auf dein Avatar, dann auf", astuce2: "„Auf der Website öffnen“", astuce3: ": Du kommst hier schon angemeldet an.",
+    pasDeProfil: "Noch kein Profil?", telechargeLauncher: "Lade den Launcher herunter",
+    titreAttente: "Schau in deinen Launcher", texteAttente1: "Wir haben eine Anfrage an den Launcher von", texteAttente2: " gesendet. Prüfe, ob der Code gleich ist, und nimm an.",
+    expireDans: "Die Anfrage läuft in {t} ab.", annuler: "Abbrechen",
+    aideAttente: "Der Launcher muss offen und angemeldet sein. Die Anfrage ist unter der Glocke, Reiter Anfragen.",
+    bienvenue: "Willkommen, {nom}!", texteConnecte: "Du bist mit deinem Origins-Profil angemeldet, demselben wie im Launcher.",
+    originsId: "Origins-ID", monProfilMaj: "MEIN PROFIL", continuer: "WEITER", accueil: "Start",
+    kickerEquipe: "ORIGINS-TEAM", titreEquipe: "Team-Board",
+    texteEquipe: "Das Board ist nur für das Team: Es prüft deine Rolle auf dem Origins-Discord, wie heute die Konsole.",
+    discordBouton: "MIT DISCORD ANMELDEN", secours: "Discord gestört? Der Notfall-Link wird auf dem VPS angefordert.",
+    retourJoueur: "← Zurück zur Spieler-Anmeldung", lienEquipe: "Im Team? Board mit Discord",
+    vide: "Gib deinen Minecraft-Namen oder deine Origins-ID ein.", refusee: "Die Anfrage wurde im Launcher abgelehnt.",
+    expiree: "Die Anfrage ist abgelaufen. Sende sie erneut und nimm sie innerhalb von 2 Minuten an.", annulee: "Anfrage abgebrochen.",
+    tropDeDemandes: "Zu viele Anfragen aus diesem Netz. Versuche es in ein paar Minuten erneut.",
+    erreur: "Die Website antwortet nicht. Versuche es gleich noch einmal.", lienExpire: "Dieser Link ist abgelaufen oder wurde schon benutzt. Öffne die Website erneut aus dem Launcher.",
+    minutes: "{m} Min. {s} s", secondes: "{s} s"
+  },
+  pt: {
+    titrePage: "Entrar", kicker: "SEU PERFIL ORIGINS", titreChoix: "Entre",
+    texteChoix: "Com o perfil criado no launcher: sem senha, é o seu launcher que confirma.",
+    champ: "NOME DO MINECRAFT OU ORIGINS ID", envoyer: "ENVIAR PARA O LAUNCHER", ou: "OU",
+    astuce1: "Já está no launcher? Clique no seu avatar e depois em", astuce2: "“Abrir no site”", astuce3: ": você chega aqui já conectado.",
+    pasDeProfil: "Ainda não tem perfil?", telechargeLauncher: "Baixe o launcher",
+    titreAttente: "Olhe o seu launcher", texteAttente1: "Enviamos um pedido para o launcher de", texteAttente2: ". Confira se o código é o mesmo e aceite.",
+    expireDans: "O pedido expira em {t}.", annuler: "Cancelar",
+    aideAttente: "O launcher precisa estar aberto e conectado. O pedido está no sino, aba Pedidos.",
+    bienvenue: "Bem-vindo, {nom}!", texteConnecte: "Você está conectado com o seu perfil Origins, o mesmo do launcher.",
+    originsId: "Origins ID", monProfilMaj: "MEU PERFIL", continuer: "CONTINUAR", accueil: "Início",
+    kickerEquipe: "EQUIPE ORIGINS", titreEquipe: "Board da equipe",
+    texteEquipe: "O Board é só para a equipe: ele confere o seu cargo no Discord do Origins, como o Console hoje.",
+    discordBouton: "ENTRAR COM O DISCORD", secours: "Discord fora do ar? O link de emergência é pedido no VPS.",
+    retourJoueur: "← Voltar ao login do jogador", lienEquipe: "Faz parte da equipe? Board com o Discord",
+    vide: "Digite seu nome do Minecraft ou seu Origins ID.", refusee: "O pedido foi recusado no launcher.",
+    expiree: "O pedido expirou. Envie de novo e aceite em até 2 minutos.", annulee: "Pedido cancelado.",
+    tropDeDemandes: "Pedidos demais a partir desta rede. Tente de novo em alguns minutos.",
+    erreur: "O site não está respondendo. Tente de novo daqui a pouco.", lienExpire: "Este link expirou ou já foi usado. Abra o site de novo pelo launcher.",
+    minutes: "{m} min {s} s", secondes: "{s} s"
+  }
+};
+</script>
+<script src="/commun/site.js"></script>
+<script src="/connexion/connexion.js"></script>
+</body>
+</html>

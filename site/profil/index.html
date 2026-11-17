@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mon profil · Origins</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0f0b08">
+<link rel="icon" href="/commun/images/oeil.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="/commun/site.css">
+<style>
+/* Mon profil (maquette « Site Origins · Profil », design/site/Site-Profil.dc.html). */
+.banniere-profil {
+  padding: 130px 0 34px;
+  background: linear-gradient(180deg, rgba(15, 11, 8, 0.2), rgba(15, 11, 8, 0.6) 70%, var(--ebene)), url("/commun/images/fond-origins.jpg") center 40% / cover no-repeat;
+}
+.banniere-profil .contenant { display: flex; align-items: flex-end; gap: 28px; flex-wrap: wrap; }
+.banniere-profil .avatar.avatar-xl { width: 140px; height: 140px; border: 4px solid var(--or); font-size: 56px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5); }
+.identite { flex: 1; min-width: 260px; padding-bottom: 6px; }
+.identite h1 { margin: 6px 0 12px; font: 800 clamp(34px, 4vw, 48px)/1 var(--titre); color: #fff; }
+.lignes-identite { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 16px; font-size: 14.5px; color: var(--texte); }
+.puce-id {
+  display: inline-flex; align-items: center; gap: 10px; height: 34px; padding: 0 10px 0 12px; border-radius: 10px;
+  background: rgba(15, 11, 8, 0.6); border: 1px solid var(--filet-fort); color: #fff; font-weight: 800; cursor: pointer;
+}
+.puce-id code { font: 700 13.5px var(--mono); letter-spacing: 0.08em; color: var(--or-clair); }
+.puce-id .icone { width: 15px; height: 15px; color: var(--doux); }
+
+.grille-profil { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 22px; align-items: start; padding: 26px 0 72px; }
+.colonne-profil { display: flex; flex-direction: column; gap: 22px; }
+.bloc { padding: 24px; background: var(--carte); scroll-margin-top: 90px; }
+.bloc-tete { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.bloc h2 { margin: 0; font: 800 23px var(--titre); color: #fff; }
+.bloc > p { margin: 0 0 10px; font-size: 14.5px; color: var(--doux); }
+.nombre { padding: 3px 10px; border-radius: 999px; background: rgba(201, 161, 74, 0.16); font-weight: 800; font-size: 12.5px; color: var(--or-clair); }
+
+.comptes { list-style: none; margin: 8px 0 0; padding: 0; }
+.comptes li { display: grid; grid-template-columns: 44px 1fr auto; gap: 14px; align-items: center; padding: 12px; border-radius: 14px; }
+.comptes li + li { border-top: 1px solid var(--filet); border-radius: 0; }
+.comptes .rond { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.06); color: var(--or); }
+.comptes strong { display: block; font: 800 16px var(--titre); color: #fff; }
+.comptes span.sous { font-size: 13.5px; color: var(--doux); }
+.etat-ok { display: inline-flex; align-items: center; gap: 6px; font-weight: 800; font-size: 14px; color: var(--vert); }
+.etat-ok .icone { width: 16px; height: 16px; }
+.actions-compte { display: flex; gap: 8px; align-items: center; }
+
+.vide { display: flex; align-items: center; gap: 16px; padding: 18px; border-radius: 14px; border: 1px dashed rgba(255, 255, 255, 0.14); }
+.vide .rond { flex: none; width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.06); color: var(--doux); }
+.vide strong { display: block; font: 800 16px var(--titre); color: #fff; }
+.vide span { font-size: 13.5px; color: var(--doux); }
+
+.amis-apercu { display: flex; margin: 6px 0 12px; }
+.amis-apercu .avatar { width: 40px; height: 40px; border: 2px solid var(--panneau); font-size: 16px; }
+.amis-apercu .avatar + .avatar, .amis-apercu .plus-amis { margin-left: -8px; }
+.plus-amis { width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--panneau-clair); border: 2px solid var(--panneau); font-weight: 800; font-size: 12.5px; color: var(--doux); }
+
+.sessions { list-style: none; margin: 4px 0 16px; padding: 0; }
+.sessions li { display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--filet); }
+.sessions .icone { color: var(--doux); }
+.sessions strong { display: block; font-size: 14.5px; color: #fff; }
+.sessions span.sous { font-size: 12.5px; color: var(--doux); }
+.celui-ci { padding: 3px 9px; border-radius: 999px; background: rgba(76, 211, 138, 0.14); color: var(--vert); font-size: 11px; font-weight: 800; letter-spacing: 0.1em; }
+.bouton-texte { border: 0; background: none; padding: 4px; color: var(--or); font: 800 14px var(--titre); cursor: pointer; }
+.bouton-texte:hover { color: var(--or-clair); }
+
+.avis {
+  position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 40; max-width: calc(100vw - 32px);
+  padding: 12px 18px; border-radius: 14px; background: var(--panneau-clair); border: 1px solid rgba(201, 161, 74, 0.5);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5); font-weight: 700; color: #fff;
+}
+.chargement { padding: 160px 0; text-align: center; color: var(--doux); }
+
+@media (max-width: 1000px) { .grille-profil { grid-template-columns: 1fr; } }
+@media (max-width: 860px) {
+  .banniere-profil { padding: 96px 0 24px; }
+  .banniere-profil .avatar.avatar-xl { width: 96px; height: 96px; font-size: 40px; }
+  .comptes li { grid-template-columns: 40px 1fr; }
+  .comptes li > :last-child { grid-column: 2; justify-self: start; }
+}
+</style>
+</head>
+<body data-page="profil" data-titre="titrePage">
+<div id="site-tete"></div>
+
+<main id="profil" aria-busy="true">
+  <p class="chargement" data-t="chargement">Chargement du profil…</p>
+</main>
+
+<div id="site-pied"></div>
+<p class="avis" id="avis" role="status" hidden></p>
+
+<script>
+window.TEXTES_PAGE = {
+  fr: {
+    titrePage: "Mon profil", chargement: "Chargement du profil…", kicker: "MON PROFIL ORIGINS", originsId: "Origins ID", copie: "Origins ID copié.",
+    membreDepuis: "Membre depuis {date}", equipeBoard: "ÉQUIPE · ORIGINS BOARD", equipeStaff: "ÉQUIPE · STAFF",
+    comptesLies: "Comptes liés", unSeulProfil: "UN SEUL PROFIL", comptesTexte: "Tout est relié à ton profil Origins, créé dans le launcher avec ton compte Microsoft.",
+    minecraft: "Minecraft : {nom}", minecraftAucun: "Minecraft", minecraftSous: "Le compte avec lequel tu joues", minecraftAttente: "Se lie tout seul à ta première connexion au serveur",
+    verifie: "Vérifié", lie: "Lié", microsoft: "Microsoft", microsoftSous: "Connecté depuis le launcher, le {date}",
+    discord: "Discord", discordSous: "Facultatif : tes grades et les annonces sur le Discord d'Origins", discordLieSous: "Lié le {date}",
+    lier: "Lier", delier: "Délier", delierConfirme: "Délier ton Discord de ce profil ?",
+    achats: "Mes achats", voirBoutique: "Voir la boutique", aucunAchat: "Aucun achat pour l'instant", aucunAchatTexte: "Ce que tu achètes arrive en jeu, sur ton compte Minecraft. La boutique ouvre bientôt.",
+    tickets: "Mes tickets", support: "Support", aucunTicket: "Aucun ticket", aucunTicketTexte: "Les tickets arrivent bientôt sur le site. En attendant, l'équipe répond sur Discord.",
+    amis: "Mes amis", amisTexte: "Tes amis et tes messages se gèrent dans le launcher.", aucunAmi: "Ajoute des amis dans le launcher, avec leur Origins ID.",
+    navigateurs: "Navigateurs connectés", celuiCi: "CELUI-CI", maintenant: "Maintenant", deconnecter: "Déconnecter", partout: "Se déconnecter partout",
+    discordLie: "Discord lié à ton profil.", discordDejaLie: "Ce Discord est déjà lié à un autre profil Origins.", discordAnnule: "Liaison Discord annulée.",
+    discordExpire: "La liaison Discord a expiré. Réessaie.", discordErreur: "Discord n'a pas répondu. Réessaie dans un instant.",
+    discordIndisponible: "La liaison Discord n'est pas encore ouverte.", discordDelie: "Discord délié.", erreur: "Ça n'a pas marché. Réessaie dans un instant."
+  },
+  en: {
+    titrePage: "My profile", chargement: "Loading the profile…", kicker: "MY ORIGINS PROFILE", originsId: "Origins ID", copie: "Origins ID copied.",
+    membreDepuis: "Member since {date}", equipeBoard: "TEAM · ORIGINS BOARD", equipeStaff: "TEAM · STAFF",
+    comptesLies: "Linked accounts", unSeulProfil: "ONE PROFILE", comptesTexte: "Everything is linked to your Origins profile, created in the launcher with your Microsoft account.",
+    minecraft: "Minecraft: {nom}", minecraftAucun: "Minecraft", minecraftSous: "The account you play with", minecraftAttente: "Links itself the first time you join the server",
+    verifie: "Verified", lie: "Linked", microsoft: "Microsoft", microsoftSous: "Signed in from the launcher on {date}",
+    discord: "Discord", discordSous: "Optional: your roles and the announcements on the Origins Discord", discordLieSous: "Linked on {date}",
+    lier: "Link", delier: "Unlink", delierConfirme: "Unlink your Discord from this profile?",
+    achats: "My purchases", voirBoutique: "See the shop", aucunAchat: "No purchases yet", aucunAchatTexte: "What you buy arrives in game, on your Minecraft account. The shop opens soon.",
+    tickets: "My tickets", support: "Support", aucunTicket: "No tickets", aucunTicketTexte: "Tickets are coming to the website soon. Meanwhile, the team answers on Discord.",
+    amis: "My friends", amisTexte: "Your friends and messages are managed in the launcher.", aucunAmi: "Add friends in the launcher, with their Origins ID.",
+    navigateurs: "Signed-in browsers", celuiCi: "THIS ONE", maintenant: "Now", deconnecter: "Sign out", partout: "Sign out everywhere",
+    discordLie: "Discord linked to your profile.", discordDejaLie: "This Discord is already linked to another Origins profile.", discordAnnule: "Discord linking cancelled.",
+    discordExpire: "Discord linking expired. Try again.", discordErreur: "Discord didn't answer. Try again in a moment.",
+    discordIndisponible: "Discord linking isn't open yet.", discordDelie: "Discord unlinked.", erreur: "That didn't work. Try again in a moment."
+  },
+  es: {
+    titrePage: "Mi perfil", chargement: "Cargando el perfil…", kicker: "MI PERFIL DE ORIGINS", originsId: "Origins ID", copie: "Origins ID copiado.",
+    membreDepuis: "Miembro desde {date}", equipeBoard: "EQUIPO · ORIGINS BOARD", equipeStaff: "EQUIPO · STAFF",
+    comptesLies: "Cuentas vinculadas", unSeulProfil: "UN SOLO PERFIL", comptesTexte: "Todo está vinculado a tu perfil de Origins, creado en el launcher con tu cuenta de Microsoft.",
+    minecraft: "Minecraft: {nom}", minecraftAucun: "Minecraft", minecraftSous: "La cuenta con la que juegas", minecraftAttente: "Se vincula sola la primera vez que entras al servidor",
+    verifie: "Verificado", lie: "Vinculado", microsoft: "Microsoft", microsoftSous: "Conectado desde el launcher el {date}",
+    discord: "Discord", discordSous: "Opcional: tus roles y los anuncios en el Discord de Origins", discordLieSous: "Vinculado el {date}",
+    lier: "Vincular", delier: "Desvincular", delierConfirme: "¿Desvincular tu Discord de este perfil?",
+    achats: "Mis compras", voirBoutique: "Ver la tienda", aucunAchat: "Aún no hay compras", aucunAchatTexte: "Lo que compras llega al juego, a tu cuenta de Minecraft. La tienda abre pronto.",
+    tickets: "Mis tickets", support: "Soporte", aucunTicket: "Ningún ticket", aucunTicketTexte: "Los tickets llegan pronto a la web. Mientras tanto, el equipo responde en Discord.",
+    amis: "Mis amigos", amisTexte: "Tus amigos y mensajes se gestionan en el launcher.", aucunAmi: "Añade amigos en el launcher, con su Origins ID.",
+    navigateurs: "Navegadores conectados", celuiCi: "ESTE", maintenant: "Ahora", deconnecter: "Cerrar sesión", partout: "Cerrar sesión en todas partes",
+    discordLie: "Discord vinculado a tu perfil.", discordDejaLie: "Este Discord ya está vinculado a otro perfil de Origins.", discordAnnule: "Vinculación de Discord cancelada.",
+    discordExpire: "La vinculación de Discord caducó. Inténtalo de nuevo.", discordErreur: "Discord no respondió. Inténtalo en un momento.",
+    discordIndisponible: "La vinculación de Discord aún no está abierta.", discordDelie: "Discord desvinculado.", erreur: "No ha funcionado. Inténtalo en un momento."
+  },
+  de: {
+    titrePage: "Mein Profil", chargement: "Profil wird geladen…", kicker: "MEIN ORIGINS-PROFIL", originsId: "Origins-ID", copie: "Origins-ID kopiert.",
+    membreDepuis: "Mitglied seit {date}", equipeBoard: "TEAM · ORIGINS BOARD", equipeStaff: "TEAM · STAFF",
+    comptesLies: "Verknüpfte Konten", unSeulProfil: "EIN PROFIL", comptesTexte: "Alles hängt an deinem Origins-Profil, im Launcher mit deinem Microsoft-Konto erstellt.",
+    minecraft: "Minecraft: {nom}", minecraftAucun: "Minecraft", minecraftSous: "Das Konto, mit dem du spielst", minecraftAttente: "Wird beim ersten Betreten des Servers von selbst verknüpft",
+    verifie: "Bestätigt", lie: "Verknüpft", microsoft: "Microsoft", microsoftSous: "Aus dem Launcher angemeldet am {date}",
+    discord: "Discord", discordSous: "Freiwillig: deine Rollen und die Ankündigungen auf dem Origins-Discord", discordLieSous: "Verknüpft am {date}",
+    lier: "Verknüpfen", delier: "Trennen", delierConfirme: "Deinen Discord von diesem Profil trennen?",
+    achats: "Meine Käufe", voirBoutique: "Zum Shop", aucunAchat: "Noch keine Käufe", aucunAchatTexte: "Was du kaufst, kommt ins Spiel, auf dein Minecraft-Konto. Der Shop öffnet bald.",
+    tickets: "Meine Tickets", support: "Support", aucunTicket: "Keine Tickets", aucunTicketTexte: "Tickets kommen bald auf die Website. Bis dahin antwortet das Team auf Discord.",
+    amis: "Meine Freunde", amisTexte: "Freunde und Nachrichten verwaltest du im Launcher.", aucunAmi: "Füge Freunde im Launcher hinzu, mit ihrer Origins-ID.",
+    navigateurs: "Angemeldete Browser", celuiCi: "DIESER", maintenant: "Jetzt", deconnecter: "Abmelden", partout: "Überall abmelden",
+    discordLie: "Discord mit deinem Profil verknüpft.", discordDejaLie: "Dieser Discord ist schon mit einem anderen Origins-Profil verknüpft.", discordAnnule: "Discord-Verknüpfung abgebrochen.",
+    discordExpire: "Die Discord-Verknüpfung ist abgelaufen. Versuche es erneut.", discordErreur: "Discord hat nicht geantwortet. Versuche es gleich noch einmal.",
+    discordIndisponible: "Die Discord-Verknüpfung ist noch nicht offen.", discordDelie: "Discord getrennt.", erreur: "Das hat nicht geklappt. Versuche es gleich noch einmal."
+  },
+  pt: {
+    titrePage: "Meu perfil", chargement: "Carregando o perfil…", kicker: "MEU PERFIL ORIGINS", originsId: "Origins ID", copie: "Origins ID copiado.",
+    membreDepuis: "Membro desde {date}", equipeBoard: "EQUIPE · ORIGINS BOARD", equipeStaff: "EQUIPE · STAFF",
+    comptesLies: "Contas vinculadas", unSeulProfil: "UM SÓ PERFIL", comptesTexte: "Tudo está ligado ao seu perfil Origins, criado no launcher com sua conta Microsoft.",
+    minecraft: "Minecraft: {nom}", minecraftAucun: "Minecraft", minecraftSous: "A conta com que você joga", minecraftAttente: "Vincula sozinha na primeira vez que você entra no servidor",
+    verifie: "Verificado", lie: "Vinculado", microsoft: "Microsoft", microsoftSous: "Conectado pelo launcher em {date}",
+    discord: "Discord", discordSous: "Opcional: seus cargos e os anúncios no Discord do Origins", discordLieSous: "Vinculado em {date}",
+    lier: "Vincular", delier: "Desvincular", delierConfirme: "Desvincular seu Discord deste perfil?",
+    achats: "Minhas compras", voirBoutique: "Ver a loja", aucunAchat: "Nenhuma compra ainda", aucunAchatTexte: "O que você compra chega no jogo, na sua conta do Minecraft. A loja abre em breve.",
+    tickets: "Meus tickets", support: "Suporte", aucunTicket: "Nenhum ticket", aucunTicketTexte: "Os tickets chegam em breve ao site. Enquanto isso, a equipe responde no Discord.",
+    amis: "Meus amigos", amisTexte: "Seus amigos e mensagens são gerenciados no launcher.", aucunAmi: "Adicione amigos no launcher, com o Origins ID deles.",
+    navigateurs: "Navegadores conectados", celuiCi: "ESTE", maintenant: "Agora", deconnecter: "Sair", partout: "Sair de todos",
+    discordLie: "Discord vinculado ao seu perfil.", discordDejaLie: "Este Discord já está vinculado a outro perfil Origins.", discordAnnule: "Vinculação do Discord cancelada.",
+    discordExpire: "A vinculação do Discord expirou. Tente de novo.", discordErreur: "O Discord não respondeu. Tente de novo daqui a pouco.",
+    discordIndisponible: "A vinculação do Discord ainda não está aberta.", discordDelie: "Discord desvinculado.", erreur: "Não funcionou. Tente de novo daqui a pouco."
+  }
+};
+</script>
+<script src="/commun/site.js"></script>
+<script src="/profil/profil.js"></script>
+</body>
+</html>

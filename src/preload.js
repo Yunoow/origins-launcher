@@ -1,6 +1,8 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
-const ORIGINS_API_BASE = "http://146.59.197.230/api";
+// Essais locaux : index.js passe --origins-api-dev=http://localhost:… quand ORIGINS_API_DEV est réglé.
+const ORIGINS_API_DEV = (process.argv || []).find((a) => a.startsWith("--origins-api-dev="))?.split("=")[1] || null;
+const ORIGINS_API_BASE = ORIGINS_API_DEV || "http://146.59.197.230/api";
 
 async function originsApi(path, token, options = {}) {
     const response = await fetch(`${ORIGINS_API_BASE}${path}`, {
@@ -96,6 +98,16 @@ contextBridge.exposeInMainWorld("origins", {
         accept: (token, requestId) => originsApi(`/friends/requests/${encodeURIComponent(requestId)}/accept`, token, { method: "POST" }),
         refuse: (token, requestId) => originsApi(`/friends/requests/${encodeURIComponent(requestId)}`, token, { method: "DELETE" }),
         remove: (token, profileId) => originsApi(`/friends/${encodeURIComponent(profileId)}`, token, { method: "DELETE" })
+    },
+
+    // Site Origins : « Ouvrir sur le site », les demandes de connexion du site (cloche), et Discord facultatif.
+    site: {
+        lien: (token, suite = "/profil/") => originsApi("/site/lien", token, { method: "POST", body: { suite } }),
+        demandes: (token) => originsApi("/site/demandes", token),
+        accepter: (token, id) => originsApi(`/site/demandes/${encodeURIComponent(id)}/accepter`, token, { method: "POST" }),
+        refuser: (token, id) => originsApi(`/site/demandes/${encodeURIComponent(id)}/refuser`, token, { method: "POST" }),
+        discord: (token) => originsApi("/site/discord", token),
+        ouvrir: (adresse) => ipcRenderer.invoke("origins:open-site", String(adresse || ""))
     },
 
     messages: {

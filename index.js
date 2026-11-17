@@ -127,9 +127,14 @@ let cachedMinecraftProfile = null;
 
 
 
+// ORIGINS_API_DEV (essais locaux seulement) : une API de test, par exemple http://localhost:3100.
+const ORIGINS_API_DEV = /^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(process.env.ORIGINS_API_DEV || "")
+    ? process.env.ORIGINS_API_DEV
+    : null;
+
 const ORIGINS_API_BASE =
 
-    "http\://146.59.197.230/api";
+    ORIGINS_API_DEV || "http\://146.59.197.230/api";
 
 
 
@@ -479,8 +484,9 @@ async function originsApi(pathname, options = {}) {
    ORIGINS REALTIME — WEBSOCKET
 ========================================== */
 
-const ORIGINS_REALTIME_URL =
-    "ws://146.59.197.230/api/realtime";
+const ORIGINS_REALTIME_URL = ORIGINS_API_DEV
+    ? ORIGINS_API_DEV.replace(/^http/, "ws") + "/realtime"
+    : "ws://146.59.197.230/api/realtime";
 
 let originsRealtimeSocket = null;
 let originsRealtimeToken = null;
@@ -1587,6 +1593,24 @@ const DISCORD_URLS = {
     support: "https://discord.gg/kHStbdtuxz"
 };
 
+/*
+ * « Ouvrir sur le site » : le lien à usage unique donné par l'API (/site/lien), ouvert dans le navigateur.
+ * Seulement la page /connexion/lien, en https (en http seulement sur localhost, pour les essais).
+ */
+ipcMain.handle("origins:open-site", async (_event, adresse) => {
+    try {
+        const url = new URL(String(adresse || ""));
+        const local = url.protocol === "http:" && ["localhost", "127.0.0.1"].includes(url.hostname);
+        if ((url.protocol !== "https:" && !local) || url.pathname !== "/connexion/lien") {
+            return { success: false, error: "SITE_URL_REFUSED" };
+        }
+        await shell.openExternal(url.toString());
+        return { success: true };
+    } catch (error) {
+        return { success: false, error: "SITE_URL_REFUSED" };
+    }
+});
+
 ipcMain.handle("origins:open-discord", async (_event, server = "tempest") => {
 
     try {
@@ -2223,6 +2247,7 @@ function createWindow() {
                 contextIsolation:
 
                     true,
+                ...(ORIGINS_API_DEV ? { additionalArguments: [`--origins-api-dev=${ORIGINS_API_DEV}`] } : {}),
 
 
 

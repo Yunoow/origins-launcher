@@ -1041,10 +1041,13 @@
                         </button>
                     </div>
                     <span class="av-profile-ms" data-i18n="connectedMicrosoft">Signed in with Microsoft</span>
+                    <!-- Discord facultatif (site Origins) : lier depuis le navigateur, déjà connecté -->
+                    <button class="av-profile-discord" id="profileDiscordLine" type="button" hidden><span id="profileDiscordText" data-i18n="discordOptionalLink">Discord: optional · Link</span></button>
                     <p class="account-description" data-i18n="accountDescription" hidden>Sign in to your account to access Tempest Origins and your friends.</p>
                 </div>
 
                 <div class="av-profile-menu">
+                    <button class="av-profile-entry" id="profileOpenSiteButton" type="button" hidden><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg><span data-i18n="openOnSite">Open on the website</span></button>
                     <button class="av-profile-entry" id="profileContactsButton" type="button"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2a5 5 0 0 1 5.5 5.8"/></svg><span data-i18n="myContacts">My contacts</span></button>
                     <button class="av-profile-entry" id="profileSettingsButton" type="button"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg><span data-i18n="settings">Settings</span></button>
                     <button class="av-profile-entry av-profile-logout account-signin" id="loginButton" type="button" data-i18n="signIn">SIGN IN</button>

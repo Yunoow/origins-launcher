@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<title>Connexion · Origins</title>
+<meta name="theme-color" content="#0f0b08">
+<link rel="icon" href="/commun/images/oeil.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="/commun/site.css">
+<link rel="stylesheet" href="/connexion/connexion.css">
+</head>
+<body data-page="connexion" data-titre="titrePage">
+<!-- « Ouvrir sur le site » depuis le launcher : échange le lien à usage unique contre une session, puis continue. -->
+<div id="site-tete"></div>
+<main class="scene">
+  <section class="carte-connexion" aria-live="polite">
+    <div class="kicker" data-t="kicker">TON PROFIL ORIGINS</div>
+    <h1 data-t="titre">Connexion…</h1>
+    <p class="texte" data-t="texte">Le launcher t'ouvre le site, déjà connecté.</p>
+    <p class="decompte"><span class="point" aria-hidden="true"></span></p>
+  </section>
+</main>
+<script>
+window.TEXTES_PAGE = {
+  fr: { titrePage: "Connexion", kicker: "TON PROFIL ORIGINS", titre: "Connexion…", texte: "Le launcher t'ouvre le site, déjà connecté." },
+  en: { titrePage: "Signing in", kicker: "YOUR ORIGINS PROFILE", titre: "Signing in…", texte: "The launcher is opening the website, already signed in." },
+  es: { titrePage: "Conexión", kicker: "TU PERFIL DE ORIGINS", titre: "Conectando…", texte: "El launcher te abre la web con la sesión ya iniciada." },
+  de: { titrePage: "Anmeldung", kicker: "DEIN ORIGINS-PROFIL", titre: "Anmeldung…", texte: "Der Launcher öffnet dir die Website, schon angemeldet." },
+  pt: { titrePage: "Conexão", kicker: "SEU PERFIL ORIGINS", titre: "Conectando…", texte: "O launcher abre o site para você, já conectado." }
+};
+// Le jeton sort tout de suite de l'adresse (historique, partage d'écran).
+const JETON = new URLSearchParams(location.search).get("jeton") || "";
+history.replaceState(null, "", location.pathname);
+</script>
+<script src="/commun/site.js"></script>
+<script>
+(async () => {
+  if (!JETON) { location.replace("/connexion/"); return; }
+  try {
+    const r = await Site.appel("/site/lien/echanger", { methode: "POST", corps: { jeton: JETON } });
+    if (r.ok) { location.replace(r.json.suite || "/profil/"); return; }
+  } catch (_) { /* réseau */ }
+  location.replace("/connexion/?lien=expire");
+})();
+</script>
+</body>
+</html>
