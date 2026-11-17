@@ -14,6 +14,24 @@ const VPS_ROOT = "/var/www/origins/launcher";
 const UPDATE_URL = `http://${VPS_HOST}/launcher/latest.yml`;
 const LIEN_FIXE = "Origins-Launcher-Setup.exe";
 
+/*
+ * Mac et Linux : fabriqués par GitHub Actions (.github/workflows/build-launcher.yml),
+ * dans des artefacts nommés avec la version (Origins-Launcher-Linux-0.6.5…).
+ * On les récupère avec gh pour les mettre en ligne avec Windows, plus ces noms fixes
+ * lus par la page de téléchargement (site/telecharger/). S'il n'y a pas de build
+ * pour cette version, on prévient et on continue : la page affiche « Bientôt ».
+ */
+const GITHUB_REPO = "Yunoow/origins-launcher-src";
+const DESKTOP_ARTIFACTS = ["Origins-Launcher-Linux", "Origins-Launcher-macOS"];
+const FIXED_NAMES = [
+    { fixed: "Origins-Launcher.AppImage", match: (name) => /\.AppImage$/.test(name) },
+    { fixed: "origins-launcher_amd64.deb", match: (name) => /_amd64\.deb$/.test(name) },
+    { fixed: "Origins-Launcher-mac-arm64.dmg", match: (name) => /arm64.*\.dmg$/.test(name) },
+    { fixed: "Origins-Launcher-mac-x64.dmg", match: (name) => /\.dmg$/.test(name) && !/arm64/.test(name) }
+];
+// Fichiers des artefacts à mettre en ligne (la mise à jour de l'AppImage lit latest-linux.yml).
+const DESKTOP_FILE = /\.(AppImage|deb|dmg|blockmap)$|^latest-linux\.yml$/;
+
 function run(command, args, options = {}) {
     const isWindows = process.platform === "win32";
 
@@ -243,11 +261,115 @@ function getReleaseFiles(version) {
     return files;
 }
 
+/** Lance une commande et rend sa sortie (sans passer par cmd.exe : gh est un vrai .exe). */
+function capture(command, args) {
+    const result = spawnSync(command, args, { encoding: "utf8", cwd: PROJECT_ROOT, maxBuffer: 1024 * 1024 * 32 });
+    if (result.error) throw result.error;
+    if (result.status !== 0) throw new Error((result.stderr || result.stdout || `${command} a échoué`).trim());
+    return result.stdout;
+}
+
+/**
+ * Télécharge les fichiers Mac et Linux de `version` depuis GitHub Actions.
+ * Rend { files: [chemins absolus à envoyer], fixed: [{ source, fixed }] }.
+ * Ne lève jamais d'erreur : en cas de souci, prévient et rend ce qui a pu être récupéré.
+ */
+function fetchDesktopBuilds(version) {
+    const empty = { files: [], fixed: [] };
+    const dir = path.join(RELEASE_ROOT, `mac-linux-${version}`);
+
+    let artifacts;
+    try {
+        const json = capture("gh", ["api", `repos/${GITHUB_REPO}/actions/artifacts?per_page=100`]);
+        artifacts = JSON.parse(json).artifacts || [];
+    } catch (error) {
+        console.warn(`ATTENTION : impossible de lister les builds GitHub (${error.message}).`);
+        console.warn("Mac et Linux ne seront pas mis en ligne : la page affichera « Bientôt ».");
+        return empty;
+    }
+
+    fs.rmSync(dir, { recursive: true, force: true });
+    fs.mkdirSync(dir, { recursive: true });
+
+    for (const base of DESKTOP_ARTIFACTS) {
+        const name = `${base}-${version}`;
+        const artifact = artifacts
+            .filter((item) => item.name === name && !item.expired)
+            .sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))[0];
+
+        if (!artifact) {
+            console.warn(`ATTENTION : aucun build « ${name} » sur GitHub (lancer le workflow « Build Origins Launcher » pour la ${version}).`);
+            continue;
+        }
+
+        try {
+            console.log(`Téléchargement de ${name} (build du ${artifact.created_at.slice(0, 10)})...`);
+            capture("gh", ["run", "download", String(artifact.workflow_run.id), "-R", GITHUB_REPO, "-n", name, "-D", path.join(dir, base)]);
+        } catch (error) {
+            console.warn(`ATTENTION : téléchargement de ${name} impossible (${error.message}).`);
+        }
+    }
+
+    const files = [];
+    const walk = (folder) => {
+        for (const entry of fs.readdirSync(folder, { withFileTypes: true })) {
+            const full = path.join(folder, entry.name);
+            if (entry.isDirectory()) walk(full);
+            else if (DESKTOP_FILE.test(entry.name)) files.push(full);
+        }
+    };
+    walk(dir);
+
+    // Garde-fou : les paquets doivent être de la même version que Windows.
+    const wrongVersion = files.filter((file) => /\.(AppImage|deb|dmg)$/.test(file) && !path.basename(file).includes(version));
+    if (wrongVersion.length) {
+        console.warn(`ATTENTION : fichiers d'une autre version ignorés : ${wrongVersion.map((f) => path.basename(f)).join(", ")}`);
+    }
+    const kept = files.filter((file) => !wrongVersion.includes(file));
+
+    const fixed = [];
+    for (const { fixed: fixedName, match } of FIXED_NAMES) {
+        const source = kept.find((file) => /\.(AppImage|deb|dmg)$/.test(file) && match(path.basename(file)));
+        if (source) fixed.push({ source: path.basename(source), fixed: fixedName });
+        else console.warn(`ATTENTION : pas de fichier pour ${fixedName} : la page affichera « Bientôt ».`);
+    }
+
+    // Deux fichiers du même nom (Mac et Linux) écraseraient l'un l'autre sur le VPS.
+    const names = kept.map((file) => path.basename(file));
+    const duplicates = names.filter((name, index) => names.indexOf(name) !== index);
+    if (duplicates.length) {
+        console.warn(`ATTENTION : fichiers en double ignorés : ${[...new Set(duplicates)].join(", ")}`);
+    }
+
+    return {
+        files: kept.filter((file, index) => names.indexOf(path.basename(file)) === index),
+        fixed
+    };
+}
+
 async function main() {
     const pkg = readPackage();
     const version = pkg.version;
 
     parseVersion(version);
+
+    /*
+     * Essai sans rien mettre en ligne : récupère seulement les fichiers Mac et Linux.
+     *   npm.cmd run deploy:launcher -- --essai-mac-linux [version]
+     */
+    const essai = process.argv.indexOf("--essai-mac-linux");
+    if (essai !== -1) {
+        const wanted = process.argv[essai + 1] && !process.argv[essai + 1].startsWith("--") ? process.argv[essai + 1] : version;
+        console.log(`=== Essai : fichiers Mac et Linux de la ${wanted} (rien n'est envoyé) ===`);
+        const desktop = fetchDesktopBuilds(wanted);
+        console.log("\nFichiers qui seraient envoyés :");
+        desktop.files.forEach((file) => console.log(`- ${path.basename(file)} (${fs.statSync(file).size} octets)`));
+        if (!desktop.files.length) console.log("- aucun");
+        console.log("\nNoms fixes qui seraient créés :");
+        desktop.fixed.forEach(({ source, fixed }) => console.log(`- ${fixed}  ←  ${source}`));
+        if (!desktop.fixed.length) console.log("- aucun");
+        return;
+    }
 
     console.log("=== Publication Origins Launcher vers OVH ===");
     console.log(`Version locale : ${version}`);
@@ -288,10 +410,19 @@ async function main() {
 
     const releaseFiles = getReleaseFiles(version);
 
+    console.log("\nFichiers Mac et Linux (GitHub Actions)...");
+    const desktop = fetchDesktopBuilds(version);
+
+    // Tout ce qui part : Windows (release/) puis Mac et Linux (release/mac-linux-<version>/).
+    const uploads = [
+        ...releaseFiles.map((file) => path.join(RELEASE_ROOT, file)),
+        ...desktop.files
+    ];
+
     console.log("\nFichiers prêts à publier :");
-    for (const file of releaseFiles) {
-        const stats = fs.statSync(path.join(RELEASE_ROOT, file));
-        console.log(`- ${file} (${stats.size} octets)`);
+    for (const file of uploads) {
+        const stats = fs.statSync(file);
+        console.log(`- ${path.basename(file)} (${stats.size} octets)`);
     }
 
     const remoteStage = `${VPS_ROOT}.deploy`;
@@ -304,9 +435,9 @@ async function main() {
     ]);
 
     console.log("\nEnvoi du launcher...");
-    for (const file of releaseFiles) {
+    for (const file of uploads) {
         run("scp", [
-            path.join(RELEASE_ROOT, file),
+            file,
             `${VPS_USER}@${VPS_HOST}:${remoteStage}/`
         ]);
     }
@@ -322,6 +453,8 @@ async function main() {
             // toujours sur la dernière version (le nom de l'installeur,
             // lui, change à chaque version et l'ancien disparaît).
             `cp '${remoteStage}/${releaseFiles[1]}' '${remoteStage}/${LIEN_FIXE}'`,
+            // Mêmes liens fixes pour Mac et Linux (lus par la page de téléchargement).
+            ...desktop.fixed.map(({ source, fixed }) => `cp '${remoteStage}/${source}' '${remoteStage}/${fixed}'`),
             `mv '${remoteStage}' '${VPS_ROOT}'`,
             `find '${VPS_ROOT}' -type d -exec chmod 755 {} \\;`,
             `find '${VPS_ROOT}' -type f -exec chmod 644 {} \\;`,

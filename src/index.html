@@ -18,67 +18,123 @@
 
     <link rel="stylesheet" href="style.css">
 
+    <link rel="stylesheet" href="aventure.css">
+
 </head>
 
 
 
-<body>
+<body data-theme="or-ebene" class="av-design">
 
 
 
     <!-- =====================================================
 
-         ORIGINS CUSTOM TITLEBAR
+         BARRE DU HAUT (nouveau design)
 
     ====================================================== -->
 
 
 
-    <header class="origins-titlebar">
+    <header class="av-topbar">
 
+        <button class="av-logo" id="originsHomeButton" type="button" title="Origins">
 
+                <img class="av-logo-eye" src="assets/logos/origins-oeil.svg" alt="Origins">
 
-        <div class="origins-titlebar-brand">
+            </button>
 
-            <span class="origins-titlebar-mark"></span>
+        <nav class="av-tabs" aria-label="Sections"><button class="av-tab active" id="homeButton" type="button" title="Home" aria-label="Home" data-i18n-title="titleHome" data-i18n-aria="titleHome"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></button><button class="av-tab" id="gamesButton" type="button" title="Games" aria-label="Games" data-i18n-title="titleGames" data-i18n-aria="titleGames" aria-expanded="false"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9h12a4 4 0 0 1 3.9 4.9l-.8 3.4a2.2 2.2 0 0 1-3.9.8L15.5 16h-7l-1.7 2.1a2.2 2.2 0 0 1-3.9-.8l-.8-3.4A4 4 0 0 1 6 9z"/><path d="M8 11.5v3M6.5 13h3"/><circle cx="16" cy="12.5" r=".6"/><circle cx="17.8" cy="14.2" r=".6"/></svg></button><button class="av-tab" id="updatesButton" type="button" title="News" aria-label="News" data-i18n-title="titleNews" data-i18n-aria="titleNews"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h11a2 2 0 0 1 2 2v1H9"/><path d="M7 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7"/><path d="M9 10h7M9 13h7M9 16h4"/></svg></button><button class="av-tab" id="shopButton" type="button" title="Shop" aria-label="Shop" data-i18n-title="titleShop" data-i18n-aria="titleShop"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></button></nav>
 
-            <span>ORIGINS</span>
-
+        <div class="av-featured-zone">
+            <button class="av-featured" id="topbarFeatured" type="button">
+                <span class="av-featured-badge" data-i18n="newBadge">NEW</span>
+                <span class="av-featured-title" id="topbarFeaturedTitle"></span>
+            </button>
         </div>
 
+        <!-- Discord du projet Origins (actus, communauté, tickets pour l'instant) -->
+        <button class="av-icon-btn av-discord-btn" id="topbarDiscordButton" type="button" title="Origins Discord" aria-label="Origins Discord" data-i18n-title="setOpenOriginsDiscord" data-i18n-aria="setOpenOriginsDiscord"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><path d="M20.32 4.37A19.8 19.8 0 0 0 15.4 2.8a13.9 13.9 0 0 0-.63 1.3 18.4 18.4 0 0 0-5.53 0 13.6 13.6 0 0 0-.64-1.3 19.7 19.7 0 0 0-4.93 1.53C.54 9.04-.31 13.58.11 18.06a19.9 19.9 0 0 0 6.04 3.05 14.7 14.7 0 0 0 1.29-2.1 12.9 12.9 0 0 1-2.04-.97l.5-.39a14.2 14.2 0 0 0 12.2 0l.5.39c-.65.39-1.33.71-2.04.97.37.74.8 1.44 1.29 2.1a19.8 19.8 0 0 0 6.04-3.05c.5-5.2-.84-9.7-3.57-13.69ZM8.02 15.33c-1.18 0-2.15-1.09-2.15-2.42s.95-2.42 2.15-2.42 2.17 1.09 2.15 2.42c0 1.33-.95 2.42-2.15 2.42Zm7.96 0c-1.18 0-2.15-1.09-2.15-2.42s.95-2.42 2.15-2.42 2.17 1.09 2.15 2.42c0 1.33-.94 2.42-2.15 2.42Z"/></svg></button>
+
+        <button class="av-icon-btn" id="notificationsQuickAccess" type="button" aria-label="Open notifications" title="Notifications" data-i18n-aria="openNotifications" data-i18n-title="notifications">
+
+            <svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>
+
+            <span class="av-badge" id="notificationsBadge" hidden>0</span>
+
+        </button>
+
+        <button
+
+            class="av-icon-btn av-contacts"
+
+            id="friendsQuickAccess"
+
+            type="button"
+
+            aria-label="Open contacts" data-i18n-aria="openContacts" data-i18n-title="contacts"
+
+            aria-expanded="false"
+
+            title="Contacts"
+
+        >
+
+            <svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 3.5V17A2.5 2.5 0 0 1 4 14.5z"/></svg>
 
 
-        <div class="origins-window-controls">
+
+            <span class="friends-online-dot" aria-hidden="true"></span>
 
 
 
-            <button id="windowMinimize" class="origins-window-button" type="button" aria-label="Minimize" data-i18n-aria="minimize">
+            <span
 
-                <span class="window-icon window-icon-minimize"></span>
+                class="av-badge"
 
-            </button>
+                id="friendsMessageBadge"
 
+                aria-hidden="true"
 
+            >
 
-            <button id="windowMaximize" class="origins-window-button" type="button" aria-label="Maximize" data-i18n-aria="maximize">
+                0
 
-                <span class="window-icon window-icon-maximize"></span>
-
-            </button>
-
-
-
-            <button id="windowClose" class="origins-window-button origins-window-close" type="button" aria-label="Close" data-i18n-aria="close">
-
-                <span class="window-icon window-icon-close"></span>
-
-            </button>
+            </span>
 
 
 
-        </div>
+            <span class="av-visually-hidden">
+
+                <strong data-i18n="friendsOnline">
+
+                    FRIENDS ONLINE
+
+                </strong>
 
 
+
+                <small>
+
+                    <span id="friendsOnlineCount">0</span>
+
+                    <span data-i18n="onlineShort">online</span>
+
+                </small>
+
+            </span>
+
+        </button>
+
+        <button class="av-icon-btn" id="settingsButton" type="button" title="Settings" aria-label="Settings" data-i18n-title="titleSettings" data-i18n-aria="titleSettings"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg></button>
+
+        <button class="av-avatar-btn" id="accountButton" type="button" title="Account" aria-label="Account">
+
+            <span class="account-icon"></span><span class="av-status" aria-hidden="true"></span>
+
+        </button>
+
+        <div class="av-window-controls"><button id="windowMinimize" class="av-win-btn" type="button" aria-label="Minimize" data-i18n-aria="minimize"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 12h12"/></svg></button><button id="windowMaximize" class="av-win-btn" type="button" aria-label="Maximize" data-i18n-aria="maximize"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12"/></svg></button><button id="windowClose" class="av-win-btn av-win-close" type="button" aria-label="Close" data-i18n-aria="close"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
 
     </header>
 
@@ -171,113 +227,20 @@
 
 
 
-        <aside class="sidebar">
+        <aside class="sidebar av-rail" aria-label="Mes jeux">
 
+            <button class="av-rail-game" id="tempestButton" type="button">
 
+                    <img src="assets/logos/tempest-logo.png" alt="Tempest Origins" class="av-rail-logo">
 
-            <!-- Nouveau logo Origins -->
+                    <span class="av-visually-hidden">TEMPEST ORIGINS <small>Disponible</small></span></button>
 
-            <button class="origins-logo origins-logo-v2" id="originsHomeButton" type="button" title="Origins">
+            <span class="av-rail-sep" aria-hidden="true"></span>
 
-                <img src="assets/logos/origins-logo.png" alt="Origins">
+            <button class="av-rail-add" id="railAllGamesButton" type="button" title="Games" aria-label="Games" data-i18n-title="titleGames" data-i18n-aria="titleGames"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button>
 
-            </button>
-
-
-
-            <!-- Navigation principale centrée -->
-
-            <div class="sidebar-center-nav">
-
-
-
-                <button class="sidebar-button active" id="homeButton" type="button" title="Home" aria-label="Home" data-i18n-title="titleHome" data-i18n-aria="titleHome">
-
-                    <span class="home-icon" aria-hidden="true">
-
-                        <svg viewBox="0 0 32 32" focusable="false" aria-hidden="true">
-
-                            <path d="M3.5 15.2 L16 4.5 L28.5 15.2"/>
-
-                            <path d="M7.2 12.1 V7.2 H10.1 V9.6"/>
-
-                            <path d="M6.7 12.5 L16 6.8 L25.3 12.5 V27 H19.3 V20.4 H12.7 V27 H6.7 Z"/>
-
-                        </svg>
-
-                    </span>
-
-                </button>
-
-
-
-                <button class="sidebar-button games-button" id="gamesButton" type="button" title="Games" aria-label="Games" data-i18n-title="titleGames" data-i18n-aria="titleGames" aria-expanded="false">
-
-                    <svg class="games-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-
-                        <path d="M8.5 8.5h7a4.5 4.5 0 0 1 4.3 3.2l1.05 3.45a2.55 2.55 0 0 1-4.35 2.45l-1.55-1.7h-5.9L7.5 17.6a2.55 2.55 0 0 1-4.35-2.45L4.2 11.7a4.5 4.5 0 0 1 4.3-3.2Z"/>
-
-                        <path d="M7.2 11.3v3.2M5.6 12.9h3.2"/>
-
-                        <circle cx="16.2" cy="12" r=".8"/>
-
-                        <circle cx="18.2" cy="14" r=".8"/>
-
-                    </svg>
-
-                </button>
-
-
-
-                <button class="sidebar-button news-button" id="updatesButton" type="button" title="News" aria-label="News" data-i18n-title="titleNews" data-i18n-aria="titleNews">
-
-                    <svg class="updates-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-
-                        <path d="M5 4.5h14a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 18V6A1.5 1.5 0 0 1 5 4.5Z"/>
-
-                        <path d="M7 8h4M7 11h4M7 14h4M14 8h3M14 11h3M14 14h3"/>
-
-                    </svg>
-
-                </button>
-
-
-
-                <button class="sidebar-button shop-button" id="shopButton" type="button" title="Shop" aria-label="Shop" data-i18n-title="titleShop" data-i18n-aria="titleShop">
-
-                    <svg class="shop-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-
-                        <path d="M5 9.5h14l-1 10H6l-1-10Z"/>
-
-                        <path d="M8.5 9.5V7a3.5 3.5 0 0 1 7 0v2.5"/>
-
-                    </svg>
-
-                </button>
-
-
-
-                <button class="sidebar-button settings-button" id="settingsButton" type="button" title="Settings" aria-label="Settings" data-i18n-title="titleSettings" data-i18n-aria="titleSettings">
-
-                    <svg class="settings-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-
-                        <circle cx="12" cy="12" r="3"/>
-
-                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/>
-
-                    </svg>
-
-                </button>
-
-
-
-            </div>
-
-
-
-            <!-- Bulle des jeux -->
-
-            <div class="games-popover" id="gamesPanel" aria-hidden="true">
+            <!-- Ancienne bulle des jeux : gardée pour renderer.js, plus affichée -->
+            <div class="games-popover" hidden id="gamesPanel" aria-hidden="true">
 
                 <div class="games-popover-header">
 
@@ -295,19 +258,7 @@
 
 
 
-                <button class="game-card" id="tempestButton" type="button">
-
-                    <img src="assets/logos/tempest-logo.png" alt="Tempest Origins" class="game-card-logo">
-
-                    <span class="game-card-copy">
-
-                        <strong>TEMPEST ORIGINS</strong>
-
-                        <small>Disponible</small>
-
-                    </span>
-
-                </button>
+                
 
 
 
@@ -327,19 +278,13 @@
 
             </div>
 
-
-
         </aside>
 
 
 
         <!-- Floating Origins profile -->
 
-        <button class="account-button floating-profile-button" id="accountButton" type="button" title="Account" aria-label="Account">
-
-            <span class="account-icon"></span>
-
-        </button>
+        
 
 
 
@@ -355,6 +300,16 @@
 
         <main class="main-content">
 
+            <!-- Petit bandeau qui suit le téléchargement sur les autres onglets -->
+            <button class="av-dl-banner" id="downloadBanner" type="button" hidden>
+                <img src="assets/logos/tempest-logo.png" alt="">
+                <span class="av-dl-banner-body">
+                    <span class="av-dl-banner-top"><span data-i18n="downloadingTempest">Downloading Tempest</span><span id="downloadBannerPercent">0 %</span></span>
+                    <span class="av-dl-banner-track" aria-hidden="true"><span class="av-stripes" id="downloadBannerBar"></span></span>
+                </span>
+                <span class="av-dl-banner-eta" id="downloadBannerEta"></span>
+            </button>
+
 
 
 
@@ -367,91 +322,65 @@
 
 
 
-            <section
+            <section class="launcher-page home-page active" id="homePage">
 
-                class="launcher-page home-page active"
+                <img class="av-home-art" src="assets/games/tempest-background.png" alt="">
 
-                id="homePage"
+                <span class="av-home-tint" aria-hidden="true"></span>
 
-            >
+                <div class="av-home-col">
 
+                <section class="av-game-card" aria-label="Tempest Origins">
 
+                    <div class="av-game-pick">
+                        <button class="av-game-picker" id="homeGamePicker" type="button" aria-label="Choose the game" data-i18n-aria="chooseGame">Tempest <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+                    </div>
 
-                <!-- Background forêt -->
+                    <img class="av-game-logo" src="assets/logos/tempest-logo.png" alt="Tempest Origins">
 
-                <div class="home-background"></div>
+                    <div class="av-play-area">
 
+                        <button
 
+                            class="av-play"
 
-                <!-- Overlay -->
+                            id="playButton"
 
-                <div class="home-overlay"></div>
+                            type="button"
 
+                            data-i18n="install"
 
+                        >
 
+                            INSTALL
 
+                        </button>
 
-                <!-- Contenu scrollable -->
+                        <p class="av-install-size" data-i18n="installContents">Minecraft 1.21.11, Tempest mods and pack</p>
 
-                <div class="home-scroll">
+                        <div class="av-install" id="installProgress" aria-hidden="true">
+                            <div class="av-install-head">
+                                <span class="av-install-status" id="installProgressStatus" data-i18n="preparingTempest">PREPARING TEMPEST ORIGINS</span>
+                                <span class="av-install-percent" id="installProgressPercent">0%</span>
+                            </div>
+                            <div class="av-install-track"><div class="av-install-bar av-stripes" id="installProgressBar"></div></div>
+                            <div class="av-install-row">
+                                <span class="av-install-detail" id="installProgressDetail" data-i18n="preparingInstallation">Preparing installation...</span>
+                                <span class="av-install-eta" id="installProgressEta"></span>
+                            </div>
+                        </div>
 
+                    </div>
 
+                    <div class="av-game-actions">
+                        <button class="av-round" id="homeShopButton" type="button" title="Shop" aria-label="Shop" data-i18n-title="titleShop" data-i18n-aria="titleShop"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></button>
+                        <button class="av-round" id="homeGameSettingsButton" type="button" title="Game settings" aria-label="Game settings" data-i18n-title="gameSettings" data-i18n-aria="gameSettings"><svg aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></button>
+                        <!-- Discord du jeu affiché (Tempest) -->
+                        <button class="av-round" id="homeDiscordButton" type="button" title="Tempest Discord" aria-label="Tempest Discord" data-i18n-title="tempestDiscord" data-i18n-aria="tempestDiscord"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.32 4.37A19.8 19.8 0 0 0 15.4 2.8a13.9 13.9 0 0 0-.63 1.3 18.4 18.4 0 0 0-5.53 0 13.6 13.6 0 0 0-.64-1.3 19.7 19.7 0 0 0-4.93 1.53C.54 9.04-.31 13.58.11 18.06a19.9 19.9 0 0 0 6.04 3.05 14.7 14.7 0 0 0 1.29-2.1 12.9 12.9 0 0 1-2.04-.97l.5-.39a14.2 14.2 0 0 0 12.2 0l.5.39c-.65.39-1.33.71-2.04.97.37.74.8 1.44 1.29 2.1a19.8 19.8 0 0 0 6.04-3.05c.5-5.2-.84-9.7-3.57-13.69ZM8.02 15.33c-1.18 0-2.15-1.09-2.15-2.42s.95-2.42 2.15-2.42 2.17 1.09 2.15 2.42c0 1.33-.95 2.42-2.15 2.42Zm7.96 0c-1.18 0-2.15-1.09-2.15-2.42s.95-2.42 2.15-2.42 2.17 1.09 2.15 2.42c0 1.33-.94 2.42-2.15 2.42Z"/></svg></button>
+                    </div>
 
-
-
-                    <!-- HERO -->
-
-                    <section class="home-hero">
-
-
-
-<!-- Texte -->
-
-                        <div class="hero-copy">
-
-
-
-                            <span
-
-                                class="eyebrow"
-
-                                data-i18n="originsProject"
-
-                            >
-
-                                ORIGINS PROJECT
-
-                            </span>
-
-
-
-
-
-                            <h1 data-i18n="welcomeTitle">
-
-                                WELCOME TO ORIGINS
-
-                            </h1>
-
-
-
-
-
-                            <p data-i18n="welcomeText">
-
-                                Follow the development of Tempest Origins,
-
-                                discover project news and read the latest
-
-                                patch notes.
-
-                            </p>
-
-
-
-
-
-                            <button
+                    <!-- Ancien bouton « Découvrir Tempest » : gardé pour renderer.js -->
+                    <button hidden
 
                                 class="hero-button"
 
@@ -467,107 +396,19 @@
 
                             </button>
 
+                </section>
 
-
-                        </div>
-
-
-
-                    </section>
-
-
-
-
-
-                    <!-- =================================================
-
-                         NEWS
-
-                    ================================================== -->
-
-
-
-                    <section class="news-section">
-
-
-
-
-
-                        <div class="section-heading">
-
-
-
-                            <div>
-
-
-
-                                <span
-
-                                    class="eyebrow"
-
-                                    data-i18n="newsEyebrow"
-
-                                >
-
-                                    ORIGINS NETWORK
-
-                                </span>
-
-
-
-
-
-                                <h2 data-i18n="latestNews">
-
-                                    LATEST NEWS
-
-                                </h2>
-
-
-
-                            </div>
-
-
-
-                        </div>
-
-
-
-
-
-                        <!--
-
-                            Les cartes d'actualité seront
-
-                            générées par renderer.js
-
-                        -->
-
-                        <div
-
-                            class="news-grid"
-
-                            id="newsGrid"
-
-                        ></div>
-
-
-
-
-
-                    </section>
-
-
+                <section class="av-home-news" aria-labelledby="homeNewsTitle">
+                    <div class="av-home-news-head">
+                        <h2 id="homeNewsTitle" data-i18n="tempestNews">TEMPEST NEWS</h2>
+                        <button class="av-more" id="homeMoreNews" type="button"><span data-i18n="moreNews">+ MORE NEWS</span><span class="av-more-chip"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button>
+                    </div>
+                    <div class="news-grid av-news-grid" id="newsGrid"></div>
+                </section>
 
                 </div>
 
-
-
             </section>
-
-
-
-
 
 
 
@@ -579,24 +420,14 @@
 
             <section class="launcher-page updates-page" id="updatesPage">
 
-                <div class="section-page-background"></div>
-
-                <div class="section-page-overlay"></div>
-
-                <div class="section-page-scroll">
-
-                    <header class="section-page-hero">
-
-                        <span class="eyebrow" data-i18n="newsEyebrow">ORIGINS NETWORK</span>
-
-                        <h1 data-i18n="updatesTitle">NEWS</h1>
-
-                        <p data-i18n="updatesLead">Find the history of launcher and Origins project updates here.</p>
-
-                    </header>
-
-                    <div class="updates-history" id="updatesHistory"></div>
-
+<div class="av-page av-news-page">
+                    <div class="av-page-head">
+                        <h1 class="av-page-title" data-i18n="originsNews">ACTUS ORIGINS</h1>
+                        <div class="av-filters" role="group" aria-label="Filter" data-i18n-aria="filterNews"><button type="button" class="av-filter active" data-news-filter="all" aria-pressed="true" data-i18n="filterAll">Tout</button><button type="button" class="av-filter" data-news-filter="tempest" aria-pressed="false" data-i18n="filterTempest">Tempest</button><button type="button" class="av-filter" data-news-filter="launcher" aria-pressed="false" data-i18n="filterLauncher">Launcher</button></div>
+                    </div>
+                    <div class="av-news-scroll">
+                        <div class="av-actus-grid" id="updatesHistory"></div>
+                    </div>
                 </div>
 
             </section>
@@ -611,71 +442,23 @@
 
             <section class="launcher-page shop-page" id="shopPage">
 
-                <div class="section-page-background"></div>
-
-                <div class="section-page-overlay"></div>
-
-                <div class="section-page-scroll">
-
-                    <header class="section-page-hero">
-
-                        <span class="eyebrow">ORIGINS</span>
-
-                        <h1>SHOP</h1>
-
-                        <p data-i18n="shopLead">The Origins shop is ready for future project content.</p>
-
-                    </header>
-
-
-
-                    <div class="shop-grid">
-
-                        <article class="shop-card shop-card-featured">
-
-                            <div class="shop-card-icon">✦</div>
-
-                            <span class="news-type">TEMPEST ORIGINS</span>
-
-                            <h3 data-i18n="shopTempestTitle">Tempest Content</h3>
-
-                            <p data-i18n="shopTempestText">Future Tempest Origins content will appear here.</p>
-
-                            <button type="button" disabled data-i18n="comingSoon">COMING SOON</button>
-
-                        </article>
-
-                        <article class="shop-card">
-
-                            <div class="shop-card-icon">◇</div>
-
-                            <span class="news-type">ORIGINS</span>
-
-                            <h3 data-i18n="shopOriginsTitle">Origins Collection</h3>
-
-                            <p data-i18n="shopOriginsText">A section planned for future Origins items and content.</p>
-
-                            <button type="button" disabled data-i18n="comingSoon">COMING SOON</button>
-
-                        </article>
-
-                        <article class="shop-card">
-
-                            <div class="shop-card-icon">☆</div>
-
-                            <span class="news-type" data-i18n="comingSoon">COMING SOON</span>
-
-                            <h3 data-i18n="shopComingTitle">Coming Soon</h3>
-
-                            <p data-i18n="shopComingText">More categories can be added without changing navigation.</p>
-
-                            <button type="button" disabled data-i18n="comingSoon">COMING SOON</button>
-
-                        </article>
-
-                    </div>
-
-                </div>
+<div class="av-page av-shop-page" style="position: absolute; inset: 0; display: flex; flex-direction: column; gap: 14px; padding: 14px 14px 18px; box-sizing: border-box; background: var(--av-barre); overflow: hidden">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><h1 style="margin: 0; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: 0.04em; color: #fff" data-i18n="shopTitle">BOUTIQUE</h1>
+<span style="font-size: 12.5px; color: var(--av-doux)" data-i18n="shopSoonLead">La boutique ouvrira bientôt : voici comment elle sera rangée.</span></div>
+<div style="display: flex; gap: 10px; height: 290px; flex: none">
+<div aria-label="Tempest" style="position: relative; width: 300px; flex: none; border-radius: 10px; overflow: hidden; background: url('assets/games/tempest-background.png') 50% 40% / cover; display: flex; align-items: center; justify-content: center; clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%)">
+<span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.45)), var(--av-teinte)"></span><span style="position: relative"><img src="assets/logos/tempest-logo.png" alt="Tempest" style="width: 210px; filter: drop-shadow(0 8px 20px rgba(0,0,0,0.5))"></span></div>
+<div style="position: relative; flex: 1; min-width: 0">
+<div class="av-shop-row" style="height: 100%; display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x proximity"><div style="flex: none; display: flex; flex-direction: column; background: rgba(255,255,255,0.03); border-radius: 8px; scroll-snap-align: start"><h2 style="margin: 0; height: 36px; display: flex; align-items: center; padding: 0 12px; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.05em; color: #fff" data-i18n="shopCosmetics">COSMÉTIQUES</h2><div style="display: flex; gap: 8px; padding: 0 8px 8px"><article class="av-produit" style="width: 150px; flex: none; display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; background: var(--av-panneau); cursor: pointer"><div style="position: relative; height: 150px; background: linear-gradient(160deg, rgba(150,40,40,0.55), rgba(0,0,0,0.35)), var(--av-verre2); display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8l1.5 3L20 21H4L6.5 6z"/><path d="M8 3c1 2 3 3 4 3s3-1 4-3"/></svg></div><p style="margin: 0; padding: 8px 10px 0; height: 40px; box-sizing: border-box; font-size: 12.5px; font-weight: 700; color: #fff; line-height: 1.25" data-i18n="shopCape">Cape de Tempest</p><p style="margin: 0; padding: 0 10px 9px; display: flex; justify-content: flex-end"><span style="padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,0.08); font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; color: var(--av-doux)" data-i18n="shopSoon">BIENTÔT</span></p></article><article class="av-produit" style="width: 150px; flex: none; display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; background: var(--av-panneau); cursor: pointer"><div style="position: relative; height: 150px; background: linear-gradient(160deg, rgba(40,90,170,0.5), rgba(0,0,0,0.35)), var(--av-verre2); display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><path d="m12 8 1.2 2.8L16 12l-2.8 1.2L12 16l-1.2-2.8L8 12l2.8-1.2z"/></svg></div><p style="margin: 0; padding: 8px 10px 0; height: 40px; box-sizing: border-box; font-size: 12.5px; font-weight: 700; color: #fff; line-height: 1.25" data-i18n="shopAura">Aura de magicule</p><p style="margin: 0; padding: 0 10px 9px; display: flex; justify-content: flex-end"><span style="padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,0.08); font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; color: var(--av-doux)" data-i18n="shopSoon">BIENTÔT</span></p></article><article class="av-produit" style="width: 150px; flex: none; display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; background: var(--av-panneau); cursor: pointer"><div style="position: relative; height: 150px; background: linear-gradient(160deg, rgba(150,110,30,0.5), rgba(0,0,0,0.35)), var(--av-verre2); display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v8H4z"/><path d="M4 15l-2 3h5M20 15l2 3h-5"/><path d="M8 11h8"/></svg></div><p style="margin: 0; padding: 8px 10px 0; height: 40px; box-sizing: border-box; font-size: 12.5px; font-weight: 700; color: #fff; line-height: 1.25" data-i18n="shopTitleAwakened">Titre « Éveillé »</p><p style="margin: 0; padding: 0 10px 9px; display: flex; justify-content: flex-end"><span style="padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,0.08); font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; color: var(--av-doux)" data-i18n="shopSoon">BIENTÔT</span></p></article><article class="av-produit" style="width: 150px; flex: none; display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; background: var(--av-panneau); cursor: pointer"><div style="position: relative; height: 150px; background: linear-gradient(160deg, rgba(40,130,110,0.5), rgba(0,0,0,0.35)), var(--av-verre2); display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 14.5c1 1.3 2.2 2 3.5 2s2.5-.7 3.5-2M9 9.5h.01M15 9.5h.01"/></svg></div><p style="margin: 0; padding: 8px 10px 0; height: 40px; box-sizing: border-box; font-size: 12.5px; font-weight: 700; color: #fff; line-height: 1.25" data-i18n="shopEmotes">Pack d'emotes</p><p style="margin: 0; padding: 0 10px 9px; display: flex; justify-content: flex-end"><span style="padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,0.08); font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; color: var(--av-doux)" data-i18n="shopSoon">BIENTÔT</span></p></article><article class="av-produit" style="width: 150px; flex: none; display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; background: var(--av-panneau); cursor: pointer"><div style="position: relative; height: 150px; background: linear-gradient(160deg, rgba(60,80,140,0.5), rgba(0,0,0,0.35)), var(--av-verre2); display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="9" r="2"/><circle cx="11" cy="5.5" r="2"/><circle cx="16" cy="6.5" r="2"/><circle cx="18.5" cy="11" r="2"/><path d="M8 16.5c0-2.5 2-4.5 4.5-4.5s4 2 4 4.5c0 2-1.5 3-3 3-1 0-1.5-.5-2.5-.5s-1.5.5-2.5.5c-1.5 0-.5-1-.5-3z"/></svg></div><p style="margin: 0; padding: 8px 10px 0; height: 40px; box-sizing: border-box; font-size: 12.5px; font-weight: 700; color: #fff; line-height: 1.25" data-i18n="shopPet">Familier lumineux</p><p style="margin: 0; padding: 0 10px 9px; display: flex; justify-content: flex-end"><span style="padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,0.08); font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; color: var(--av-doux)" data-i18n="shopSoon">BIENTÔT</span></p></article></div></div><div style="flex: none; display: flex; flex-direction: column; background: rgba(255,255,255,0.03); border-radius: 8px; scroll-snap-align: start"><h2 style="margin: 0; height: 36px; display: flex; align-items: center; padding: 0 12px; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.05em; color: #fff" data-i18n="shopOffers">OFFRES DU MOMENT</h2><div style="display: flex; gap: 8px; padding: 0 8px 8px"><article class="av-produit" style="width: 150px; flex: none; display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; background: var(--av-panneau); cursor: pointer"><div style="position: relative; height: 150px; background: linear-gradient(160deg, rgba(110,50,150,0.55), rgba(0,0,0,0.35)), var(--av-verre2); display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="11" rx="1.5"/><path d="M3 9a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5M3 13h18"/><rect x="10.5" y="11.5" width="3" height="4" rx=".8"/></svg></div><p style="margin: 0; padding: 8px 10px 0; height: 40px; box-sizing: border-box; font-size: 12.5px; font-weight: 700; color: #fff; line-height: 1.25" data-i18n="shopChest">Coffre de la saison</p><p style="margin: 0; padding: 0 10px 9px; display: flex; justify-content: flex-end"><span style="padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,0.08); font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; color: var(--av-doux)" data-i18n="shopSoon">BIENTÔT</span></p></article><article class="av-produit" style="width: 150px; flex: none; display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; background: var(--av-panneau); cursor: pointer"><div style="position: relative; height: 150px; background: linear-gradient(160deg, rgba(140,70,110,0.5), rgba(0,0,0,0.35)), var(--av-verre2); display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="1.5"/><path d="M3 13h18M12 9v12M12 9c-1.5-3-5-4-6-2s3 2 6 2zM12 9c1.5-3 5-4 6-2s-3 2-6 2z"/></svg></div><p style="margin: 0; padding: 8px 10px 0; height: 40px; box-sizing: border-box; font-size: 12.5px; font-weight: 700; color: #fff; line-height: 1.25" data-i18n="shopWelcome">Pack de bienvenue</p><p style="margin: 0; padding: 0 10px 9px; display: flex; justify-content: flex-end"><span style="padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,0.08); font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; color: var(--av-doux)" data-i18n="shopSoon">BIENTÔT</span></p></article></div></div></div>
+<button type="button" class="av-shop-next" aria-label="Voir la suite" data-i18n-aria="seeMore" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: #ffffff; color: #111; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.4)"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></button></div>
+</div><div style="display: flex; gap: 10px; height: 290px; flex: none">
+<div aria-label="Origins" style="position: relative; width: 300px; flex: none; border-radius: 10px; overflow: hidden; background: url('assets/backgrounds/origins-home.png') 40% 30% / cover; display: flex; align-items: center; justify-content: center; clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%)">
+<span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.05), rgba(0,0,0,0.45)), var(--av-teinte)"></span><span style="position: relative"><span style="display: flex; flex-direction: column; align-items: center; gap: 10px"><span class="av-wordmark" role="img" aria-label="Origins" style="--s: 92px"><img src="assets/logos/origins-oeil-regard.svg" alt=""><span aria-hidden="true">RIGINS</span></span></span></span></div>
+<div style="position: relative; flex: 1; min-width: 0">
+<div class="av-shop-row" style="height: 100%; display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x proximity"><div style="flex: none; display: flex; flex-direction: column; background: rgba(255,255,255,0.03); border-radius: 8px; scroll-snap-align: start"><h2 style="margin: 0; height: 36px; display: flex; align-items: center; padding: 0 12px; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 0.05em; color: #fff" data-i18n="shopCollection">COLLECTION ORIGINS</h2><div style="display: flex; gap: 8px; padding: 0 8px 8px"><article class="av-produit" style="width: 150px; flex: none; display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; background: var(--av-panneau); cursor: pointer"><div style="position: relative; height: 150px; background: linear-gradient(160deg, rgba(60,80,140,0.5), rgba(0,0,0,0.35)), var(--av-verre2); display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.6-.9 1.2-1.8-.5-1-.1-2.2 1.2-2.2H17a4 4 0 0 0 4-4c0-5.5-4-10-9-10z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="14.5" cy="7" r="1"/></svg></div><p style="margin: 0; padding: 8px 10px 0; height: 40px; box-sizing: border-box; font-size: 12.5px; font-weight: 700; color: #fff; line-height: 1.25" data-i18n="shopThemes">Thèmes du launcher</p><p style="margin: 0; padding: 0 10px 9px; display: flex; justify-content: flex-end"><span style="padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,0.08); font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; color: var(--av-doux)" data-i18n="shopSoon">BIENTÔT</span></p></article><article class="av-produit" style="width: 150px; flex: none; display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; background: var(--av-panneau); cursor: pointer"><div style="position: relative; height: 150px; background: linear-gradient(160deg, rgba(140,70,110,0.5), rgba(0,0,0,0.35)), var(--av-verre2); display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/><path d="M12 1.5v2M12 20.5v2M1.5 12h2M20.5 12h2"/></svg></div><p style="margin: 0; padding: 8px 10px 0; height: 40px; box-sizing: border-box; font-size: 12.5px; font-weight: 700; color: #fff; line-height: 1.25" data-i18n="shopFrame">Cadre d'avatar</p><p style="margin: 0; padding: 0 10px 9px; display: flex; justify-content: flex-end"><span style="padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,0.08); font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; color: var(--av-doux)" data-i18n="shopSoon">BIENTÔT</span></p></article><article class="av-produit" style="width: 150px; flex: none; display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; background: var(--av-panneau); cursor: pointer"><div style="position: relative; height: 150px; background: linear-gradient(160deg, rgba(40,110,150,0.5), rgba(0,0,0,0.35)), var(--av-verre2); display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 19 6v6c0 4-3 7-7 9-4-2-7-5-7-9V6z"/><path d="m9 12 2 2 4-4"/></svg></div><p style="margin: 0; padding: 8px 10px 0; height: 40px; box-sizing: border-box; font-size: 12.5px; font-weight: 700; color: #fff; line-height: 1.25" data-i18n="shopBadge">Badge de profil</p><p style="margin: 0; padding: 0 10px 9px; display: flex; justify-content: flex-end"><span style="padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,0.08); font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; color: var(--av-doux)" data-i18n="shopSoon">BIENTÔT</span></p></article><article class="av-produit" style="width: 150px; flex: none; display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; background: var(--av-panneau); cursor: pointer"><div style="position: relative; height: 150px; background: linear-gradient(160deg, rgba(150,40,40,0.55), rgba(0,0,0,0.35)), var(--av-verre2); display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg></div><p style="margin: 0; padding: 8px 10px 0; height: 40px; box-sizing: border-box; font-size: 12.5px; font-weight: 700; color: #fff; line-height: 1.25" data-i18n="shopProfileBg">Fond de profil</p><p style="margin: 0; padding: 0 10px 9px; display: flex; justify-content: flex-end"><span style="padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,0.08); font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; color: var(--av-doux)" data-i18n="shopSoon">BIENTÔT</span></p></article><article class="av-produit" style="width: 150px; flex: none; display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; background: var(--av-panneau); cursor: pointer"><div style="position: relative; height: 150px; background: linear-gradient(160deg, rgba(40,90,170,0.5), rgba(0,0,0,0.35)), var(--av-verre2); display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/></svg></div><p style="margin: 0; padding: 8px 10px 0; height: 40px; box-sizing: border-box; font-size: 12.5px; font-weight: 700; color: #fff; line-height: 1.25" data-i18n="shopWallpaper">Fond d'écran du launcher</p><p style="margin: 0; padding: 0 10px 9px; display: flex; justify-content: flex-end"><span style="padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,0.08); font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; color: var(--av-doux)" data-i18n="shopSoon">BIENTÔT</span></p></article><article class="av-produit" style="width: 150px; flex: none; display: flex; flex-direction: column; border-radius: 8px; overflow: hidden; background: var(--av-panneau); cursor: pointer"><div style="position: relative; height: 150px; background: linear-gradient(160deg, rgba(150,110,30,0.5), rgba(0,0,0,0.35)), var(--av-verre2); display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="58" height="58" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 14.5c1 1.3 2.2 2 3.5 2s2.5-.7 3.5-2M9 9.5h.01M15 9.5h.01"/></svg></div><p style="margin: 0; padding: 8px 10px 0; height: 40px; box-sizing: border-box; font-size: 12.5px; font-weight: 700; color: #fff; line-height: 1.25" data-i18n="shopSounds">Sons du launcher</p><p style="margin: 0; padding: 0 10px 9px; display: flex; justify-content: flex-end"><span style="padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,0.08); font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; color: var(--av-doux)" data-i18n="shopSoon">BIENTÔT</span></p></article></div></div></div>
+<button type="button" class="av-shop-next" aria-label="Voir la suite" data-i18n-aria="seeMore" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: #ffffff; color: #111; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.4)"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg></button></div>
+</div>
+</div>
 
             </section>
 
@@ -691,197 +474,26 @@
 
             <section class="launcher-page games-library-page" id="gamesLibraryPage">
 
-                <div class="games-library-shell">
-
-                    <span class="eyebrow" data-i18n="originsLibrary">ORIGINS LIBRARY</span>
-
-                    <h1 data-origins-games-title>GAMES</h1>
-
-                    <p class="games-library-lead" data-origins-games-lead>Your worlds, in one place.</p>
-
-                    <div class="games-library-grid">
-
-                        <button class="library-game-card available" id="libraryTempestButton" type="button">
-
-                            <img src="assets/logos/tempest-logo.png" alt="Tempest Origins">
-
-                            <span><strong>TEMPEST ORIGINS</strong><small data-origins-available>AVAILABLE</small></span>
-
-                        </button>
-
-                        <div class="library-game-card coming">
-
-                            <div class="coming-mark">+</div>
-
-                            <span><strong data-origins-coming>UPCOMING GAME</strong><small data-origins-coming-sub>Coming later</small></span>
-
-                        </div>
-
-                    </div>
-
-                </div>
+<div class="av-page av-games-page" style="position: absolute; inset: 0; display: flex; flex-direction: column; gap: 12px; padding: 14px 18px 18px; box-sizing: border-box; background: var(--av-barre)">
+<h1 style="margin: 0; font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 17px; letter-spacing: 0.04em; color: #fff" data-i18n="originsGames">JEUX ORIGINS</h1>
+<div style="flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+<button class="av-affiche" id="libraryTempestButton" type="button" aria-label="Tempest" style="grid-column: span 3; position: relative; border: 0; padding: 0; border-radius: 12px; overflow: hidden; background: url('assets/games/tempest-background.png') 50% 40% / cover; cursor: pointer; text-align: left; font-family: Nunito, sans-serif">
+<span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.78)), var(--av-teinte)"></span>
+<img src="assets/logos/tempest-logo.png" alt="" style="position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); width: 300px; filter: drop-shadow(0 10px 24px rgba(0,0,0,0.5))">
+<span style="position: absolute; left: 18px; bottom: 16px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-family: 'Baloo 2', sans-serif; font-weight: 800; font-size: 24px; letter-spacing: 0.03em; color: #fff">TEMPEST</span>
+<span style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.05em; color: #e6eaf2; text-transform: uppercase" data-i18n="tempestGenre">MMORPG, fantasy · Minecraft 1.21.11</span></span>
+<span style="position: absolute; right: 16px; bottom: 18px; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: rgba(0,0,0,0.5); color: #fff; font-size: 11.5px; font-weight: 800; letter-spacing: 0.04em"><span aria-hidden="true" id="libraryTempestDot" style="width: 8px; height: 8px; border-radius: 50%; background: #4cd38a"></span><span id="libraryTempestState">INSTALLÉ</span></span>
+</button>
+</div>
+</div>
 
             </section>
 
 
 
-            <section
-
-                class="launcher-page tempest-page"
-
-                id="tempestPage"
-
-            >
-
-
-
-
-
-                <!-- Background Tempest -->
-
-                <div class="game-background"></div>
-
-
-
-
-
-                <!-- Overlay -->
-
-                <div class="game-overlay"></div>
-
-
-
-
-
-                <!-- Topbar -->
-
-                <div class="topbar">
-
-
-
-                    <div class="game-name-small">
-
-                        TEMPEST ORIGINS
-
-                    </div>
-
-
-
-                </div>
-
-
-
-
-
-                <!-- Informations jeu -->
-
-                <section class="game-info">
-
-
-
-                    <h1>
-
-
-
-                        TEMPEST
-
-
-
-                        <span>
-
-                            ORIGINS
-
-                        </span>
-
-
-
-                    </h1>
-
-
-
-
-
-                    <div class="play-area">
-
-
-
-                        <button
-
-                            class="play-button"
-
-                            id="playButton"
-
-                            type="button"
-
-                            data-i18n="install"
-
-                        >
-
-                            INSTALL
-
-                        </button>
-
-
-
-                        <div
-
-                            class="install-progress"
-
-                            id="installProgress"
-
-                            aria-hidden="true"
-
-                        >
-
-                            <div class="install-progress-header">
-
-                                <span class="install-progress-status" id="installProgressStatus" data-i18n="preparingTempest">
-
-                                    PREPARING TEMPEST ORIGINS
-
-                                </span>
-
-                                <span class="install-progress-percent" id="installProgressPercent">
-
-                                    0%
-
-                                </span>
-
-                            </div>
-
-
-
-                            <div class="install-progress-track">
-
-                                <div class="install-progress-bar" id="installProgressBar"></div>
-
-                            </div>
-
-
-
-                            <div class="install-progress-detail" id="installProgressDetail" data-i18n="preparingInstallation">
-
-                                Preparing installation...
-
-                            </div>
-
-                        </div>
-
-
-
-                    </div>
-
-
-
-                </section>
-
-
-
-            </section>
-
-
-
-
+            <!-- Le jeu Tempest est maintenant sur l'accueil ; section gardée pour renderer.js -->
+            <section class="launcher-page tempest-page" id="tempestPage" aria-hidden="true"></section>
 
         </main>
 
@@ -891,13 +503,7 @@
 
         <!-- Origins notifications -->
 
-        <button class="notifications-quick-access" id="notificationsQuickAccess" type="button" aria-label="Open notifications" title="Notifications" data-i18n-aria="openNotifications" data-i18n-title="notifications">
-
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 9.5a5.5 5.5 0 0 1 11 0v3.2l1.8 3.1H4.7l1.8-3.1V9.5Z"/><path d="M10 18.2a2.2 2.2 0 0 0 4 0"/></svg>
-
-            <span class="notifications-badge" id="notificationsBadge" hidden>0</span>
-
-        </button>
+        
 
 
 
@@ -911,17 +517,7 @@
 
             </div>
 
-            <div class="notifications-content" id="notificationsContent">
-
-                <div class="social-empty-state">
-
-                    <strong data-i18n="noNotifications">NO NOTIFICATIONS</strong>
-
-                    <span data-i18n="noNotificationsText">Friend requests will appear here.</span>
-
-                </div>
-
-            </div>
+            
 
         </aside>
 
@@ -935,75 +531,7 @@
 
 
 
-        <button
-
-            class="friends-quick-access"
-
-            id="friendsQuickAccess"
-
-            type="button"
-
-            aria-label="Open contacts" data-i18n-aria="openContacts" data-i18n-title="contacts"
-
-            aria-expanded="false"
-
-            title="Contacts"
-
-        >
-
-            <span class="friends-bubble-icon" aria-hidden="true">
-
-                <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
-
-                    <circle cx="9" cy="8" r="3"/><path d="M3.5 18c.5-3.2 2.4-5 5.5-5s5 1.8 5.5 5"/><circle cx="17" cy="9" r="2.4"/><path d="M15.3 13.6c2.8-.7 5 .8 5.4 3.4"/>
-
-                </svg>
-
-            </span>
-
-
-
-            <span class="friends-online-dot" aria-hidden="true"></span>
-
-
-
-            <span
-
-                class="friends-online-badge"
-
-                id="friendsMessageBadge"
-
-                aria-hidden="true"
-
-            >
-
-                0
-
-            </span>
-
-
-
-            <span class="friends-bubble-tooltip">
-
-                <strong data-i18n="friendsOnline">
-
-                    FRIENDS ONLINE
-
-                </strong>
-
-
-
-                <small>
-
-                    <span id="friendsOnlineCount">0</span>
-
-                    <span data-i18n="onlineShort">online</span>
-
-                </small>
-
-            </span>
-
-        </button>
+        
 
 
 
@@ -1171,12 +699,39 @@
 
 
 
-            <!-- Friends / private messages -->
+            
+            <!-- Nouveau design : onglets du tiroir -->
+            <div class="av-social-tabs" role="tablist" aria-label="Contacts">
+                <button class="av-social-tab active" id="socialTabContacts" type="button" role="tab" aria-selected="true" data-social-tab="contacts"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2a5 5 0 0 1 5.5 5.8"/></svg><span data-i18n="tabContacts">CONTACTS</span></button>
+                <button class="av-social-tab" id="socialTabMessages" type="button" role="tab" aria-selected="false" data-social-tab="messages"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span data-i18n="tabMessages">MESSAGES</span><span class="av-tab-badge" id="socialMessagesBadge" hidden>0</span></button>
+                <button class="av-social-tab" id="socialTabRequests" type="button" role="tab" aria-selected="false" data-social-tab="requests"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span data-i18n="tabRequests">REQUESTS</span><span class="av-tab-badge" id="socialRequestsBadge" hidden>0</span></button>
+            </div>
 
-            <div class="friends-messages-ui">
+            <div class="av-social-pane" data-social-pane="contacts" role="tabpanel">
+                <aside class="floating-tool-window add-contact-panel" id="addContactPanel" aria-hidden="true">
 
+            <div class="floating-window-header" data-drag-handle>
 
+                <strong data-i18n="addContact">ADD A CONTACT</strong>
 
+                <button class="floating-window-close" id="addContactClose" type="button" aria-label="Close" data-i18n-aria="close">×</button>
+
+            </div>
+
+            <div class="add-contact-content">
+
+                <label for="addContactId" data-i18n="addWithOriginsId">ADD WITH AN ORIGINS ID</label>
+
+                <input id="addContactId" type="text" autocomplete="off" placeholder="XXXX-XXXX">
+
+                <button class="add-contact-search" id="addContactSearch" type="button" data-i18n="search">SEARCH</button>
+
+                <p class="add-contact-hint" data-i18n="socialBackendPending">Origins ID search will be connected to the social server.</p>
+
+            </div>
+
+        </aside>
+                <button class="av-switch" id="socialOnlineOnly" type="button" role="switch" aria-checked="true"><span class="av-switch-track" aria-hidden="true"><span class="av-switch-knob"></span></span><span><span data-i18n="onlyOnline">Only online</span> (<span id="socialOnlineCount">0/0</span>)</span></button>
                 <section
 
                     class="friends-messages-view active"
@@ -1234,6 +789,33 @@
 
 
                 </section>
+            </div>
+
+            <div class="av-social-pane" data-social-pane="messages" role="tabpanel" hidden>
+                <ul class="av-conversations" id="socialConversations"></ul>
+            </div>
+
+            <div class="av-social-pane" data-social-pane="requests" role="tabpanel" hidden>
+                <div class="notifications-content" id="notificationsContent">
+
+                <div class="social-empty-state">
+
+                    <strong data-i18n="noNotifications">NO NOTIFICATIONS</strong>
+
+                    <span data-i18n="noNotificationsText">Friend requests will appear here.</span>
+
+                </div>
+
+            </div>
+            </div>
+
+            <!-- Friends / private messages -->
+
+            <div class="friends-messages-ui">
+
+
+
+                
 
 
 
@@ -1396,29 +978,7 @@
 
 
 
-        <aside class="floating-tool-window add-contact-panel" id="addContactPanel" aria-hidden="true">
-
-            <div class="floating-window-header" data-drag-handle>
-
-                <strong data-i18n="addContact">ADD A CONTACT</strong>
-
-                <button class="floating-window-close" id="addContactClose" type="button" aria-label="Close" data-i18n-aria="close">×</button>
-
-            </div>
-
-            <div class="add-contact-content">
-
-                <label for="addContactId" data-i18n="originsId">ORIGINS ID</label>
-
-                <input id="addContactId" type="text" autocomplete="off" placeholder="XXXX-XXXX">
-
-                <button class="add-contact-search" id="addContactSearch" type="button" data-i18n="search">SEARCH</button>
-
-                <p class="add-contact-hint" data-i18n="socialBackendPending">Origins ID search will be connected to the social server.</p>
-
-            </div>
-
-        </aside>
+        
 
 
 
@@ -1456,139 +1016,39 @@
 
 
 
-            <section class="account-panel">
+            <section class="account-panel av-profile" role="dialog" aria-label="Origins profile">
 
+                <button class="account-close av-dim-close av-dim-close-profile" id="accountClose" type="button" aria-label="Close account" data-i18n-aria="close"><span><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span></button>
 
-
-
-
-                <div class="account-panel-header">
-
-
-
-                    <div>
-
-
-
-                        <span class="panel-eyebrow">
-
-                            ORIGINS
-
-                        </span>
-
-
-
-
-
-                        <h2 data-i18n="account">
-
-                            ACCOUNT
-
-                        </h2>
-
-
-
+                <div class="av-profile-top">
+                    <span class="av-profile-status" id="profileStatusPill"><span aria-hidden="true"></span><span id="profileStatusText">Online</span></span>
+                    <span class="av-profile-ring">
+                        <span class="account-avatar-large">?</span>
+                        <button class="av-profile-pencil" id="changeAvatarButton" type="button" title="Change avatar" aria-label="Change avatar" data-i18n-title="changeAvatar" data-i18n-aria="changeAvatar"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg></button>
+                    </span>
+                    <div class="av-profile-name" id="profileNameView">
+                        <h3 id="accountProfileName" data-i18n="notSignedIn">Not signed in</h3>
+                        <button class="av-profile-edit" id="editProfileNameButton" type="button" aria-label="Edit my name" data-i18n-aria="editName"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg></button>
                     </div>
-
-
-
-
-
-                    <button
-
-                        class="account-close"
-
-                        id="accountClose"
-
-                        type="button"
-
-                        aria-label="Close account"
-
-                    >
-
-                        ×
-
-                    </button>
-
-
-
+                    <div class="av-profile-name-edit" id="profileNameEdit" hidden>
+                        <input id="profileNameInput" class="profile-name-input" maxlength="32" data-i18n-placeholder="displayName" placeholder="Display name">
+                        <button id="saveProfileButton" type="button">OK</button>
+                    </div>
+                    <div class="origins-id-card" id="originsIdCard" hidden>
+                        <button class="origins-id-copy" id="copyOriginsIdButton" type="button" title="Copy Origins ID" data-i18n-title="copyOriginsId">
+                            <span class="av-id-text"><span class="origins-id-label" data-i18n="originsId">ORIGINS ID</span><span id="accountOriginsId">----</span></span>
+                            <span class="origins-id-copy-label" id="originsIdCopyLabel" data-i18n="copy">COPY</span>
+                        </button>
+                    </div>
+                    <span class="av-profile-ms" data-i18n="connectedMicrosoft">Signed in with Microsoft</span>
+                    <p class="account-description" data-i18n="accountDescription" hidden>Sign in to your account to access Tempest Origins and your friends.</p>
                 </div>
 
-
-
-
-
-                <div class="account-avatar-large">
-
-                    ?
-
+                <div class="av-profile-menu">
+                    <button class="av-profile-entry" id="profileContactsButton" type="button"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2a5 5 0 0 1 5.5 5.8"/></svg><span data-i18n="myContacts">My contacts</span></button>
+                    <button class="av-profile-entry" id="profileSettingsButton" type="button"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg><span data-i18n="settings">Settings</span></button>
+                    <button class="av-profile-entry av-profile-logout account-signin" id="loginButton" type="button" data-i18n="signIn">SIGN IN</button>
                 </div>
-
-
-
-
-
-                <h3 id="accountProfileName" data-i18n="notSignedIn">Not signed in</h3>
-
-
-                <div class="origins-id-card" id="originsIdCard" hidden>
-                    <span class="origins-id-label" data-i18n="originsId">ORIGINS ID</span>
-                    <button class="origins-id-copy" id="copyOriginsIdButton" type="button" title="Copy Origins ID" data-i18n-title="copyOriginsId">
-                        <span id="accountOriginsId">----</span>
-                        <span class="origins-id-copy-label" id="originsIdCopyLabel" data-i18n="copy">COPY</span>
-                    </button>
-                </div>
-
-
-
-
-                <input id="profileNameInput" class="profile-name-input" maxlength="32" data-i18n-placeholder="displayName" placeholder="Display name">
-
-                <button id="saveProfileButton" class="account-signin" type="button" data-i18n="saveName">SAVE NAME</button>
-
-                <button id="changeAvatarButton" class="account-signin secondary" type="button" data-i18n="changeAvatar">CHANGE AVATAR</button>
-
-
-
-
-
-                <p
-
-                    class="account-description"
-
-                    data-i18n="accountDescription"
-
-                >
-
-                    Sign in to your account to access
-
-                    Tempest Origins and your friends.
-
-                </p>
-
-
-
-
-
-                <button
-
-                    class="account-signin"
-
-                    id="loginButton"
-
-                    type="button"
-
-                    data-i18n="signIn"
-
-                >
-
-                    SIGN IN
-
-                </button>
-
-
-
-
 
             </section>
 
@@ -1620,159 +1080,67 @@
 
 
 
-            <section
+            <section class="settings-panel av-settings" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
 
-                class="settings-panel"
+                <nav class="av-set-nav">
+                    <h2 class="av-set-heading"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg><span id="settingsTitle" data-i18n="settings">SETTINGS</span></h2>
+                    <div class="av-set-cats" role="tablist" aria-orientation="vertical">
+                        <button class="av-set-cat active" type="button" role="tab" aria-selected="true" data-set-cat="general" data-i18n="setCatGeneral">General</button><button class="av-set-cat" type="button" role="tab" aria-selected="false" data-set-cat="jeu" data-i18n="setCatGame">Game</button><button class="av-set-cat" type="button" role="tab" aria-selected="false" data-set-cat="compte" data-i18n="setCatAccount">Account</button><button class="av-set-cat" type="button" role="tab" aria-selected="false" data-set-cat="aide" data-i18n="setCatHelp">Help</button><button class="av-set-cat" type="button" role="tab" aria-selected="false" data-set-cat="apropos" data-i18n="setCatAbout">About</button>
+                    </div>
+                    <p class="av-set-version" id="settingsVersion">Origins Launcher</p>
+                </nav>
 
-                role="dialog"
+                <div class="av-set-body">
 
-                aria-modal="true"
-
-                aria-labelledby="settingsTitle"
-
-            >
-
-
-
-
-
-                <!-- Header -->
-
-                <div class="settings-header">
-
-
-
-                    <div>
-
-
-
-                        <span class="settings-eyebrow">
-
-                            ORIGINS
-
-                        </span>
-
-
-
-
-
-                        <h2
-
-                            id="settingsTitle"
-
-                            data-i18n="settings"
-
-                        >
-
-                            SETTINGS
-
-                        </h2>
-
-
-
+                    <div class="av-set-pane" data-set-pane="general" role="tabpanel">
+                        <div class="av-set-row"><div class="av-set-text"><label class="av-set-title" for="launcherLanguage" data-i18n="setLanguageTitle">Origins language</label><div class="av-set-desc" data-i18n="originsLanguageDescription">One language for Origins Launcher and Tempest / Minecraft.</div></div>
+                            <!-- Options are generated from ORIGINS_LANGUAGES (i18n.js). -->
+                            <select id="launcherLanguage" class="av-select"></select>
+                            <select id="gameLanguage" hidden aria-hidden="true"></select>
+                        </div>
+                        <div class="av-set-row av-set-row-block"><div class="av-set-text"><div class="av-set-title" data-i18n="setThemeTitle">Theme</div><div class="av-set-desc" data-i18n="setThemeDesc">The launcher colours, just for you. The change is instant.</div></div>
+                            <div class="av-themes" id="themePicker" role="radiogroup" aria-label="Theme" data-i18n-aria="setThemeTitle"></div>
+                        </div>
                     </div>
 
-
-
-
-
-                    <button
-
-                        class="settings-close"
-
-                        id="settingsClose"
-
-                        type="button"
-
-                        aria-label="Close settings"
-
-                    >
-
-                        ×
-
-                    </button>
-
-
-
-                </div>
-
-
-
-
-
-                <!-- Origins language -->
-
-                <div class="settings-section">
-
-                    <label for="launcherLanguage" data-i18n="originsLanguage">ORIGINS LANGUAGE</label>
-
-                    <p data-i18n="originsLanguageDescription">One language for Origins Launcher and Tempest / Minecraft.</p>
-
-                    <!-- Options are generated from ORIGINS_LANGUAGES (i18n.js). -->
-                    <select id="launcherLanguage"></select>
-
-                    <select id="gameLanguage" hidden aria-hidden="true"></select>
-
-                </div>
-
-                <!-- Game memory -->
-
-                <div class="settings-section" id="gameMemorySection">
-
-                    <label for="gameMemory" data-i18n="gameMemory">GAME MEMORY</label>
-
-                    <p data-i18n="gameMemoryDescription">RAM given to Minecraft. More helps with shaders and big areas; too much slows down the rest of the PC.</p>
-
-                    <div class="memory-row">
-                        <input type="range" id="gameMemory" min="2" max="8" step="1" value="4">
-                        <output id="gameMemoryValue" for="gameMemory">4 GB</output>
+                    <div class="av-set-pane" data-set-pane="jeu" role="tabpanel" hidden>
+                        <div class="av-set-row av-set-row-block" id="gameMemorySection">
+                            <div class="av-set-text"><label class="av-set-title" for="gameMemory" data-i18n="setMemoryTitle">Game memory</label><div class="av-set-desc" data-i18n="gameMemoryDescription">RAM given to Minecraft. More helps with shaders and big areas; too much slows down the rest of the PC.</div></div>
+                            <div class="av-memory">
+                                <div class="av-memory-track">
+                                    <input type="range" id="gameMemory" min="2" max="8" step="1" value="4">
+                                    <!-- Seulement le minimum et le maximum (fixés par systemMemory() dans index.js) -->
+                                    <div class="av-memory-ticks" aria-hidden="true"><span id="gameMemoryMinLabel">2 GB</span><span id="gameMemoryMaxLabel">8 GB</span></div>
+                                </div>
+                                <output id="gameMemoryValue" for="gameMemory">4 GB</output>
+                            </div>
+                            <span class="memory-hint av-memory-hint" id="gameMemoryHint"></span>
+                        </div>
                     </div>
 
-                    <span class="memory-hint" id="gameMemoryHint"></span>
+                    <div class="av-set-pane" data-set-pane="compte" role="tabpanel" hidden>
+                        <div class="av-set-row"><div class="av-set-text"><div class="av-set-title" data-i18n="setMicrosoftTitle">Microsoft account</div><div class="av-set-desc"><span id="settingsAccountName"></span></div></div><button class="av-set-btn" id="settingsSwitchAccount" type="button" data-i18n="setSwitchAccount">Switch account</button></div>
+                        <div class="av-set-row"><div class="av-set-text"><div class="av-set-title" data-i18n="setProfileTitle">Origins profile</div><div class="av-set-desc" data-i18n="setProfileDesc">Your name, your avatar and your Origins ID.</div></div><button class="av-set-btn" id="settingsEditProfile" type="button" data-i18n="setEditProfile">Edit my profile</button></div>
+                        <div class="av-set-row"><div class="av-set-text"><div class="av-set-title" data-i18n="setLogoutTitle">Sign out</div><div class="av-set-desc" data-i18n="setLogoutDesc">You will need to sign in with Microsoft again next time.</div></div><button class="av-set-btn av-set-danger" id="settingsLogout" type="button" data-i18n="setLogoutTitle">Sign out</button></div>
+                    </div>
+
+                    <div class="av-set-pane" data-set-pane="aide" role="tabpanel" hidden>
+                        <div class="av-set-row"><div class="av-set-text"><div class="av-set-title" data-i18n="setTutorialTitle">Tutorial</div><div class="av-set-desc" data-i18n="tutorialSectionText">Take the guided tour of the launcher again.</div></div><button class="av-set-btn settings-tutorial-button" id="replayTutorialButton" type="button" data-i18n="setReplayTutorial">Replay the tutorial</button></div>
+                        <div class="av-set-row"><div class="av-set-text"><div class="av-set-title" data-i18n="setWhatsNewTitle">What's new</div><div class="av-set-desc" data-i18n="setWhatsNewDesc">What changed in the last update.</div></div><button class="av-set-btn" id="settingsWhatsNew" type="button" data-i18n="setWhatsNewButton">See what's new</button></div>
+                        <div class="av-set-row"><div class="av-set-text"><div class="av-set-title" data-i18n="setSupportTitle">Technical support</div><div class="av-set-desc" data-i18n="setSupportDesc">A problem with the launcher or the game not starting? Open a ticket on the Origins Discord.</div></div><button class="av-set-btn" id="settingsOriginsDiscord" type="button" data-i18n="setOpenOriginsDiscord">Origins Discord</button></div>
+                        <div class="av-set-row"><div class="av-set-text"><div class="av-set-title" data-i18n="setTempestDiscordTitle">Tempest community</div><div class="av-set-desc" data-i18n="setTempestDiscordDesc">Questions about the game, the news and the players: it all happens on the Tempest Discord.</div></div><button class="av-set-btn" id="settingsTempestDiscord" type="button" data-i18n="tempestDiscord">Tempest Discord</button></div>
+                    </div>
+
+                    <div class="av-set-pane" data-set-pane="apropos" role="tabpanel" hidden>
+                        <div class="av-set-row"><div class="av-set-text"><div class="av-set-title" data-i18n="setVersionTitle">Version</div><div class="av-set-desc"><span id="settingsVersionText">Origins Launcher</span></div></div><span class="av-set-pill" id="settingsUpdateState" data-i18n="setUpToDate">Up to date</span></div>
+                        <div class="av-set-row"><div class="av-set-text"><div class="av-set-title" data-i18n="setUpdatesTitle">Updates</div><div class="av-set-desc" data-i18n="setUpdatesDesc">The launcher updates itself; a banner tells you when to restart.</div></div><span class="av-set-pill" data-i18n="setAutomatic">Automatic</span></div>
+                        <div class="av-set-row"><div class="av-set-text"><div class="av-set-title" data-i18n="setAllNewsTitle">All news</div><div class="av-set-desc" data-i18n="setAllNewsDesc">The history of launcher and Origins project updates.</div></div><button class="av-set-link" id="settingsAllNews" type="button"><span data-i18n="setSee">See</span> →</button></div>
+                    </div>
 
                 </div>
 
-                <!-- Tutorial -->
-
-                <div class="settings-section">
-
-                    <label data-i18n="tutorialSection">TUTORIAL</label>
-
-                    <p data-i18n="tutorialSectionText">Take the guided tour of the launcher again.</p>
-
-                    <button class="add-contact-search settings-tutorial-button" id="replayTutorialButton" type="button" data-i18n="replayTutorial">
-                        REPLAY THE TUTORIAL
-                    </button>
-
-                </div>
-
-
-
-
-
-                <!-- Footer -->
-
-                <div class="settings-footer">
-
-
-
-                    <span>
-
-                        Origins Launcher
-
-                    </span>
-
-
-
-                    <span></span>
-
-
-
-                </div>
-
-
-
-
+                <!-- Le reste de l'écran est assombri, avec une croix ronde au milieu -->
+                <button class="settings-close av-dim-close" id="settingsClose" type="button" aria-label="Close settings" data-i18n-aria="close"><span><svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span></button>
 
             </section>
 
@@ -1799,6 +1167,30 @@
 
 
     <!-- Launcher update banner (download progress / restart to install) -->
+
+    <!-- Diagnostic de lancement : pourquoi le jeu ne s'est pas lancé, et quoi faire -->
+    <div class="av-problem" id="launchProblem" hidden>
+        <div class="av-problem-card" role="alertdialog" aria-modal="true" aria-labelledby="launchProblemTitle" aria-describedby="launchProblemText">
+            <button class="av-news-detail-close" id="launchProblemClose" type="button" aria-label="Close" data-i18n-aria="close"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+            <span class="av-problem-kicker" data-i18n="problemKicker">THE GAME DID NOT START</span>
+            <h2 id="launchProblemTitle"></h2>
+            <p id="launchProblemText"></p>
+            <p class="av-problem-detail" id="launchProblemDetail"></p>
+            <div class="av-problem-actions" id="launchProblemActions"></div>
+            <p class="av-problem-status" id="launchProblemStatus" role="status"></p>
+        </div>
+    </div>
+
+    <div class="av-news-detail" id="newsDetail" hidden>
+        <div class="av-news-detail-card" role="dialog" aria-modal="true" aria-labelledby="newsDetailTitle">
+            <button class="av-news-detail-close" id="newsDetailClose" type="button" aria-label="Close" data-i18n-aria="close"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+            <span class="av-news-detail-meta" id="newsDetailMeta"></span>
+            <h2 id="newsDetailTitle"></h2>
+            <p id="newsDetailText"></p>
+            <ul id="newsDetailChanges"></ul>
+        </div>
+    </div>
+
     <div class="launcher-update-banner" id="launcherUpdateBanner" role="status" aria-live="polite" hidden>
         <span class="launcher-update-icon" aria-hidden="true">↻</span>
         <span class="launcher-update-text" id="launcherUpdateText"></span>
@@ -1807,7 +1199,8 @@
 
     <!-- "What's new" after an update: every change since the last version seen -->
     <div class="origins-whats-new" id="originsWhatsNew" hidden>
-        <div class="origins-whats-new-card" role="dialog" aria-modal="true" aria-labelledby="originsWhatsNewTitle">
+        <div class="origins-whats-new-card" role="dialog" aria-labelledby="originsWhatsNewTitle">
+            <button class="av-whats-new-x" id="originsWhatsNewX" type="button" aria-label="Close" data-i18n-aria="close"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
             <span class="origins-whats-new-kicker" data-i18n="whatsNewKicker">UPDATE INSTALLED</span>
             <h2 id="originsWhatsNewTitle" data-i18n="whatsNewTitle">What’s new?</h2>
             <p class="origins-whats-new-versions" id="originsWhatsNewVersions"></p>

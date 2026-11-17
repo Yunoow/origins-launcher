@@ -34,6 +34,8 @@
     "files": [
       "index.js",
       "tempest-updater.js",
+      "java-runtime.js",
+      "launch-diagnostic.js",
       "src/**/*",
       "package.json"
     ],

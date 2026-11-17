@@ -59,6 +59,18 @@ const {
 
 } = require("./tempest-updater");
 
+// Java 21 embarqué (téléchargé une fois dans le dossier du launcher) et diagnostic de lancement.
+const { ensureJavaRuntime, removeJavaRuntime } = require("./java-runtime");
+const launchDiagnostic = require("./launch-diagnostic");
+
+/** Dossier des Java embarqués : %APPDATA%/OriginsLauncher/runtime */
+function getJavaRuntimeDir() {
+    return path.join(app.getPath("appData"), "OriginsLauncher", "runtime");
+}
+
+// Dernières lignes écrites par le jeu (lues par le diagnostic s'il plante).
+let gameOutput = launchDiagnostic.createOutputBuffer(400);
+
 
 
 
@@ -1560,6 +1572,43 @@ function detectJava() {
 
 
 
+/*
+ * Liens externes du launcher. Les adresses sont fixées ici : l'interface peut seulement
+ * demander l'un de ces noms, jamais ouvrir une autre adresse.
+ *   origins : Discord du projet Origins (actus, communauté) — mis en avant dans la barre du haut
+ *   tempest : Discord du jeu Tempest
+ *   support : où ouvrir un ticket (bouton « Ouvrir un ticket » quand le jeu ne se lance pas).
+ *             Pour l'instant le Discord d'Origins ; quand les tickets seront sur le site,
+ *             mettre ici l'adresse de la page des tickets.
+ */
+const DISCORD_URLS = {
+    origins: "https://discord.gg/kHStbdtuxz",
+    tempest: "https://discord.gg/9YGPreUdQ7",
+    support: "https://discord.gg/kHStbdtuxz"
+};
+
+ipcMain.handle("origins:open-discord", async (_event, server = "tempest") => {
+
+    try {
+
+        const url = DISCORD_URLS[server];
+
+        if (!url) return { success: false, error: "UNKNOWN_DISCORD" };
+
+        await shell.openExternal(url);
+
+        return { success: true };
+
+    } catch (error) {
+
+        return { success: false, error: error.message };
+
+    }
+
+});
+
+
+
 ipcMain.handle(
 
     "java:detect",
@@ -1640,45 +1689,66 @@ function showMainWindow() {
 
 
 
+/*
+ * Icône de l'application (œil de dragon, pupille au centre, tuile bleu nuit).
+ * Copies de build/icon.ico et design/logo/icon-256.png dans src/assets/logos/,
+ * car build/ n'est pas embarqué dans le launcher installé.
+ * Windows : .ico (toutes les tailles, net dans la barre des tâches et près de l'horloge) ;
+ * Linux / Mac : .png.
+ */
+function getAppIconPath() {
+
+    const names = process.platform === "win32"
+        ? ["origins-icon.ico", "origins-icon.png"]
+        : ["origins-icon.png"];
+
+    for (const name of names) {
+
+        const candidate = path.join(__dirname, "src", "assets", "logos", name);
+
+        if (fs.existsSync(candidate)) return candidate;
+
+    }
+
+    return null;
+
+}
+
+
+
+// Les notifications veulent un PNG (le .ico n'y est pas lu partout).
+function notificationIconPath() {
+
+    const png = path.join(__dirname, "src", "assets", "logos", "origins-icon.png");
+
+    return fs.existsSync(png) ? png : undefined;
+
+}
+
+
+
 function getTrayIcon() {
 
 
 
-    const candidates = [
+    const iconPath = getAppIconPath();
 
-        path.join(__dirname, "src", "assets", "logos", "origins-logo.png"),
-
-        path.join(__dirname, "assets", "logos", "origins-logo.png")
-
-    ];
+    if (!iconPath) return nativeImage.createEmpty();
 
 
 
-    for (const candidate of candidates) {
+    // Sous Windows, le chemin du .ico laisse le système choisir la bonne taille.
+    if (iconPath.endsWith(".ico")) return iconPath;
 
 
 
-        if (fs.existsSync(candidate)) {
+    const image = nativeImage.createFromPath(iconPath);
 
+    if (image.isEmpty()) return nativeImage.createEmpty();
 
+    const size = process.platform === "darwin" ? 18 : 22;
 
-            const image = nativeImage.createFromPath(candidate);
-
-
-
-            if (!image.isEmpty()) {
-
-                return image.resize({ width: 20, height: 20 });
-
-            }
-
-        }
-
-    }
-
-
-
-    return nativeImage.createEmpty();
+    return image.resize({ width: size, height: size });
 
 }
 
@@ -2127,6 +2197,9 @@ function createWindow() {
 
                 false,
 
+            // Icône de la fenêtre et de la barre des tâches (aussi en mode développement).
+            ...(getAppIconPath() ? { icon: getAppIconPath() } : {}),
+
 
 
             webPreferences: {
@@ -2272,6 +2345,8 @@ minecraftLauncher.on(
     (message) => {
 
 
+
+        gameOutput.push(`${message}\n`);
 
         console.log(
 
@@ -4344,6 +4419,10 @@ ipcMain.handle(
 
 
 
+                    code:
+
+                        "NOT_INSTALLED",
+
                     error:
 
                         "Tempest Origins n'est pas installé."
@@ -4354,75 +4433,68 @@ ipcMain.handle(
 
 
 
+            /* ------------------------------------------
+
+               PLACE SUR LE DISQUE (au moins 1 Go libre)
+
+            ------------------------------------------ */
+
+            launchDiagnostic.assertDiskSpace(gamePath, 1024 ** 3);
+
 
 
             /* ------------------------------------------
 
-               CHECK JAVA
+               JAVA 21 EMBARQUÉ
+               Téléchargé une seule fois dans le dossier du launcher
+               (java-runtime.js). Le joueur n'a rien à installer.
 
             ------------------------------------------ */
 
-
-
             const java =
 
-                cachedJava && cachedJava.found
+                cachedJava && cachedJava.javaPath
 
                     ? cachedJava
 
-                    : await detectJava();
+                    : await ensureJavaRuntime({
+
+                        baseDir: getJavaRuntimeDir(),
+
+                        detectSystemJava: detectJava,
+
+                        onProgress: (percent, step) => {
+
+                            if (step === "done") return;
+
+                            sendInstallProgress(
+
+                                percent,
+
+                                "JAVA",
+
+                                `Préparation de Java 21 (${percent} %)`,
+
+                                {
+                                    key: step === "extract" ? "detailJavaExtract" : "detailJavaDownload",
+                                    params: { percent }
+                                }
+
+                            );
+
+                        }
+
+                    });
 
 
 
-            if (java.found) {
-
-                cachedJava = java;
-
-            }
-
-
-
-
-
-            if (
-
-                !java.found
-
-            ) {
-
-
-
-                return {
-
-
-
-                    success:
-
-                        false,
-
-
-
-                    launching:
-
-                        false,
-
-
-
-                    error:
-
-                        "Java est introuvable."
-
-                };
-
-            }
-
-
+            cachedJava = java;
 
 
 
             console.log(
 
-                `Java détecté : ${java.version}`
+                `Java prêt : ${java.version} (${java.source === "embedded" ? "embarqué" : "installé sur le PC"})`
 
             );
 
@@ -4610,12 +4682,11 @@ ipcMain.handle(
 
 
 
-                // Java found on the system PATH, like detectJava():
-                // works with any Java install on Windows, Linux and macOS.
-                // javaw avoids an extra console window on Windows.
+                // Java 21 embarqué (ou, en secours, celui du PC) : javaw sous Windows,
+                // pour ne pas ouvrir de fenêtre de console en plus.
                 javaPath:
 
-                    process.platform === "win32" ? "javaw" : "java",
+                    java.javaPath,
 
 
 
@@ -4695,6 +4766,13 @@ ipcMain.handle(
              * au lieu de lancer silencieusement.
 
              */
+
+
+
+            // Pour le diagnostic : sortie du jeu de CE lancement, et son heure de départ.
+            gameOutput = launchDiagnostic.createOutputBuffer(400);
+
+            const launchStartedAt = Date.now();
 
 
 
@@ -4792,6 +4870,27 @@ ipcMain.handle(
 
                         setTempestRunning(false);
 
+
+
+                        // Arrêt anormal (plantage) : le launcher revient à l'écran et dit pourquoi.
+                        if (code !== 0 && code !== null) {
+
+                            reportGameCrash({
+
+                                gamePath,
+
+                                output: gameOutput.text(),
+
+                                startedAt: launchStartedAt,
+
+                                exitCode: code,
+
+                                javaVersion: java.version
+
+                            });
+
+                        }
+
                     }
 
                 );
@@ -4884,6 +4983,13 @@ ipcMain.handle(
 
 
 
+                // Cause reconnue (Java, réseau, disque, compte…) : l'interface montre le bon message.
+                code:
+
+                    launchDiagnostic.classifyError(error),
+
+
+
                 error:
 
                     error.message
@@ -4895,6 +5001,105 @@ ipcMain.handle(
     }
 
 );
+
+
+
+/*
+ * Le jeu s'est arrêté en plantant : on cherche la cause (sortie du jeu,
+ * logs/latest.log, crash-reports/), on remet le launcher à l'écran et on
+ * lui envoie le message à afficher, avec le rapport à copier pour le support.
+ */
+function reportGameCrash(details) {
+
+    let result;
+
+    try {
+
+        result = launchDiagnostic.diagnoseCrash(details);
+
+    } catch (error) {
+
+        console.error("Diagnostic du plantage impossible :", error);
+
+        result = { code: "UNKNOWN", report: String(details.output || "").slice(-4000), crashReportFile: null };
+
+    }
+
+    console.log(`[DIAGNOSTIC] Tempest a planté : ${result.code}`);
+
+    if (!mainWindow || mainWindow.isDestroyed()) return;
+
+    if (!mainWindow.isVisible()) mainWindow.show();
+
+    mainWindow.focus();
+
+    mainWindow.webContents.send("tempest:launch-problem", {
+
+        code: result.code,
+
+        exitCode: details.exitCode,
+
+        report: result.report,
+
+        crashReportFile: result.crashReportFile
+
+    });
+
+}
+
+
+
+/* Réparer Java : supprime le Java embarqué, il sera retéléchargé au prochain lancement. */
+ipcMain.handle("tempest:repair-java", async () => {
+
+    try {
+
+        removeJavaRuntime(getJavaRuntimeDir());
+
+        cachedJava = null;
+
+        return { success: true };
+
+    } catch (error) {
+
+        return { success: false, error: error.message };
+
+    }
+
+});
+
+
+
+/*
+ * Réparer Tempest : fait retélécharger Minecraft et Fabric (dossiers libraries/ et versions/).
+ * Les mods sont déjà vérifiés un par un à chaque lancement (syncTempest).
+ * Les mondes, réglages et captures d'écran ne sont pas touchés.
+ */
+ipcMain.handle("tempest:repair-files", async () => {
+
+    try {
+
+        if (tempestRunning) return { success: false, error: "TEMPEST_RUNNING" };
+
+        const gamePath = getTempestPath();
+
+        for (const folder of ["libraries", "versions"]) {
+
+            fs.rmSync(path.join(gamePath, folder), { recursive: true, force: true });
+
+        }
+
+        cachedFabric = null;
+
+        return { success: true };
+
+    } catch (error) {
+
+        return { success: false, error: error.message };
+
+    }
+
+});
 
 
 
@@ -5097,6 +5302,8 @@ ipcMain.handle(
                 title,
 
                 body,
+
+                icon: notificationIconPath(),
 
                 silent:
 
@@ -5459,6 +5666,8 @@ function setupLauncherAutoUpdater() {
 
                             "Origins Launcher",
 
+                        icon: notificationIconPath(),
+
                         body:
 
                             mainText("updateReadyBody").replace("{version}", info.version)
@@ -5763,8 +5972,13 @@ ipcMain.handle(
 
 // Windows n'affiche les notifications que si l'AppUserModelId correspond
 // au raccourci créé par l'installeur (build.appId dans package.json).
+// En développement (npm start), un identifiant à part : sinon Windows range la fenêtre
+// sous le raccourci du launcher installé et affiche SON icône (celle de la version installée)
+// au lieu de celle de la fenêtre. Pour tester les notifications Windows en développement,
+// lancer avec ORIGINS_DEV_SHARED_ID=1 (reprend l'identifiant du launcher installé).
 if (process.platform === "win32") {
-    app.setAppUserModelId("com.origins.launcher");
+    const devOwnId = !app.isPackaged && process.env.ORIGINS_DEV_SHARED_ID !== "1";
+    app.setAppUserModelId(devOwnId ? "com.origins.launcher.dev" : "com.origins.launcher");
 }
 
 /*

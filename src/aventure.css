@@ -1,0 +1,1823 @@
+/* =====================================================================
+   ORIGINS LAUNCHER — NOUVEAU DESIGN « AVENTURE »
+   Chargé après style.css. Tout est préfixé par body.av-design pour passer
+   devant les anciennes règles (dont beaucoup sont en !important).
+   Référence : design/maquettes/Aventure-*.dc.html et NOUVEAU-DESIGN.md.
+   Étape 1 : thèmes, polices, barre du haut, barre de gauche, accueil.
+   ===================================================================== */
+
+@font-face {
+    font-family: "Baloo 2";
+    src: url("assets/fonts/baloo2.woff2") format("woff2");
+    font-weight: 400 800;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Nunito";
+    src: url("assets/fonts/nunito.woff2") format("woff2");
+    font-weight: 200 1000;
+    font-display: swap;
+}
+
+/* ---------------------------------------------------------------------
+   THÈMES (palettes de design/maquettes/themes.py) — <body data-theme="…">
+   --------------------------------------------------------------------- */
+
+body[data-theme="argent-nuit"] {
+    --av-verre1: rgba(75, 86, 106, 0.93);  --av-verre2: rgba(23, 30, 45, 0.96);
+    --av-accent: #a9b8d4;  --av-sur-accent: #0c111c;  --av-jouer: #56668a;
+    --av-teinte: rgba(9, 12, 19, 0.28);  --av-barre: #090c13;  --av-panneau: #10151f;
+    --av-reglages: #171e2c;  --av-doux: #a7b1c3;  --av-texte: #e9eef7;
+}
+body[data-theme="or-ebene"] {
+    --av-verre1: rgba(96, 74, 37, 0.93);  --av-verre2: rgba(37, 25, 16, 0.96);
+    --av-accent: #c9a14a;  --av-sur-accent: #1a1208;  --av-jouer: #8c6222;
+    --av-teinte: rgba(15, 11, 8, 0.28);  --av-barre: #0f0b08;  --av-panneau: #19120d;
+    --av-reglages: #221913;  --av-doux: #b9a888;  --av-texte: #f0e6cf;
+}
+body[data-theme="emeraude-or"] {
+    --av-verre1: rgba(84, 83, 45, 0.93);  --av-verre2: rgba(18, 34, 25, 0.96);
+    --av-accent: #cfa94e;  --av-sur-accent: #1a1208;  --av-jouer: #8c6222;
+    --av-teinte: rgba(8, 16, 12, 0.28);  --av-barre: #08100c;  --av-panneau: #0e1a14;
+    --av-reglages: #15251c;  --av-doux: #acb9a2;  --av-texte: #eef0de;
+}
+body[data-theme="pourpre-or"] {
+    --av-verre1: rgba(98, 74, 60, 0.93);  --av-verre2: rgba(36, 23, 43, 0.96);
+    --av-accent: #d0a852;  --av-sur-accent: #1a1208;  --av-jouer: #8c6222;
+    --av-teinte: rgba(14, 9, 17, 0.28);  --av-barre: #0e0911;  --av-panneau: #170f1c;
+    --av-reglages: #211626;  --av-doux: #bba9bb;  --av-texte: #f2e7f0;
+}
+body[data-theme="cuivre-braise"] {
+    --av-verre1: rgba(98, 65, 42, 0.93);  --av-verre2: rgba(36, 25, 20, 0.96);
+    --av-accent: #d08650;  --av-sur-accent: #1e0d05;  --av-jouer: #84401c;
+    --av-teinte: rgba(14, 11, 10, 0.28);  --av-barre: #0e0b0a;  --av-panneau: #171211;
+    --av-reglages: #211918;  --av-doux: #bea898;  --av-texte: #f4e8df;
+}
+body[data-theme="sang-onyx"] {
+    --av-verre1: rgba(98, 45, 41, 0.93);  --av-verre2: rgba(36, 20, 19, 0.96);
+    --av-accent: #d0574d;  --av-sur-accent: #1c0605;  --av-jouer: #7a1f1a;
+    --av-teinte: rgba(12, 9, 9, 0.28);  --av-barre: #0c0909;  --av-panneau: #151010;
+    --av-reglages: #1e1615;  --av-doux: #bda7a3;  --av-texte: #f3e8e6;
+}
+body[data-theme="sakura"] {
+    --av-verre1: rgba(108, 70, 87, 0.93);  --av-verre2: rgba(39, 23, 32, 0.96);
+    --av-accent: #e79ab9;  --av-sur-accent: #20080f;  --av-jouer: #8f4466;
+    --av-teinte: rgba(17, 11, 14, 0.28);  --av-barre: #110b0e;  --av-panneau: #1a1116;
+    --av-reglages: #24171e;  --av-doux: #c3a9b6;  --av-texte: #f6eaf0;
+}
+body[data-theme="tempete"] {
+    --av-verre1: rgba(47, 96, 111, 0.93);  --av-verre2: rgba(14, 37, 47, 0.96);
+    --av-accent: #6cc8e0;  --av-sur-accent: #04131a;  --av-jouer: #22647a;
+    --av-teinte: rgba(6, 17, 23, 0.28);  --av-barre: #061117;  --av-panneau: #0a1a22;
+    --av-reglages: #10242e;  --av-doux: #9cbcc6;  --av-texte: #e6f6fa;
+}
+
+body.av-design {
+    --av-haut: 46px;      /* barre du haut */
+    --av-gauche: 56px;    /* barre de gauche */
+    --av-rouge: #e2574c;  /* pastilles */
+    --av-vert: #4cd38a;   /* en ligne */
+    --av-titre: "Baloo 2", "Segoe UI", sans-serif;
+    --av-texte-police: "Nunito", "Segoe UI", system-ui, sans-serif;
+
+    background: var(--av-barre) !important;
+    color: var(--av-texte);
+    font-family: var(--av-texte-police) !important;
+}
+
+/* Aucune barre de défilement visible, défilement doux */
+body.av-design * { scrollbar-width: none; scroll-behavior: smooth; }
+body.av-design *::-webkit-scrollbar { display: none; }
+
+body.av-design .av-visually-hidden {
+    position: absolute !important; width: 1px !important; height: 1px !important;
+    overflow: hidden !important; clip-path: inset(50%) !important; white-space: nowrap !important;
+}
+
+/* ---------------------------------------------------------------------
+   CADRE : barre du haut + barre de gauche + contenu
+   --------------------------------------------------------------------- */
+
+body.av-design .launcher {
+    position: fixed !important;
+    inset: var(--av-haut) 0 0 0 !important;
+    width: auto !important; height: auto !important;
+    padding: 0 !important; margin: 0 !important;
+    background: var(--av-barre) !important;
+}
+
+body.av-design .main-content {
+    position: absolute !important;
+    inset: 0 0 0 var(--av-gauche) !important;
+    width: auto !important; height: auto !important;
+    background: var(--av-barre) !important;
+}
+
+body.av-design .launcher-page {
+    padding: 0 !important;
+}
+
+/* L'écran de première connexion commence sous la barre du haut */
+body.av-design .origins-onboarding { top: var(--av-haut) !important; }
+/* … et pendant ce temps, seuls les boutons de fenêtre restent dans la barre */
+body.av-design:has(.origins-onboarding.is-visible) .av-topbar > :not(.av-window-controls) {
+    visibility: hidden;
+}
+
+/* ---------------------------------------------------------------------
+   BARRE DU HAUT (46 px)
+   --------------------------------------------------------------------- */
+
+body.av-design .av-topbar {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: var(--av-haut);
+    display: flex;
+    align-items: stretch;
+    background: var(--av-barre);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    z-index: 300;
+    -webkit-app-region: drag;
+    user-select: none;
+}
+
+body.av-design .av-topbar button {
+    -webkit-app-region: no-drag;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+}
+
+body.av-design .av-topbar svg { display: block; }
+
+/* Tuile du logo Origins : l'œil de dragon seul, pupille au centre */
+body.av-design .av-logo {
+    width: var(--av-gauche);
+    flex: none;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(140deg, var(--av-verre1), var(--av-verre2));
+    color: #fff;
+}
+body.av-design .av-logo-eye { width: 40px; height: 40px; display: block; pointer-events: none; }
+body.av-design .av-logo:hover .av-logo-eye { transform: scale(1.06); }
+
+/* Logo avec le mot : l'œil (qui regarde le R) remplace le O de ORIGINS.
+   --s = taille de l'œil ; texte Baloo 2 800, blanc, contour sombre ≈ s/28, collé à l'œil (≈ −11 % de s). */
+body.av-design .av-wordmark { --s: 92px; display: inline-flex; align-items: center; }
+body.av-design .av-wordmark img { width: var(--s); height: var(--s); flex: none; }
+body.av-design .av-wordmark span {
+    margin-left: calc(var(--s) * -0.11);
+    font-family: var(--av-titre);
+    font-weight: 800;
+    font-size: calc(var(--s) * 0.6);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: #fff;
+    -webkit-text-stroke: calc(var(--s) / 28) #0a1024;
+    paint-order: stroke fill;
+}
+
+/* Onglets Accueil, Jeux, Actus, Boutique */
+body.av-design .av-tabs { display: flex; }
+
+body.av-design .av-tabs .av-tab,
+body.av-design .av-tabs #homeButton {   /* l'ancien style cachait Accueil sur l'accueil */
+    display: flex !important;
+    width: 50px; height: var(--av-haut);
+    align-items: center; justify-content: center;
+    background: transparent;
+    color: var(--av-doux);
+}
+body.av-design .av-tabs .av-tab:hover { color: var(--av-texte); filter: brightness(1.25); }
+body.av-design .av-tabs .av-tab.active {
+    background: var(--av-accent) !important;
+    color: var(--av-sur-accent) !important;
+    filter: none;
+}
+
+/* Bandeau d'actu mis en avant, au centre */
+body.av-design .av-featured-zone {
+    flex: 1;
+    min-width: 0;
+    display: flex; align-items: center; justify-content: center;
+}
+
+body.av-design .av-featured {
+    height: var(--av-haut);
+    max-width: 100%;
+    display: flex; align-items: center; gap: 10px;
+    padding: 0 18px !important;
+    background: linear-gradient(120deg, var(--av-verre2), var(--av-verre1));
+    font-family: var(--av-titre) !important;
+    font-weight: 800 !important; font-size: 15px !important; letter-spacing: 0.04em;
+    color: #fff;
+    text-transform: uppercase;
+    transition: filter .15s;
+}
+body.av-design .av-featured-title { font-weight: 800 !important; line-height: 1; padding-top: 2px; }
+body.av-design .av-featured:hover { filter: brightness(1.25); }
+body.av-design .av-featured-title { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+body.av-design .av-featured:has(.av-featured-title:empty) { visibility: hidden; }
+
+body.av-design .av-featured-badge {
+    flex: none;
+    padding: 1px 7px;
+    border-radius: 6px;
+    background: var(--av-accent);
+    color: var(--av-sur-accent);
+    font-size: 11px !important; font-weight: 800 !important; letter-spacing: 0.08em;
+    line-height: 1.5;
+}
+
+/* Cloche, contacts, paramètres */
+body.av-design .av-icon-btn {
+    position: relative;
+    width: 50px;
+    flex: none;
+    display: flex !important; align-items: center; justify-content: center;
+    background: transparent;
+    color: var(--av-doux);
+    transition: background-color .15s, color .15s;
+}
+body.av-design .av-icon-btn:hover { color: var(--av-texte); filter: brightness(1.25); }
+body.av-design .av-icon-btn[aria-expanded="true"] { background: var(--av-panneau); color: var(--av-accent); }
+
+body.av-design .av-badge {
+    position: absolute; top: 7px; right: 8px;
+    min-width: 16px; height: 16px; padding: 0 4px; box-sizing: border-box;
+    border-radius: 8px;
+    background: var(--av-rouge); color: #fff;
+    font-family: var(--av-texte-police);
+    font-size: 10px; font-weight: 800; line-height: 16px; text-align: center;
+}
+body.av-design .av-badge[hidden] { display: none; }
+/* #friendsMessageBadge compte les amis en ligne : le point vert suffit */
+body.av-design #friendsMessageBadge { display: none; }
+
+/* Petit point vert quand des amis sont en ligne */
+body.av-design .av-contacts .friends-online-dot {
+    position: absolute !important; top: auto !important; left: auto !important;
+    right: 13px !important; bottom: 11px !important;
+    width: 8px !important; height: 8px !important; margin: 0 !important;
+    border-radius: 50%;
+    background: var(--av-vert) !important;
+    border: 2px solid var(--av-barre) !important;
+    display: none !important;
+}
+body.av-design .av-contacts.has-online-friends .friends-online-dot { display: block !important; }
+
+/* Avatar + statut */
+body.av-design .av-avatar-btn {
+    position: relative !important; inset: auto !important;
+    width: 54px !important; height: var(--av-haut) !important;
+    flex: none;
+    display: flex !important; align-items: center; justify-content: center;
+    border-radius: 0 !important;
+    background: transparent !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+body.av-design .av-avatar-btn:hover { background: rgba(255, 255, 255, 0.06) !important; }
+body.av-design .av-avatar-btn .account-icon {
+    width: 30px !important; height: 30px !important;
+    flex: none;
+    border-radius: 50% !important;
+    background-color: var(--av-reglages);
+    color: var(--av-doux);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+/* Sans avatar : la petite silhouette d'origine, centrée */
+body.av-design .av-avatar-btn .account-icon:not(.has-profile-avatar)::before { top: 7px; width: 8px; height: 8px; }
+body.av-design .av-avatar-btn .account-icon:not(.has-profile-avatar)::after { bottom: 6px; width: 16px; height: 7px; }
+body.av-design .av-avatar-btn .account-icon.has-profile-avatar::before,
+body.av-design .av-avatar-btn .account-icon.has-profile-avatar::after { display: none; }
+
+body.av-design .av-status {
+    position: absolute; right: 10px; bottom: 8px;
+    width: 9px; height: 9px; box-sizing: border-box;
+    border-radius: 50%;
+    background: var(--av-vert);
+    border: 2px solid var(--av-barre);
+}
+
+/* Réduire / agrandir / fermer */
+body.av-design .av-window-controls {
+    display: flex;
+    align-items: flex-start;
+    flex: none;
+    -webkit-app-region: no-drag;
+}
+body.av-design .av-win-btn {
+    width: 34px !important; height: 26px !important;
+    display: flex !important; align-items: center; justify-content: center;
+    background: transparent !important;
+    color: var(--av-doux) !important;
+    opacity: 1 !important;
+}
+body.av-design .av-win-btn:hover { background: rgba(255, 255, 255, 0.08) !important; color: #fff !important; }
+body.av-design .av-win-close:hover { background: #c42b1c !important; }
+
+/* ---------------------------------------------------------------------
+   BARRE DE GAUCHE : jeux installés, puis « + »
+   --------------------------------------------------------------------- */
+
+body.av-design .sidebar.av-rail {
+    position: fixed !important;
+    inset: var(--av-haut) auto 0 0 !important;
+    transform: none !important;
+    width: var(--av-gauche) !important; height: auto !important; min-height: 0 !important;
+    margin: 0 !important;
+    padding: 12px 0 0 !important;
+    display: flex !important; flex-direction: column !important; align-items: center !important; gap: 10px !important;
+    border: 0 !important; border-radius: 0 !important;
+    background: var(--av-barre) !important;
+    box-shadow: none !important; backdrop-filter: none !important;
+    overflow: visible !important;
+    z-index: 200 !important;
+}
+
+body.av-design .av-rail-game {
+    position: relative;
+    width: 40px; height: 40px;
+    padding: 0; border: 0;
+    border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--av-panneau);
+    box-shadow: 0 0 0 2px var(--av-barre), 0 0 0 4px rgba(255, 255, 255, 0.14);
+    cursor: pointer;
+    transition: box-shadow .15s, transform .15s;
+}
+body.av-design .av-rail-game:hover { transform: translateY(-1px); }
+body.av-design .av-rail-game.selected { box-shadow: 0 0 0 2px var(--av-barre), 0 0 0 4px var(--av-accent); }
+body.av-design .av-rail-logo { width: 34px; height: 34px; object-fit: contain; }
+
+body.av-design .av-rail-sep { width: 26px; height: 1px; background: rgba(255, 255, 255, 0.14); }
+
+body.av-design .av-rail-add {
+    width: 40px; height: 40px;
+    padding: 0; border: 0;
+    border-radius: 11px;
+    display: flex; align-items: center; justify-content: center;
+    background: transparent;
+    color: var(--av-doux);
+    cursor: pointer;
+}
+body.av-design .av-rail-add:hover { background: rgba(255, 255, 255, 0.06); color: var(--av-texte); }
+
+/* ---------------------------------------------------------------------
+   ACCUEIL : illustration, carte du jeu, actus
+   --------------------------------------------------------------------- */
+
+body.av-design .home-page {
+    overflow: hidden !important;
+    background: var(--av-barre) !important;
+}
+body.av-design .home-page::before,
+body.av-design .home-page::after { display: none !important; content: none !important; }
+
+body.av-design .av-home-art {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: saturate(1.15);
+    pointer-events: none;
+}
+body.av-design .av-home-tint {
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0) 60%), var(--av-teinte);
+    pointer-events: none;
+}
+
+/* Colonne de gauche : carte du jeu, puis les actus juste dessous */
+body.av-design .av-home-col {
+    position: absolute; left: 24px; top: 20px; bottom: 16px;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 15px;
+    max-width: calc(100% - 48px);
+    z-index: 2;
+}
+
+/* Carte du jeu flottante */
+body.av-design .av-game-card {
+    position: relative; flex: none;
+    width: 300px; box-sizing: border-box;
+    padding: 14px 20px 16px;
+    border-radius: 22px;
+    background: linear-gradient(160deg, var(--av-verre1), var(--av-verre2));
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+    display: flex; flex-direction: column; gap: 10px;
+    z-index: 2;
+}
+
+/* Pastille « Tempest ⌄ » (ouvre l'onglet Jeux) */
+body.av-design .av-game-pick { display: flex; justify-content: flex-end; }
+body.av-design .av-game-picker {
+    display: flex; align-items: center; gap: 4px;
+    padding: 3px 8px 3px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    background: rgba(0, 0, 0, 0.15);
+    color: #fff;
+    font-family: var(--av-texte-police);
+    font-weight: 800; font-size: 12px;
+    cursor: pointer;
+}
+body.av-design .av-game-picker:hover { background: rgba(255, 255, 255, 0.12); }
+
+body.av-design .av-game-logo {
+    width: 210px; height: 168px;
+    margin-top: -8px;
+    object-fit: contain;
+    align-self: center;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
+}
+
+body.av-design .av-play-area { display: flex; flex-direction: column; gap: 10px; }
+
+/* Gros bouton blanc JOUER / INSTALLER */
+body.av-design .av-play {
+    height: 56px;
+    border: 0; border-radius: 16px;
+    background: #fff;
+    color: var(--av-jouer);
+    font-family: var(--av-titre);
+    font-weight: 800; font-size: 23px; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 5px 0 rgba(0, 0, 0, 0.18);
+    transition: transform .15s, box-shadow .15s, opacity .15s;
+}
+body.av-design .av-play:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 7px 0 rgba(0, 0, 0, 0.18); }
+body.av-design .av-play:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 3px 0 rgba(0, 0, 0, 0.18); }
+body.av-design .av-play:disabled { cursor: default; opacity: 0.82; }
+body.av-design .av-play.installing { font-size: 17px; }
+
+/* Bloc d'installation (pourcentage, barre animée, étape) */
+body.av-design .av-install {
+    display: none;
+    flex-direction: column; gap: 7px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+}
+body.av-design .av-install.visible { display: flex; }
+
+body.av-design .av-install-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+body.av-design .av-install-status {
+    min-width: 0;
+    font-size: 11px; font-weight: 800; letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.85);
+    text-transform: uppercase;
+    overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+body.av-design .av-install-percent {
+    flex: none;
+    font-family: var(--av-titre);
+    font-weight: 800; font-size: 22px; line-height: 1;
+    color: #fff;
+}
+body.av-design .av-install-track {
+    position: relative;
+    height: 8px; border-radius: 4px;
+    background: rgba(255, 255, 255, 0.16);
+    overflow: hidden;
+}
+body.av-design .av-install-bar {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 0;
+    border-radius: 4px;
+    background-color: var(--av-accent);
+    transition: width .2s linear;
+}
+body.av-design .av-stripes {
+    background-image: linear-gradient(135deg,
+        rgba(255, 255, 255, .28) 25%, transparent 25%, transparent 50%,
+        rgba(255, 255, 255, .28) 50%, rgba(255, 255, 255, .28) 75%, transparent 75%, transparent);
+    background-size: 16px 16px;
+    animation: av-defile 0.8s linear infinite;
+}
+@keyframes av-defile { from { background-position: 0 0; } to { background-position: 16px 0; } }
+body.av-design .av-install.complete .av-install-bar { animation: none; background-image: none; background-color: var(--av-vert); }
+body.av-design .av-install.error .av-install-bar { animation: none; background-image: none; background-color: var(--av-rouge); }
+body.av-design .av-install-detail {
+    font-size: 11.5px;
+    color: rgba(255, 255, 255, 0.8);
+    overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+
+/* Boutons ronds : Boutique, Paramètres du jeu */
+body.av-design .av-game-actions { display: flex; justify-content: center; gap: 22px; }
+body.av-design .av-round {
+    width: 42px; height: 42px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: background-color .15s;
+}
+body.av-design .av-round svg { width: 19px; height: 19px; }
+body.av-design .av-round:hover { background: rgba(255, 255, 255, 0.28); }
+
+/* Actus en cartes sombres */
+body.av-design .av-home-news {
+    position: relative;
+    box-sizing: border-box;
+    max-width: 100%;
+    padding: 12px 18px 18px;
+    border-radius: 18px;
+    background: rgba(5, 8, 14, 0.62);
+    backdrop-filter: blur(8px);
+    display: flex; flex-direction: column; gap: 10px;
+    z-index: 1;
+}
+body.av-design .av-home-news-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+body.av-design .av-home-news-head h2 {
+    margin: 0;
+    font-family: var(--av-titre);
+    font-weight: 800; font-size: 17px; letter-spacing: 0.04em;
+    color: #fff;
+}
+body.av-design .av-more {
+    display: flex; align-items: center; gap: 8px;
+    padding: 0; border: 0;
+    background: transparent;
+    font-family: var(--av-titre);
+    font-weight: 700; font-size: 15px;
+    color: #fff;
+    cursor: pointer;
+}
+body.av-design .av-more:hover { filter: brightness(0.85); }
+body.av-design .av-more-chip {
+    width: 20px; height: 20px;
+    border-radius: 6px;
+    background: #fff; color: #111;
+    display: flex; align-items: center; justify-content: center;
+}
+
+body.av-design .av-news-grid {
+    display: flex !important;
+    gap: 12px !important;
+    margin: 0 !important; padding: 0 !important;
+    grid-template-columns: none !important;
+}
+
+body.av-design .av-news-card {
+    position: relative !important;
+    width: 196px !important; height: 236px !important;
+    min-height: 0 !important;
+    flex: none;
+    margin: 0 !important; padding: 0 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    background: var(--av-panneau) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: none !important;
+    display: flex !important; flex-direction: column !important;
+    cursor: pointer;
+    transform: none;
+    transition: transform .15s !important;
+}
+body.av-design .av-news-card::before,
+body.av-design .av-news-card::after { display: none !important; content: none !important; }
+body.av-design .av-news-card:hover { transform: translateY(-3px) !important; }
+
+body.av-design .av-news-copy {
+    height: 98px; box-sizing: border-box; flex: none;
+    padding: 10px 12px 8px;
+    display: flex; flex-direction: column; gap: 4px;
+}
+body.av-design .av-news-card h3 {
+    margin: 0 !important;
+    font-family: var(--av-titre) !important;
+    font-weight: 800 !important; font-size: 14px !important; line-height: 1.08 !important;
+    letter-spacing: 0 !important;
+    text-transform: uppercase;
+    color: var(--av-accent) !important;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+body.av-design .av-news-card .av-news-copy p {
+    margin: 0 !important;
+    font-family: var(--av-texte-police) !important;
+    font-size: 11.5px !important; line-height: 1.32 !important;
+    color: var(--av-doux) !important;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+
+/* Illustration de la carte : un morceau de l'image de Tempest + l'œil Origins */
+body.av-design .av-news-art {
+    position: relative;
+    flex: 1;
+    background: url("assets/games/tempest-background.png") 78% 18% / 300% auto;
+}
+body.av-design .av-news-art::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: rgba(10, 20, 50, 0.35);
+}
+body.av-design .av-news-art::after {
+    content: "";
+    position: absolute; left: 50%; top: 50%;
+    width: 64px; height: 64px;
+    transform: translate(-50%, -50%);
+    background: url("assets/logos/origins-oeil.svg") center / contain no-repeat;
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.45));
+}
+body.av-design .av-news-card:nth-child(2) .av-news-art { background-position: 60% 70%; }
+body.av-design .av-news-card:nth-child(2) .av-news-art::before { background: rgba(20, 60, 40, 0.35); }
+body.av-design .av-news-card:nth-child(3) .av-news-art { background-position: 10% 80%; }
+body.av-design .av-news-card:nth-child(3) .av-news-art::before { background: rgba(90, 60, 10, 0.35); }
+
+body.av-design .av-news-foot {
+    height: 26px; flex: none;
+    margin: 0 !important;
+    padding: 0 12px !important;
+    display: flex; align-items: center; gap: 4px;
+    background: var(--av-barre);
+    color: #fff !important;
+    font-family: var(--av-texte-police) !important;
+    font-size: 10.5px !important; font-weight: 800; letter-spacing: 0.02em;
+    text-transform: none;
+}
+body.av-design .av-news-foot .news-type {
+    all: unset;
+    color: #fff !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+body.av-design .av-news-foot .news-date {
+    all: unset;
+    flex: none;
+    font-weight: 600 !important;
+    color: var(--av-doux) !important;
+    text-transform: none !important;
+}
+
+/* Fenêtre basse (700 px minimum) : on resserre pour que tout tienne */
+@media (max-height: 740px) {
+    body.av-design .av-game-logo { height: 128px; }
+    body.av-design .av-news-card { height: 206px !important; }
+    body.av-design .av-news-copy { height: 90px; }
+}
+
+/* ---------------------------------------------------------------------
+   PAGES JEUX, ACTUS, BOUTIQUE (HTML repris des maquettes)
+   --------------------------------------------------------------------- */
+
+body.av-design .games-library-page,
+body.av-design .updates-page,
+body.av-design .shop-page {
+    background: var(--av-barre) !important;
+    overflow: hidden !important;
+}
+body.av-design .games-library-page::before, body.av-design .games-library-page::after,
+body.av-design .updates-page::before, body.av-design .updates-page::after,
+body.av-design .shop-page::before, body.av-design .shop-page::after { display: none !important; content: none !important; }
+
+body.av-design .av-page { color: var(--av-texte); }
+body.av-design .av-page h1, body.av-design .av-page h2, body.av-design .av-page h3 { text-shadow: none; }
+
+/* Jeux : l'affiche */
+body.av-design .av-affiche { transition: filter .15s; }
+body.av-design .av-affiche:hover { filter: brightness(1.12); }
+
+/* Boutique */
+body.av-design .av-produit { transition: transform .15s; }
+body.av-design .av-produit:hover { transform: translateY(-3px); }
+body.av-design .av-shop-next { border: 0; padding: 0; cursor: pointer; }
+body.av-design .av-shop-next:hover { filter: brightness(0.9); }
+
+/* Actus */
+body.av-design .av-news-page {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; gap: 12px;
+    padding: 14px 18px 0; box-sizing: border-box;
+    background: var(--av-barre);
+}
+body.av-design .av-page-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+body.av-design .av-page-title {
+    margin: 0;
+    font-family: var(--av-titre);
+    font-weight: 800; font-size: 17px; letter-spacing: 0.04em;
+    color: #fff;
+}
+body.av-design .av-filters { display: flex; gap: 8px; }
+body.av-design .av-filter {
+    height: 30px; padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: transparent;
+    color: var(--av-texte);
+    font-family: var(--av-texte-police);
+    font-weight: 800; font-size: 12.5px;
+    cursor: pointer;
+}
+body.av-design .av-filter:hover { background: rgba(255, 255, 255, 0.06); }
+body.av-design .av-filter.active { border-color: var(--av-accent); background: var(--av-accent); color: var(--av-sur-accent); }
+
+body.av-design .av-news-scroll { flex: 1; min-height: 0; overflow-y: auto; padding-bottom: 18px; }
+body.av-design .av-actus-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: 300px;
+    gap: 14px;
+}
+body.av-design .av-actu-card {
+    display: flex; flex-direction: column;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--av-panneau);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform .15s;
+    outline: none;
+}
+body.av-design .av-actu-card[hidden] { display: none; }
+body.av-design .av-actu-card:hover { transform: translateY(-3px); }
+body.av-design .av-actu-card:focus-visible { box-shadow: 0 0 0 2px var(--av-accent); }
+body.av-design .av-actu-big { grid-column: span 2; }
+
+body.av-design .av-actu-copy {
+    height: 108px; box-sizing: border-box; flex: none;
+    padding: 12px 14px 10px;
+    display: flex; flex-direction: column; gap: 5px;
+}
+body.av-design .av-actu-copy h3 {
+    margin: 0;
+    font-family: var(--av-titre);
+    font-weight: 800; font-size: 15px; line-height: 1.08;
+    text-transform: uppercase;
+    color: var(--av-accent);
+}
+body.av-design .av-actu-big .av-actu-copy { height: 112px; }
+body.av-design .av-actu-big .av-actu-copy h3 { font-size: 20px; }
+body.av-design .av-actu-copy p {
+    margin: 0;
+    font-size: 12px; line-height: 1.35;
+    color: var(--av-doux);
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+body.av-design .av-actu-big .av-actu-copy p { -webkit-line-clamp: 3; }
+
+body.av-design .av-actu-art {
+    position: relative;
+    flex: 1;
+    display: flex; align-items: center; justify-content: center;
+    background: url("assets/games/tempest-background.png") 60% 70% / 300% auto;
+}
+body.av-design .av-actu-art::before { content: ""; position: absolute; inset: 0; background: rgba(20, 60, 40, 0.35); }
+body.av-design .av-actu-launcher .av-actu-art { background: url("assets/backgrounds/origins-home.png") 40% 30% / cover; }
+body.av-design .av-actu-launcher .av-actu-art::before { background: rgba(10, 20, 50, 0.35); }
+body.av-design .av-actu-card:nth-child(3n+1) .av-actu-art { background-position: 78% 18%; }
+body.av-design .av-actu-card:nth-child(3n+2) .av-actu-art { background-position: 10% 80%; }
+body.av-design .av-actu-big .av-actu-art { background-size: 220% auto; }
+body.av-design .av-actu-launcher.av-actu-card .av-actu-art { background-size: cover; }
+body.av-design .av-actu-art > * { position: relative; filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.45)); }
+body.av-design .av-actu-art img { width: 64px; height: 64px; object-fit: contain; }
+body.av-design .av-actu-big .av-actu-art img { width: 96px; height: 96px; }
+
+body.av-design .av-actu-foot {
+    height: 26px; flex: none;
+    margin: 0;
+    display: flex; align-items: center;
+    padding: 0 12px;
+    background: var(--av-barre);
+    color: #fff;
+    font-size: 10.5px; font-weight: 800; letter-spacing: 0.02em;
+}
+body.av-design .av-actu-type { text-transform: uppercase; }
+body.av-design .av-actu-date { font-weight: 600; color: var(--av-doux); }
+
+/* Détail d'une actu */
+body.av-design .av-news-detail {
+    position: fixed; inset: var(--av-haut) 0 0 var(--av-gauche);
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 260;
+}
+body.av-design .av-news-detail[hidden] { display: none; }
+body.av-design .av-news-detail-card {
+    position: relative;
+    width: min(560px, calc(100% - 48px));
+    max-height: calc(100% - 48px);
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 20px 24px 22px;
+    border-radius: 18px;
+    background: linear-gradient(150deg, var(--av-verre1), var(--av-verre2));
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+    color: #fff;
+}
+body.av-design .av-news-detail-close {
+    position: absolute; top: 12px; right: 12px;
+    width: 30px; height: 30px;
+    border: 0; border-radius: 50%;
+    background: transparent; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+}
+body.av-design .av-news-detail-close:hover { background: rgba(255, 255, 255, 0.12); }
+body.av-design .av-news-detail-meta {
+    font-size: 10.5px; font-weight: 800; letter-spacing: 0.12em;
+    color: var(--av-accent);
+    text-transform: uppercase;
+}
+body.av-design .av-news-detail-card h2 {
+    margin: 4px 36px 8px 0;
+    font-family: var(--av-titre);
+    font-weight: 800; font-size: 21px; line-height: 1.15;
+}
+body.av-design .av-news-detail-card p { margin: 0 0 12px; font-size: 13.5px; line-height: 1.45; color: var(--av-texte); }
+body.av-design .av-news-detail-card ul {
+    margin: 0; padding: 0;
+    list-style: none;
+    display: flex; flex-direction: column; gap: 6px;
+    font-size: 13px; line-height: 1.4;
+}
+body.av-design .av-news-detail-card li { display: flex; gap: 8px; }
+body.av-design .av-news-detail-card li::before { content: "✦"; color: var(--av-accent); flex: none; }
+
+/* ---------------------------------------------------------------------
+   TÉLÉCHARGEMENT
+   --------------------------------------------------------------------- */
+
+/* Avant l'installation : icône sur INSTALLER et contenu installé */
+body.av-design .av-install-size {
+    display: none;
+    margin: -4px 0 0;
+    text-align: center;
+    font-size: 11.5px; font-weight: 700;
+    color: rgba(255, 255, 255, 0.85);
+}
+body.av-design.av-not-installed .av-install-size { display: block; }
+body.av-design.av-not-installed .av-play:not(.installing)::before {
+    content: "";
+    display: inline-block;
+    width: 22px; height: 22px;
+    margin: 0 10px -3px 0;
+    background-color: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 4v11M7 10l5 5 5-5M5 20h14'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+/* Pendant le téléchargement, le bloc de progression remplace le bouton */
+body.av-design.av-downloading .av-play { display: none; }
+
+body.av-design .av-install-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+body.av-design .av-install-row .av-install-detail { min-width: 0; flex: 1; }
+body.av-design .av-install-eta { flex: none; font-size: 11.5px; font-weight: 700; color: #fff; }
+
+/* Barre de gauche : Tempest caché tant qu'il n'est pas installé, anneau pendant le téléchargement */
+body.av-design.av-not-installed .av-rail-game,
+body.av-design.av-not-installed .av-rail-sep { display: none; }
+body.av-design.av-downloading .av-rail-game {
+    box-shadow: 0 0 0 2px var(--av-barre);
+}
+body.av-design.av-downloading .av-rail-game::before {
+    content: "";
+    position: absolute; inset: -5px;
+    border-radius: 14px;
+    background: conic-gradient(var(--av-accent) var(--av-pct, 0%), rgba(255, 255, 255, 0.14) 0);
+    -webkit-mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    padding: 3px;
+    z-index: -1;
+}
+
+/* Bandeau en bas des autres onglets */
+body.av-design .av-dl-banner {
+    position: absolute; left: 50%; bottom: 16px;
+    transform: translateX(-50%);
+    width: 420px; max-width: calc(100% - 32px);
+    display: flex; align-items: center; gap: 12px;
+    padding: 9px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: var(--av-verre2);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-family: var(--av-texte-police);
+    cursor: pointer;
+    z-index: 50;
+}
+body.av-design .av-dl-banner[hidden] { display: none; }
+body.av-design .av-dl-banner img { width: 30px; height: 30px; object-fit: contain; }
+body.av-design .av-dl-banner-body { flex: 1; display: flex; flex-direction: column; gap: 5px; text-align: left; }
+body.av-design .av-dl-banner-top { display: flex; justify-content: space-between; font-size: 12px; font-weight: 800; }
+body.av-design .av-dl-banner-track { position: relative; height: 5px; border-radius: 3px; background: rgba(255, 255, 255, 0.16); overflow: hidden; }
+body.av-design .av-dl-banner-track span { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background-color: var(--av-accent); transition: width .2s linear; }
+body.av-design .av-dl-banner-eta { flex: none; font-size: 11.5px; font-weight: 700; color: var(--av-doux); }
+
+/* ---------------------------------------------------------------------
+   TIROIR CONTACTS / MESSAGES / DEMANDES (220 px à droite)
+   --------------------------------------------------------------------- */
+
+body.av-design .social-panel {
+    position: fixed !important;
+    top: var(--av-haut) !important; right: 0 !important; bottom: 0 !important; left: auto !important;
+    width: 220px !important; height: auto !important; max-height: none !important;
+    margin: 0 !important; padding: 0 !important;
+    border-radius: 0 !important;
+    border: 0 !important; border-left: 1px solid rgba(255, 255, 255, 0.06) !important;
+    background: var(--av-panneau) !important;
+    box-shadow: none !important; backdrop-filter: none !important;
+    transform: none !important;
+    display: flex !important; flex-direction: column !important;
+    overflow: hidden !important;
+    font-family: var(--av-texte-police) !important;
+    color: var(--av-texte);
+    z-index: 240 !important;
+}
+body.av-design .social-panel:not(.open) { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+body.av-design .social-panel::before, body.av-design .social-panel::after { display: none !important; content: none !important; }
+/* Le contenu se resserre quand le tiroir est ouvert */
+body.av-design:has(#socialPanel.open) .main-content { right: 220px !important; }
+
+body.av-design .social-panel > .social-header,
+body.av-design .social-panel > .social-separator,
+body.av-design .social-panel > .friends-header { display: none !important; }
+
+/* En-tête : ma tête, mon nom, mon statut */
+body.av-design .social-panel > .profile {
+    display: flex !important; align-items: center !important; gap: 10px !important;
+    margin: 0 !important; padding: 10px 12px !important;
+    border: 0 !important; border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 0 !important; background: transparent !important; box-shadow: none !important;
+}
+body.av-design .social-panel > .profile .avatar {
+    width: 34px !important; height: 34px !important; min-width: 34px !important;
+    border-radius: 50% !important;
+    font-family: var(--av-titre) !important; font-weight: 800 !important; font-size: 15px !important;
+    background-color: var(--av-reglages) !important;
+    color: #fff !important; box-shadow: none !important; border: 0 !important;
+    display: flex !important; align-items: center !important; justify-content: center !important;
+}
+body.av-design .social-panel > .profile .profile-info { display: flex; flex-direction: column; min-width: 0; }
+body.av-design #localProfileName {
+    font-family: var(--av-titre) !important; font-weight: 800 !important; font-size: 14px !important;
+    color: var(--av-texte) !important; letter-spacing: 0 !important; text-transform: none !important;
+    overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+body.av-design #localProfileStatus {
+    display: flex !important; align-items: center !important; gap: 5px !important;
+    font-size: 11.5px !important; font-weight: 600 !important; letter-spacing: 0 !important; text-transform: none !important;
+    color: var(--av-doux) !important;
+}
+body.av-design #localProfileStatus::before {
+    content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--av-vert); flex: none;
+}
+body.av-design #localProfileStatus.away::before { background: #f1c04a; }
+
+/* Filtre « en ligne » sans personne en ligne : un petit message plutôt qu'une liste vide */
+body.av-design #friendsListView.av-online-only:has(.friends-contact-row):not(:has(.friends-contact-row.is-online))::after {
+    content: attr(data-empty-online);
+    padding: 16px 6px;
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--av-doux);
+}
+
+/* Onglets */
+body.av-design .av-social-tabs { display: flex; flex: none; }
+body.av-design .av-social-tab {
+    position: relative;
+    flex: 1;
+    height: 50px;
+    border: 0; border-bottom: 2px solid transparent;
+    background: transparent;
+    color: var(--av-texte);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+    font-family: var(--av-texte-police);
+    font-size: 9.5px; font-weight: 800; letter-spacing: 0.06em;
+    cursor: pointer;
+}
+body.av-design .av-social-tab:hover { background: rgba(255, 255, 255, 0.04); }
+body.av-design .av-social-tab.active { border-bottom-color: var(--av-accent); background: rgba(255, 255, 255, 0.06); }
+body.av-design .av-tab-badge {
+    position: absolute; top: 6px; right: 14px;
+    min-width: 15px; height: 15px; padding: 0 4px; box-sizing: border-box;
+    border-radius: 8px;
+    background: var(--av-rouge); color: #fff;
+    font-size: 9.5px; font-weight: 800; line-height: 15px; text-align: center; letter-spacing: 0;
+}
+body.av-design .av-tab-badge[hidden] { display: none; }
+
+body.av-design .av-social-pane {
+    flex: 1; min-height: 0;
+    overflow-y: auto;
+    padding: 12px;
+    display: flex; flex-direction: column; gap: 10px;
+}
+body.av-design .av-social-pane[hidden] { display: none; }
+
+/* Ajout par Origins ID (l'ancienne fenêtre, posée dans l'onglet) */
+body.av-design .av-social-pane .add-contact-panel {
+    position: static !important; inset: auto !important;
+    width: auto !important; height: auto !important; max-height: none !important;
+    margin: 0 !important; padding: 0 !important;
+    opacity: 1 !important; visibility: visible !important; pointer-events: auto !important;
+    transform: none !important;
+    border: 0 !important; border-radius: 0 !important;
+    background: transparent !important; box-shadow: none !important; backdrop-filter: none !important;
+    display: block !important;
+}
+body.av-design .av-social-pane .add-contact-panel .floating-window-header { display: none !important; }
+body.av-design .av-social-pane .add-contact-content {
+    display: grid !important;
+    grid-template-columns: 1fr 32px;
+    gap: 5px 6px !important;
+    padding: 0 !important; margin: 0 !important;
+    background: transparent !important; border: 0 !important;
+}
+body.av-design .add-contact-content label {
+    grid-column: 1 / -1;
+    margin: 0 !important;
+    font-size: 10.5px !important; font-weight: 800 !important; letter-spacing: 0.08em !important;
+    color: var(--av-doux) !important;
+}
+body.av-design #addContactId {
+    min-width: 0; width: 100% !important;
+    height: 32px !important; box-sizing: border-box;
+    margin: 0 !important; padding: 0 10px !important;
+    border-radius: 9px !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    background: var(--av-barre) !important; color: #fff !important;
+    font-family: ui-monospace, monospace !important; font-size: 12.5px !important; letter-spacing: 0.06em !important;
+    box-shadow: none !important;
+}
+body.av-design #addContactId:focus { outline: none; border-color: var(--av-accent) !important; }
+body.av-design #addContactSearch {
+    width: 32px !important; height: 32px !important; min-width: 0 !important;
+    margin: 0 !important; padding: 0 !important;
+    border: 0 !important; border-radius: 9px !important;
+    background: var(--av-accent) !important;
+    font-size: 0 !important; color: transparent !important;
+    position: relative;
+    cursor: pointer;
+}
+body.av-design #addContactSearch::after {
+    content: ""; position: absolute; inset: 0; margin: auto; width: 17px; height: 17px;
+    background: var(--av-sur-accent);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='8' r='3.5'/%3E%3Cpath d='M2.5 20a6.5 6.5 0 0 1 13 0M18 8v6M15 11h6'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+body.av-design .add-contact-hint {
+    grid-column: 1 / -1;
+    margin: 2px 0 0 !important;
+    font-size: 11px !important; line-height: 1.35 !important; color: var(--av-doux) !important;
+}
+body.av-design .add-contact-hint:empty { display: none; }
+body.av-design .add-contact-content > *:not(label):not(#addContactId):not(#addContactSearch):not(.add-contact-hint) { grid-column: 1 / -1; }
+
+/* Interrupteur « Seulement en ligne » */
+body.av-design .av-switch {
+    display: flex; align-items: center; gap: 10px;
+    border: 0; background: transparent; padding: 0;
+    cursor: pointer;
+    color: var(--av-texte);
+    font-family: var(--av-texte-police); font-size: 12.5px; font-weight: 700;
+    text-align: left;
+}
+body.av-design .av-switch-track {
+    position: relative; flex: none;
+    width: 32px; height: 18px; border-radius: 9px;
+    background: rgba(255, 255, 255, 0.18);
+    transition: background-color .15s;
+}
+body.av-design .av-switch-knob {
+    position: absolute; top: 2px; left: 2px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--av-doux);
+    transition: left .15s, background-color .15s;
+}
+body.av-design .av-switch[aria-checked="true"] .av-switch-track { background: var(--av-accent); }
+body.av-design .av-switch[aria-checked="true"] .av-switch-knob { left: 16px; background: var(--av-sur-accent); }
+
+/* Liste des contacts */
+body.av-design .av-social-pane #friendsListView {
+    position: static !important; display: flex !important; flex-direction: column !important;
+    opacity: 1 !important; visibility: visible !important; transform: none !important;
+    margin: 0 !important; padding: 0 !important;
+    background: transparent !important; border: 0 !important; box-shadow: none !important;
+    overflow: visible !important; max-height: none !important;
+}
+body.av-design #friendsListView .friends-list-heading { display: none !important; }
+body.av-design #friendsListView.av-online-only .friends-contact-row:not(.is-online) { display: none !important; }
+
+body.av-design .friends-contact-row,
+body.av-design .av-conversation {
+    position: relative;
+    width: 100% !important;
+    display: flex !important; align-items: center !important; gap: 10px !important;
+    margin: 0 !important; padding: 6px 2px !important;
+    min-height: 0 !important; height: auto !important;
+    border: 0 !important; border-radius: 8px !important;
+    background: transparent !important; box-shadow: none !important;
+    color: var(--av-texte) !important;
+    font-family: var(--av-texte-police) !important;
+    text-align: left;
+    cursor: pointer;
+}
+body.av-design .friends-contact-row:hover,
+body.av-design .av-conversation:hover { background: rgba(255, 255, 255, 0.06) !important; }
+body.av-design .friends-contact-row::before, body.av-design .friends-contact-row::after { display: none !important; }
+body.av-design .av-social-pane .friends-contact-avatar {
+    position: relative !important;
+    width: 32px !important; height: 32px !important; min-width: 32px !important; flex: none !important;
+    border-radius: 50% !important;
+    font-family: var(--av-titre) !important; font-weight: 800 !important; font-size: 14px !important;
+    box-shadow: none !important; border: 0 !important;
+}
+body.av-design .av-social-pane .friends-contact-presence {
+    position: absolute !important; right: -2px !important; bottom: -2px !important; left: auto !important; top: auto !important;
+    width: 10px !important; height: 10px !important;
+    border-radius: 50% !important;
+    border: 2px solid var(--av-panneau) !important;
+    box-sizing: content-box;
+}
+body.av-design .friends-contact-info,
+body.av-design .av-conversation-info { display: flex !important; flex-direction: column !important; min-width: 0 !important; flex: 1; gap: 0 !important; }
+body.av-design .friends-contact-info strong,
+body.av-design .av-conversation-info strong {
+    font-family: var(--av-titre) !important; font-weight: 800 !important; font-size: 13.5px !important;
+    color: var(--av-texte) !important; letter-spacing: 0 !important; text-transform: none !important;
+    overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+body.av-design .friends-contact-info small,
+body.av-design .av-conversation-info small {
+    font-size: 11.5px !important; font-weight: 600 !important; color: var(--av-doux) !important;
+    letter-spacing: 0 !important; text-transform: none !important;
+    overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+body.av-design .friends-contact-arrow { display: none !important; }
+
+/* Conversations */
+body.av-design .av-conversations { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+body.av-design .av-conversations li { border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
+body.av-design .av-conversation { padding: 9px 4px !important; }
+body.av-design .av-conversation-badge { position: static; flex: none; }
+body.av-design .av-social-empty,
+body.av-design .av-social-pane .social-empty-state {
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 16px 6px !important;
+    text-align: center;
+    font-size: 12.5px; color: var(--av-doux) !important;
+    background: transparent !important; border: 0 !important;
+}
+body.av-design .av-social-pane .social-empty-state strong { font-size: 12px; color: var(--av-texte) !important; letter-spacing: 0.04em; }
+
+/* Demandes : une carte par demande, Accepter / Refuser */
+body.av-design .av-social-pane #notificationsContent { display: flex; flex-direction: column; gap: 10px; padding: 0 !important; }
+body.av-design .av-social-pane .friend-request-row {
+    display: grid !important;
+    grid-template-columns: 36px 1fr;
+    align-items: center;
+    gap: 10px !important;
+    margin: 0 !important; padding: 12px !important;
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 0 !important; box-shadow: none !important;
+}
+body.av-design .av-social-pane .friend-request-row .friends-contact-avatar { width: 36px !important; height: 36px !important; min-width: 36px !important; font-size: 16px !important; }
+body.av-design .friend-request-info { display: flex; flex-direction: column; min-width: 0; }
+body.av-design .friend-request-info strong { font-weight: 800 !important; font-size: 13.5px !important; color: var(--av-texte) !important; }
+body.av-design .friend-request-info small { font-size: 11px !important; color: var(--av-doux) !important; }
+body.av-design .friend-request-actions { grid-column: 1 / -1; display: flex !important; gap: 8px !important; }
+body.av-design .friend-request-actions .add-contact-search {
+    flex: 1;
+    height: 30px !important; margin: 0 !important; padding: 0 !important;
+    border: 0 !important; border-radius: 9px !important;
+    background: var(--av-accent) !important; color: var(--av-sur-accent) !important;
+    font-family: var(--av-texte-police) !important; font-weight: 800 !important; font-size: 12px !important;
+    letter-spacing: 0 !important; text-transform: none !important; box-shadow: none !important;
+    cursor: pointer;
+}
+body.av-design .friend-request-actions .add-contact-search.secondary { background: rgba(255, 255, 255, 0.1) !important; color: var(--av-texte) !important; }
+
+/* Pastille de messages non lus sur la bulle de la barre du haut */
+body.av-design .av-contacts.av-has-unread::after {
+    content: var(--av-unread);
+    position: absolute; top: 7px; right: 8px;
+    min-width: 16px; height: 16px; padding: 0 4px; box-sizing: border-box;
+    border-radius: 8px; background: var(--av-rouge); color: #fff;
+    font-size: 10px; font-weight: 800; line-height: 16px; text-align: center;
+}
+body.av-design .av-contacts[aria-expanded="true"],
+body.av-design #settingsButton[aria-expanded="true"] { background: var(--av-accent) !important; color: var(--av-sur-accent) !important; }
+body.av-design #accountButton[aria-expanded="true"] { background: var(--av-accent) !important; }
+
+/* ---------------------------------------------------------------------
+   PARAMÈTRES ET PROFIL : grand panneau à droite, reste de l'écran assombri
+   --------------------------------------------------------------------- */
+
+body.av-design { --av-set-w: min(896px, calc(100vw - 300px)); --av-prof-w: 240px; }
+
+body.av-design .settings-overlay,
+body.av-design .account-overlay {
+    position: fixed !important;
+    inset: var(--av-haut) 0 0 0 !important;
+    padding: 0 !important; margin: 0 !important;
+    display: block !important;
+    background: rgba(0, 0, 0, 0.64) !important;
+    backdrop-filter: none !important;
+    z-index: 250 !important;
+    opacity: 1 !important;
+}
+body.av-design .settings-overlay:not(.open),
+body.av-design .account-overlay:not(.open) { visibility: hidden !important; pointer-events: none !important; background: transparent !important; }
+body.av-design .settings-overlay.open,
+body.av-design .account-overlay.open { visibility: visible !important; pointer-events: auto !important; }
+
+body.av-design .settings-panel.av-settings,
+body.av-design .account-panel.av-profile {
+    position: absolute !important;
+    top: 0 !important; right: 0 !important; bottom: 0 !important; left: auto !important;
+    height: auto !important; max-height: none !important;
+    max-width: none !important; min-width: 0 !important; min-height: 0 !important;
+    margin: 0 !important; padding: 0 !important;
+    border: 0 !important; border-radius: 0 !important;
+    background: var(--av-reglages) !important;
+    box-shadow: -18px 0 40px rgba(0, 0, 0, 0.35) !important;
+    backdrop-filter: none !important;
+    font-family: var(--av-texte-police) !important;
+    color: var(--av-texte);
+    opacity: 1 !important;
+    transform: translateX(24px) !important;
+    transition: transform .2s ease !important;
+    overflow: visible !important;
+}
+body.av-design .settings-panel.av-settings { width: var(--av-set-w) !important; display: flex !important; }
+body.av-design .account-panel.av-profile { width: var(--av-prof-w) !important; display: flex !important; flex-direction: column !important; }
+body.av-design .settings-overlay.open .settings-panel,
+body.av-design .account-overlay.open .account-panel { transform: none !important; }
+body.av-design .settings-panel::before, body.av-design .settings-panel::after,
+body.av-design .account-panel::before, body.av-design .account-panel::after { display: none !important; content: none !important; }
+
+/* Croix ronde au milieu de la partie assombrie */
+body.av-design .av-dim-close {
+    position: fixed !important;
+    top: calc(var(--av-haut) + (100vh - var(--av-haut)) / 2) !important;
+    left: calc((100vw - var(--av-set-w)) / 2) !important;
+    right: auto !important;
+    transform: translate(-50%, -50%) !important;
+    width: 62px !important; height: 62px !important;
+    margin: 0 !important; padding: 0 !important;
+    border-radius: 50% !important;
+    border: 2px solid rgba(255, 255, 255, 0.7) !important;
+    background: rgba(0, 0, 0, 0.2) !important;
+    color: #fff !important;
+    display: flex !important; align-items: center; justify-content: center;
+    font-size: 0 !important;
+    cursor: pointer;
+    box-shadow: none !important;
+}
+body.av-design .av-dim-close:hover { background: rgba(255, 255, 255, 0.12) !important; }
+body.av-design .av-dim-close-profile { left: calc((100vw - var(--av-prof-w)) / 2) !important; }
+
+/* Colonne des catégories */
+body.av-design .av-set-nav {
+    width: 190px; flex: none;
+    background: var(--av-panneau);
+    display: flex; flex-direction: column;
+}
+body.av-design .av-set-heading {
+    margin: 0;
+    height: 52px; flex: none;
+    display: flex; align-items: center; gap: 10px;
+    padding: 0 22px;
+    background: rgba(0, 0, 0, 0.25);
+    font-family: var(--av-titre) !important;
+    font-weight: 800; font-size: 16px; letter-spacing: 0.04em;
+    color: #fff;
+}
+body.av-design #settingsTitle { font: inherit !important; color: inherit !important; letter-spacing: inherit !important; margin: 0 !important; text-transform: uppercase; }
+body.av-design .av-set-cats { display: flex; flex-direction: column; }
+body.av-design .av-set-cat {
+    width: 100%; height: 42px; flex: none;
+    text-align: left;
+    padding: 0 22px;
+    border: 0; border-left: 3px solid transparent;
+    background: transparent;
+    color: var(--av-doux);
+    font-family: var(--av-texte-police);
+    font-size: 14px; font-weight: 600; letter-spacing: 0.03em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+body.av-design .av-set-cat:hover { color: #fff; }
+body.av-design .av-set-cat.active { border-left-color: var(--av-accent); background: var(--av-reglages); color: #fff; font-weight: 800; }
+body.av-design .av-set-version { margin: auto 0 0; padding: 14px 22px; font-size: 11.5px; color: var(--av-doux); }
+
+/* Contenu : une ligne par réglage (titre, explication, contrôle à droite) */
+body.av-design .av-set-body { flex: 1; min-width: 0; padding: 18px 34px; overflow-y: auto; }
+body.av-design .av-set-pane { display: flex; flex-direction: column; }
+body.av-design .av-set-pane[hidden] { display: none; }
+body.av-design .av-set-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    padding: 14px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin: 0 !important; background: transparent !important; border-radius: 0 !important; box-shadow: none !important;
+}
+body.av-design .av-set-row-block { flex-direction: column; align-items: stretch; gap: 12px; padding-bottom: 16px; }
+body.av-design .av-set-text { min-width: 0; }
+body.av-design .av-set-title {
+    display: block;
+    margin: 0 !important;
+    font-family: var(--av-texte-police) !important;
+    font-size: 14.5px !important; font-weight: 700 !important; letter-spacing: 0 !important; text-transform: none !important;
+    color: #f2f4f8 !important;
+}
+body.av-design .av-set-desc { font-size: 12px; color: var(--av-doux); margin-top: 2px; }
+
+body.av-design .av-select {
+    flex: none;
+    width: 230px !important; height: 34px !important;
+    margin: 0 !important; padding: 0 12px !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    background-color: transparent !important;
+    color: #fff !important;
+    font-family: var(--av-texte-police) !important; font-weight: 700 !important; font-size: 13.5px !important;
+    box-shadow: none !important;
+    cursor: pointer;
+}
+body.av-design .av-select option { background: var(--av-reglages); color: #fff; }
+
+body.av-design .av-set-btn {
+    flex: none;
+    height: 34px; padding: 0 16px;
+    border-radius: 10px; border: 0;
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    font-family: var(--av-texte-police) !important; font-weight: 800 !important; font-size: 13px !important;
+    letter-spacing: 0 !important; text-transform: none !important;
+    width: auto !important; margin: 0 !important; box-shadow: none !important;
+    cursor: pointer;
+}
+body.av-design .av-set-btn:hover { background: rgba(255, 255, 255, 0.18) !important; }
+body.av-design .av-set-danger { background: rgba(226, 87, 76, 0.18) !important; color: #ff8a80 !important; }
+body.av-design .av-set-danger:hover { background: rgba(226, 87, 76, 0.3) !important; }
+body.av-design .av-set-pill {
+    flex: none;
+    padding: 6px 12px; border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--av-doux);
+    font-size: 13px; font-weight: 800;
+}
+body.av-design .av-set-link {
+    flex: none; border: 0; padding: 0; background: transparent;
+    color: var(--av-accent);
+    font-family: var(--av-texte-police); font-size: 13px; font-weight: 800;
+    cursor: pointer;
+}
+body.av-design .av-set-link:hover { text-decoration: underline; }
+
+/* Thèmes */
+body.av-design .av-themes { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px; }
+body.av-design .av-theme {
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+    padding: 8px 2px 6px;
+    border-radius: 10px;
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    cursor: pointer;
+    font-family: var(--av-texte-police);
+}
+body.av-design .av-theme:hover { background: rgba(255, 255, 255, 0.04); }
+body.av-design .av-theme[aria-checked="true"] { border-color: var(--av-accent); background: rgba(255, 255, 255, 0.07); }
+body.av-design .av-theme-swatch { position: relative; width: 32px; height: 32px; border-radius: 50%; }
+body.av-design .av-theme-swatch span {
+    position: absolute; right: -2px; bottom: -2px;
+    width: 12px; height: 12px; border-radius: 50%;
+    border: 2px solid var(--av-reglages);
+}
+body.av-design .av-theme-name { font-size: 10.5px; font-weight: 700; line-height: 1.15; text-align: center; color: #f2f4f8; }
+
+/* Mémoire du jeu : curseur du minimum au maximum de systemMemory() (index.js).
+   Le rond (20 px) a son centre à 10px + (largeur − 20px) × ratio : la partie remplie s'arrête au même endroit. */
+body.av-design .av-memory { display: flex; align-items: center; gap: 18px; }
+body.av-design .av-memory-track { position: relative; flex: 1; }
+body.av-design #gameMemory {
+    --av-thumb: 20px;
+    -webkit-appearance: none; appearance: none;
+    display: block;
+    width: 100% !important; height: 20px !important;
+    margin: 0 !important; padding: 0 !important;
+    background: transparent !important;
+    cursor: pointer;
+}
+body.av-design #gameMemory::-webkit-slider-runnable-track {
+    height: 4px; border-radius: 2px;
+    background: linear-gradient(90deg,
+        var(--av-accent) calc(var(--av-thumb) / 2 + (100% - var(--av-thumb)) * var(--fill-ratio, 0)),
+        rgba(255, 255, 255, 0.18) calc(var(--av-thumb) / 2 + (100% - var(--av-thumb)) * var(--fill-ratio, 0)));
+}
+body.av-design #gameMemory::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: var(--av-thumb); height: var(--av-thumb); margin-top: -8px;
+    border-radius: 50%; border: 0;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+/* Seulement le minimum (à gauche) et le maximum (à droite) */
+body.av-design .av-memory-ticks {
+    display: flex; justify-content: space-between;
+    padding: 4px 0 0;
+    font-size: 11px; font-weight: 700; color: var(--av-doux);
+}
+body.av-design #gameMemoryValue {
+    width: 64px; text-align: right;
+    font-family: var(--av-titre) !important; font-weight: 800 !important; font-size: 22px !important;
+    color: #fff !important; background: transparent !important; border: 0 !important; padding: 0 !important;
+}
+body.av-design .av-memory-hint { margin: 2px 0 0; font-size: 12.5px; font-weight: 700; color: var(--av-vert) !important; }
+
+/* Profil */
+body.av-design .av-profile-top {
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    padding: 46px 18px 16px;   /* place pour la pastille de statut, qui ne touche pas l'avatar */
+}
+body.av-design .av-profile-status {
+    position: absolute; top: 12px; right: 12px;
+    max-width: calc(100% - 24px);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    display: flex; align-items: center; gap: 5px;
+    padding: 3px 7px 3px 5px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: var(--av-panneau);
+    color: #fff;
+    font-size: 11px; font-weight: 800;
+}
+body.av-design .av-profile-status > span:first-child { width: 10px; height: 10px; flex: none; border-radius: 50%; background: var(--av-vert); }
+body.av-design .av-profile-status.away > span:first-child { background: #f1c04a; }
+body.av-design .av-profile-ring {
+    position: relative;
+    padding: 4px;
+    border-radius: 50%;
+    background: linear-gradient(150deg, var(--av-accent), var(--av-verre2));
+}
+body.av-design .av-profile .account-avatar-large {
+    display: flex !important; align-items: center; justify-content: center;
+    width: 88px !important; height: 88px !important; margin: 0 !important;
+    border-radius: 50% !important;
+    background-color: var(--av-panneau) !important;
+    background-size: cover !important; background-position: center !important;
+    border: 0 !important; box-shadow: none !important;
+    font-family: var(--av-titre) !important; font-weight: 800 !important; font-size: 40px !important;
+    color: #fff !important;
+}
+body.av-design .av-profile-pencil {
+    position: absolute; right: 0; bottom: 0;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    border: 2px solid var(--av-reglages) !important;
+    background: var(--av-accent) !important;
+    color: var(--av-sur-accent) !important;
+    display: flex !important; align-items: center; justify-content: center;
+    padding: 0 !important; margin: 0 !important;
+    font-size: 0 !important;
+    cursor: pointer;
+    box-shadow: none !important;
+}
+body.av-design .av-profile-name { display: flex; align-items: center; gap: 6px; max-width: 100%; }
+body.av-design .av-profile-name[hidden], body.av-design .av-profile-name-edit[hidden] { display: none !important; }
+body.av-design #accountProfileName {
+    margin: 0 !important;
+    font-family: var(--av-titre) !important; font-weight: 800 !important; font-size: 19px !important;
+    color: #fff !important; letter-spacing: 0 !important; text-transform: none !important;
+    overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+body.av-design .av-profile-edit {
+    flex: none;
+    width: 26px; height: 26px;
+    border-radius: 8px; border: 0;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--av-doux);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+}
+body.av-design .av-profile-edit:hover { color: #fff; }
+body.av-design .av-profile-name-edit { display: flex; gap: 6px; width: 100%; }
+body.av-design .av-profile #profileNameInput {
+    flex: 1; min-width: 0;
+    height: 32px !important; box-sizing: border-box;
+    margin: 0 !important; padding: 0 10px !important;
+    border-radius: 9px !important;
+    border: 1px solid var(--av-accent) !important;
+    background: var(--av-panneau) !important;
+    color: #fff !important;
+    font-family: var(--av-texte-police) !important; font-size: 13.5px !important; font-weight: 700 !important;
+    box-shadow: none !important;
+}
+body.av-design .av-profile #saveProfileButton {
+    height: 32px !important; width: auto !important;
+    margin: 0 !important; padding: 0 12px !important;
+    border-radius: 9px !important; border: 0 !important;
+    background: var(--av-accent) !important; color: var(--av-sur-accent) !important;
+    font-family: var(--av-texte-police) !important; font-weight: 800 !important; font-size: 12px !important;
+    box-shadow: none !important;
+    cursor: pointer;
+}
+body.av-design .av-profile .origins-id-card { width: 100% !important; margin: 0 !important; padding: 0 !important; background: transparent !important; border: 0 !important; display: block !important; }
+body.av-design .av-profile .origins-id-label { display: block !important; }
+body.av-design .av-profile .origins-id-card[hidden] { display: none !important; }
+body.av-design .av-profile .origins-id-copy {
+    width: 100% !important;
+    display: flex !important; align-items: center; justify-content: space-between; gap: 8px;
+    margin: 0 !important; padding: 8px 12px !important;
+    border-radius: 12px !important;
+    border: 1px dashed rgba(255, 255, 255, 0.3) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    box-shadow: none !important;
+    cursor: pointer;
+    font-family: var(--av-texte-police) !important;
+}
+body.av-design .av-id-text { display: flex; flex-direction: column; align-items: flex-start; }
+body.av-design .av-profile .origins-id-label { font-size: 9.5px !important; font-weight: 800 !important; letter-spacing: 0.12em !important; color: var(--av-doux) !important; }
+body.av-design #accountOriginsId { font-family: ui-monospace, monospace !important; font-size: 14px !important; font-weight: 700 !important; letter-spacing: 0.08em !important; color: #fff !important; }
+body.av-design #originsIdCopyLabel { font-size: 11px !important; font-weight: 800 !important; color: var(--av-accent) !important; }
+body.av-design .av-profile-ms { font-size: 11.5px; color: var(--av-doux); }
+
+body.av-design .av-profile-menu {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 6px;
+    display: flex; flex-direction: column;
+}
+body.av-design .av-profile-entry {
+    display: flex !important; align-items: center; gap: 10px;
+    width: 100% !important; height: 40px !important;
+    margin: 0 !important; padding: 0 22px !important;
+    border: 0 !important; border-radius: 0 !important;
+    background: transparent !important;
+    color: #f2f4f8 !important;
+    font-family: var(--av-texte-police) !important; font-size: 13.5px !important; font-weight: 700 !important;
+    letter-spacing: 0.03em !important; text-transform: uppercase;
+    text-align: left;
+    box-shadow: none !important;
+    cursor: pointer;
+}
+body.av-design .av-profile-entry:hover { background: rgba(255, 255, 255, 0.08) !important; }
+body.av-design .av-profile-logout { color: #ff8a80 !important; }
+body.av-design .av-profile-logout::before {
+    content: ""; width: 17px; height: 17px; flex: none;
+    background: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4M9 8l-4 4 4 4M5 12h10'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* Fenêtre de conversation : carte de verre à gauche du tiroir */
+body.av-design .friends-chat-window {
+    position: fixed !important;
+    top: auto !important; left: auto !important;
+    right: 232px !important; bottom: 16px !important;
+    width: 330px !important; height: min(460px, calc(100vh - 90px)) !important; max-height: none !important;
+    border-radius: 18px !important;
+    background: linear-gradient(160deg, var(--av-verre1), var(--av-verre2)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45) !important;
+    backdrop-filter: none !important;
+    font-family: var(--av-texte-police) !important;
+    z-index: 245 !important;
+}
+body.av-design .friends-chat-window .friends-conversation-header {
+    background: transparent !important; border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+body.av-design .friends-chat-window input,
+body.av-design .friends-chat-window textarea {
+    border-radius: 10px !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    background: rgba(0, 0, 0, 0.25) !important;
+    color: #fff !important;
+    font-family: var(--av-texte-police) !important;
+}
+
+/* ---------------------------------------------------------------------
+   « QUOI DE NEUF ? » : petite carte en bas à droite, sans bloquer le launcher
+   --------------------------------------------------------------------- */
+
+body.av-design .origins-whats-new {
+    inset: auto 22px 22px auto !important;
+    padding: 0 !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    display: block !important;
+    z-index: 230 !important;
+}
+body.av-design .origins-whats-new[hidden] { display: none !important; }
+body.av-design .origins-whats-new-card {
+    position: relative;
+    width: 300px !important;
+    max-height: min(420px, calc(100vh - 120px)) !important;
+    box-sizing: border-box;
+    padding: 16px 20px !important;
+    border-radius: 18px !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    background: linear-gradient(150deg, var(--av-verre1), var(--av-verre2)) !important;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4) !important;
+    font-family: var(--av-texte-police) !important;
+    color: #fff !important;
+}
+body.av-design .av-whats-new-x {
+    position: absolute; top: 10px; right: 10px;
+    width: 28px; height: 28px;
+    border: 0; border-radius: 50%;
+    background: transparent; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+}
+body.av-design .av-whats-new-x:hover { background: rgba(255, 255, 255, 0.12); }
+body.av-design .origins-whats-new-kicker {
+    font-size: 10.5px !important; font-weight: 800 !important; letter-spacing: 0.12em !important;
+    color: var(--av-accent) !important;
+}
+body.av-design .origins-whats-new-card h2 {
+    margin: 2px 30px 2px 0 !important;
+    font-family: var(--av-titre) !important; font-weight: 800 !important; font-size: 19px !important;
+    color: #fff !important;
+}
+body.av-design .origins-whats-new-versions { margin: 0 0 8px !important; color: var(--av-doux) !important; font-size: 11px !important; }
+body.av-design .origins-whats-new-list { gap: 8px !important; padding: 0 !important; }
+body.av-design .origins-whats-new-list section { padding: 0 !important; border: 0 !important; background: transparent !important; }
+body.av-design .origins-whats-new-list h3 {
+    margin: 0 0 4px !important;
+    font-family: var(--av-titre) !important; font-weight: 800 !important; font-size: 13px !important;
+    color: var(--av-accent) !important;
+}
+body.av-design .origins-whats-new-list ul {
+    margin: 0 !important; padding: 0 !important;
+    list-style: none;
+    display: flex; flex-direction: column; gap: 4px;
+    font-size: 13px !important; line-height: 1.35 !important;
+    color: #fff !important;
+}
+body.av-design .origins-whats-new-list li { display: flex; gap: 8px; }
+body.av-design .origins-whats-new-list li::before { content: "✦"; color: var(--av-accent); flex: none; }
+body.av-design .origins-whats-new-actions { display: flex !important; gap: 8px !important; margin-top: 12px !important; }
+body.av-design .origins-whats-new-actions .origins-tutorial-button {
+    flex: 1;
+    height: 34px !important; margin: 0 !important; padding: 0 6px !important;
+    border-radius: 10px !important;
+    border: 0 !important;
+    background: #fff !important; color: var(--av-jouer) !important;
+    font-family: var(--av-texte-police) !important; font-weight: 800 !important; font-size: 12px !important;
+    letter-spacing: 0 !important;
+    box-shadow: none !important;
+}
+body.av-design .origins-whats-new-actions .origins-tutorial-button.secondary {
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    background: transparent !important; color: #fff !important;
+}
+
+
+/* ---------------------------------------------------------------------
+   ÉCRAN DE CONNEXION (première ouverture) : fond peint et couleurs du thème
+   Référence : design/maquettes/Aventure-Connexion.dc.html. La refonte complète
+   de cet écran viendra avec sa nouvelle DA ; ici, le fond et plus aucun vert.
+   --------------------------------------------------------------------- */
+
+body.av-design .origins-onboarding {
+    background: url("assets/backgrounds/origins-connexion.jpg") center 30% / cover no-repeat !important;
+}
+/* Milieu dégagé (la carte et la lueur), bords assombris dans la teinte du thème */
+body.av-design .origins-onboarding-shade {
+    background: radial-gradient(60% 60% at 50% 50%, rgba(0, 0, 0, 0) 0%, var(--av-teinte) 100%) !important;
+}
+body.av-design .origins-onboarding-card {
+    border-radius: 22px !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    background: linear-gradient(160deg, var(--av-verre1), var(--av-verre2)) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: none !important;
+    font-family: var(--av-texte-police);
+}
+body.av-design .origins-onboarding-kicker { color: var(--av-accent) !important; }
+body.av-design .origins-onboarding h1 {
+    color: #fff !important;
+    font-family: var(--av-titre) !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.03em;
+}
+body.av-design .origins-onboarding p { color: var(--av-texte) !important; }
+body.av-design .origins-onboarding-status { color: var(--av-doux) !important; }
+body.av-design .origins-onboarding-link { color: var(--av-accent) !important; }
+body.av-design .origins-onboarding-link:hover { color: #fff !important; }
+
+/* Choix de la langue */
+body.av-design .origins-language-option {
+    border: 1.5px solid rgba(255, 255, 255, 0.16) !important;
+    background: transparent !important;
+    color: #fff !important;
+}
+body.av-design .origins-language-option:hover { border-color: rgba(255, 255, 255, 0.4) !important; }
+body.av-design .origins-language-option.selected {
+    border-color: var(--av-accent) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: none !important;
+}
+
+/* Création du profil */
+body.av-design .origins-profile-input {
+    border: 1px solid rgba(255, 255, 255, 0.35) !important;
+    background: rgba(0, 0, 0, 0.25) !important;
+    color: #fff !important;
+}
+body.av-design .origins-profile-input:focus {
+    border-color: var(--av-accent) !important;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06) !important;
+}
+body.av-design .origins-microsoft-button,
+body.av-design .origins-profile-create-button {
+    border: 0 !important;
+    background: #fff !important;
+    color: var(--av-jouer) !important;
+    font-family: var(--av-titre) !important;
+    font-weight: 800 !important;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.18) !important;
+}
+body.av-design .origins-microsoft-button:hover,
+body.av-design .origins-profile-create-button:hover { background: #fff !important; transform: translateY(-1px); }
+
+
+/* ---------------------------------------------------------------------
+   DIAGNOSTIC DE LANCEMENT : « Le jeu ne s'est pas lancé »
+   --------------------------------------------------------------------- */
+
+body.av-design .av-problem {
+    position: fixed; inset: var(--av-haut) 0 0 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 270;
+}
+body.av-design .av-problem[hidden] { display: none; }
+body.av-design .av-problem-card {
+    position: relative;
+    width: min(460px, calc(100% - 48px));
+    box-sizing: border-box;
+    padding: 22px 26px 22px;
+    border-radius: 20px;
+    background: linear-gradient(160deg, var(--av-verre1), var(--av-verre2));
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-family: var(--av-texte-police);
+}
+body.av-design .av-problem-kicker {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 10.5px; font-weight: 800; letter-spacing: 0.12em;
+    color: #ff9a8f;
+}
+body.av-design .av-problem-kicker::before {
+    content: ""; width: 9px; height: 9px; border-radius: 50%;
+    background: var(--av-rouge); box-shadow: 0 0 8px var(--av-rouge);
+}
+body.av-design .av-problem-card h2 {
+    margin: 6px 36px 8px 0;
+    font-family: var(--av-titre);
+    font-weight: 800; font-size: 21px; line-height: 1.15;
+}
+body.av-design #launchProblemText { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--av-texte); }
+body.av-design .av-problem-detail {
+    margin: 10px 0 0;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.25);
+    font-family: ui-monospace, monospace;
+    font-size: 11.5px; line-height: 1.4;
+    color: var(--av-doux);
+    overflow-wrap: anywhere;
+    max-height: 90px; overflow-y: auto;
+}
+body.av-design .av-problem-detail[hidden] { display: none; }
+body.av-design .av-problem-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+body.av-design .av-problem-btn {
+    flex: 1 1 auto;
+    min-height: 40px; padding: 0 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: transparent; color: #fff;
+    font-family: var(--av-titre); font-weight: 800; font-size: 14px; letter-spacing: 0.03em;
+    cursor: pointer;
+}
+body.av-design .av-problem-btn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.1); }
+body.av-design .av-problem-btn.primary {
+    border: 0;
+    background: #fff; color: var(--av-jouer);
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.18);
+}
+body.av-design .av-problem-btn.primary:hover:not(:disabled) { background: #fff; transform: translateY(-1px); }
+body.av-design .av-problem-btn:disabled { opacity: 0.6; cursor: wait; }
+body.av-design .av-problem-status { margin: 10px 0 0; font-size: 12.5px; font-weight: 700; color: var(--av-accent); }
+body.av-design .av-problem-status:empty { display: none; }
+
+
+/* Discord d'Origins mis en avant dans la barre du haut : couleur d'accent du thème */
+body.av-design .av-icon-btn.av-discord-btn { color: var(--av-accent); }
+body.av-design .av-icon-btn.av-discord-btn:hover { color: #fff; filter: none; background: rgba(255, 255, 255, 0.06); }

@@ -636,6 +636,7 @@ async function openFriendsConversation(eventOrProfile) {
 
     if (profile) activeFriendsConversationProfile = profile;
     if (!friendsConversationView || !activeFriendsConversationProfile) return;
+    if (typeof clearUnreadMessages === "function") clearUnreadMessages(activeFriendsConversationProfile.id);
 
     setConversationHeader(activeFriendsConversationProfile);
     if (typeof openFloatingWindow === "function") openFloatingWindow(friendsConversationView);
@@ -817,19 +818,23 @@ function renderNews(language) {
 
         items.map((item) => `
 
-            <article class="news-card update-preview-card" data-update-version="${item.version}">
-
-                <span class="news-type">${item.type}</span>
-
-                <h3>${item.title}</h3>
-
-                <p>${item.text}</p>
-
-                <span class="news-date">${item.date}</span>
-
+            <article class="news-card update-preview-card av-news-card" data-update-version="${item.version}">
+                <div class="av-news-copy">
+                    <h3>${item.title}</h3>
+                    <p>${item.text}</p>
+                </div>
+                <div class="av-news-art" aria-hidden="true"></div>
+                <p class="av-news-foot"><span class="news-type">${item.type}</span> <span class="news-date">${item.date}</span></p>
             </article>
 
         `).join("");
+
+
+
+    // Bandeau de la barre du haut : l'actu la plus récente.
+    const featuredTitle = document.getElementById("topbarFeaturedTitle");
+
+    if (featuredTitle) featuredTitle.textContent = items[0] ? items[0].title : "";
 
 }
 
@@ -857,43 +862,248 @@ function renderUpdateHistory() {
 
 
 
+    // Nouveau design : cartes sombres, la plus récente en grand, filtres Tout / Tempest / Launcher.
+    renderedHistory = history;
+
     updatesHistory.innerHTML =
 
-        history.map((item, index) => `
+        history.map((item, index) => {
 
-            <article class="update-history-card ${index === 0 ? "latest" : ""}">
+            const kind = String(item.type || "").toLowerCase().includes("launcher") ? "launcher" : "tempest";
 
-                <div class="update-history-top">
+            const hidden = newsFilter !== "all" && newsFilter !== kind;
 
-                    <div>
-
-                        <span class="news-type">${item.type}</span>
-
-                        <h2>${item.title}</h2>
-
-                    </div>
-
-                    ${item.version ? `<span class="update-version">v${item.version}</span>` : ""}
-
+            return `
+            <article class="av-actu-card av-actu-${kind}" data-news-index="${index}" data-news-kind="${kind}" tabindex="0" role="button"${hidden ? " hidden" : ""}>
+                <div class="av-actu-copy">
+                    <h3>${item.title}</h3>
+                    <p>${item.text}</p>
                 </div>
+                <div class="av-actu-art" aria-hidden="true">${kind === "launcher" ? NEWS_ORIGINS_EYE : `<img src="assets/logos/tempest-logo.png" alt="">`}</div>
+                <p class="av-actu-foot"><span class="av-actu-type">${item.type}${item.version ? ` ${item.version}` : ""}</span>&nbsp;<span class="av-actu-date">${item.date}</span></p>
+            </article>`;
 
-                <p>${item.text}</p>
+        }).join("");
 
-                <ul>${item.changes.map((change) => `<li>${change}</li>`).join("")}</ul>
-
-                <div class="update-history-meta">
-
-                    <span>${item.date}</span>
-
-                    ${index === 0 ? `<strong>${t("latestUpdate")}</strong>` : ""}
-
-                </div>
-
-            </article>
-
-        `).join("");
+    // La première carte visible prend deux colonnes.
+    updatesHistory.querySelector(".av-actu-card:not([hidden])")?.classList.add("av-actu-big");
 
 }
+
+
+
+const NEWS_ORIGINS_EYE = '<img src="assets/logos/origins-oeil.svg" alt="">';
+
+let newsFilter = "all";
+
+let renderedHistory = [];
+
+
+
+document.querySelectorAll("[data-news-filter]").forEach((button) => {
+
+    button.addEventListener("click", () => {
+
+        newsFilter = button.dataset.newsFilter;
+
+        document.querySelectorAll("[data-news-filter]").forEach((b) => {
+
+            const on = b === button;
+
+            b.classList.toggle("active", on);
+
+            b.setAttribute("aria-pressed", String(on));
+
+        });
+
+        renderUpdateHistory();
+
+    });
+
+});
+
+
+
+// Détail d'une actu : la liste complète des changements.
+function openNewsDetail(index) {
+
+    const item = renderedHistory[index];
+
+    const box = document.getElementById("newsDetail");
+
+    if (!item || !box) return;
+
+    document.getElementById("newsDetailMeta").innerHTML = `${item.type}${item.version ? ` · v${item.version}` : ""} · ${item.date}`;
+
+    document.getElementById("newsDetailTitle").innerHTML = item.title;
+
+    document.getElementById("newsDetailText").innerHTML = item.text;
+
+    document.getElementById("newsDetailChanges").innerHTML = (item.changes || []).map((change) => `<li>${change}</li>`).join("");
+
+    box.hidden = false;
+
+    document.getElementById("newsDetailClose")?.focus();
+
+}
+
+function closeNewsDetail() {
+
+    const box = document.getElementById("newsDetail");
+
+    if (box) box.hidden = true;
+
+}
+
+updatesHistory?.addEventListener("click", (event) => {
+
+    const card = event.target.closest(".av-actu-card");
+
+    if (card) openNewsDetail(Number(card.dataset.newsIndex));
+
+});
+
+updatesHistory?.addEventListener("keydown", (event) => {
+
+    const card = event.target.closest(".av-actu-card");
+
+    if (card && (event.key === "Enter" || event.key === " ")) {
+
+        event.preventDefault();
+
+        openNewsDetail(Number(card.dataset.newsIndex));
+
+    }
+
+});
+
+document.getElementById("newsDetailClose")?.addEventListener("click", closeNewsDetail);
+
+document.getElementById("newsDetail")?.addEventListener("click", (event) => {
+
+    if (event.target.id === "newsDetail") closeNewsDetail();
+
+});
+
+document.addEventListener("keydown", (event) => {
+
+    if (event.key === "Escape") closeNewsDetail();
+
+});
+
+
+
+// L'état « Téléchargement » suit le bloc d'installation.
+if (installProgress) {
+
+    new MutationObserver(() => refreshLibraryGameState())
+        .observe(installProgress, { attributes: true, attributeFilter: ["class"] });
+
+}
+
+
+
+// Téléchargement : anneau dans la barre de gauche, bandeau sur les autres onglets, temps restant estimé.
+// (Le launcher ne reçoit que le pourcentage : le temps restant est estimé à partir de sa vitesse d'avancée.)
+const downloadTrack = { startedAt: 0, startPct: 0 };
+
+function formatEta(seconds) {
+
+    if (!isFinite(seconds) || seconds <= 0) return "";
+
+    if (seconds < 60) return t("etaSeconds", { s: Math.max(1, Math.round(seconds)) });
+
+    return t("etaMinutes", { m: Math.floor(seconds / 60), s: Math.round(seconds % 60) });
+
+}
+
+function updateDownloadExtras() {
+
+    const pct = Math.max(0, Math.min(100, parseFloat(installProgressPercent?.textContent) || 0));
+
+    const downloading = document.body.classList.contains("av-downloading");
+
+    document.body.style.setProperty("--av-pct", `${pct}%`);
+
+    let eta = "";
+
+    if (downloading) {
+
+        const now = Date.now();
+
+        if (!downloadTrack.startedAt || pct < downloadTrack.startPct) {
+
+            downloadTrack.startedAt = now;
+            downloadTrack.startPct = pct;
+
+        }
+
+        const done = pct - downloadTrack.startPct;
+
+        const elapsed = (now - downloadTrack.startedAt) / 1000;
+
+        if (done >= 2 && elapsed >= 4 && pct < 100) eta = formatEta(elapsed / done * (100 - pct));
+
+    } else {
+
+        downloadTrack.startedAt = 0;
+
+    }
+
+    const etaEl = document.getElementById("installProgressEta");
+
+    if (etaEl) etaEl.textContent = eta;
+
+    const banner = document.getElementById("downloadBanner");
+
+    if (banner) {
+
+        banner.hidden = !downloading || currentPage === "home";
+
+        document.getElementById("downloadBannerPercent").textContent = `${Math.floor(pct)} %`;
+
+        document.getElementById("downloadBannerBar").style.width = `${pct}%`;
+
+        document.getElementById("downloadBannerEta").textContent = eta;
+
+    }
+
+}
+
+if (installProgressPercent) {
+
+    new MutationObserver(() => updateDownloadExtras())
+        .observe(installProgressPercent, { childList: true, characterData: true, subtree: true });
+
+}
+
+if (installProgress) {
+
+    new MutationObserver(() => updateDownloadExtras())
+        .observe(installProgress, { attributes: true, attributeFilter: ["class"] });
+
+}
+
+document.getElementById("downloadBanner")?.addEventListener("click", () => showPage("home"));
+
+
+
+// Boutique : la flèche fait défiler la rangée.
+document.querySelectorAll(".av-shop-next").forEach((button) => {
+
+    button.addEventListener("click", () => {
+
+        const row = button.parentElement.querySelector(".av-shop-row");
+
+        if (!row) return;
+
+        const atEnd = row.scrollLeft + row.clientWidth >= row.scrollWidth - 4;
+
+        row.scrollBy({ left: atEnd ? -row.scrollWidth : row.clientWidth * 0.8, behavior: "smooth" });
+
+    });
+
+});
 
 
 
@@ -907,9 +1117,38 @@ function renderUpdateHistory() {
 
 
 
+// Nouveau design : état de Tempest sur son affiche (onglet Jeux) et anneau de la barre de gauche.
+function refreshLibraryGameState() {
+
+    const stateEl = document.getElementById("libraryTempestState");
+
+    const dot = document.getElementById("libraryTempestDot");
+
+    const downloading = !!installProgress?.classList.contains("visible")
+        && !installProgress.classList.contains("complete")
+        && !installProgress.classList.contains("error");
+
+    const [key, color] = downloading
+        ? ["gameStateDownloading", "var(--av-accent)"]
+        : tempestInstalled ? ["gameStateInstalled", "#4cd38a"] : ["gameStateToInstall", "#f1c04a"];
+
+    if (stateEl) stateEl.textContent = t(key);
+
+    if (dot) dot.style.background = color;
+
+    document.body.classList.toggle("av-downloading", downloading);
+
+    document.body.classList.toggle("av-not-installed", !tempestInstalled && !downloading);
+
+}
+
+
+
 function updateTempestButton() {
 
 
+
+    refreshLibraryGameState();
 
     if (!playButton) {
 
@@ -1336,6 +1575,9 @@ function showPage(pageName) {
 
 
 
+    // Nouveau design : le jeu Tempest (JOUER / INSTALLER) est sur l'accueil.
+    if (pageName === "tempest") pageName = "home";
+
     currentPage = pageName;
 
 
@@ -1344,7 +1586,7 @@ function showPage(pageName) {
 
     if (gamesLibraryPage) gamesLibraryPage.classList.toggle("active", pageName === "games");
 
-    if (gamesButton) gamesButton.classList.toggle("active", pageName === "games" || pageName === "tempest");
+    if (gamesButton) gamesButton.classList.toggle("active", pageName === "games");
 
 
 
@@ -1382,7 +1624,12 @@ function showPage(pageName) {
 
     shopButton.classList.toggle("active", pageName === "shop");
 
-    tempestButton.classList.toggle("selected", pageName === "tempest");
+    tempestButton.classList.toggle("selected", pageName === "home");
+
+    // Le bandeau de téléchargement ne s'affiche pas sur l'accueil.
+    const downloadBanner = document.getElementById("downloadBanner");
+
+    if (downloadBanner) downloadBanner.hidden = pageName === "home" || !document.body.classList.contains("av-downloading");
 
 
 
@@ -1658,6 +1905,20 @@ if (libraryTempestButton) {
 
 
 
+// Nouveau design : boutons ajoutés à la barre du haut, à la barre de gauche et à l'accueil.
+document.getElementById("railAllGamesButton")?.addEventListener("click", () => showPage("games"));
+document.getElementById("homeGamePicker")?.addEventListener("click", () => showPage("games"));
+document.getElementById("topbarFeatured")?.addEventListener("click", () => showPage("updates"));
+document.getElementById("homeMoreNews")?.addEventListener("click", () => showPage("updates"));
+document.getElementById("homeShopButton")?.addEventListener("click", () => showPage("shop"));
+document.getElementById("homeGameSettingsButton")?.addEventListener("click", () => {
+    openSettings();
+    // Paramètres du jeu : les Paramètres s'ouvrent sur la catégorie Jeu.
+    openSettingsCategory("jeu");
+});
+
+
+
 discoverTempestButton.addEventListener(
 
     "click",
@@ -1784,7 +2045,10 @@ if (friendsQuickAccess) {
 
 
 
-            openFriends();
+            // Nouveau design : le bouton ouvre et ferme le tiroir.
+            if (socialPanel.classList.contains("open")) closeFriends();
+
+            else openFriends();
 
         }
 
@@ -2498,6 +2762,7 @@ function getInstallStageText(stage) {
         WRITING_CONFIGURATION: "stageConfiguring",
         VERIFYING: "stageVerifying",
         UPDATE: "stageUpdate",
+        JAVA: "stageJava",
         COMPLETE: "stageComplete",
         ERROR: "stageError"
     };
@@ -2943,13 +3208,18 @@ playButton.addEventListener(
 
 
 
-                    throw new Error(
+                    const failure = new Error(
 
                         result?.error ||
 
                         "Minecraft launch failed."
 
                     );
+
+                    // Cause reconnue par index.js (launch-diagnostic.js) : JAVA_…, NETWORK, DISK_SPACE…
+                    failure.launchCode = result?.code || "UNKNOWN";
+
+                    throw failure;
 
                 }
 
@@ -2962,6 +3232,9 @@ playButton.addEventListener(
                     result.path
 
                 );
+
+                // La barre de préparation (Java…) n'a plus lieu d'être une fois le jeu lancé.
+                hideInstallProgressSoon();
 
 
 
@@ -2985,6 +3258,8 @@ playButton.addEventListener(
                     stage: "ERROR",
                     detail: error.message
                 });
+                // Fenêtre d'aide avec la cause et la bonne action (Réessayer, Réparer Java…).
+                showLaunchProblem({ code: error.launchCode || "UNKNOWN", detail: error.message });
                 playButton.disabled = false;
 
                 playButton.textContent =
@@ -3892,6 +4167,7 @@ async function handleOriginsRealtimeEvent(event) {
 
         // Conversation not visible: notify so the message is not missed.
         if (!(conversationOpen && activeId === senderId && document.hasFocus())) {
+            if (!(conversationOpen && activeId === senderId)) noteUnreadMessage(senderId, message);
             const sender = originsFriendsCache.find(p => String(p.id) === senderId);
             showSocialNotification(
                 sender?.displayName || "Origins",
@@ -4168,7 +4444,8 @@ makeFloatingDraggable(addContactPanel, "origins-window-add-contact", "[data-drag
 
 
 
-notificationsQuickAccess?.addEventListener("click", () => openFloatingWindow(notificationsPanel));
+// Nouveau design : la cloche ouvre le tiroir des contacts sur l'onglet Demandes.
+notificationsQuickAccess?.addEventListener("click", () => openSocialTab("requests"));
 
 notificationsClose?.addEventListener("click", () => closeFloatingWindow(notificationsPanel));
 
@@ -4536,6 +4813,8 @@ function renderTutorialStep() {
     if (step.panel === "settings" && !tutorialOpenedSettings) {
         tutorialOpenedSettings = true;
         openSettings();
+        // Nouveau design : la mémoire du jeu est dans la catégorie Jeu.
+        if (typeof openSettingsCategory === "function") openSettingsCategory("jeu");
         window.setTimeout(renderTutorialStep, 350);
     } else if (step.panel !== "settings" && tutorialOpenedSettings) {
         tutorialOpenedSettings = false;
@@ -4952,8 +5231,15 @@ function renderGameMemory() {
     if (!gameMemoryInput) return;
     const min = Number(gameMemoryInput.min), max = Number(gameMemoryInput.max);
     const value = Number(gameMemoryInput.value);
-    gameMemoryInput.style.setProperty("--fill", `${max > min ? ((value - min) / (max - min)) * 100 : 100}%`);
+    const ratio = max > min ? (value - min) / (max - min) : 1;
+    gameMemoryInput.style.setProperty("--fill", `${ratio * 100}%`);
+    // Même proportion, sans unité : le CSS cale la partie remplie sur le centre du rond.
+    gameMemoryInput.style.setProperty("--fill-ratio", String(ratio));
     gameMemoryValue.textContent = t("gameMemoryValue", { gb: value });
+    const minLabel = document.getElementById("gameMemoryMinLabel");
+    const maxLabel = document.getElementById("gameMemoryMaxLabel");
+    if (minLabel) minLabel.textContent = t("gameMemoryValue", { gb: min });
+    if (maxLabel) maxLabel.textContent = t("gameMemoryValue", { gb: max });
     if (gameMemoryInfo) {
         gameMemoryHint.textContent = t("gameMemoryHint", { total: gameMemoryInfo.totalGb, recommended: gameMemoryInfo.defaultGb });
     }
@@ -5081,3 +5367,569 @@ window.origins?.realtime?.onEvent?.((event) => {
 });
 
 loadLiveNews();
+
+
+
+/* ==========================================
+   NOUVEAU DESIGN : TIROIR CONTACTS / MESSAGES / DEMANDES
+========================================== */
+
+function openSocialTab(name) {
+    document.querySelectorAll("[data-social-tab]").forEach((tab) => {
+        const on = tab.dataset.socialTab === name;
+        tab.classList.toggle("active", on);
+        tab.setAttribute("aria-selected", String(on));
+    });
+    document.querySelectorAll("[data-social-pane]").forEach((pane) => {
+        pane.hidden = pane.dataset.socialPane !== name;
+    });
+    if (!socialPanel.classList.contains("open")) openFriends();
+    if (name === "messages") renderConversations();
+}
+
+document.querySelectorAll("[data-social-tab]").forEach((tab) => {
+    tab.addEventListener("click", () => openSocialTab(tab.dataset.socialTab));
+});
+
+// « Seulement en ligne » (activé par défaut, comme la maquette) + compteur en ligne / total
+const socialOnlineOnly = document.getElementById("socialOnlineOnly");
+
+function applyOnlineOnly() {
+    const on = socialOnlineOnly?.getAttribute("aria-checked") === "true";
+    friendsListView?.classList.toggle("av-online-only", on);
+    const rows = friendsListView ? [...friendsListView.querySelectorAll(".friends-contact-row")] : [];
+    const online = rows.filter((row) => row.classList.contains("is-online")).length;
+    const count = document.getElementById("socialOnlineCount");
+    if (count) count.textContent = `${online}/${rows.length}`;
+    friendsListView?.setAttribute("data-empty-online", t("noOnlineContacts"));
+}
+
+socialOnlineOnly?.addEventListener("click", () => {
+    const on = socialOnlineOnly.getAttribute("aria-checked") !== "true";
+    socialOnlineOnly.setAttribute("aria-checked", String(on));
+    applyOnlineOnly();
+});
+
+if (friendsListView) {
+    new MutationObserver(applyOnlineOnly).observe(friendsListView, { childList: true, subtree: true, attributes: true, attributeFilter: ["class"] });
+    applyOnlineOnly();
+}
+
+// Pastille de l'onglet Demandes = celle de la cloche
+const socialRequestsBadge = document.getElementById("socialRequestsBadge");
+
+function syncRequestsBadge() {
+    if (!socialRequestsBadge || !notificationsBadge) return;
+    socialRequestsBadge.hidden = notificationsBadge.hidden;
+    socialRequestsBadge.textContent = notificationsBadge.textContent;
+}
+
+if (notificationsBadge) {
+    new MutationObserver(syncRequestsBadge).observe(notificationsBadge, { attributes: true, childList: true, characterData: true, subtree: true });
+    syncRequestsBadge();
+}
+
+// Messages non lus (pendant la session) : pastille sur la bulle, l'onglet Messages et chaque conversation
+const unreadByProfile = new Map();
+const lastMessageByProfile = new Map();
+
+function updateUnreadBadges() {
+    const total = [...unreadByProfile.values()].reduce((a, b) => a + b, 0);
+    const tabBadge = document.getElementById("socialMessagesBadge");
+    if (tabBadge) {
+        tabBadge.hidden = total === 0;
+        tabBadge.textContent = String(total);
+    }
+    const bubble = document.getElementById("friendsMessageBadge");
+    if (bubble) {
+        bubble.classList.toggle("av-unread", total > 0);
+        bubble.dataset.unread = String(total);
+    }
+    friendsQuickAccess?.classList.toggle("av-has-unread", total > 0);
+    friendsQuickAccess?.style.setProperty("--av-unread", `"${total}"`);
+}
+
+function noteUnreadMessage(senderId, message) {
+    if (!senderId) return;
+    unreadByProfile.set(senderId, (unreadByProfile.get(senderId) || 0) + 1);
+    lastMessageByProfile.set(senderId, message);
+    updateUnreadBadges();
+    if (!document.querySelector('[data-social-pane="messages"]')?.hidden) renderConversations();
+}
+
+function clearUnreadMessages(profileId) {
+    unreadByProfile.delete(String(profileId));
+    updateUnreadBadges();
+    if (!document.querySelector('[data-social-pane="messages"]')?.hidden) renderConversations();
+}
+
+// Liste des conversations : dernier message échangé avec chaque contact
+let conversationsRequest = 0;
+
+async function renderConversations() {
+    const list = document.getElementById("socialConversations");
+    const token = localStorage.getItem("origins-token");
+    if (!list) return;
+    const friends = (originsFriendsCache || []).slice(0, 25);
+    const requestId = ++conversationsRequest;
+
+    const entries = await Promise.all(friends.map(async (profile) => {
+        const id = String(profile.id);
+        let last = lastMessageByProfile.get(id) || null;
+        if (!last && token && window.origins?.messages) {
+            try {
+                const messages = normalizePrivateMessages(await window.origins.messages.list(token, profile.id));
+                last = messages[messages.length - 1] || null;
+                if (last) lastMessageByProfile.set(id, last);
+            } catch (error) {
+                last = null;
+            }
+        }
+        return last ? { profile, last } : null;
+    }));
+    if (requestId !== conversationsRequest) return;
+
+    const stamp = (m) => Date.parse(m?.createdAt ?? m?.created_at ?? m?.sentAt ?? m?.date ?? "") || 0;
+    const rows = entries.filter(Boolean).sort((a, b) => stamp(b.last) - stamp(a.last));
+
+    list.innerHTML = "";
+    if (!rows.length) {
+        const empty = document.createElement("li");
+        empty.className = "av-social-empty";
+        empty.textContent = t("noConversations");
+        list.appendChild(empty);
+        return;
+    }
+
+    rows.forEach(({ profile, last }) => {
+        const li = document.createElement("li");
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "av-conversation";
+        button.__originsProfile = profile;
+        button.appendChild(friendAvatar(profile));
+
+        const info = document.createElement("span");
+        info.className = "av-conversation-info";
+        const name = document.createElement("strong");
+        name.textContent = profile.displayName;
+        const preview = document.createElement("small");
+        preview.textContent = privateMessageText(last);
+        info.append(name, preview);
+        button.appendChild(info);
+
+        const unread = unreadByProfile.get(String(profile.id)) || 0;
+        if (unread) {
+            const badge = document.createElement("span");
+            badge.className = "av-tab-badge av-conversation-badge";
+            badge.textContent = String(unread);
+            button.appendChild(badge);
+        }
+        button.addEventListener("click", openFriendsConversation);
+        li.appendChild(button);
+        list.appendChild(li);
+    });
+}
+
+
+
+/* ==========================================
+   NOUVEAU DESIGN : PARAMÈTRES (catégories, thèmes) ET PROFIL
+========================================== */
+
+function openSettingsCategory(name) {
+    document.querySelectorAll("[data-set-cat]").forEach((button) => {
+        const on = button.dataset.setCat === name;
+        button.classList.toggle("active", on);
+        button.setAttribute("aria-selected", String(on));
+    });
+    document.querySelectorAll("[data-set-pane]").forEach((pane) => {
+        pane.hidden = pane.dataset.setPane !== name;
+    });
+}
+
+document.querySelectorAll("[data-set-cat]").forEach((button) => {
+    button.addEventListener("click", () => openSettingsCategory(button.dataset.setCat));
+});
+
+// Le bouton Paramètres de la barre du haut ouvre toujours sur « Général »
+settingsButton?.addEventListener("click", () => openSettingsCategory("general"), true);
+
+// Thèmes : 8 palettes (variables CSS dans aventure.css), choix enregistré
+const AV_THEMES = [
+    { id: "argent-nuit", key: "themeSilverNight", verre: "rgba(75,86,106,.93)", barre: "#090c13", accent: "#a9b8d4" },
+    { id: "or-ebene", key: "themeGoldEbony", verre: "rgba(96,74,37,.93)", barre: "#0f0b08", accent: "#c9a14a" },
+    { id: "emeraude-or", key: "themeEmeraldGold", verre: "rgba(84,83,45,.93)", barre: "#08100c", accent: "#cfa94e" },
+    { id: "pourpre-or", key: "themePurpleGold", verre: "rgba(98,74,60,.93)", barre: "#0e0911", accent: "#d0a852" },
+    { id: "cuivre-braise", key: "themeCopperEmber", verre: "rgba(98,65,42,.93)", barre: "#0e0b0a", accent: "#d08650" },
+    { id: "sang-onyx", key: "themeBloodOnyx", verre: "rgba(98,45,41,.93)", barre: "#0c0909", accent: "#d0574d" },
+    { id: "sakura", key: "themeSakura", verre: "rgba(108,70,87,.93)", barre: "#110b0e", accent: "#e79ab9" },
+    { id: "tempete", key: "themeStorm", verre: "rgba(47,96,111,.93)", barre: "#061117", accent: "#6cc8e0" }
+];
+const AV_THEME_KEY = "origins-theme";
+// Thème de base : Or et ébène, dans la DA du logo (œil de dragon orange).
+const AV_DEFAULT_THEME = "or-ebene";
+
+// save = true seulement quand le joueur choisit un thème : sans choix, il suit le thème de base.
+function applyTheme(id, save = false) {
+    const theme = AV_THEMES.find((item) => item.id === id)
+        || AV_THEMES.find((item) => item.id === AV_DEFAULT_THEME);
+    document.body.dataset.theme = theme.id;
+    if (save) {
+        try { localStorage.setItem(AV_THEME_KEY, theme.id); } catch (_) {}
+    }
+    document.querySelectorAll("#themePicker [data-theme-id]").forEach((button) => {
+        button.setAttribute("aria-checked", String(button.dataset.themeId === theme.id));
+    });
+}
+
+function renderThemePicker() {
+    const picker = document.getElementById("themePicker");
+    if (!picker) return;
+    picker.innerHTML = "";
+    AV_THEMES.forEach((theme) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "av-theme";
+        button.setAttribute("role", "radio");
+        button.dataset.themeId = theme.id;
+        button.setAttribute("aria-checked", String(document.body.dataset.theme === theme.id));
+        const swatch = document.createElement("span");
+        swatch.className = "av-theme-swatch";
+        swatch.style.background = `linear-gradient(150deg, ${theme.verre}, ${theme.barre})`;
+        const dot = document.createElement("span");
+        dot.style.background = theme.accent;
+        swatch.appendChild(dot);
+        const name = document.createElement("span");
+        name.className = "av-theme-name";
+        name.textContent = t(theme.key);
+        button.append(swatch, name);
+        button.addEventListener("click", () => applyTheme(theme.id, true));
+        picker.appendChild(button);
+    });
+}
+
+try { applyTheme(localStorage.getItem(AV_THEME_KEY) || AV_DEFAULT_THEME); } catch (_) { applyTheme(AV_DEFAULT_THEME); }
+renderThemePicker();
+// Les noms des thèmes suivent la langue choisie
+document.getElementById("launcherLanguage")?.addEventListener("change", () => setTimeout(renderThemePicker, 50));
+
+// Version (Général, À propos) et état des mises à jour
+function refreshSettingsAbout() {
+    const version = installedLauncherVersion();
+    const label = version ? `Origins Launcher v${version}` : "Origins Launcher";
+    const nav = document.getElementById("settingsVersion");
+    if (nav) nav.textContent = label;
+    const about = document.getElementById("settingsVersionText");
+    if (about) about.textContent = version ? `Origins Launcher ${version}.` : "Origins Launcher";
+    const state = document.getElementById("settingsUpdateState");
+    const status = (typeof launcherUpdateStatus !== "undefined" && launcherUpdateStatus?.status) || "idle";
+    if (state) {
+        const key = status === "downloaded" ? "setUpdateReady"
+            : (status === "available" || status === "downloading" || status === "installing") ? "setUpdating" : "setUpToDate";
+        state.dataset.i18n = key;
+        state.textContent = t(key);
+    }
+}
+
+settingsButton?.addEventListener("click", refreshSettingsAbout);
+refreshSettingsAbout();
+
+// Compte
+function refreshSettingsAccount() {
+    const el = document.getElementById("settingsAccountName");
+    if (!el) return;
+    const name = document.getElementById("accountProfileName")?.textContent?.trim();
+    const signedIn = Boolean(localStorage.getItem("origins-token"));
+    el.textContent = signedIn && name ? t("setConnectedAs", { name }) : t("notSignedIn");
+}
+
+settingsButton?.addEventListener("click", refreshSettingsAccount);
+document.querySelector('[data-set-cat="compte"]')?.addEventListener("click", refreshSettingsAccount);
+
+function signOutFromSettings() {
+    closeSettings();
+    if (localStorage.getItem("origins-token")) loginButton.click();
+    else signInWithMicrosoft();
+}
+
+document.getElementById("settingsSwitchAccount")?.addEventListener("click", signOutFromSettings);
+document.getElementById("settingsLogout")?.addEventListener("click", signOutFromSettings);
+document.getElementById("settingsEditProfile")?.addEventListener("click", () => {
+    closeSettings();
+    openAccount();
+});
+
+// Aide : les nouveautés de la dernière version du launcher
+document.getElementById("settingsWhatsNew")?.addEventListener("click", () => {
+    closeSettings();
+    newsFilter = "all";
+    document.querySelectorAll("[data-news-filter]").forEach((b) => {
+        const on = b.dataset.newsFilter === "all";
+        b.classList.toggle("active", on);
+        b.setAttribute("aria-pressed", String(on));
+    });
+    showPage("updates");
+    renderUpdateHistory();
+    const index = renderedHistory.findIndex((item) => String(item.type || "").toLowerCase().includes("launcher"));
+    openNewsDetail(index >= 0 ? index : 0);
+});
+
+// À propos : toutes les actus
+document.getElementById("settingsAllNews")?.addEventListener("click", () => {
+    closeSettings();
+    showPage("updates");
+});
+
+// Profil : le crayon ouvre la modification du nom sur place
+const profileNameView = document.getElementById("profileNameView");
+const profileNameEdit = document.getElementById("profileNameEdit");
+
+function setProfileNameEditing(on) {
+    if (!profileNameView || !profileNameEdit) return;
+    profileNameView.hidden = on;
+    profileNameEdit.hidden = !on;
+    if (on) {
+        profileNameInput.value = document.getElementById("accountProfileName")?.textContent?.trim() || "";
+        profileNameInput.focus();
+        profileNameInput.select();
+    }
+}
+
+document.getElementById("editProfileNameButton")?.addEventListener("click", () => setProfileNameEditing(true));
+saveProfileButton?.addEventListener("click", () => setTimeout(() => setProfileNameEditing(false), 0));
+profileNameInput?.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") saveProfileButton.click();
+    if (event.key === "Escape") setProfileNameEditing(false);
+});
+accountButton?.addEventListener("click", () => setProfileNameEditing(false));
+
+document.getElementById("profileContactsButton")?.addEventListener("click", () => {
+    closeAccount();
+    openSocialTab("contacts");
+});
+document.getElementById("profileSettingsButton")?.addEventListener("click", () => {
+    closeAccount();
+    openSettings();
+    openSettingsCategory("general");
+});
+
+// Les boutons du haut montrent quel panneau est ouvert
+function syncTopbarPanels() {
+    settingsButton?.setAttribute("aria-expanded", String(settingsOverlay.classList.contains("open")));
+    accountButton?.setAttribute("aria-expanded", String(accountOverlay.classList.contains("open")));
+}
+
+[settingsOverlay, accountOverlay].forEach((overlay) => {
+    if (overlay) new MutationObserver(syncTopbarPanels).observe(overlay, { attributes: true, attributeFilter: ["class"] });
+});
+syncTopbarPanels();
+
+// Pastille de statut du Profil : la même que dans le tiroir Contacts (En ligne, Absent, En jeu)
+function syncProfileStatus() {
+    const pill = document.getElementById("profileStatusPill");
+    const text = document.getElementById("profileStatusText");
+    if (!pill || !text || !localProfileStatus) return;
+    text.textContent = localProfileStatus.textContent.trim() || t("presenceOnline");
+    pill.classList.toggle("away", localProfileStatus.classList.contains("away"));
+}
+
+if (localProfileStatus) {
+    new MutationObserver(syncProfileStatus).observe(localProfileStatus, { childList: true, characterData: true, subtree: true, attributes: true, attributeFilter: ["class"] });
+}
+syncProfileStatus();
+
+// « Quoi de neuf ? » : la croix fait comme « Compris ! »
+document.getElementById("originsWhatsNewX")?.addEventListener("click", () => {
+    document.getElementById("originsWhatsNewClose")?.click();
+});
+
+// Un clic dans la partie assombrie ferme le panneau
+settingsOverlay?.addEventListener("click", (event) => {
+    if (event.target === settingsOverlay) closeSettings();
+});
+accountOverlay?.addEventListener("click", (event) => {
+    if (event.target === accountOverlay) closeAccount();
+});
+
+
+
+/* ==========================================
+   DIAGNOSTIC DE LANCEMENT
+   index.js reconnaît la cause (launch-diagnostic.js) ; ici, le message clair
+   dans la langue du joueur et les boutons pour régler le problème.
+========================================== */
+
+// Code → clé de traduction (problem<Clé>Title / problem<Clé>Text) et actions proposées.
+const LAUNCH_PROBLEMS = {
+    JAVA_DOWNLOAD_FAILED: { key: "JavaDownload", actions: ["retry", "copy", "discord"] },
+    JAVA_CHECKSUM: { key: "JavaBroken", actions: ["repairJava"] },
+    JAVA_EXTRACT_FAILED: { key: "JavaBroken", actions: ["repairJava", "copy", "discord"] },
+    JAVA_UNSUPPORTED_PLATFORM: { key: "JavaPlatform", actions: ["copy", "discord"] },
+    JAVA_TOO_OLD: { key: "JavaOld", actions: ["repairJava"] },
+    NETWORK: { key: "Network", actions: ["retry"] },
+    DISK_SPACE: { key: "Disk", actions: ["retry"] },
+    AUTH: { key: "Auth", actions: ["retry", "relogin"] },
+    NOT_INSTALLED: { key: "NotInstalled", actions: ["retry"] },
+    MEMORY_TOO_HIGH: { key: "MemoryHigh", actions: ["memory"] },
+    MEMORY_TOO_LOW: { key: "MemoryLow", actions: ["memory"] },
+    GPU_DRIVER: { key: "Gpu", actions: ["retry", "copy", "discord"] },
+    MODS_CONFLICT: { key: "Mods", actions: ["repairFiles", "copy", "discord"] },
+    FILES_CORRUPTED: { key: "Files", actions: ["repairFiles"] },
+    UNKNOWN: { key: "Unknown", actions: ["retry", "copy", "discord"] }
+};
+
+const launchProblem = document.getElementById("launchProblem");
+let currentLaunchProblem = null;
+
+function setLaunchProblemStatus(key) {
+    const status = document.getElementById("launchProblemStatus");
+    if (status) status.textContent = key ? t(key) : "";
+}
+
+function closeLaunchProblem() {
+    if (launchProblem) launchProblem.hidden = true;
+    currentLaunchProblem = null;
+}
+
+function retryLaunch() {
+    closeLaunchProblem();
+    if (playButton && !playButton.disabled) playButton.click();
+}
+
+const LAUNCH_PROBLEM_ACTIONS = {
+    retry: { label: "problemActionRetry", run: retryLaunch },
+    repairJava: {
+        label: "problemActionRepairJava",
+        run: async () => {
+            setLaunchProblemStatus("problemRepairing");
+            const result = await window.origins?.tempest?.repairJava?.();
+            if (!result?.success) return setLaunchProblemStatus("problemRepairFailed");
+            retryLaunch();
+        }
+    },
+    repairFiles: {
+        label: "problemActionRepairFiles",
+        run: async () => {
+            setLaunchProblemStatus("problemRepairing");
+            const result = await window.origins?.tempest?.repairFiles?.();
+            if (!result?.success) return setLaunchProblemStatus("problemRepairFailed");
+            retryLaunch();
+        }
+    },
+    memory: {
+        label: "problemActionMemory",
+        run: () => {
+            closeLaunchProblem();
+            openSettings();
+            openSettingsCategory("jeu");
+        }
+    },
+    relogin: {
+        label: "problemActionRelogin",
+        run: () => {
+            closeLaunchProblem();
+            signOutFromSettings();
+        }
+    },
+    discord: {
+        label: "problemActionDiscord",
+        run: async () => {
+            const result = await window.origins?.community?.openDiscord?.("support");
+            if (!result?.success) setLaunchProblemStatus("problemRepairFailed");
+        }
+    },
+    copy: {
+        label: "problemActionCopy",
+        run: async () => {
+            const problem = currentLaunchProblem || {};
+            const text = problem.report || `Origins Launcher — ${problem.code || "UNKNOWN"}\n${problem.detail || ""}`;
+            try {
+                if (window.origins?.clipboard?.writeText) await window.origins.clipboard.writeText(text);
+                else await navigator.clipboard.writeText(text);
+                setLaunchProblemStatus("problemReportCopied");
+            } catch (error) {
+                setLaunchProblemStatus("problemRepairFailed");
+            }
+        }
+    }
+};
+
+/** Montre la fenêtre d'aide. problem = { code, detail?, report?, exitCode? } */
+function showLaunchProblem(problem = {}) {
+    if (!launchProblem) return;
+    const entry = LAUNCH_PROBLEMS[problem.code] || LAUNCH_PROBLEMS.UNKNOWN;
+    currentLaunchProblem = { ...problem, code: LAUNCH_PROBLEMS[problem.code] ? problem.code : "UNKNOWN" };
+
+    document.getElementById("launchProblemTitle").textContent = t(`problem${entry.key}Title`);
+    document.getElementById("launchProblemText").textContent = t(`problem${entry.key}Text`);
+    const detail = document.getElementById("launchProblemDetail");
+    detail.textContent = problem.exitCode !== undefined && problem.exitCode !== null
+        ? t("problemExitCode", { code: problem.exitCode })
+        : (problem.detail || "");
+    detail.hidden = !detail.textContent;
+    setLaunchProblemStatus("");
+
+    const actions = document.getElementById("launchProblemActions");
+    actions.innerHTML = "";
+    entry.actions.forEach((name, index) => {
+        const action = LAUNCH_PROBLEM_ACTIONS[name];
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = index === 0 ? "av-problem-btn primary" : "av-problem-btn";
+        button.textContent = t(action.label);
+        button.addEventListener("click", async () => {
+            actions.querySelectorAll("button").forEach((b) => { b.disabled = true; });
+            try {
+                await action.run();
+            } finally {
+                actions.querySelectorAll("button").forEach((b) => { b.disabled = false; });
+            }
+        });
+        actions.appendChild(button);
+    });
+
+    launchProblem.hidden = false;
+    actions.querySelector("button")?.focus();
+}
+
+document.getElementById("launchProblemClose")?.addEventListener("click", closeLaunchProblem);
+launchProblem?.addEventListener("click", (event) => {
+    if (event.target === launchProblem) closeLaunchProblem();
+});
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && launchProblem && !launchProblem.hidden) closeLaunchProblem();
+});
+
+// Le jeu a planté au démarrage : index.js remet le launcher à l'écran et envoie la cause.
+window.origins?.tempest?.onLaunchProblem?.((problem) => {
+    showLaunchProblem(problem || {});
+    updateTempestButton();
+});
+
+/** Cache la barre de progression peu après un lancement réussi (préparation de Java…). */
+function hideInstallProgressSoon() {
+    setTimeout(() => {
+        if (!installProgress || installProgress.classList.contains("error")) return;
+        installProgress.classList.remove("visible", "complete");
+        installProgress.setAttribute("aria-hidden", "true");
+    }, 1200);
+}
+
+
+
+
+/* ==========================================
+   DISCORD
+   Origins : support technique (tickets). Tempest : la communauté du jeu.
+   Les adresses sont fixées dans index.js (DISCORD_URLS).
+========================================== */
+
+function openDiscord(server) {
+    window.origins?.community?.openDiscord?.(server);
+}
+
+document.getElementById("topbarDiscordButton")?.addEventListener("click", () => openDiscord("origins"));
+document.getElementById("homeDiscordButton")?.addEventListener("click", () => openDiscord("tempest"));
+document.getElementById("settingsTempestDiscord")?.addEventListener("click", () => openDiscord("tempest"));
+document.getElementById("settingsOriginsDiscord")?.addEventListener("click", () => openDiscord("support"));

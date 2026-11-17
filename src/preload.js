@@ -42,6 +42,8 @@ contextBridge.exposeInMainWorld("origins", {
     },
 
     java: { detect: () => ipcRenderer.invoke("java:detect") },
+    // Liens : "origins" (Discord du projet), "tempest" (Discord du jeu), "support" (tickets). Adresses fixées dans index.js.
+    community: { openDiscord: (server = "origins") => ipcRenderer.invoke("origins:open-discord", ["origins", "tempest", "support"].includes(server) ? server : "origins") },
 
     launcher: {
         // Tray menu and Microsoft sign-in page follow the launcher language.
@@ -144,6 +146,14 @@ contextBridge.exposeInMainWorld("origins", {
             const listener = (_event, data) => callback(data);
             ipcRenderer.on("tempest:install-progress", listener);
             return () => ipcRenderer.removeListener("tempest:install-progress", listener);
+        },
+        // Diagnostic de lancement : réparations et plantages au démarrage du jeu.
+        repairJava: () => ipcRenderer.invoke("tempest:repair-java"),
+        repairFiles: () => ipcRenderer.invoke("tempest:repair-files"),
+        onLaunchProblem: (callback) => {
+            const listener = (_event, data) => callback(data);
+            ipcRenderer.on("tempest:launch-problem", listener);
+            return () => ipcRenderer.removeListener("tempest:launch-problem", listener);
         }
     }
 });
