@@ -77,6 +77,8 @@
   async function chargerMoi() {
     const r = await Site.appel("/site/moi").catch(() => ({ ok: false }));
     Site.moi = r.ok ? r.json : null;
+    // Connecté ici : l'en-tête affiche le compte dans ce navigateur, même en mode essai.
+    if (Site.moi) { try { localStorage.setItem("origins-connexion-essai", "1"); } catch (_) { /* rien */ } }
     if (typeof window.dessinerCompte === "function") window.dessinerCompte();
   }
 
@@ -140,7 +142,8 @@
   });
 
   // Départ : déjà connecté ? sinon le choix (ou l'équipe avec #equipe).
-  Site.moiPret.then((moi) => {
+  Site.moiPret.then(async (moi) => {
+    if (!moi && !window.CONNEXION) { await chargerMoi(); moi = Site.moi; }
     if (moi) { dessinerConnecte(); montrer("connecte"); return; }
     if (location.hash === "#equipe") { montrer("equipe"); return; }
     if (messageCle) message(messageCle);

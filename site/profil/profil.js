@@ -148,6 +148,14 @@
   };
 
   Site.moiPret.then(async (moi) => {
+    if (!moi && !window.CONNEXION) {
+      // Mode essai pas encore actif dans ce navigateur : on regarde quand même la session.
+      const r = await Site.appel("/site/moi").catch(() => ({ ok: false }));
+      if (r.ok) {
+        Site.moi = moi = r.json;
+        try { localStorage.setItem("origins-connexion-essai", "1"); } catch (_) { /* rien */ }
+      }
+    }
     if (!moi) { location.replace("/connexion/?suite=" + encodeURIComponent("/profil/")); return; }
     await chargerSessions();
     dessiner();

@@ -41,7 +41,11 @@ history.replaceState(null, "", location.pathname);
   if (!JETON) { location.replace("/connexion/"); return; }
   try {
     const r = await Site.appel("/site/lien/echanger", { methode: "POST", corps: { jeton: JETON } });
-    if (r.ok) { location.replace(r.json.suite || "/profil/"); return; }
+    if (r.ok) {
+      try { localStorage.setItem("origins-connexion-essai", "1"); } catch (_) { /* rien */ }
+      location.replace(r.json.suite || "/profil/");
+      return;
+    }
   } catch (_) { /* réseau */ }
   location.replace("/connexion/?lien=expire");
 })();
