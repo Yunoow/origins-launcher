@@ -15,7 +15,7 @@ const SITE = {
   discordTempest: "https://discord.gg/9YGPreUdQ7",   // Discord de Tempest
   board: "https://tempest-console.duckdns.org/board/", // Board de l'équipe (connexion Discord, grade Origins board)
   api: "/api",                                       // API Origins, sur le même serveur (nginx : /api/ → port 3000)
-  connexionJoueur: false,                            // « Se connecter » en ligne : seulement avec HTTPS et l'API à jour
+  connexionJoueur: true,                             // « Se connecter » en ligne : seulement avec HTTPS et l'API à jour
                                                      // (en local, sur localhost, il est toujours actif pour les essais)
   pages: {
     accueil: "/", jeux: "/jeux/tempest/", actus: "/actus/", boutique: "/boutique/",
