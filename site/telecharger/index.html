@@ -48,6 +48,17 @@ button { font: inherit; color: inherit; }
 .nav-liens a[aria-current="page"]::after { content: ""; position: absolute; left: 50%; bottom: -9px; width: 22px; height: 3px; margin-left: -11px; border-radius: 2px; background: var(--or); }
 .bouton-contour { height: 40px; padding: 0 14px; border-radius: 12px; border: 1.5px solid rgba(255,255,255,0.22); background: rgba(15,11,8,0.4); color: #fff; display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 14px; cursor: pointer; text-decoration: none; white-space: nowrap; transition: background .15s, border-color .15s; }
 .bouton-contour:hover { background: rgba(201,161,74,0.16); border-color: var(--or); }
+/* Compte du site Origins (connexion par le launcher) : même en-tête que les autres pages */
+.compte-site { position: relative; display: flex; align-items: center; gap: 10px; }
+.compte-site[hidden] { display: none; }
+.compte-site .board { height: 40px; padding: 0 14px; border-radius: 12px; background: var(--or); color: var(--sur-or); display: inline-flex; align-items: center; font-weight: 800; font-size: 14.5px; text-decoration: none; }
+.compte-site .avatar { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(160deg, var(--or), var(--or-fonce)); color: var(--sur-or); font-weight: 800; font-size: 14px; }
+.compte-site .bouton-contour { padding: 0 12px 0 6px; }
+.compte-site ul { position: absolute; right: 0; top: 48px; z-index: 30; width: 220px; margin: 0; padding: 6px; list-style: none; border-radius: 14px; background: var(--panneau); border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 18px 40px rgba(0,0,0,0.5); }
+.compte-site ul a, .compte-site ul button { width: 100%; height: 40px; padding: 0 12px; border: 0; border-radius: 9px; background: transparent; color: #fff; display: flex !important; align-items: center; font: 700 14.5px inherit; font-family: inherit; text-decoration: none; cursor: pointer; text-align: left; }
+.compte-site ul a:hover, .compte-site ul button:hover { background: rgba(255,255,255,0.07); }
+.compte-site ul button { color: #e3c27a; }
+@media (max-width: 560px) { .compte-site .nom, .compte-site .board { display: none; } }
 .langue { position: relative; }
 .langue ul { position: absolute; right: 0; top: 48px; width: 220px; margin: 0; padding: 6px; list-style: none; border-radius: 14px; background: var(--panneau); border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 18px 40px rgba(0,0,0,0.5); }
 .langue li button { width: 100%; height: 38px; padding: 0 12px; border: 0; border-radius: 9px; background: transparent; display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-size: 14px; cursor: pointer; }
@@ -196,6 +207,7 @@ footer { padding: 36px clamp(16px, 6.6vw, 96px); border-top: 1px solid rgba(255,
       <ul id="liste-langues" role="listbox" hidden></ul>
     </div>
     <a class="bouton-contour lien-discord" href="#" target="_blank" rel="noopener" hidden><svg width="18" height="18" aria-hidden="true" style="color: var(--or)"><use href="#i-bulle"/></svg>Discord</a>
+    <div class="compte-site" id="compte-site" hidden></div>
   </nav>
 </header>
 
@@ -717,6 +729,56 @@ document.addEventListener("keydown", (e) => { if (e.key === "Escape") { el("list
   await Promise.all([lireManifeste(), verifierFichiers()]);
   rendre();
   detecterPuceMac();
+})();
+</script>
+<script>
+/* Le compte du site Origins : visible ici aussi quand on est connecté (cookie posé par l'API, en HTTPS). */
+(async () => {
+  const zone = document.getElementById("compte-site");
+  if (!zone || (location.protocol !== "https:" && !["localhost", "127.0.0.1"].includes(location.hostname))) return;
+  let moi = null;
+  try {
+    const r = await fetch("/api/site/moi", { credentials: "same-origin", headers: { Accept: "application/json" } });
+    if (r.ok) moi = await r.json();
+  } catch (_) { return; }
+  if (!moi) return;
+  const textes = {
+    fr: ["Mon profil", "Mes achats", "Mes tickets", "Se déconnecter"], en: ["My profile", "My purchases", "My tickets", "Sign out"],
+    es: ["Mi perfil", "Mis compras", "Mis tickets", "Cerrar sesión"], de: ["Mein Profil", "Meine Käufe", "Meine Tickets", "Abmelden"],
+    pt: ["Meu perfil", "Minhas compras", "Meus tickets", "Sair"]
+  };
+  const e = (x) => String(x == null ? "" : x).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const nom = moi.profil.nom;
+  const image = /^\/api\/avatars\//.test(moi.profil.avatar || "") ? `<img class="avatar" src="${e(moi.profil.avatar)}" alt="">` : `<span class="avatar" aria-hidden="true">${e(String(nom).slice(0, 1).toUpperCase())}</span>`;
+  function dessiner() {
+    let l = "fr"; try { l = localStorage.getItem("origins-langue") || "fr"; } catch (_) {}
+    const t = textes[l] || textes.fr;
+    zone.innerHTML = `${moi.equipe.includes("board") ? '<a class="board" href="/board/">Board</a>' : ""}
+      <button class="bouton-contour" type="button" aria-haspopup="menu" aria-expanded="false">${image}<span class="nom">${e(nom)}</span></button>
+      <ul role="menu" hidden>
+        <li role="none"><a role="menuitem" href="/profil/">${t[0]}</a></li>
+        <li role="none"><a role="menuitem" href="/profil/#achats">${t[1]}</a></li>
+        <li role="none"><a role="menuitem" href="/profil/#tickets">${t[2]}</a></li>
+        <li role="none"><button role="menuitem" type="button" data-sortir>${t[3]}</button></li>
+      </ul>`;
+    zone.hidden = false;
+  }
+  dessiner();
+  document.getElementById("liste-langues")?.addEventListener("click", () => setTimeout(dessiner, 0));
+  zone.addEventListener("click", async (ev) => {
+    const bouton = ev.target.closest("button");
+    if (!bouton) return;
+    ev.stopPropagation();
+    if (bouton.hasAttribute("data-sortir")) {
+      await fetch("/api/site/deconnexion", { method: "POST", credentials: "same-origin", headers: { "X-Origins-Site": "1" } }).catch(() => null);
+      location.href = "/";
+      return;
+    }
+    const menu = zone.querySelector("ul");
+    menu.hidden = !menu.hidden;
+    bouton.setAttribute("aria-expanded", String(!menu.hidden));
+  });
+  document.addEventListener("click", () => { const menu = zone.querySelector("ul"); if (menu) menu.hidden = true; });
 })();
 </script>
 </body>
