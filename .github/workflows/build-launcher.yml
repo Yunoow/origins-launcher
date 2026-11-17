@@ -39,7 +39,7 @@ jobs:
       - name: Build Windows
         run: npm run build:win
 
-      - name: Release : installeur Windows
+      - name: "Release : installeur Windows"
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
@@ -76,7 +76,7 @@ jobs:
         run: npm run build:linux
 
       # latest-linux.yml et le .blockmap permettent à l'AppImage de se mettre à jour toute seule.
-      - name: Release : paquets Linux
+      - name: "Release : paquets Linux"
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
@@ -115,7 +115,7 @@ jobs:
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
 
       # Sans signature Apple, le Mac ne se met pas à jour tout seul : seulement les .dmg (et leurs .blockmap).
-      - name: Release : paquets macOS
+      - name: "Release : paquets macOS"
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
