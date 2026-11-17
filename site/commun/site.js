@@ -316,7 +316,9 @@ function dessinerCompte() {
     return;
   }
   const board = moi.equipe.includes("board");
+  const staff = moi.equipe.includes("staff");
   zone.innerHTML = `
+    ${staff ? `<a class="contour-carre bouton-tickets" href="/support/equipe/">${Site.icone("bulle")}<span>Tickets</span><b class="compteur-tickets" id="compteur-tickets" hidden></b></a>` : ""}
     ${board ? `<a class="bouton-board" href="${SITE.board}">${Site.icone("bouclier")}<span>Board</span></a>` : ""}
     <div class="compte">
       <button class="contour-carre bouton-compte" id="bouton-compte" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="menu-compte" aria-label="${Site.echapper(Site.t("compte"))}">
@@ -351,7 +353,17 @@ async function chargerCompte() {
   Site.moi = r.ok ? r.json : null;
   compteCharge = true;
   dessinerCompte();
+  if (Site.moi && Site.moi.equipe.includes("staff")) compterTickets();
   return Site.moi;
+}
+
+/** Équipe : le nombre de tickets à traiter, sur le bouton « Tickets » de l'en-tête. */
+async function compterTickets() {
+  const r = await Site.appel("/site/equipe/compteur").catch(() => ({ ok: false }));
+  const b = document.getElementById("compteur-tickets");
+  if (!b || !r.ok) return;
+  b.textContent = r.json.aTraiter;
+  b.hidden = !r.json.aTraiter;
 }
 
 /* ------------------------------------------------------------ langues */

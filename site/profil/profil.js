@@ -3,6 +3,7 @@
 (function () {
   const main = document.getElementById("profil");
   let sessions = [];
+  let tickets = [];
   const AVIS_DISCORD = { lie: "discordLie", "deja-lie": "discordDejaLie", annule: "discordAnnule", expire: "discordExpire", erreur: "discordErreur", indisponible: "discordIndisponible" };
   const e = Site.echapper;
   const t = (cle, v) => e(Site.t(cle, v));
@@ -86,8 +87,13 @@
       </div>
       <div class="colonne-profil">
         <section class="carte bloc" id="tickets" aria-labelledby="titre-tickets">
-          <div class="bloc-tete"><h2 id="titre-tickets">${t("tickets")}</h2><a class="lien-or" href="/support/">${t("support")} →</a></div>
-          <div class="vide"><span class="rond">${Site.icone("courrier")}</span><div><strong>${t("aucunTicket")}</strong><span>${t("aucunTicketTexte")}</span></div></div>
+          <div class="bloc-tete"><h2 id="titre-tickets">${t("tickets")}</h2><a class="lien-or" href="/support/">${t("toutVoir")} →</a></div>
+          ${tickets.length ? `<ul class="mes-tickets">${tickets.slice(0, 3).map((x) => `<li><a href="/support/#ticket-${x.id}">
+              <span class="point${x.nonLu ? " non-lu" : ""}" aria-hidden="true"></span>
+              <span class="quoi"><strong>${e(x.sujet)}</strong><span>#${x.id}</span></span>
+              <span class="etat etat-${e(x.etat)}">${t("etat_" + x.etat)}</span></a></li>`).join("")}</ul>`
+            : `<div class="vide"><span class="rond">${Site.icone("courrier")}</span><div><strong>${t("aucunTicket")}</strong><span>${t("aucunTicketTexte")}</span></div></div>`}
+          <a class="bouton bouton-contour bouton-petit" style="margin-top: 14px" href="/support/#nouveau">${Site.icone("plus")}${t("ouvrirTicket")}</a>
         </section>
         <section class="carte bloc" aria-labelledby="titre-amis">
           <div class="bloc-tete"><h2 id="titre-amis">${t("amis")}</h2><span class="nombre">${moi.amis}</span></div>
@@ -112,8 +118,12 @@
   }
 
   async function chargerSessions() {
-    const r = await Site.appel("/site/sessions").catch(() => ({ ok: false }));
+    const [r, rt] = await Promise.all([
+      Site.appel("/site/sessions").catch(() => ({ ok: false })),
+      Site.appel("/site/tickets").catch(() => ({ ok: false }))
+    ]);
     sessions = r.ok ? r.json.sessions : [];
+    tickets = rt.ok ? rt.json.tickets : [];
   }
 
   main.addEventListener("click", async (ev) => {

@@ -3982,6 +3982,42 @@ function updateFriendsOnlineBadge() {
 
 let lastFriendRequests = [];
 let siteLoginRequests = [];          // [{ id, code, navigateur, expire }]
+let ticketNotices = [];              // réponses du staff aux tickets du site : [{ id, sujet, staff, resolu }]
+
+function addTicketNotice(payload, resolu) {
+    if (!payload?.id) return;
+    ticketNotices = [{ id: payload.id, sujet: String(payload.sujet || ""), staff: String(payload.staff || ""), resolu },
+        ...ticketNotices.filter((n) => n.id !== payload.id)].slice(0, 5);
+    renderFriendRequests(lastFriendRequests);
+}
+
+function ticketNoticeRow(notice) {
+    const row = document.createElement("div");
+    row.className = "site-login-request ticket-notice";
+    const title = document.createElement("strong");
+    title.innerHTML = `<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6 8.5 7 8.5-7"/></svg>`;
+    title.append(t(notice.resolu ? "ticketResolvedTitle" : "ticketReplyTitle"));
+    const body = document.createElement("span");
+    body.className = "site-login-text";
+    body.textContent = notice.resolu
+        ? t("ticketResolvedBody", { subject: notice.sujet })
+        : t("ticketReplyBody", { staff: notice.staff || "Origins", subject: notice.sujet });
+    const actions = document.createElement("div");
+    actions.className = "friend-request-actions";
+    actions.append(
+        socialActionButton(t("ticketOpen"), () => {
+            ticketNotices = ticketNotices.filter((n) => n.id !== notice.id);
+            renderFriendRequests(lastFriendRequests);
+            openOriginsSite(`/support/#ticket-${notice.id}`);
+        }),
+        socialActionButton(t("ticketDismiss"), () => {
+            ticketNotices = ticketNotices.filter((n) => n.id !== notice.id);
+            renderFriendRequests(lastFriendRequests);
+        }, true)
+    );
+    row.append(title, body, actions);
+    return row;
+}
 let siteLoginStatus = null;          // message après Accepter / Refuser
 const siteLoginTimers = new Map();
 
@@ -4058,13 +4094,14 @@ function renderFriendRequests(requests) {
     if (!notificationsContent) return;
     lastFriendRequests = requests || [];
     requests = lastFriendRequests;
-    const total = requests.length + siteLoginRequests.length;
+    const total = requests.length + siteLoginRequests.length + ticketNotices.length;
     if (notificationsBadge) {
         notificationsBadge.hidden = total === 0;
         notificationsBadge.textContent = String(total);
     }
     notificationsContent.innerHTML = "";
     siteLoginRequests.forEach((demande) => notificationsContent.appendChild(siteLoginRequestRow(demande)));
+    ticketNotices.forEach((notice) => notificationsContent.appendChild(ticketNoticeRow(notice)));
     if (siteLoginStatus) {
         const status = document.createElement("p");
         status.className = "site-login-status";
@@ -4319,6 +4356,17 @@ async function handleOriginsRealtimeEvent(event) {
 
     if (type === "site:demande-fermee") {
         removeSiteLoginRequest(payload?.id);
+        return;
+    }
+
+    if (type === "ticket:reponse" || type === "ticket:resolu") {
+        const resolu = type === "ticket:resolu";
+        addTicketNotice(payload, resolu);
+        showSocialNotification(
+            t(resolu ? "ticketResolvedTitle" : "ticketReplyTitle"),
+            resolu ? t("ticketResolvedBody", { subject: payload?.sujet || "" })
+                : t("ticketReplyBody", { staff: payload?.staff || "Origins", subject: payload?.sujet || "" })
+        );
     }
 }
 

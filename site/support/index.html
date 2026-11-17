@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800&display=swap">
 <link rel="stylesheet" href="/commun/site.css">
+<link rel="stylesheet" href="/support/tickets.css">
 <style>
 /* Page Support, version publique (maquette « Site Origins · Support », design/site/Site-Support.dc.html).
    Les tickets sur le site arrivent plus tard (connexion par le launcher) : en attendant, l'aide passe par Discord. */
@@ -64,12 +65,31 @@
   <section class="tete-page">
     <div class="contenant">
       <div class="kicker" data-t="kicker">SUPPORT</div>
-      <h1 class="titre-page" data-t="titre">Besoin d'aide ?</h1>
-      <p class="chapo" data-t="chapo">L'équipe te répond sur Discord. Choisis le bon endroit selon ton souci : ça va plus vite.</p>
+      <div class="tete-section" style="margin-bottom: 0">
+        <div>
+          <h1 class="titre-page" data-t="titre">Besoin d'aide ?</h1>
+          <p class="chapo" id="chapo" data-t="chapo">L'équipe te répond sur Discord. Choisis le bon endroit selon ton souci : ça va plus vite.</p>
+        </div>
+        <button class="bouton bouton-blanc" type="button" id="nouveau-ticket" hidden><svg class="icone" aria-hidden="true"><use href="#i-plus"/></svg><span data-t="nouveauTicket">NOUVEAU TICKET</span></button>
+      </div>
     </div>
   </section>
 
-  <section class="section" style="padding-top: 8px" aria-label="Contacter l'équipe">
+  <!-- Tickets du joueur connecté (tickets-joueur.js) -->
+  <section class="section" id="zone-tickets" style="padding-top: 8px" hidden>
+    <div class="contenant tickets-grille">
+      <aside class="panneau liste-tickets" aria-label="Tickets">
+        <div class="onglets-tickets" role="tablist">
+          <button type="button" role="tab" data-onglet="cours" aria-selected="true"><span data-t="enCours">En cours</span> · <span id="nb-cours">0</span></button>
+          <button type="button" role="tab" data-onglet="fermes" aria-selected="false"><span data-t="fermes">Fermés</span> · <span id="nb-fermes">0</span></button>
+        </div>
+        <div id="liste"></div>
+      </aside>
+      <div class="panneau conversation" id="panneau" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="section" id="contacts" style="padding-top: 8px" aria-label="Contacter l'équipe">
     <div class="contenant">
       <div class="contacts">
         <article class="carte contact principal">
@@ -95,10 +115,11 @@
           <a class="bouton bouton-contour bouton-petit" id="lien-tempest" href="#" target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" style="color: var(--or)"><use href="#i-bulle"/></svg><span data-t="tempestBouton">Discord de Tempest</span></a>
         </article>
       </div>
-      <div class="carte bientot-tickets">
+      <div class="carte bientot-tickets" id="carte-connexion-ticket" hidden>
         <span class="rond"><svg class="icone" aria-hidden="true"><use href="#i-courrier"/></svg></span>
-        <div><strong data-t="bientotTitre">Bientôt : les tickets sur le site</strong> <span class="pastille" data-t="bientot" style="margin-left: 6px">BIENTÔT</span>
-          <p data-t="bientotTexte">Tu pourras ouvrir un ticket ici avec ton profil Origins : l'équipe te répondra sur le site et tu seras prévenu dans le launcher.</p></div>
+        <div style="flex: 1"><strong data-t="connecteToi">Connecte-toi pour ouvrir un ticket</strong>
+          <p data-t="connecteToiTexte">Avec ton profil Origins, par le launcher : l'équipe te répond ici et tu es prévenu dans le launcher.</p></div>
+        <a class="bouton bouton-blanc bouton-petit" href="/connexion/?suite=%2Fsupport%2F" data-t="seConnecterBtn">SE CONNECTER</a>
       </div>
     </div>
   </section>
@@ -207,10 +228,13 @@ window.TEXTES_PAGE = {
   }
 };
 </script>
+<script src="/support/textes-tickets.js"></script>
 <script src="/commun/site.js"></script>
 <script>
 document.getElementById("lien-origins").href = SITE.discord;
 document.getElementById("lien-tempest").href = SITE.discordTempest;
 </script>
+<script src="/support/tickets-commun.js"></script>
+<script src="/support/tickets-joueur.js"></script>
 </body>
 </html>

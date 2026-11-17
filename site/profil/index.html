@@ -71,6 +71,16 @@
   padding: 12px 18px; border-radius: 14px; background: var(--panneau-clair); border: 1px solid rgba(201, 161, 74, 0.5);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5); font-weight: 700; color: #fff;
 }
+.mes-tickets { list-style: none; margin: 4px 0 0; padding: 0; }
+.mes-tickets a { display: grid; grid-template-columns: 10px 1fr auto; gap: 12px; align-items: center; padding: 10px 4px; border-bottom: 1px solid var(--filet); color: inherit; text-decoration: none; }
+.mes-tickets a:hover strong { color: var(--or-clair); }
+.mes-tickets .point { width: 8px; height: 8px; border-radius: 50%; background: var(--or); }
+.mes-tickets .point.non-lu { background: var(--rouge); }
+.mes-tickets strong { display: block; font: 800 15px var(--titre); color: #fff; }
+.mes-tickets .quoi span { font-size: 12.5px; color: var(--doux); }
+.etat { display: inline-block; padding: 3px 9px; border-radius: 999px; font: 800 10.5px var(--police); letter-spacing: 0.1em; white-space: nowrap; }
+.etat-ouvert { background: rgba(226, 87, 76, 0.16); color: #ff9a8f; } .etat-en_cours { background: rgba(201, 161, 74, 0.18); color: var(--or-clair); }
+.etat-attente { background: rgba(110, 150, 230, 0.18); color: #a9c2ff; } .etat-resolu { background: rgba(76, 211, 138, 0.14); color: var(--vert); }
 .chargement { padding: 160px 0; text-align: center; color: var(--doux); }
 
 @media (max-width: 1000px) { .grille-profil { grid-template-columns: 1fr; } }
@@ -95,6 +105,7 @@
 <script>
 window.TEXTES_PAGE = {
   fr: {
+    toutVoir: "Tout voir", ouvrirTicket: "Ouvrir un ticket", etat_ouvert: "ENVOYÉ", etat_en_cours: "EN COURS", etat_attente: "RÉPONDU", etat_resolu: "RÉSOLU", aucunTicketTexte: "Un souci ? Ouvre un ticket : l'équipe te répond sur le site et tu es prévenu dans le launcher.",
     titrePage: "Mon profil", chargement: "Chargement du profil…", kicker: "MON PROFIL ORIGINS", originsId: "Origins ID", copie: "Origins ID copié.",
     membreDepuis: "Membre depuis {date}", equipeBoard: "ÉQUIPE · ORIGINS BOARD", equipeStaff: "ÉQUIPE · STAFF",
     comptesLies: "Comptes liés", unSeulProfil: "UN SEUL PROFIL", comptesTexte: "Tout est relié à ton profil Origins, créé dans le launcher avec ton compte Microsoft.",
@@ -111,6 +122,7 @@ window.TEXTES_PAGE = {
     discordIndisponible: "La liaison Discord n'est pas encore ouverte.", discordDelie: "Discord délié.", erreur: "Ça n'a pas marché. Réessaie dans un instant."
   },
   en: {
+    toutVoir: "See all", ouvrirTicket: "Open a ticket", etat_ouvert: "SENT", etat_en_cours: "IN PROGRESS", etat_attente: "ANSWERED", etat_resolu: "RESOLVED", aucunTicketTexte: "A problem? Open a ticket: the team answers on the website and you're notified in the launcher.",
     titrePage: "My profile", chargement: "Loading the profile…", kicker: "MY ORIGINS PROFILE", originsId: "Origins ID", copie: "Origins ID copied.",
     membreDepuis: "Member since {date}", equipeBoard: "TEAM · ORIGINS BOARD", equipeStaff: "TEAM · STAFF",
     comptesLies: "Linked accounts", unSeulProfil: "ONE PROFILE", comptesTexte: "Everything is linked to your Origins profile, created in the launcher with your Microsoft account.",
@@ -127,6 +139,7 @@ window.TEXTES_PAGE = {
     discordIndisponible: "Discord linking isn't open yet.", discordDelie: "Discord unlinked.", erreur: "That didn't work. Try again in a moment."
   },
   es: {
+    toutVoir: "Ver todo", ouvrirTicket: "Abrir un ticket", etat_ouvert: "ENVIADO", etat_en_cours: "EN CURSO", etat_attente: "RESPONDIDO", etat_resolu: "RESUELTO", aucunTicketTexte: "¿Un problema? Abre un ticket: el equipo responde en la web y recibes un aviso en el launcher.",
     titrePage: "Mi perfil", chargement: "Cargando el perfil…", kicker: "MI PERFIL DE ORIGINS", originsId: "Origins ID", copie: "Origins ID copiado.",
     membreDepuis: "Miembro desde {date}", equipeBoard: "EQUIPO · ORIGINS BOARD", equipeStaff: "EQUIPO · STAFF",
     comptesLies: "Cuentas vinculadas", unSeulProfil: "UN SOLO PERFIL", comptesTexte: "Todo está vinculado a tu perfil de Origins, creado en el launcher con tu cuenta de Microsoft.",
@@ -143,6 +156,7 @@ window.TEXTES_PAGE = {
     discordIndisponible: "La vinculación de Discord aún no está abierta.", discordDelie: "Discord desvinculado.", erreur: "No ha funcionado. Inténtalo en un momento."
   },
   de: {
+    toutVoir: "Alle ansehen", ouvrirTicket: "Ticket öffnen", etat_ouvert: "GESENDET", etat_en_cours: "IN BEARBEITUNG", etat_attente: "BEANTWORTET", etat_resolu: "GELÖST", aucunTicketTexte: "Ein Problem? Öffne ein Ticket: Das Team antwortet auf der Website und du wirst im Launcher benachrichtigt.",
     titrePage: "Mein Profil", chargement: "Profil wird geladen…", kicker: "MEIN ORIGINS-PROFIL", originsId: "Origins-ID", copie: "Origins-ID kopiert.",
     membreDepuis: "Mitglied seit {date}", equipeBoard: "TEAM · ORIGINS BOARD", equipeStaff: "TEAM · STAFF",
     comptesLies: "Verknüpfte Konten", unSeulProfil: "EIN PROFIL", comptesTexte: "Alles hängt an deinem Origins-Profil, im Launcher mit deinem Microsoft-Konto erstellt.",
@@ -159,6 +173,7 @@ window.TEXTES_PAGE = {
     discordIndisponible: "Die Discord-Verknüpfung ist noch nicht offen.", discordDelie: "Discord getrennt.", erreur: "Das hat nicht geklappt. Versuche es gleich noch einmal."
   },
   pt: {
+    toutVoir: "Ver tudo", ouvrirTicket: "Abrir um ticket", etat_ouvert: "ENVIADO", etat_en_cours: "EM ANDAMENTO", etat_attente: "RESPONDIDO", etat_resolu: "RESOLVIDO", aucunTicketTexte: "Algum problema? Abra um ticket: a equipe responde no site e você é avisado no launcher.",
     titrePage: "Meu perfil", chargement: "Carregando o perfil…", kicker: "MEU PERFIL ORIGINS", originsId: "Origins ID", copie: "Origins ID copiado.",
     membreDepuis: "Membro desde {date}", equipeBoard: "EQUIPE · ORIGINS BOARD", equipeStaff: "EQUIPE · STAFF",
     comptesLies: "Contas vinculadas", unSeulProfil: "UM SÓ PERFIL", comptesTexte: "Tudo está ligado ao seu perfil Origins, criado no launcher com sua conta Microsoft.",

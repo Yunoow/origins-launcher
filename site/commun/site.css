@@ -156,6 +156,8 @@ a.carte:hover, .carte.cliquable:hover { transform: translateY(-4px); border-colo
   display: inline-flex; align-items: center; gap: 8px; font: 800 14.5px var(--titre); text-decoration: none;
 }
 .bouton-board:hover { filter: brightness(1.08); }
+.bouton-tickets span { font-size: 14px; }
+.compteur-tickets { min-width: 20px; height: 20px; padding: 0 6px; border-radius: 10px; background: var(--rouge); color: #fff; font: 800 11.5px/20px var(--police); text-align: center; }
 .compte { position: relative; }
 .bouton-compte { padding: 0 10px 0 6px; gap: 8px; }
 .bouton-compte .nom-compte { max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14.5px; }
@@ -222,6 +224,7 @@ a.carte:hover, .carte.cliquable:hover { transform: translateY(-4px); border-colo
   .site-actions { gap: 6px; }
   .bouton-connexion span, .bouton-board span, .bouton-compte .nom-compte, .bouton-compte > .icone { display: none; }
   .bouton-board { width: 40px; padding: 0; justify-content: center; }
+  .bouton-tickets span { display: none; }
   .bouton-compte { padding: 0; width: 40px; }
   .bouton-connexion { width: 40px; padding: 0; justify-content: center; }
   .section { padding: 48px 0; }
