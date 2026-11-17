@@ -24,8 +24,20 @@ const SITE = {
 };
 
 /** La connexion des joueurs est-elle active ici ? En ligne : SITE.connexionJoueur ; en local : toujours. */
+// Mode essai : tant que connexionJoueur est à false, la connexion n'apparaît que dans un navigateur passé une fois par
+// une adresse avec « ?essai=1 » (« ?essai=0 » l'enlève). Les visiteurs ne voient rien.
+const ESSAI_CONNEXION = (() => {
+  try {
+    const q = new URLSearchParams(location.search).get("essai");
+    if (q === "1") localStorage.setItem("origins-connexion-essai", "1");
+    if (q === "0") localStorage.removeItem("origins-connexion-essai");
+    return localStorage.getItem("origins-connexion-essai") === "1";
+  } catch (_) {
+    return false;
+  }
+})();
 // Jamais sans HTTPS : le cookie de session circulerait en clair (et le navigateur le refuse, il est « Secure »).
-const CONNEXION = (SITE.connexionJoueur && location.protocol === "https:") || ["localhost", "127.0.0.1"].includes(location.hostname);
+const CONNEXION = ((SITE.connexionJoueur || ESSAI_CONNEXION) && location.protocol === "https:") || ["localhost", "127.0.0.1"].includes(location.hostname);
 
 const LANGUES = [
   { code: "fr", nom: "Français" },
