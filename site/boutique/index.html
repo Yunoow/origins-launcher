@@ -192,12 +192,18 @@ window.rendrePage = function () {
 <script src="/commun/site.js"></script>
 <script>
 document.getElementById("info-discord").href = SITE.discord;
-document.querySelector(".filtres").addEventListener("click", (e) => {
-  const b = e.target.closest("[data-filtre]");
-  if (!b) return;
+function filtrer(b) {
   document.querySelectorAll("[data-filtre]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
   document.querySelectorAll("[data-rayon]").forEach((r) => { r.hidden = b.dataset.filtre !== "tout" && r.dataset.rayon !== b.dataset.filtre; });
+}
+document.querySelector(".filtres").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-filtre]");
+  if (b) filtrer(b);
 });
+// ?rayon=tempest (bouton Boutique du menu Échap, en jeu) : la boutique s'ouvre sur ce rayon.
+const rayonDemande = new URLSearchParams(location.search).get("rayon");
+const boutonRayon = [...document.querySelectorAll("[data-filtre]")].find((x) => x.dataset.filtre === rayonDemande);
+if (boutonRayon) filtrer(boutonRayon);
 </script>
 </body>
 </html>
