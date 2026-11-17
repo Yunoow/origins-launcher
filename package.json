@@ -18,7 +18,8 @@
     "build:dir": "electron-builder --win --dir",
     "deploy:tempest": "node scripts/deploy-tempest.js",
     "deploy:tempest:ajout": "node scripts/deploy-tempest-ajout.js",
-    "deploy:launcher": "node scripts/deploy-launcher.js"
+    "deploy:launcher": "node scripts/deploy-launcher.js",
+    "deploy:site": "node scripts/deploy-site.js"
   },
   "devDependencies": {
     "electron": "^41.0.3",

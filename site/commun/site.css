@@ -1,0 +1,206 @@
+/* =====================================================================================================
+   SITE ORIGINS : styles communs à toutes les pages (DA « Site Origins » du 17/11, thème Or et ébène).
+   Chaque page ajoute son propre CSS ; l'en-tête et le pied sont posés par commun/site.js.
+   ===================================================================================================== */
+
+:root {
+  --or: #c9a14a; --or-clair: #e3c27a; --or-fonce: #8c6222; --sur-or: #1a1208;
+  --ebene: #0f0b08; --ebene-fonce: #0c0906; --panneau: #19120d; --panneau-clair: #221913;
+  --texte: #f0e6cf; --doux: #b9a888; --tres-doux: #8f8068;
+  --vert: #4cd38a; --rouge: #e2574c;
+  --filet: rgba(255, 255, 255, 0.08); --filet-fort: rgba(255, 255, 255, 0.14);
+  --verre: linear-gradient(160deg, rgba(96, 74, 37, 0.93), rgba(37, 25, 16, 0.96));
+  --carte: linear-gradient(170deg, #1e160e, #130d08);
+  --titre: "Baloo 2", "Nunito", system-ui, sans-serif;
+  --police: "Nunito", system-ui, sans-serif;
+  --mono: ui-monospace, Menlo, Consolas, monospace;
+  --largeur: 1248px;
+  --gouttiere: 48px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+body { margin: 0; background: var(--ebene); color: var(--texte); font: 600 16px/1.55 var(--police); }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+img { max-width: 100%; }
+:focus-visible { outline: 2px solid var(--or); outline-offset: 3px; border-radius: 8px; }
+[hidden] { display: none !important; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.icone { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ------------------------------------------------------------ logo : l'œil qui regarde le R, puis « RIGINS » */
+.logo { display: inline-flex; align-items: center; text-decoration: none; color: #fff; }
+.logo img { width: 40px; height: 40px; flex: none; }
+.logo span {
+  margin-left: -4px;
+  font: 800 28px/1 var(--titre); color: #fff;
+  -webkit-text-stroke: 1.5px #0a1024; paint-order: stroke fill;
+}
+
+/* ------------------------------------------------------------ conteneur et sections */
+.contenant { width: 100%; max-width: calc(var(--largeur) + 2 * var(--gouttiere)); margin: 0 auto; padding: 0 var(--gouttiere); }
+.section { padding: 72px 0; }
+.kicker { font: 800 12.5px var(--police); letter-spacing: 0.22em; text-transform: uppercase; color: var(--or); }
+.titre-section { margin: 8px 0 0; font: 800 clamp(28px, 3.4vw, 40px)/1.12 var(--titre); color: #fff; }
+.chapo { margin: 10px 0 0; max-width: 720px; color: var(--texte); font-size: 16.5px; }
+.discret { color: var(--doux); }
+.tete-section { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 28px; }
+
+/* ------------------------------------------------------------ boutons */
+.bouton {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  height: 52px; padding: 0 24px; border-radius: 15px; border: 0;
+  font: 800 15px var(--titre); letter-spacing: 0.02em; text-decoration: none; white-space: nowrap; cursor: pointer;
+  transition: transform .15s, box-shadow .15s, background .15s, border-color .15s, filter .15s;
+}
+.bouton-blanc { background: #fff; color: var(--or-fonce); box-shadow: 0 5px 0 rgba(0, 0, 0, 0.22); text-transform: uppercase; letter-spacing: 0.08em; font-size: 16px; }
+.bouton-blanc:hover { transform: translateY(-2px); box-shadow: 0 7px 0 rgba(0, 0, 0, 0.25); }
+.bouton-or { background: var(--or); color: var(--sur-or); }
+.bouton-or:hover { filter: brightness(1.1); }
+.bouton-contour { background: rgba(15, 11, 8, 0.35); color: #fff; border: 1.5px solid rgba(201, 161, 74, 0.6); }
+.bouton-contour:hover { background: rgba(201, 161, 74, 0.16); border-color: var(--or); }
+.bouton-petit { height: 40px; padding: 0 14px; border-radius: 12px; font-size: 14px; }
+.lien-or { color: var(--or); font: 800 15px var(--titre); text-decoration: none; }
+.lien-or:hover { color: var(--or-clair); }
+
+/* ------------------------------------------------------------ cartes */
+.carte {
+  border-radius: 18px; background: var(--panneau); border: 1px solid var(--filet);
+  transition: transform .18s, border-color .18s;
+}
+a.carte, .carte.cliquable { text-decoration: none; color: inherit; }
+a.carte:hover, .carte.cliquable:hover { transform: translateY(-4px); border-color: rgba(201, 161, 74, 0.55); }
+.pastille {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 4px 10px; border-radius: 999px;
+  background: rgba(201, 161, 74, 0.16); border: 1px solid rgba(201, 161, 74, 0.4);
+  font: 800 11.5px var(--police); letter-spacing: 0.12em; text-transform: uppercase; color: var(--or-clair);
+}
+
+/* ------------------------------------------------------------ cartes d'actus (Accueil, Tempest, Actus) */
+.grille-actus { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.actu { display: flex; flex-direction: column; overflow: hidden; }
+.actu-image { height: 150px; background: url("/commun/images/tempest-fond.jpg") center / cover; position: relative; }
+.actu-image.launcher, .actu-image.origins { background-image: url("/commun/images/fond-origins.jpg"); background-position: center 35%; }
+.actu-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15, 11, 8, 0) 40%, rgba(25, 18, 13, 0.9)); }
+.actu-corps { padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 8px; }
+.actu-meta { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: var(--doux); }
+.actu-type { font-weight: 800; letter-spacing: 0.12em; color: var(--or); }
+.actu h3 { margin: 0; font: 800 19px/1.2 var(--titre); color: #fff; }
+.actu p { margin: 0; font-size: 14.5px; color: var(--doux); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.actus-vide { padding: 30px; text-align: center; color: var(--doux); }
+
+/* =====================================================================================================
+   EN-TÊTE DU SITE (posé par site.js dans <div id="site-tete">)
+   ===================================================================================================== */
+.site-tete {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 20;
+  height: 76px; padding: 0 var(--gouttiere);
+  display: flex; align-items: center; gap: 40px;
+}
+.site-tete.plein { position: sticky; background: rgba(15, 11, 8, 0.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--filet); }
+.site-menu { display: flex; align-items: center; gap: 26px; flex: 1; }
+.site-menu a { position: relative; padding: 8px 0; color: var(--texte); text-decoration: none; font-weight: 700; font-size: 15px; transition: color .15s; }
+.site-menu a:hover { color: #fff; }
+.site-menu a[aria-current="page"] { color: #fff; font-weight: 800; }
+.site-menu a[aria-current="page"]::after {
+  content: ""; position: absolute; left: 50%; bottom: -1px; width: 22px; height: 3px; margin-left: -11px;
+  border-radius: 2px; background: var(--or);
+}
+.site-actions { display: flex; align-items: center; gap: 10px; }
+.contour-carre {
+  height: 40px; min-width: 40px; padding: 0 11px; border-radius: 12px;
+  border: 1.5px solid rgba(255, 255, 255, 0.2); background: rgba(15, 11, 8, 0.35); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  font: 800 13.5px var(--police); text-decoration: none; cursor: pointer;
+  transition: background .15s, border-color .15s;
+}
+.contour-carre:hover { background: rgba(201, 161, 74, 0.16); border-color: var(--or); }
+.contour-carre .icone { width: 17px; height: 17px; }
+.bouton-connexion { height: 40px; padding: 0 16px; border-radius: 12px; background: #fff; color: var(--or-fonce); font: 800 14.5px var(--titre); display: inline-flex; align-items: center; gap: 8px; text-decoration: none; border: 0; cursor: pointer; }
+.bouton-connexion:hover { filter: brightness(0.95); }
+
+/* Menu des langues */
+.langue { position: relative; }
+.langue ul {
+  position: absolute; right: 0; top: 48px; z-index: 30;
+  width: 220px; margin: 0; padding: 6px; list-style: none;
+  border-radius: 14px; background: var(--panneau); border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.langue li button {
+  width: 100%; height: 38px; padding: 0 12px; border: 0; border-radius: 9px;
+  background: transparent; color: #fff;
+  display: flex; align-items: center; justify-content: space-between;
+  font: 700 14px var(--police); cursor: pointer;
+}
+.langue li button:hover { background: rgba(255, 255, 255, 0.07); }
+.langue li button[aria-selected="true"] { background: rgba(201, 161, 74, 0.18); }
+.langue li small { font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; color: var(--doux); }
+
+/* Bouton du menu sur téléphone */
+.bouton-menu { display: none; }
+
+/* =====================================================================================================
+   PIED DE PAGE (posé par site.js dans <div id="site-pied">)
+   ===================================================================================================== */
+.site-pied { padding: 48px 0 36px; border-top: 1px solid var(--filet); background: var(--ebene-fonce); }
+.site-pied .grille { display: grid; grid-template-columns: 1.6fr repeat(4, 1fr); gap: 40px; }
+.site-pied .presentation { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.site-pied .presentation p { margin: 0; max-width: 300px; font-size: 14px; color: var(--doux); }
+.site-pied .colonne { display: flex; flex-direction: column; gap: 10px; }
+.site-pied .colonne span { font-weight: 800; font-size: 12px; letter-spacing: 0.18em; color: var(--or); }
+.site-pied .colonne a { color: var(--texte); text-decoration: none; font-weight: 700; font-size: 14.5px; }
+.site-pied .colonne a:hover { color: #fff; }
+.site-pied .bas {
+  display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  margin-top: 36px; padding-top: 22px; border-top: 1px solid var(--filet);
+  font-size: 13px; color: var(--tres-doux);
+}
+.site-pied .bas p { margin: 0; }
+
+/* =====================================================================================================
+   TÉLÉPHONE ET TABLETTE
+   ===================================================================================================== */
+@media (max-width: 1080px) {
+  :root { --gouttiere: 28px; }
+  .site-tete { gap: 18px; }
+  .site-menu { gap: 18px; }
+  .site-pied .grille { grid-template-columns: 1fr 1fr; }
+  .site-pied .presentation { grid-column: 1 / -1; }
+}
+@media (max-width: 860px) {
+  :root { --gouttiere: 16px; }
+  .site-tete { height: 64px; gap: 10px; }
+  .logo img { width: 34px; height: 34px; }
+  .logo span { font-size: 23px; -webkit-text-stroke-width: 1.2px; }
+  .bouton-menu { display: inline-flex; }
+  .site-actions { margin-left: auto; }
+  .site-menu {
+    display: none;
+    position: absolute; top: 64px; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    padding: 8px 16px 16px; background: var(--panneau); border-bottom: 1px solid var(--filet-fort);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+  }
+  .site-menu.ouvert { display: flex; }
+  .site-menu a { padding: 12px 4px; font-size: 16px; border-bottom: 1px solid var(--filet); }
+  .site-menu a[aria-current="page"]::after { left: 4px; margin-left: 0; bottom: 8px; }
+  .site-actions { gap: 6px; }
+  .bouton-connexion span { display: none; }
+  .bouton-connexion { width: 40px; padding: 0; justify-content: center; }
+  .section { padding: 48px 0; }
+  .grille-actus { grid-template-columns: 1fr; }
+  .bouton { height: 50px; padding: 0 18px; }
+}
+@media (max-width: 520px) {
+  .site-pied .grille { grid-template-columns: 1fr; gap: 28px; }
+}

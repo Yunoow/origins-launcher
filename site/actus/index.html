@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Actus · Origins</title>
+<meta name="description" content="Les nouvelles d'Origins : ce qui change sur Tempest et dans le launcher.">
+<meta name="theme-color" content="#0f0b08">
+<link rel="icon" href="/commun/images/oeil.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="/commun/site.css">
+<style>
+/* Page Actus (maquette « Site Origins · Actus », design/site/Site-Actus.dc.html). */
+.tete-page { padding: 56px 0 28px; }
+.tete-page .tete-section { margin-bottom: 0; }
+.titre-page { margin: 8px 0 0; font: 800 clamp(32px, 4vw, 46px)/1.1 var(--titre); color: #fff; }
+
+/* Filtres Tout / Tempest / Launcher */
+.filtres { display: inline-flex; gap: 4px; padding: 5px; border-radius: 15px; background: var(--panneau); border: 1px solid var(--filet); }
+.filtres button {
+  height: 40px; padding: 0 18px; border: 0; border-radius: 11px; background: transparent; color: #fff;
+  font: 800 14.5px var(--police); cursor: pointer;
+}
+.filtres button:hover { background: rgba(255, 255, 255, 0.06); }
+.filtres button[aria-pressed="true"] { background: #fff; color: var(--or-fonce); }
+
+/* L'actu à la une */
+.une {
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); overflow: hidden; margin-bottom: 22px;
+  text-align: left; width: 100%; padding: 0; cursor: pointer; font: inherit; color: inherit;
+}
+.une .actu-image { height: auto; min-height: 340px; }
+.une .actu-image::after { background: linear-gradient(90deg, rgba(25, 18, 13, 0) 60%, rgba(25, 18, 13, 0.6)); }
+.une-corps { padding: 40px 44px; display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+.une-corps h2 { margin: 0; font: 800 clamp(26px, 2.6vw, 34px)/1.15 var(--titre); color: #fff; }
+.une-corps p { margin: 0; color: var(--texte); font-size: 16px; }
+.etiquette {
+  display: inline-block; padding: 3px 10px; border-radius: 7px; background: var(--or); color: var(--sur-or);
+  font: 800 11.5px var(--police); letter-spacing: 0.1em;
+}
+.etiquette.launcher { background: #f3ead8; color: #3a2a12; }
+
+/* Cartes : les actus du site sont des boutons qui ouvrent le détail */
+button.actu { padding: 0; text-align: left; font: inherit; color: inherit; cursor: pointer; }
+button.actu:hover { transform: translateY(-4px); border-color: rgba(201, 161, 74, 0.55); }
+.actu .etiquette { position: absolute; top: 12px; left: 12px; z-index: 1; }
+.plus { margin-top: 26px; display: flex; justify-content: center; }
+
+/* Détail d'une actu */
+dialog.detail {
+  width: min(720px, calc(100vw - 32px)); max-height: calc(100vh - 64px); padding: 0; overflow: auto;
+  border-radius: 22px; border: 1px solid rgba(201, 161, 74, 0.35); background: var(--panneau); color: var(--texte);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+dialog.detail::backdrop { background: rgba(8, 6, 4, 0.75); backdrop-filter: blur(3px); }
+.detail .actu-image { height: 200px; }
+.detail-corps { padding: 26px 32px 32px; }
+.detail-corps .actu-meta { margin-bottom: 10px; }
+.detail-corps h2 { margin: 0; font: 800 28px/1.15 var(--titre); color: #fff; }
+.detail-corps > p { margin: 12px 0 0; font-size: 16px; }
+.detail-corps ul { margin: 20px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.detail-corps li { position: relative; padding-left: 22px; color: var(--texte); font-size: 15px; }
+.detail-corps li::before { content: ""; position: absolute; left: 4px; top: 9px; width: 7px; height: 7px; border-radius: 2px; background: var(--or); transform: rotate(45deg); }
+.detail-fermer { position: absolute; top: 14px; right: 14px; z-index: 2; }
+
+@media (max-width: 860px) {
+  .tete-page { padding: 32px 0 20px; }
+  .une { grid-template-columns: 1fr; }
+  .une .actu-image { min-height: 180px; }
+  .une-corps { padding: 22px; }
+  .detail-corps { padding: 20px; }
+}
+</style>
+</head>
+<body data-page="actus" data-titre="titrePage">
+<div id="site-tete" data-style="plein"></div>
+
+<main>
+  <section class="tete-page">
+    <div class="contenant">
+      <div class="tete-section">
+        <div>
+          <div class="kicker" data-t="kicker">ACTUS</div>
+          <h1 class="titre-page" data-t="titre">Les nouvelles d'Origins</h1>
+          <p class="chapo" data-t="chapo">Les mêmes que dans le launcher : ce qui change sur Tempest et dans le launcher, dans ta langue.</p>
+        </div>
+        <div class="filtres" role="group" data-t-aria="filtrer">
+          <button type="button" data-filtre="tout" aria-pressed="true" data-t="tout">Tout</button>
+          <button type="button" data-filtre="tempest" aria-pressed="false">Tempest</button>
+          <button type="button" data-filtre="launcher" aria-pressed="false">Launcher</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0" aria-live="polite">
+    <div class="contenant">
+      <div id="une"></div>
+      <div class="grille-actus" id="grille"></div>
+      <div class="plus"><button class="bouton bouton-contour bouton-petit" id="voir-plus" type="button" data-t="voirPlus" hidden>Voir plus d'actus</button></div>
+    </div>
+  </section>
+</main>
+
+<dialog class="detail" id="detail" aria-labelledby="detail-titre">
+  <button class="contour-carre detail-fermer" type="button" id="detail-fermer" data-t-aria="fermer"><svg class="icone" aria-hidden="true"><use href="#i-fermer"/></svg></button>
+  <div id="detail-contenu"></div>
+</dialog>
+
+<div id="site-pied"></div>
+
+<script>
+window.TEXTES_PAGE = {
+  fr: { titrePage: "Actus", kicker: "ACTUS", titre: "Les nouvelles d'Origins", chapo: "Les mêmes que dans le launcher : ce qui change sur Tempest et dans le launcher, dans ta langue.",
+        filtrer: "Filtrer les actus", tout: "Tout", lire: "Lire l'actu", voirPlus: "Voir plus d'actus", fermer: "Fermer", actusVide: "Aucune actu pour l'instant.", chargement: "Chargement des actus…", versionDu: "Version {v}" },
+  en: { titrePage: "News", kicker: "NEWS", titre: "Origins news", chapo: "The same as in the launcher: what changes on Tempest and in the launcher, in your language.",
+        filtrer: "Filter the news", tout: "All", lire: "Read more", voirPlus: "See more news", fermer: "Close", actusVide: "No news yet.", chargement: "Loading the news…", versionDu: "Version {v}" },
+  es: { titrePage: "Noticias", kicker: "NOTICIAS", titre: "Las noticias de Origins", chapo: "Las mismas que en el launcher: lo que cambia en Tempest y en el launcher, en tu idioma.",
+        filtrer: "Filtrar las noticias", tout: "Todo", lire: "Leer la noticia", voirPlus: "Ver más noticias", fermer: "Cerrar", actusVide: "Aún no hay noticias.", chargement: "Cargando las noticias…", versionDu: "Versión {v}" },
+  de: { titrePage: "News", kicker: "NEWS", titre: "Die Origins-News", chapo: "Dieselben wie im Launcher: was sich bei Tempest und im Launcher ändert, in deiner Sprache.",
+        filtrer: "News filtern", tout: "Alle", lire: "Weiterlesen", voirPlus: "Mehr News", fermer: "Schließen", actusVide: "Noch keine News.", chargement: "News werden geladen…", versionDu: "Version {v}" },
+  pt: { titrePage: "Notícias", kicker: "NOTÍCIAS", titre: "As notícias do Origins", chapo: "As mesmas do launcher: o que muda no Tempest e no launcher, no seu idioma.",
+        filtrer: "Filtrar as notícias", tout: "Tudo", lire: "Ler a notícia", voirPlus: "Ver mais notícias", fermer: "Fechar", actusVide: "Ainda não há notícias.", chargement: "Carregando as notícias…", versionDu: "Versão {v}" }
+};
+
+/* ------------------------------------------------------------------
+   Les actus viennent de deux endroits, comme dans le launcher :
+   - l'API Origins (/api/news) pour Tempest ;
+   - l'historique du launcher (src/news.js du launcher, publié en /commun/historique-launcher.js).
+   ------------------------------------------------------------------ */
+const MOIS = { JANVIER: 0, FÉVRIER: 1, FEVRIER: 1, MARS: 2, AVRIL: 3, MAI: 4, JUIN: 5, JUILLET: 6, AOÛT: 7, AOUT: 7, SEPTEMBRE: 8, OCTOBRE: 9, NOVEMBRE: 10, DÉCEMBRE: 11, DECEMBRE: 11 };
+const PAR_PAGE = 9;
+let toutes = null;       // [{ id, source, type, date, contenu(langue) }]
+let filtre = "tout";
+let combien = PAR_PAGE;
+
+/** « 4 NOVEMBRE 2026 » → date ; null si ce n'est pas une date (« PREMIER PROTOTYPE »). */
+function dateFrancaise(texte) {
+  const m = /^(\d{1,2})\s+(\S+)\s+(\d{4})$/.exec(String(texte || "").trim().toUpperCase());
+  if (!m || MOIS[m[2]] === undefined) return null;
+  return new Date(Date.UTC(+m[3], MOIS[m[2]], +m[1], 12));
+}
+
+function actusLauncher() {
+  let histo;
+  try { histo = updateHistoryI18n; } catch (_) { return []; }   // fichier absent : seulement les actus Tempest
+  const fr = histo.fr || [];
+  return fr.map((entree, i) => {
+    const date = dateFrancaise(entree.date);
+    return {
+      id: "launcher-" + String(entree.version || i).replace(/[^\w.-]/g, ""),
+      source: "launcher",
+      type: entree.type === "ORIGINS" ? "ORIGINS" : "LAUNCHER",
+      date: date ? date.toISOString() : null,
+      contenu: (langue) => {
+        const e = (histo[langue] || [])[i] || histo.en?.[i] || entree;
+        return { title: e.title, text: e.text, changes: e.changes || [], dateTexte: date ? null : e.date };
+      }
+    };
+  });
+}
+
+async function charger() {
+  const api = await Site.actus("tempest");
+  const tempest = api.map((a) => ({
+    id: a.slug || String(a.id), source: "tempest", type: String(a.type || "TEMPEST").toUpperCase(),
+    date: a.createdAt || a.created_at || null,
+    contenu: () => Site.contenu(a)
+  }));
+  toutes = [...tempest, ...actusLauncher()].sort((a, b) => (b.date ? Date.parse(b.date) : 0) - (a.date ? Date.parse(a.date) : 0));
+  dessiner();
+  ouvrirDepuisAdresse();
+}
+
+function visibles() {
+  return (toutes || []).filter((a) => filtre === "tout" || a.source === filtre);
+}
+
+function etiquette(a) {
+  return `<span class="etiquette${a.source === "launcher" ? " launcher" : ""}">${Site.echapper(a.type)}</span>`;
+}
+function dateDe(a, c) {
+  return a.date ? Site.date(a.date) : (c.dateTexte || "");
+}
+function image(a) {
+  return `<div class="actu-image${a.source === "launcher" ? " launcher" : ""}"></div>`;
+}
+
+function dessiner() {
+  const une = document.getElementById("une");
+  const grille = document.getElementById("grille");
+  const plus = document.getElementById("voir-plus");
+  if (toutes === null) { grille.innerHTML = `<div class="carte actus-vide" style="grid-column: 1 / -1">${Site.echapper(Site.t("chargement"))}</div>`; return; }
+  const liste = visibles();
+  if (!liste.length) {
+    une.innerHTML = "";
+    grille.innerHTML = `<div class="carte actus-vide" style="grid-column: 1 / -1">${Site.echapper(Site.t("actusVide"))}</div>`;
+    plus.hidden = true;
+    return;
+  }
+  const [premiere, ...reste] = liste;
+  const c = premiere.contenu(Site.langue);
+  une.innerHTML = `<button type="button" class="carte une" data-id="${Site.echapper(premiere.id)}">
+      ${image(premiere)}
+      <div class="une-corps">
+        <div class="actu-meta">${etiquette(premiere)}<span>${Site.echapper(dateDe(premiere, c))}</span></div>
+        <h2>${Site.echapper(c.title)}</h2>
+        <p>${Site.echapper(c.text)}</p>
+        <span class="lien-or">${Site.echapper(Site.t("lire"))} →</span>
+      </div></button>`;
+  grille.innerHTML = reste.slice(0, combien).map((a) => {
+    const ca = a.contenu(Site.langue);
+    return `<button type="button" class="carte actu" data-id="${Site.echapper(a.id)}">
+      <div style="position: relative">${etiquette(a)}${image(a)}</div>
+      <div class="actu-corps">
+        <div class="actu-meta"><span>${Site.echapper(dateDe(a, ca))}</span></div>
+        <h3>${Site.echapper(ca.title)}</h3>
+        <p>${Site.echapper(ca.text)}</p>
+      </div></button>`;
+  }).join("");
+  plus.hidden = reste.length <= combien;
+}
+
+/* Détail d'une actu, dans une fenêtre ; l'adresse garde #id pour partager le lien. */
+let ouverte = null;
+function ouvrir(id, depuisAdresse) {
+  const a = (toutes || []).find((x) => x.id === id);
+  if (!a) return;
+  ouverte = a;
+  remplirDetail();
+  const fenetre = document.getElementById("detail");
+  if (!fenetre.open) fenetre.showModal();
+  if (!depuisAdresse) history.replaceState(null, "", "#" + encodeURIComponent(id));
+}
+function remplirDetail() {
+  if (!ouverte) return;
+  const c = ouverte.contenu(Site.langue);
+  document.getElementById("detail-contenu").innerHTML = `${image(ouverte)}
+    <div class="detail-corps">
+      <div class="actu-meta">${etiquette(ouverte)}<span>${Site.echapper(dateDe(ouverte, c))}</span></div>
+      <h2 id="detail-titre">${Site.echapper(c.title)}</h2>
+      <p>${Site.echapper(c.text)}</p>
+      ${c.changes && c.changes.length ? `<ul>${c.changes.map((l) => `<li>${Site.echapper(l)}</li>`).join("")}</ul>` : ""}
+    </div>`;
+}
+function ouvrirDepuisAdresse() {
+  const id = decodeURIComponent(location.hash.slice(1));
+  if (id) ouvrir(id, true);
+}
+
+window.rendrePage = function () { dessiner(); remplirDetail(); };
+</script>
+<script src="/commun/historique-launcher.js"></script>
+<script src="/commun/site.js"></script>
+<script>
+document.querySelector(".filtres").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-filtre]");
+  if (!b) return;
+  filtre = b.dataset.filtre;
+  combien = PAR_PAGE;
+  document.querySelectorAll("[data-filtre]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+  dessiner();
+});
+document.querySelector("main").addEventListener("click", (e) => {
+  const carte = e.target.closest("[data-id]");
+  if (carte) ouvrir(carte.dataset.id);
+});
+document.getElementById("voir-plus").addEventListener("click", () => { combien += PAR_PAGE; dessiner(); });
+const fenetre = document.getElementById("detail");
+document.getElementById("detail-fermer").addEventListener("click", () => fenetre.close());
+fenetre.addEventListener("click", (e) => { if (e.target === fenetre) fenetre.close(); });
+fenetre.addEventListener("close", () => { ouverte = null; history.replaceState(null, "", location.pathname); });
+window.addEventListener("hashchange", ouvrirDepuisAdresse);
+charger();
+</script>
+</body>
+</html>

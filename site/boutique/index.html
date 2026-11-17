@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boutique · Origins</title>
+<meta name="description" content="La boutique Origins : des cosmétiques pour Tempest et le launcher. Ouvre bientôt.">
+<meta name="theme-color" content="#0f0b08">
+<link rel="icon" href="/commun/images/oeil.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="/commun/site.css">
+<style>
+/* Page Boutique (maquette « Site Origins · Boutique », design/site/Site-Boutique.dc.html).
+   Vitrine seulement : rien ne s'achète tant que la boutique n'est pas ouverte. */
+.tete-page { padding: 56px 0 28px; }
+.tete-page .tete-section { margin-bottom: 0; }
+.titre-page { margin: 8px 0 0; display: flex; align-items: center; flex-wrap: wrap; gap: 8px 16px; font: 800 clamp(32px, 4vw, 46px)/1.1 var(--titre); color: #fff; }
+.filtres { display: inline-flex; gap: 4px; padding: 5px; border-radius: 15px; background: var(--panneau); border: 1px solid var(--filet); }
+.filtres button { height: 40px; padding: 0 18px; border: 0; border-radius: 11px; background: transparent; color: #fff; font: 800 14.5px var(--police); cursor: pointer; }
+.filtres button:hover { background: rgba(255, 255, 255, 0.06); }
+.filtres button[aria-pressed="true"] { background: #fff; color: var(--or-fonce); }
+
+.rayon + .rayon { margin-top: 44px; }
+.banniere {
+  display: flex; align-items: center; gap: 44px; min-height: 150px; padding: 18px 48px; margin-bottom: 20px;
+  border-radius: 20px; border: 1px solid var(--filet); overflow: hidden;
+}
+.banniere.tempest { background: linear-gradient(90deg, rgba(15, 11, 8, 0.85) 25%, rgba(15, 11, 8, 0.35)), url("/commun/images/tempest-fond.jpg") center 40% / cover; }
+.banniere.origins { background: linear-gradient(90deg, rgba(15, 11, 8, 0.85) 25%, rgba(15, 11, 8, 0.2)), url("/commun/images/fond-origins.jpg") center 45% / cover; }
+.banniere img.tempest { width: 116px; height: auto; }
+.banniere p { margin: 0; color: #fff; font-size: 15.5px; }
+.banniere p span { display: block; color: var(--doux); }
+.banniere .logo span { font-size: 34px; }
+.banniere .logo img { width: 46px; height: 46px; }
+
+.grille-produits { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 18px; }
+.produit { padding: 12px 12px 14px; background: var(--carte); }
+.produit-image { aspect-ratio: 1 / 0.9; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #fff; }
+.produit-image .icone { width: 48px; height: 48px; stroke-width: 1.5; }
+.produit strong { display: block; margin-top: 14px; font: 800 16.5px/1.2 var(--titre); color: #fff; }
+.produit-bas { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 8px; font-size: 13px; color: var(--doux); }
+.bientot { padding: 3px 10px; border-radius: 999px; background: rgba(201, 161, 74, 0.16); font-size: 11px; font-weight: 800; letter-spacing: 0.1em; color: var(--or); white-space: nowrap; }
+
+.info { margin-top: 44px; padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.info p { margin: 0; max-width: 760px; color: var(--texte); }
+
+@media (max-width: 1080px) { .grille-produits { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 860px) {
+  .tete-page { padding: 32px 0 20px; }
+  .banniere { padding: 18px 20px; gap: 18px; min-height: 0; }
+  .banniere img.tempest { width: 80px; }
+  .banniere .logo span { font-size: 26px; }
+}
+@media (max-width: 520px) { .grille-produits { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } }
+</style>
+</head>
+<body data-page="boutique" data-titre="titrePage">
+<div id="site-tete" data-style="plein"></div>
+
+<main>
+  <section class="tete-page">
+    <div class="contenant">
+      <div class="tete-section">
+        <div>
+          <div class="kicker" data-t="kicker">BOUTIQUE</div>
+          <h1 class="titre-page"><span data-t="titre">Soutiens Origins</span><span class="pastille" data-t="ouvreBientot">OUVRE BIENTÔT</span></h1>
+          <p class="chapo" data-t="chapo">La même boutique que dans le launcher. Des cosmétiques pour te démarquer, rien qui donne un avantage en jeu.</p>
+        </div>
+        <div class="filtres" role="group" data-t-aria="filtrer">
+          <button type="button" data-filtre="tout" aria-pressed="true" data-t="tout">Tout</button>
+          <button type="button" data-filtre="tempest" aria-pressed="false">Tempest</button>
+          <button type="button" data-filtre="origins" aria-pressed="false">Origins</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0">
+    <div class="contenant">
+      <div class="rayon" data-rayon="tempest">
+        <div class="banniere tempest">
+          <img class="tempest" src="/commun/images/tempest-logo.png" alt="Tempest" width="116" height="93">
+          <p><b data-t="tempestPour">Pour ton personnage sur Tempest.</b><span data-t="tempestOu">Arrive en jeu, sur ton compte Minecraft.</span></p>
+        </div>
+        <div class="grille-produits" id="produits-tempest"></div>
+      </div>
+      <div class="rayon" data-rayon="origins">
+        <div class="banniere origins">
+          <span class="logo" aria-label="Origins"><img src="/commun/images/oeil-regard.svg" alt=""><span aria-hidden="true">RIGINS</span></span>
+          <p><b data-t="originsPour">Pour ton launcher et ton profil Origins.</b><span data-t="originsOu">Dans tous les jeux Origins.</span></p>
+        </div>
+        <div class="grille-produits" id="produits-origins"></div>
+      </div>
+
+      <div class="carte info">
+        <p data-t="info">La boutique n'est pas encore ouverte : rien ne s'achète pour l'instant. L'ouverture sera annoncée sur le Discord d'Origins et dans les actus.</p>
+        <a class="bouton bouton-contour bouton-petit" id="info-discord" href="#" target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" style="color: var(--or)"><use href="#i-bulle"/></svg>Discord</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-pied"></div>
+
+<script>
+/* Les produits de la vitrine (les mêmes que dans la maquette). Couleur : teinte du fond de l'image. */
+const ICONES = {
+  aura: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M12 8l1.5 2.5L16 12l-2.5 1.5L12 16l-1.5-2.5L8 12l2.5-1.5z"/>',
+  titre: '<rect x="4" y="5" width="16" height="9" rx="1.5"/><path d="M4 14 3 19h18l-1-5M8 9h8"/>',
+  emote: '<circle cx="12" cy="12" r="9"/><path d="M8.5 14.5a4.5 4.5 0 0 0 7 0M9 9.5h.01M15 9.5h.01"/>',
+  familier: '<circle cx="7" cy="9" r="2"/><circle cx="12" cy="6" r="2"/><circle cx="17" cy="9" r="2"/><path d="M8 17c0-2.5 1.8-5 4-5s4 2.5 4 5c0 1.5-1.2 2.5-2.5 2.5-.9 0-1-.5-1.5-.5s-.6.5-1.5.5C9.2 19.5 8 18.5 8 17z"/>',
+  coffre: '<rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M3 12h18M7 7V5.5A2.5 2.5 0 0 1 9.5 3h5A2.5 2.5 0 0 1 17 5.5V7"/><rect x="10.5" y="10.5" width="3" height="3" rx=".5"/>',
+  cadeau: '<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12M12 8c-1.5-3-5-4-5-1.5S10 8 12 8zM12 8c1.5-3 5-4 5-1.5S14 8 12 8z"/>',
+  palette: '<path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.6-1 1.1-1.9-.6-1.1.1-2.1 1.3-2.1H17a4 4 0 0 0 4-4c0-5.5-4-10-9-10z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/>',
+  cadre: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/>',
+  badge: '<path d="M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/>',
+  image: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/>',
+  sons: '<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/>'
+};
+const PRODUITS = [
+  { rayon: "tempest", cle: "pAura", icone: "aura", couleur: "40, 90, 170" },
+  { rayon: "tempest", cle: "pTitre", icone: "titre", couleur: "130, 50, 170" },
+  { rayon: "tempest", cle: "pEmotes", icone: "emote", couleur: "30, 130, 100" },
+  { rayon: "tempest", cle: "pFamilier", icone: "familier", couleur: "170, 45, 70" },
+  { rayon: "tempest", cle: "pCoffre", icone: "coffre", couleur: "190, 140, 40" },
+  { rayon: "tempest", cle: "pBienvenue", icone: "cadeau", couleur: "40, 110, 150" },
+  { rayon: "origins", cle: "pThemes", icone: "palette", couleur: "160, 45, 75" },
+  { rayon: "origins", cle: "pCadre", icone: "cadre", couleur: "35, 110, 150" },
+  { rayon: "origins", cle: "pBadge", icone: "badge", couleur: "150, 130, 40" },
+  { rayon: "origins", cle: "pFondProfil", icone: "image", couleur: "40, 80, 170" },
+  { rayon: "origins", cle: "pFondLauncher", icone: "image", couleur: "170, 90, 40" },
+  { rayon: "origins", cle: "pSons", icone: "sons", couleur: "120, 50, 170" }
+];
+
+window.TEXTES_PAGE = {
+  fr: { titrePage: "Boutique", kicker: "BOUTIQUE", titre: "Soutiens Origins", ouvreBientot: "OUVRE BIENTÔT",
+        chapo: "La même boutique que dans le launcher. Des cosmétiques pour te démarquer, rien qui donne un avantage en jeu.",
+        filtrer: "Filtrer la boutique", tout: "Tout", bientot: "BIENTÔT",
+        tempestPour: "Pour ton personnage sur Tempest.", tempestOu: "Arrive en jeu, sur ton compte Minecraft.",
+        originsPour: "Pour ton launcher et ton profil Origins.", originsOu: "Dans tous les jeux Origins.",
+        info: "La boutique n'est pas encore ouverte : rien ne s'achète pour l'instant. L'ouverture sera annoncée sur le Discord d'Origins et dans les actus.",
+        pAura: "Aura de magicule", pTitre: "Titre « Éveillé »", pEmotes: "Pack d'emotes", pFamilier: "Familier lumineux", pCoffre: "Coffre de la saison", pBienvenue: "Pack de bienvenue",
+        pThemes: "Thèmes du launcher", pCadre: "Cadre d'avatar", pBadge: "Badge de profil", pFondProfil: "Fond de profil", pFondLauncher: "Fond d'écran du launcher", pSons: "Sons du launcher" },
+  en: { titrePage: "Shop", kicker: "SHOP", titre: "Support Origins", ouvreBientot: "OPENING SOON",
+        chapo: "The same shop as in the launcher. Cosmetics to stand out, nothing that gives an in-game advantage.",
+        filtrer: "Filter the shop", tout: "All", bientot: "SOON",
+        tempestPour: "For your character on Tempest.", tempestOu: "Arrives in game, on your Minecraft account.",
+        originsPour: "For your launcher and your Origins profile.", originsOu: "In every Origins game.",
+        info: "The shop isn't open yet: nothing can be bought for now. The opening will be announced on the Origins Discord and in the news.",
+        pAura: "Magicule aura", pTitre: "“Awakened” title", pEmotes: "Emote pack", pFamilier: "Glowing pet", pCoffre: "Season chest", pBienvenue: "Welcome pack",
+        pThemes: "Launcher themes", pCadre: "Avatar frame", pBadge: "Profile badge", pFondProfil: "Profile background", pFondLauncher: "Launcher wallpaper", pSons: "Launcher sounds" },
+  es: { titrePage: "Tienda", kicker: "TIENDA", titre: "Apoya a Origins", ouvreBientot: "ABRE PRONTO",
+        chapo: "La misma tienda que en el launcher. Cosméticos para destacar, nada que dé ventaja en el juego.",
+        filtrer: "Filtrar la tienda", tout: "Todo", bientot: "PRONTO",
+        tempestPour: "Para tu personaje en Tempest.", tempestOu: "Llega al juego, en tu cuenta de Minecraft.",
+        originsPour: "Para tu launcher y tu perfil de Origins.", originsOu: "En todos los juegos de Origins.",
+        info: "La tienda aún no está abierta: por ahora no se puede comprar nada. La apertura se anunciará en el Discord de Origins y en las noticias.",
+        pAura: "Aura de magícula", pTitre: "Título «Despertado»", pEmotes: "Pack de emotes", pFamilier: "Mascota luminosa", pCoffre: "Cofre de temporada", pBienvenue: "Pack de bienvenida",
+        pThemes: "Temas del launcher", pCadre: "Marco de avatar", pBadge: "Insignia de perfil", pFondProfil: "Fondo de perfil", pFondLauncher: "Fondo del launcher", pSons: "Sonidos del launcher" },
+  de: { titrePage: "Shop", kicker: "SHOP", titre: "Unterstütze Origins", ouvreBientot: "ÖFFNET BALD",
+        chapo: "Derselbe Shop wie im Launcher. Kosmetik, um aufzufallen, nichts, was im Spiel einen Vorteil gibt.",
+        filtrer: "Shop filtern", tout: "Alle", bientot: "BALD",
+        tempestPour: "Für deinen Charakter auf Tempest.", tempestOu: "Kommt ins Spiel, auf deinem Minecraft-Konto.",
+        originsPour: "Für deinen Launcher und dein Origins-Profil.", originsOu: "In allen Origins-Spielen.",
+        info: "Der Shop ist noch nicht geöffnet: Im Moment kann nichts gekauft werden. Die Eröffnung wird im Origins-Discord und in den News angekündigt.",
+        pAura: "Magicula-Aura", pTitre: "Titel „Erwacht“", pEmotes: "Emote-Paket", pFamilier: "Leuchtendes Haustier", pCoffre: "Saisontruhe", pBienvenue: "Willkommenspaket",
+        pThemes: "Launcher-Designs", pCadre: "Avatar-Rahmen", pBadge: "Profilabzeichen", pFondProfil: "Profilhintergrund", pFondLauncher: "Launcher-Hintergrund", pSons: "Launcher-Sounds" },
+  pt: { titrePage: "Loja", kicker: "LOJA", titre: "Apoie o Origins", ouvreBientot: "ABRE EM BREVE",
+        chapo: "A mesma loja do launcher. Cosméticos para se destacar, nada que dê vantagem no jogo.",
+        filtrer: "Filtrar a loja", tout: "Tudo", bientot: "EM BREVE",
+        tempestPour: "Para o seu personagem no Tempest.", tempestOu: "Chega no jogo, na sua conta do Minecraft.",
+        originsPour: "Para o seu launcher e o seu perfil Origins.", originsOu: "Em todos os jogos Origins.",
+        info: "A loja ainda não abriu: nada pode ser comprado por enquanto. A abertura será anunciada no Discord do Origins e nas notícias.",
+        pAura: "Aura de magícula", pTitre: "Título “Despertado”", pEmotes: "Pacote de emotes", pFamilier: "Mascote luminoso", pCoffre: "Baú da temporada", pBienvenue: "Pacote de boas-vindas",
+        pThemes: "Temas do launcher", pCadre: "Moldura de avatar", pBadge: "Emblema de perfil", pFondProfil: "Fundo de perfil", pFondLauncher: "Papel de parede do launcher", pSons: "Sons do launcher" }
+};
+
+window.rendrePage = function () {
+  for (const rayon of ["tempest", "origins"]) {
+    document.getElementById("produits-" + rayon).innerHTML = PRODUITS.filter((p) => p.rayon === rayon).map((p) => `
+      <article class="carte produit">
+        <div class="produit-image" style="background: radial-gradient(circle at 50% 35%, rgba(${p.couleur}, 0.95), rgba(${p.couleur}, 0.45) 75%), #1a120c">
+          <svg class="icone" viewBox="0 0 24 24" aria-hidden="true">${ICONES[p.icone]}</svg></div>
+        <strong>${Site.echapper(Site.t(p.cle))}</strong>
+        <div class="produit-bas"><span>${rayon === "tempest" ? "Tempest" : "Origins"}</span><span class="bientot">${Site.echapper(Site.t("bientot"))}</span></div>
+      </article>`).join("");
+  }
+};
+</script>
+<script src="/commun/site.js"></script>
+<script>
+document.getElementById("info-discord").href = SITE.discord;
+document.querySelector(".filtres").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-filtre]");
+  if (!b) return;
+  document.querySelectorAll("[data-filtre]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+  document.querySelectorAll("[data-rayon]").forEach((r) => { r.hidden = b.dataset.filtre !== "tout" && r.dataset.rayon !== b.dataset.filtre; });
+});
+</script>
+</body>
+</html>

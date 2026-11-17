@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Télécharger le launcher Origins</title>
+<meta name="description" content="Télécharge le launcher Origins pour Windows, macOS ou Linux, et rejoins Tempest.">
+<meta name="theme-color" content="#0f0b08">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAWfmNhQlgAABZ+anVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAFlhqdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3VybjpjMnBhOjQzNTJjZDg3LWRhNjAtNDY5Mi05YmM4LTkxMjM0Y2I5NTY5YQAAAAOTanVtYgAAAClqdW1kYzJhcwARABCAAACqADibcQNjMnBhLmFzc2VydGlvbnMAAAAAuGp1bWIAAABEanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5pbmdyZWRpZW50LnYzAAAAABhjMnNol2MKTazKXkIi0UBKJyAvygAAAGxjYm9yo2lkYzpmb3JtYXRpaW1hZ2UvcG5namluc3RhbmNlSUR4LHhtcDppaWQ6MTI4MmQxZTktODY1MC00MDFiLThjYTEtOTQ4YWMyOThlZTc0bHJlbGF0aW9uc2hpcGhwYXJlbnRPZgAAAeJqdW1iAAAAQWp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuYWN0aW9ucy52MgAAAAAYYzJzaDcsK6N+hg0cMunxSMvhLtwAAAGZY2JvcqJnYWN0aW9uc4KiZmFjdGlvbmtjMnBhLm9wZW5lZGpwYXJhbWV0ZXJzoWtpbmdyZWRpZW50c4GiY3VybHgtc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5pbmdyZWRpZW50LnYzZGhhc2hYIBC8WGJ5S6P71sbAj1bFaAmXRNg3xJVbiUqOqqNqXvLapGZhY3Rpb254HWNvbS5hbnRocm9waWMuY2xhdWRlLnByb3ZpZGVkanBhcmFtZXRlcnOheB9jb20uYW50aHJvcGljLm9yaWdpbi1jb25maWRlbmNlZ3Vua25vd25rZGVzY3JpcHRpb254ZkNsYXVkZSBwcm92aWRlZCB0aGlzIGZpbGUgYXQgdGhlIHJlcXVlc3Qgb2YgYSB1c2VyIGFuZCBtYXkgaGF2ZSBjcmVhdGVkIG9yIG1vZGlmaWVkIHRoZSBmaWxlIGNvbnRlbnRzLm1zb2Z0d2FyZUFnZW50oWRuYW1lZkNsYXVkZXJhbGxBY3Rpb25zSW5jbHVkZWT1AAAAyGp1bWIAAABAanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5oYXNoLmRhdGEAAAAAGGMyc2gZ6D0DQH5jO0+wzY16pR2LAAAAgGNib3KlY2FsZ2ZzaGEyNTZjcGFkTQAAAAAAAAAAAAAAAABkaGFzaFggKsjaClO2TMYi1vHECayIts2E0PsYfI8INOSqTHIn7qxkbmFtZW5qdW1iZiBtYW5pZmVzdGpleGNsdXNpb25zgaJlc3RhcnQYIWZsZW5ndGgZFooAAAI+anVtYgAAACdqdW1kYzJjbAARABCAAACqADibcQNjMnBhLmNsYWltLnYyAAAAAg9jYm9ypWNhbGdmc2hhMjU2aXNpZ25hdHVyZXhNc2VsZiNqdW1iZj0vYzJwYS91cm46YzJwYTo0MzUyY2Q4Ny1kYTYwLTQ2OTItOWJjOC05MTIzNGNiOTU2OWEvYzJwYS5zaWduYXR1cmVqaW5zdGFuY2VJRHgseG1wOmlpZDpjMTMyNDM5Ni04ZjI0LTRiNDQtOTFmZC0yY2Y2NTg5NzQ3NzhyY3JlYXRlZF9hc3NlcnRpb25zg6JjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggELxYYnlLo/vWxsCPVsVoCZdE2DfElVuJSo6qo2pe8tqiY3VybHgqc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5hY3Rpb25zLnYyZGhhc2hYIMEXXrHAEa7NNvpw1fUrTj/11h6jawItQGpjFbB8kYZ0omN1cmx4KXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaGFzaC5kYXRhZGhhc2hYIB/KqqDmVBm9fYZOVKJsx5cFbe9WVE5nisCnxxLM9+SGdGNsYWltX2dlbmVyYXRvcl9pbmZvo2RuYW1lb0FudGhyb3BpYyBGaWxlc2d2ZXJzaW9uZTEuMC4wa3NwZWNWZXJzaW9uZTIuNC4wAAAQOGp1bWIAAAAoanVtZGMyY3MAEQAQgAAAqgA4m3EDYzJwYS5zaWduYXR1cmUAAAAQCGNib3LShFkCEqIBJhghWQIKMIICBjCCAY2gAwIBAgIUQOWgCu7COdC+uIP6BkIFPWdVEwAwCgYIKoZIzj0EAwMwSTEXMBUGA1UEChMOQW50aHJvcGljLCBQQkMxLjAsBgNVBAMTJUFudGhyb3BpYyBDb250ZW50IENyZWRlbnRpYWxzIFJvb3QgQ0EwHhcNMjYwODA3MTg0MzU2WhcNMjgwODA2MTk0MzU2WjBEMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEpMCcGA1UEAxMgQW50aHJvcGljIENsYXVkZSBDb250ZW50IFNpZ25pbmcwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASYegpry1AYBRTVNL1CpTlbROnY3dey+UrsF9C3phYrATN3ZHf93Mo8RQN0KOUuOn19P4oWNFWe5n2/She9N7eTo1gwVjAOBgNVHQ8BAf8EBAMCB4AwFQYDVR0lBA4wDAYKKwYBBAGD6F4CATAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFM5R4gSBTmRbI/jjxM+aPpzB11zCMAoGCCqGSM49BAMDA2cAMGQCMDFzHRSeAXrSy1WOzkbhPZ6Km2wGTmZ/2gK18k8BQGXyqz88Rdrz6CTX9flAnYNVxgIwcF9c3fVhqmJKpi+UhasNUMko69cyX6STPfta3Q8EjyzDjzoyrol46FP6VFHhvUcJoWNwYWRZDZ4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800&display=swap">
+<style>
+/* Page de téléchargement du launcher Origins : même DA que le launcher (thème Or et ébène, logo œil de dragon).
+   Rien à configurer ici : les réglages sont en haut du script (CONFIG). */
+:root {
+  --or: #c9a14a; --or-fonce: #8c6222; --sur-or: #1a1208; --ebene: #0f0b08; --panneau: #19120d;
+  --texte: #f0e6cf; --doux: #b9a888; --vert: #8bd99a;
+  --verre: linear-gradient(160deg, rgba(96,74,37,0.93), rgba(37,25,16,0.96));
+  --carte: linear-gradient(170deg, #1e160e, #130d08);
+  --titre: "Baloo 2", "Nunito", system-ui, sans-serif;
+  --texte-police: "Nunito", system-ui, sans-serif;
+  --mono: ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+body { margin: 0; background: var(--ebene); color: var(--texte); font: 600 16px/1.55 var(--texte-police); }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--or); outline-offset: 3px; border-radius: 8px; }
+[hidden] { display: none !important; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* logo : l'œil qui regarde le R, puis « RIGINS » */
+.logo { display: inline-flex; align-items: center; text-decoration: none; }
+.logo svg { flex: none; overflow: visible; }
+.logo span { font: 800 1em/1 var(--titre); color: #fff; -webkit-text-stroke: var(--trait, 1.5px) #0a1024; paint-order: stroke fill; }
+
+/* haut de page */
+.nav { position: absolute; top: 0; left: 0; right: 0; z-index: 5; height: 76px; padding: 0 clamp(16px, 4vw, 56px); display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.nav-liens { display: flex; align-items: center; gap: 26px; }
+.nav-liens a { text-decoration: none; font-weight: 700; font-size: 15px; color: var(--texte); transition: color .15s; }
+.nav-liens a:hover { color: #fff; }
+.nav-liens a[aria-current="page"] { position: relative; color: #fff; font-weight: 800; }
+.nav-liens a[aria-current="page"]::after { content: ""; position: absolute; left: 50%; bottom: -9px; width: 22px; height: 3px; margin-left: -11px; border-radius: 2px; background: var(--or); }
+.bouton-contour { height: 40px; padding: 0 14px; border-radius: 12px; border: 1.5px solid rgba(255,255,255,0.22); background: rgba(15,11,8,0.4); color: #fff; display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 14px; cursor: pointer; text-decoration: none; white-space: nowrap; transition: background .15s, border-color .15s; }
+.bouton-contour:hover { background: rgba(201,161,74,0.16); border-color: var(--or); }
+.langue { position: relative; }
+.langue ul { position: absolute; right: 0; top: 48px; width: 220px; margin: 0; padding: 6px; list-style: none; border-radius: 14px; background: var(--panneau); border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 18px 40px rgba(0,0,0,0.5); }
+.langue li button { width: 100%; height: 38px; padding: 0 12px; border: 0; border-radius: 9px; background: transparent; display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-size: 14px; cursor: pointer; }
+.langue li button:hover, .langue li button[aria-selected="true"] { background: rgba(201,161,74,0.18); }
+.langue small { font-size: 10.5px; font-weight: 800; letter-spacing: .08em; color: var(--doux); }
+
+/* scène peinte et gros bouton */
+.hero { position: relative; min-height: 860px; overflow: hidden; display: flex; flex-direction: column; align-items: center; padding: 118px 20px 90px; text-align: center; }
+.hero::before { content: ""; position: absolute; inset: 0; background: url("fond.jpg") 50% 30% / cover no-repeat; }
+.hero::after { content: ""; position: absolute; inset: 0; background: radial-gradient(42% 46% at 50% 44%, rgba(15,11,8,0.62), rgba(15,11,8,0)), linear-gradient(180deg, rgba(15,11,8,0.78) 0%, rgba(15,11,8,0) 16%, rgba(15,11,8,0) 62%, var(--ebene) 100%); }
+.hero > * { position: relative; z-index: 1; }
+.logo-grand { margin-top: 16px; font-size: 77px; --trait: 2.8px; }
+.logo-grand span { margin-left: -12px; }
+.surtitre { font-weight: 800; font-size: 12.5px; letter-spacing: .24em; color: var(--or); text-transform: uppercase; }
+.hero h1 { margin: 18px 0 0; font: 800 clamp(36px, 5vw, 52px)/1.05 var(--titre); color: #fff; text-shadow: 0 4px 24px rgba(0,0,0,0.65); }
+.hero .sous { margin: 12px 0 0; max-width: 600px; font-size: 18px; color: var(--texte); text-shadow: 0 2px 14px rgba(0,0,0,0.85); }
+.dock { margin-top: 28px; width: min(640px, 100%); padding: 22px 26px 20px; border-radius: 22px; background: var(--verre); border: 1px solid rgba(255,255,255,0.16); box-shadow: 0 24px 60px rgba(0,0,0,0.55); display: flex; flex-direction: column; gap: 12px; text-align: left; }
+.cta { height: 66px; border: 0; border-radius: 16px; background: #fff; color: var(--or-fonce); font: 800 21px/1 var(--titre); letter-spacing: .06em; display: flex; align-items: center; justify-content: center; gap: 12px; box-shadow: 0 5px 0 rgba(0,0,0,0.25); cursor: pointer; text-decoration: none; text-transform: uppercase; transition: transform .15s, box-shadow .15s; }
+.cta:hover { transform: translateY(-2px); box-shadow: 0 7px 0 rgba(0,0,0,0.25); }
+.cta[aria-disabled="true"] { background: rgba(255,255,255,0.14); color: var(--doux); box-shadow: none; cursor: default; transform: none; }
+.ligne-info { margin: 0; text-align: center; font-size: 13.5px; font-weight: 700; color: var(--doux); }
+.lien-or { padding: 0; border: 0; background: transparent; color: var(--or); font-weight: 800; font-size: 13.5px; cursor: pointer; }
+.lien-or:hover { color: #fff; }
+.etat { margin: 0; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13.5px; font-weight: 700; color: var(--texte); }
+.trait { height: 1px; background: rgba(255,255,255,0.12); }
+.choix-systeme { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.choix-systeme > span { font-size: 11.5px; font-weight: 800; letter-spacing: .14em; color: var(--doux); text-transform: uppercase; }
+.pilules { display: flex; gap: 4px; padding: 4px; border-radius: 12px; background: rgba(0,0,0,0.3); }
+.pilules button { height: 36px; padding: 0 14px; border: 0; border-radius: 9px; background: transparent; color: var(--texte); font-weight: 800; font-size: 13.5px; display: flex; align-items: center; gap: 7px; cursor: pointer; }
+.pilules button[aria-checked="true"] { background: #fff; color: var(--or-fonce); }
+.pilules small { font-size: 9.5px; letter-spacing: .1em; opacity: .7; text-transform: uppercase; }
+.note { margin: 0; display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--doux); }
+.telephone { margin-top: 28px; width: min(560px, 100%); padding: 22px; border-radius: 22px; background: var(--verre); border: 1px solid rgba(255,255,255,0.16); display: flex; flex-direction: column; gap: 12px; }
+.telephone strong { font: 800 22px/1.15 var(--titre); color: #fff; }
+.indice { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); z-index: 1; display: flex; flex-direction: column; align-items: center; color: var(--doux); text-decoration: none; font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+
+/* sections */
+.section { padding: 56px clamp(16px, 6.6vw, 96px) 0; max-width: 1440px; margin: 0 auto; }
+.section h2 { margin: 8px 0 0; font: 800 clamp(28px, 3.4vw, 38px)/1.1 var(--titre); color: #fff; }
+.centre { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.cartes { margin-top: 38px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.carte { position: relative; padding: 24px; border-radius: 20px; background: var(--carte); border: 1.5px solid rgba(255,255,255,0.08); box-shadow: 0 16px 40px rgba(0,0,0,0.35); display: flex; flex-direction: column; gap: 18px; }
+.carte.ici { border-color: var(--or); box-shadow: 0 0 0 4px rgba(201,161,74,0.12), 0 24px 50px rgba(0,0,0,0.45); }
+.badge { position: absolute; top: -12px; right: 20px; padding: 5px 11px; border-radius: 99px; background: var(--or); color: var(--sur-or); font-size: 10.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.carte-tete { display: flex; align-items: center; gap: 14px; }
+.pastille-icone { width: 54px; height: 54px; flex: none; border-radius: 16px; background: rgba(201,161,74,0.14); color: var(--or); display: flex; align-items: center; justify-content: center; }
+.carte h3 { margin: 0; font: 800 25px/1.1 var(--titre); color: #fff; }
+.carte-tete p { margin: 3px 0 0; font-size: 13px; color: var(--doux); }
+.rangs { display: flex; flex-direction: column; gap: 10px; }
+.rang { width: 100%; min-height: 66px; padding: 10px 12px 10px 14px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.03); display: flex; align-items: center; gap: 12px; text-align: left; cursor: pointer; text-decoration: none; transition: transform .15s, border-color .15s; }
+.rang:hover { transform: translateY(-2px); border-color: rgba(201,161,74,0.7); }
+.rang.ici { border-color: var(--or); background: rgba(201,161,74,0.10); }
+.rang[aria-disabled="true"] { cursor: default; opacity: .6; transform: none; }
+.rang .ico { color: var(--or); display: flex; }
+.rang .txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.rang strong { font-size: 15px; font-weight: 800; color: #fff; }
+.rang .txt span { font-size: 12.5px; color: var(--doux); }
+.etiquette { font-size: 10.5px; font-weight: 800; letter-spacing: .06em; color: var(--doux); padding: 3px 7px; border-radius: 6px; background: rgba(255,255,255,0.07); white-space: nowrap; }
+.rond { width: 36px; height: 36px; flex: none; border-radius: 50%; background: var(--or); color: var(--sur-or); display: flex; align-items: center; justify-content: center; }
+.rang[aria-disabled="true"] .rond { background: rgba(255,255,255,0.12); color: var(--doux); }
+.avantages { list-style: none; margin: 8px 0 0; padding: 0 4px; display: flex; flex-direction: column; gap: 12px; }
+.avantages li { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; color: var(--texte); }
+.avantages li span { width: 24px; height: 24px; flex: none; border-radius: 50%; background: rgba(201,161,74,0.16); color: var(--or); display: flex; align-items: center; justify-content: center; }
+.carte-pied { margin: auto 0 0; display: flex; gap: 8px; font-size: 12.5px; line-height: 1.5; color: var(--doux); }
+.carte-pied svg { flex: none; color: var(--or); }
+
+.installer { margin-top: 72px; padding: 56px 0 64px; background: linear-gradient(180deg, #140e09, var(--ebene)); border-top: 1px solid rgba(201,161,74,0.16); }
+.installer .section { padding-top: 0; }
+.tete-installer { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.onglets { display: flex; gap: 4px; padding: 4px; border-radius: 13px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); }
+.onglets button { height: 40px; padding: 0 16px; border: 0; border-radius: 10px; background: transparent; color: var(--texte); display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 14px; cursor: pointer; }
+.onglets button[aria-selected="true"] { background: #fff; color: var(--or-fonce); }
+.formats { display: flex; gap: 6px; }
+.formats button { height: 34px; padding: 0 12px; border-radius: 9px; border: 1.5px solid rgba(255,255,255,0.16); background: transparent; color: #fff; font-weight: 800; font-size: 13px; cursor: pointer; }
+.formats button[aria-checked="true"] { border-color: var(--or); background: rgba(201,161,74,0.2); }
+.etapes { list-style: none; margin: 36px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.etapes li { padding: 24px; border-radius: 20px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; gap: 12px; }
+.numero { width: 46px; height: 46px; border-radius: 50%; background: var(--or); color: var(--sur-or); font: 800 23px/1 var(--titre); display: flex; align-items: center; justify-content: center; }
+.etapes h3 { margin: 4px 0 0; font: 800 22px/1.15 var(--titre); color: #fff; }
+.etapes p { margin: 0; font-size: 14.5px; color: var(--texte); }
+.code { display: flex; align-items: flex-start; gap: 8px; padding: 7px 7px 7px 12px; border-radius: 11px; background: #0a0705; border: 1px solid rgba(255,255,255,0.1); }
+.code code { flex: 1; min-width: 0; padding-top: 6px; font: 600 13px/1.45 var(--mono); color: #ffd98f; white-space: pre-wrap; overflow-wrap: anywhere; }
+.code button { height: 30px; padding: 0 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.18); background: transparent; font-weight: 800; font-size: 12px; display: flex; align-items: center; gap: 6px; cursor: pointer; white-space: nowrap; }
+
+.questions { display: grid; grid-template-columns: 380px minmax(0, 1fr); gap: 64px; align-items: start; padding-bottom: 80px; }
+.faq { display: flex; flex-direction: column; gap: 10px; }
+.faq details { border-radius: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
+.faq details[open] { background: rgba(201,161,74,0.08); border-color: rgba(201,161,74,0.35); }
+.faq summary { padding: 17px 20px; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-weight: 800; font-size: 16px; color: #fff; cursor: pointer; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary svg { flex: none; color: var(--or); transition: transform .2s; }
+.faq details[open] summary svg { transform: rotate(180deg); }
+.faq p { margin: 0; padding: 0 20px 18px; font-size: 14.5px; line-height: 1.6; color: var(--texte); }
+
+footer { padding: 36px clamp(16px, 6.6vw, 96px); border-top: 1px solid rgba(255,255,255,0.08); background: #0c0906; }
+.pied { max-width: 1440px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+.pied p { margin: 0; font-size: 12px; color: rgba(185,168,136,0.75); }
+
+@media (max-width: 1000px) {
+  .cartes, .etapes { grid-template-columns: 1fr; }
+  .questions { grid-template-columns: 1fr; gap: 28px; }
+  .nav-liens a { display: none; }
+}
+@media (max-width: 560px) {
+  .hero { padding-top: 96px; min-height: 0; }
+  .hero .sous { font-size: 15.5px; }
+  .logo-grand { font-size: 50px; --trait: 1.9px; }
+  .logo-grand svg { width: 74px; height: 74px; }
+  .logo-grand span { margin-left: -8px; }
+  .dock { padding: 16px; }
+  .cta { height: 58px; font-size: 16px; letter-spacing: .03em; }
+  .choix-systeme { justify-content: center; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+<symbol id="oeil" viewBox="-8 -10 116 118" overflow="visible"><defs><clipPath id="cr"><path d="M14 52 A36 40 0 1 0 86 52 A36 40 0 1 0 14 52 Z M50.1 52 A11.9 16.15 0 1 0 73.9 52 A11.9 16.15 0 1 0 50.1 52 Z" clip-rule="evenodd"/></clipPath><filter id="fr" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="5"/></filter></defs><g transform="rotate(-14 50 50)" filter="url(#fr)" opacity="0.6"><path d="M14 52 A36 40 0 1 0 86 52 A36 40 0 1 0 14 52 Z" fill="#ff7a2a"/></g><g transform="rotate(-14 50 50)"><path d="M14 52 A36 40 0 1 0 86 52 A36 40 0 1 0 14 52 Z" fill="#1e0a05" stroke="#1e0a05" stroke-width="10" stroke-linejoin="round"/><path d="M14 52 A36 40 0 1 0 86 52 A36 40 0 1 0 14 52 Z M50.1 52 A11.9 16.15 0 1 0 73.9 52 A11.9 16.15 0 1 0 50.1 52 Z" fill="#ff9b1f" fill-rule="evenodd"/><g clip-path="url(#cr)"><path d="M10 50 C14 18 40 6 64 10 C84 14 92 30 92 40 C80 26 60 20 44 24 C30 28 20 38 10 50 Z" fill="#e0441b"/><path d="M30 92 C50 96 78 86 86 60 C88 78 74 98 50 98 Z" fill="#ffe066"/><path d="M58 80 C68 76 76 68 80 58" fill="none" stroke="#ffe066" stroke-width="6" stroke-linecap="round"/></g><path d="M50.1 52 A11.9 16.15 0 1 0 73.9 52 A11.9 16.15 0 1 0 50.1 52 Z" fill="#1e0a05"/><g transform="rotate(-8 62 52)"><path d="M62 37.55 Q67 52 62 66.45 Q57 52 62 37.55 Z" fill="#ff9b1f" opacity="0.45"/><path d="M62 41.8 Q64.5 52 62 62.2 Q59.5 52 62 41.8 Z" fill="#1e0a05"/></g><path d="M14 52 A36 40 0 1 0 86 52 A36 40 0 1 0 14 52 Z" fill="none" stroke="#1e0a05" stroke-width="5"/><path d="M50.1 52 A11.9 16.15 0 1 0 73.9 52 A11.9 16.15 0 1 0 50.1 52 Z" fill="none" stroke="#1e0a05" stroke-width="3"/><ellipse cx="38" cy="32" rx="8" ry="5.5" fill="#ffffff" transform="rotate(-35 38 32)"/><circle cx="28" cy="44" r="3" fill="#ffffff"/><circle cx="70" cy="65" r="3.2" fill="#ffffff" opacity="0.9"/></g><path d="M86 7 Q87.98 14.02 95 16 Q87.98 17.98 86 25 Q84.02 17.98 77 16 Q84.02 14.02 86 7 Z" fill="#ffffff"/><path d="M14 81 Q15.1 84.9 19 86 Q15.1 87.1 14 91 Q12.9 87.1 9 86 Q12.9 84.9 14 81 Z" fill="#ffffff"/><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTozMDM5MWUxNy03NWYyLTQzNGYtYmI1Mi02MzA3NTU4M2QxZGMAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaOs2Vl/2bzzTMDpS52PKmw8AAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDoyM2FmOTE0YS0xNmI2LTQ1NDUtOGJkNy1lMDI3MTc3NDg1OTNscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoFzRozlds9rr0i9Sff6nmxwAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggMp7/q93N3B42W9DlcuRId36KspArH2y+TdCHxGuzMRKkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaIxsrhG+2xuymCwA+wNFplcAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYIKTMg+hDhvdcs/qib1akPABu6y3BMcH8SDKiyExNRL6UZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GQiKZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjMwMzkxZTE3LTc1ZjItNDM0Zi1iYjUyLTYzMDc1NTgzZDFkYy9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjRlNDM4NWI0LTY3YWUtNGI5OS1hM2U3LWM2OTJhOGQ4YmY1NHJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCAynv+r3c3cHjZb0OVy5Eh3foqykCsfbL5N0IfEa7MxEqJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFgg1+qV053mEBSG951suLrhqarvS6Ay7Wr2rm5+3iobUkyiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggEaSihzVfEgCPS+cUcFnMkTk/cVHbSteD8zZ4DbSUPqZ0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQKrebCuARmOSpAXu6a6dfe1EG3dOwar8aps/mHZ6IpnOQltScSwF1zWH66A/Z658NNKEhYHl1ExgWxG7YdLvAGg=</c2pa:manifest></metadata></symbol>
+<symbol id="i-telecharger" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-fenetre" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18M6.5 6.5h.01M9 6.5h.01"/></g></symbol>
+<symbol id="i-portable" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="5" width="15" height="10.5" rx="1.5"/><path d="M2.5 19h19l-1.5-3.5H4z"/></g></symbol>
+<symbol id="i-terminal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="m7 9.5 3 2.5-3 2.5M12.5 15h4.5"/></g></symbol>
+<symbol id="i-puce" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="1.5"/><rect x="10" y="10" width="4" height="4" rx=".5"/><path d="M9.5 3.5V7M14.5 3.5V7M9.5 17v3.5M14.5 17v3.5M3.5 9.5H7M3.5 14.5H7M17 9.5h3.5M17 14.5h3.5"/></g></symbol>
+<symbol id="i-cube" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 20 7.5v9L12 21l-8-4.5v-9z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></g></symbol>
+<symbol id="i-boite" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v9.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V9M10 13h4"/></g></symbol>
+<symbol id="i-coche" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.6v.2"/></g></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.7 3.9 5.7 3.9 9s-1.3 6.3-3.9 9c-2.6-2.7-3.9-5.7-3.9-9S9.4 5.7 12 3z"/></g></symbol>
+<symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-bulle" viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 3.5V17A2.5 2.5 0 0 1 4 14.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+<symbol id="i-copie" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="1"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></g></symbol>
+<symbol id="i-lien" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/></g></symbol>
+</svg>
+
+<header class="nav">
+  <a class="logo" href="/" aria-label="Origins" style="font-size: 29px; --trait: 1.5px"><svg width="42" height="42" aria-hidden="true"><use href="#oeil"/></svg><span aria-hidden="true" style="margin-left: -5px">RIGINS</span></a>
+  <nav class="nav-liens" aria-label="Site Origins">
+    <a href="/" data-t="navAccueil">Accueil</a>
+    <a href="/jeux/tempest/" data-t="navJeux">Jeux</a>
+    <a href="/actus/" data-t="navActus">Actus</a>
+    <a href="/boutique/" data-t="navBoutique">Boutique</a>
+    <a href="/telecharger/" data-t="navTelecharger" aria-current="page">Télécharger</a>
+    <a href="/support/" data-t="navSupport">Support</a>
+    <div class="langue">
+      <button class="bouton-contour" id="bouton-langue" aria-haspopup="listbox" aria-expanded="false"><svg width="17" height="17" aria-hidden="true"><use href="#i-globe"/></svg><span id="code-langue">FR</span><svg width="14" height="14" aria-hidden="true"><use href="#i-chevron"/></svg><span class="sr" data-t="langue">Langue</span></button>
+      <ul id="liste-langues" role="listbox" hidden></ul>
+    </div>
+    <a class="bouton-contour lien-discord" href="#" target="_blank" rel="noopener" hidden><svg width="18" height="18" aria-hidden="true" style="color: var(--or)"><use href="#i-bulle"/></svg>Discord</a>
+  </nav>
+</header>
+
+<main id="haut">
+  <section class="hero" aria-labelledby="titre">
+    <span class="surtitre" id="surtitre">LAUNCHER ORIGINS</span>
+    <div class="logo logo-grand" aria-hidden="true"><svg width="112" height="112"><use href="#oeil"/></svg><span>RIGINS</span></div>
+    <h1 id="titre" data-t="titre">Entre dans Tempest</h1>
+    <p class="sous" data-t="sous">Le launcher installe le jeu et le garde à jour. Tes amis, tes messages et les actus du serveur t'y attendent.</p>
+
+    <div class="dock" id="dock">
+      <a class="cta" id="cta" href="#"><svg width="24" height="24" aria-hidden="true"><use href="#i-telecharger"/></svg><span id="cta-texte">Télécharger</span></a>
+      <p class="ligne-info" id="ligne-info"><span id="cta-info"></span> <button class="lien-or" id="variante" type="button"></button></p>
+      <p class="etat" id="etat" role="status" hidden><svg width="17" height="17" aria-hidden="true" style="color: var(--vert)"><use href="#i-coche"/></svg><span id="etat-texte"></span> <button class="lien-or" id="reessayer" type="button" data-t="reessayer">Réessayer</button></p>
+      <div class="trait" aria-hidden="true"></div>
+      <div class="choix-systeme"><span data-t="tonSysteme">Ton système</span><div class="pilules" role="radiogroup" id="pilules" aria-label="Système"></div></div>
+      <p class="note"><svg width="16" height="16" aria-hidden="true" style="color: var(--or); flex: none"><use href="#i-info"/></svg><span data-t="compte">Il te faut un compte Microsoft avec Minecraft : Java Edition.</span></p>
+    </div>
+
+    <div class="telephone" id="telephone" hidden>
+      <strong data-t="telTitre">Le launcher s'installe sur ton ordinateur</strong>
+      <p class="note" style="font-size: 14.5px; color: var(--texte)" data-t="telTexte">Ouvre cette page sur ton PC ou ton Mac pour le télécharger.</p>
+      <button class="cta" id="copier-lien" type="button" style="height: 56px; font-size: 16px"><svg width="20" height="20" aria-hidden="true"><use href="#i-lien"/></svg><span id="copier-lien-texte" data-t="copierLien">Copier le lien</span></button>
+    </div>
+    <a class="indice" href="#versions"><span data-t="toutesVersions">Toutes les versions</span><svg width="18" height="18" aria-hidden="true"><use href="#i-chevron"/></svg></a>
+  </section>
+
+  <section class="section" id="versions" aria-labelledby="titre-versions">
+    <div class="centre">
+      <span class="surtitre" data-t="toutesVersions">Toutes les versions</span>
+      <h2 id="titre-versions" data-t="choisis">Choisis ton système</h2>
+      <p style="margin: 10px 0 0; max-width: 620px; color: var(--texte)" data-t="memeLauncher">Le même launcher partout : ton profil Origins et tes amis te suivent d'un ordinateur à l'autre.</p>
+    </div>
+    <div class="cartes" id="cartes"></div>
+  </section>
+
+  <section class="installer" id="installer" aria-labelledby="titre-installer">
+    <div class="section">
+      <div class="tete-installer">
+        <div><span class="surtitre" data-t="en3">En 3 étapes</span><h2 id="titre-installer" data-t="installerTitre">Installer le launcher</h2></div>
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+          <div class="formats" role="radiogroup" id="formats" aria-label="Format Linux" hidden></div>
+          <div class="onglets" role="tablist" id="onglets" aria-label="Système"></div>
+        </div>
+      </div>
+      <ol class="etapes" id="etapes"></ol>
+    </div>
+  </section>
+
+  <section class="section questions" id="questions" aria-labelledby="titre-questions">
+    <div>
+      <span class="surtitre" data-t="questionsSurtitre">Questions</span>
+      <h2 id="titre-questions" data-t="souci">Un souci ?</h2>
+      <p style="margin: 12px 0 22px; color: var(--texte)" data-t="souciTexte">Les réponses à ce qu'on nous demande le plus.</p>
+      <a class="bouton-contour lien-discord" href="#" target="_blank" rel="noopener" hidden style="height: 46px; border-color: rgba(201,161,74,0.6)"><svg width="18" height="18" aria-hidden="true" style="color: var(--or)"><use href="#i-bulle"/></svg><span data-t="rejoindreDiscord">Rejoindre le Discord</span></a>
+    </div>
+    <div class="faq" id="faq"></div>
+  </section>
+</main>
+
+<footer>
+  <div class="pied">
+    <div style="display: flex; align-items: center; gap: 16px"><span class="logo" aria-hidden="true" style="font-size: 23px; --trait: 1.2px"><svg width="34" height="34"><use href="#oeil"/></svg><span style="margin-left: -4px">RIGINS</span></span><span style="font-size: 13px; font-weight: 700; color: var(--doux)" id="pied-version"></span></div>
+    <p data-t="mentions">Ce n'est pas un produit officiel Minecraft. Non approuvé par Mojang ou Microsoft, ni associé à eux.</p>
+    <p>© 2026 Origins</p>
+  </div>
+</footer>
+
+<script>
+"use strict";
+/* ---------- Réglages ---------- */
+const CONFIG = {
+  dossier: "/launcher/",                  // dossier du launcher sur le VPS (même serveur que cette page)
+  discord: "https://discord.gg/kHStbdtuxz", // lien d'invitation du Discord d'Origins ; vide = boutons Discord cachés
+  fichiers: {                             // noms fixes posés par la mise en ligne (deploy-launcher)
+    win: "Origins-Launcher-Setup.exe",
+    mac_arm: "Origins-Launcher-mac-arm64.dmg",
+    mac_x64: "Origins-Launcher-mac-x64.dmg",
+    appimage: "Origins-Launcher.AppImage",
+    deb: "origins-launcher_amd64.deb"
+  }
+};
+
+/* ---------- Textes, dans les 5 langues du launcher ---------- */
+const NBSP = " ";
+const TEXTES = {
+  fr: {
+    nom: "Français", navAccueil: "Accueil", navJeux: "Jeux", navActus: "Actus", navBoutique: "Boutique", navTelecharger: "Télécharger", navSupport: "Support", navVersions: "Versions", navInstaller: "Installer", navQuestions: "Questions", langue: "Langue",
+    surtitre: "Launcher Origins · version {v}", titre: "Entre dans Tempest",
+    sous: "Le launcher installe le jeu et le garde à jour. Tes amis, tes messages et les actus du serveur t'y attendent.",
+    cta: { windows: "Télécharger pour Windows", mac: "Télécharger pour Mac", linux: "Télécharger pour Linux" },
+    info: { win: "Windows 10 et 11 · 64 bits", mac_arm: "Puce Apple (M1 et suivants) · .dmg", mac_x64: "Mac avec processeur Intel · .dmg", appimage: "AppImage · toutes les distributions", deb: "Paquet .deb · Ubuntu, Debian, Mint" },
+    autre: { mac_arm: "Mac avec processeur Intel" + NBSP + "?", mac_x64: "Mac avec puce Apple" + NBSP + "?", appimage: "Plutôt le paquet .deb" + NBSP + "?", deb: "Plutôt l'AppImage" + NBSP + "?" },
+    lance: "Téléchargement de «" + NBSP + "{f}" + NBSP + "» lancé.", reessayer: "Réessayer",
+    bientot: "Bientôt disponible", bientotInfo: "Cette version arrive bientôt.",
+    tonSysteme: "Ton système", detecte: "Détecté", compte: "Il te faut un compte Microsoft avec Minecraft" + NBSP + ": Java Edition.",
+    telTitre: "Le launcher s'installe sur ton ordinateur", telTexte: "Ouvre cette page sur ton PC ou ton Mac pour le télécharger.",
+    copierLien: "Copier le lien", lienCopie: "Lien copié ✓",
+    toutesVersions: "Toutes les versions", choisis: "Choisis ton système", memeLauncher: "Le même launcher partout" + NBSP + ": ton profil Origins et tes amis te suivent d'un ordinateur à l'autre.",
+    ici: "Ton système", unite: "Mo",
+    cartes: {
+      windows: { nom: "Windows", besoin: "Windows 10 et 11, 64 bits", pied: "Windows peut te mettre en garde au premier lancement" + NBSP + ": c'est normal, voir l'étape 2 plus bas.",
+                 rangs: { win: ["Installateur Windows", "Windows 10 et 11"] }, avantages: ["Se met à jour tout seul", "Raccourci sur le bureau et dans le menu Démarrer", "Dossier d'installation au choix"] },
+      mac: { nom: "macOS", besoin: "Puce Apple ou processeur Intel", pied: "Pour savoir lequel prendre" + NBSP + ": menu Pomme > À propos de ce Mac, ligne «" + NBSP + "Puce" + NBSP + "» ou «" + NBSP + "Processeur" + NBSP + "».",
+             rangs: { mac_arm: ["Puce Apple", "M1, M2, M3, M4 et suivants"], mac_x64: ["Processeur Intel", "Les Mac plus anciens"] } },
+      linux: { nom: "Linux", besoin: "64 bits (x86_64)", pied: "L'AppImage se lance sans rien installer" + NBSP + "; le paquet .deb s'installe comme une application.",
+               rangs: { appimage: ["AppImage", "Toutes les distributions"], deb: ["Paquet .deb", "Ubuntu, Debian, Mint, Pop!_OS"] } }
+    },
+    en3: "En 3 étapes", installerTitre: "Installer le launcher", copier: "Copier", copie: "Copié",
+    connexion: "Choisis ta langue, connecte-toi avec Microsoft et crée ton profil Origins. Tempest s'installe ensuite depuis l'accueil.",
+    etapes: {
+      windows: [["Ouvre le fichier", "Lance «" + NBSP + "Origins-Launcher-Setup.exe" + NBSP + "» depuis tes téléchargements, choisis le dossier d'installation et laisse-toi guider."],
+                ["Si Windows te prévient", "Le launcher n'est pas encore signé" + NBSP + ": Windows peut afficher «" + NBSP + "Windows a protégé votre ordinateur" + NBSP + "». Clique sur «" + NBSP + "Informations complémentaires" + NBSP + "», puis «" + NBSP + "Exécuter quand même" + NBSP + "»."],
+                ["Connecte-toi", null]],
+      mac: [["Ouvre le .dmg", "Glisse Origins Launcher dans le dossier Applications, puis lance-le depuis le Launchpad ou le Finder."],
+            ["Autorise-le", "S'il est bloqué" + NBSP + ": Réglages Système > Confidentialité et sécurité > «" + NBSP + "Ouvrir quand même" + NBSP + "». Si macOS dit que l'app est endommagée, tape dans le Terminal" + NBSP + ":", "xattr -cr \"/Applications/Origins Launcher.app\""],
+            ["Connecte-toi", null]],
+      appimage: [["Rends-le exécutable", "Clic droit sur le fichier > Propriétés > «" + NBSP + "Autoriser l'exécution" + NBSP + "», ou dans un terminal, depuis le dossier du fichier" + NBSP + ":", "chmod +x Origins-Launcher.AppImage"],
+                 ["Lance-le", "Double-clique dessus" + NBSP + ": rien à installer. S'il ne s'ouvre pas, installe le paquet libfuse2 (libfuse2t64 sur Ubuntu 24.04 et plus récents)."],
+                 ["Connecte-toi", null]],
+      deb: [["Installe le paquet", "Double-clique dessus pour l'ouvrir dans ta logithèque, ou dans un terminal, depuis le dossier du fichier" + NBSP + ":", "sudo apt install ./origins-launcher_amd64.deb"],
+            ["Lance-le", "Origins Launcher apparaît dans la liste de tes applications, comme les autres."],
+            ["Connecte-toi", null]]
+    },
+    questionsSurtitre: "Questions", souci: "Un souci" + NBSP + "?", souciTexte: "Les réponses à ce qu'on nous demande le plus.", souciDiscord: " Sinon, viens nous voir sur le Discord.", rejoindreDiscord: "Rejoindre le Discord",
+    faq: [["C'est gratuit" + NBSP + "?", "Oui, le launcher est gratuit. Il te faut seulement un compte Microsoft qui possède Minecraft" + NBSP + ": Java Edition."],
+          ["Faut-il le retélécharger à chaque mise à jour" + NBSP + "?", "Pas sur Windows" + NBSP + ": le launcher cherche les mises à jour à son lancement puis toutes les 10 minutes, et les installe quand tu as fini de jouer. Sur Mac et Linux, reviens ici quand une nouvelle version sort."],
+          ["Windows ou mon antivirus bloque le fichier", "Le launcher n'est pas encore signé, alors Windows peut te mettre en garde. Clique sur «" + NBSP + "Informations complémentaires" + NBSP + "», puis «" + NBSP + "Exécuter quand même" + NBSP + "». Télécharge-le seulement depuis cette page."],
+          ["Je n'arrive pas à me connecter", "Vérifie que ton compte Microsoft possède bien Minecraft" + NBSP + ": Java Edition. Si ça bloque encore, écris-nous avec une capture de l'erreur."]],
+    mentions: "Ce n'est pas un produit officiel Minecraft. Non approuvé par Mojang ou Microsoft, ni associé à eux.", piedVersion: "Launcher {v}"
+  },
+  en: {
+    nom: "English", navAccueil: "Home", navJeux: "Games", navActus: "News", navBoutique: "Shop", navTelecharger: "Download", navSupport: "Support", navVersions: "Versions", navInstaller: "Install", navQuestions: "FAQ", langue: "Language",
+    surtitre: "Origins launcher · version {v}", titre: "Step into Tempest",
+    sous: "The launcher installs the game and keeps it up to date. Your friends, your messages and the server news are waiting for you.",
+    cta: { windows: "Download for Windows", mac: "Download for Mac", linux: "Download for Linux" },
+    info: { win: "Windows 10 and 11 · 64-bit", mac_arm: "Apple chip (M1 and later) · .dmg", mac_x64: "Mac with an Intel processor · .dmg", appimage: "AppImage · any distribution", deb: ".deb package · Ubuntu, Debian, Mint" },
+    autre: { mac_arm: "Mac with an Intel processor?", mac_x64: "Mac with an Apple chip?", appimage: "Prefer the .deb package?", deb: "Prefer the AppImage?" },
+    lance: "Downloading “{f}”.", reessayer: "Try again", bientot: "Coming soon", bientotInfo: "This version is coming soon.",
+    tonSysteme: "Your system", detecte: "Detected", compte: "You need a Microsoft account that owns Minecraft: Java Edition.",
+    telTitre: "The launcher installs on your computer", telTexte: "Open this page on your PC or Mac to download it.", copierLien: "Copy link", lienCopie: "Link copied ✓",
+    toutesVersions: "All versions", choisis: "Pick your system", memeLauncher: "The same launcher everywhere: your Origins profile and your friends follow you from one computer to another.",
+    ici: "Your system", unite: "MB",
+    cartes: {
+      windows: { nom: "Windows", besoin: "Windows 10 and 11, 64-bit", pied: "Windows may warn you the first time you run it: that's expected, see step 2 below.",
+                 rangs: { win: ["Windows installer", "Windows 10 and 11"] }, avantages: ["Updates itself", "Shortcut on the desktop and in the Start menu", "Choose where to install it"] },
+      mac: { nom: "macOS", besoin: "Apple chip or Intel processor", pied: "Not sure which one? Apple menu > About This Mac, look at “Chip” or “Processor”.",
+             rangs: { mac_arm: ["Apple chip", "M1, M2, M3, M4 and later"], mac_x64: ["Intel processor", "Older Macs"] } },
+      linux: { nom: "Linux", besoin: "64-bit (x86_64)", pied: "The AppImage runs without installing anything; the .deb package installs like any app.",
+               rangs: { appimage: ["AppImage", "Any distribution"], deb: [".deb package", "Ubuntu, Debian, Mint, Pop!_OS"] } }
+    },
+    en3: "In 3 steps", installerTitre: "Install the launcher", copier: "Copy", copie: "Copied",
+    connexion: "Pick your language, sign in with Microsoft and create your Origins profile. Then install Tempest from the home screen.",
+    etapes: {
+      windows: [["Open the file", "Run “Origins-Launcher-Setup.exe” from your downloads, choose where to install it and follow the steps."],
+                ["If Windows warns you", "The launcher isn't signed yet, so Windows may show “Windows protected your PC”. Click “More info”, then “Run anyway”."],
+                ["Sign in", null]],
+      mac: [["Open the .dmg", "Drag Origins Launcher into your Applications folder, then open it from Launchpad or Finder."],
+            ["Allow it", "If it's blocked: System Settings > Privacy & Security > “Open Anyway”. If macOS says the app is damaged, type this in Terminal:", "xattr -cr \"/Applications/Origins Launcher.app\""],
+            ["Sign in", null]],
+      appimage: [["Make it executable", "Right-click the file > Properties > “Allow executing”, or in a terminal, from the file's folder:", "chmod +x Origins-Launcher.AppImage"],
+                 ["Run it", "Double-click it: nothing to install. If it doesn't open, install the libfuse2 package (libfuse2t64 on Ubuntu 24.04 and later)."],
+                 ["Sign in", null]],
+      deb: [["Install the package", "Double-click it to open it in your software center, or in a terminal, from the file's folder:", "sudo apt install ./origins-launcher_amd64.deb"],
+            ["Run it", "Origins Launcher shows up in your applications, like any other app."],
+            ["Sign in", null]]
+    },
+    questionsSurtitre: "Questions", souci: "Need help?", souciTexte: "Answers to what we get asked the most.", souciDiscord: " Otherwise, come and see us on Discord.", rejoindreDiscord: "Join the Discord",
+    faq: [["Is it free?", "Yes, the launcher is free. You only need a Microsoft account that owns Minecraft: Java Edition."],
+          ["Do I need to download it again for every update?", "Not on Windows: the launcher checks for updates when it starts and every 10 minutes, and installs them once you've finished playing. On Mac and Linux, come back here when a new version is out."],
+          ["Windows or my antivirus blocks the file", "The launcher isn't signed yet, so Windows may warn you. Click “More info”, then “Run anyway”. Only download it from this page."],
+          ["I can't sign in", "Check that your Microsoft account owns Minecraft: Java Edition. If it still fails, write to us with a screenshot of the error."]],
+    mentions: "Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.", piedVersion: "Launcher {v}"
+  },
+  es: {
+    nom: "Español", navAccueil: "Inicio", navJeux: "Juegos", navActus: "Noticias", navBoutique: "Tienda", navTelecharger: "Descargar", navSupport: "Soporte", navVersions: "Versiones", navInstaller: "Instalar", navQuestions: "Preguntas", langue: "Idioma",
+    surtitre: "Launcher Origins · versión {v}", titre: "Entra en Tempest",
+    sous: "El launcher instala el juego y lo mantiene actualizado. Tus amigos, tus mensajes y las noticias del servidor te esperan.",
+    cta: { windows: "Descargar para Windows", mac: "Descargar para Mac", linux: "Descargar para Linux" },
+    info: { win: "Windows 10 y 11 · 64 bits", mac_arm: "Chip de Apple (M1 o posterior) · .dmg", mac_x64: "Mac con procesador Intel · .dmg", appimage: "AppImage · cualquier distribución", deb: "Paquete .deb · Ubuntu, Debian, Mint" },
+    autre: { mac_arm: "¿Mac con procesador Intel?", mac_x64: "¿Mac con chip de Apple?", appimage: "¿Prefieres el paquete .deb?", deb: "¿Prefieres la AppImage?" },
+    lance: "Descargando «{f}».", reessayer: "Reintentar", bientot: "Disponible pronto", bientotInfo: "Esta versión llegará pronto.",
+    tonSysteme: "Tu sistema", detecte: "Detectado", compte: "Necesitas una cuenta de Microsoft con Minecraft: Java Edition.",
+    telTitre: "El launcher se instala en tu ordenador", telTexte: "Abre esta página en tu PC o tu Mac para descargarlo.", copierLien: "Copiar el enlace", lienCopie: "Enlace copiado ✓",
+    toutesVersions: "Todas las versiones", choisis: "Elige tu sistema", memeLauncher: "El mismo launcher en todas partes: tu perfil Origins y tus amigos te siguen de un ordenador a otro.",
+    ici: "Tu sistema", unite: "MB",
+    cartes: {
+      windows: { nom: "Windows", besoin: "Windows 10 y 11, 64 bits", pied: "Windows puede avisarte la primera vez que lo abras: es normal, mira el paso 2 más abajo.",
+                 rangs: { win: ["Instalador de Windows", "Windows 10 y 11"] }, avantages: ["Se actualiza solo", "Acceso directo en el escritorio y en el menú Inicio", "Eliges la carpeta de instalación"] },
+      mac: { nom: "macOS", besoin: "Chip de Apple o procesador Intel", pied: "¿Cuál elegir? Menú Apple > Acerca de este Mac, línea «Chip» o «Procesador».",
+             rangs: { mac_arm: ["Chip de Apple", "M1, M2, M3, M4 y posteriores"], mac_x64: ["Procesador Intel", "Los Mac más antiguos"] } },
+      linux: { nom: "Linux", besoin: "64 bits (x86_64)", pied: "La AppImage se abre sin instalar nada; el paquete .deb se instala como cualquier aplicación.",
+               rangs: { appimage: ["AppImage", "Cualquier distribución"], deb: ["Paquete .deb", "Ubuntu, Debian, Mint, Pop!_OS"] } }
+    },
+    en3: "En 3 pasos", installerTitre: "Instalar el launcher", copier: "Copiar", copie: "Copiado",
+    connexion: "Elige tu idioma, inicia sesión con Microsoft y crea tu perfil Origins. Después instala Tempest desde el inicio.",
+    etapes: {
+      windows: [["Abre el archivo", "Ejecuta «Origins-Launcher-Setup.exe» desde tus descargas, elige la carpeta de instalación y sigue los pasos."],
+                ["Si Windows te avisa", "El launcher aún no está firmado: Windows puede mostrar «Windows protegió su PC». Haz clic en «Más información» y luego en «Ejecutar de todas formas»."],
+                ["Inicia sesión", null]],
+      mac: [["Abre el .dmg", "Arrastra Origins Launcher a la carpeta Aplicaciones y ábrelo desde el Launchpad o el Finder."],
+            ["Autorízalo", "Si está bloqueado: Ajustes del Sistema > Privacidad y seguridad > «Abrir igualmente». Si macOS dice que la app está dañada, escribe en el Terminal:", "xattr -cr \"/Applications/Origins Launcher.app\""],
+            ["Inicia sesión", null]],
+      appimage: [["Hazlo ejecutable", "Clic derecho en el archivo > Propiedades > «Permitir ejecutar», o en una terminal, desde la carpeta del archivo:", "chmod +x Origins-Launcher.AppImage"],
+                 ["Ábrelo", "Haz doble clic: no hay nada que instalar. Si no se abre, instala el paquete libfuse2 (libfuse2t64 en Ubuntu 24.04 y posteriores)."],
+                 ["Inicia sesión", null]],
+      deb: [["Instala el paquete", "Haz doble clic para abrirlo en tu centro de software, o en una terminal, desde la carpeta del archivo:", "sudo apt install ./origins-launcher_amd64.deb"],
+            ["Ábrelo", "Origins Launcher aparece en tu lista de aplicaciones, como las demás."],
+            ["Inicia sesión", null]]
+    },
+    questionsSurtitre: "Preguntas", souci: "¿Algún problema?", souciTexte: "Las respuestas a lo que más nos preguntan.", souciDiscord: " Si no, ven a vernos en Discord.", rejoindreDiscord: "Unirse al Discord",
+    faq: [["¿Es gratis?", "Sí, el launcher es gratis. Solo necesitas una cuenta de Microsoft con Minecraft: Java Edition."],
+          ["¿Hay que volver a descargarlo en cada actualización?", "En Windows no: el launcher busca actualizaciones al abrirse y cada 10 minutos, y las instala cuando terminas de jugar. En Mac y Linux, vuelve aquí cuando salga una nueva versión."],
+          ["Windows o mi antivirus bloquea el archivo", "El launcher aún no está firmado, así que Windows puede avisarte. Haz clic en «Más información» y luego en «Ejecutar de todas formas». Descárgalo solo desde esta página."],
+          ["No consigo iniciar sesión", "Comprueba que tu cuenta de Microsoft tiene Minecraft: Java Edition. Si sigue sin funcionar, escríbenos con una captura del error."]],
+    mentions: "No es un producto oficial de Minecraft. No está aprobado por Mojang ni Microsoft, ni asociado con ellos.", piedVersion: "Launcher {v}"
+  },
+  de: {
+    nom: "Deutsch", navAccueil: "Start", navJeux: "Spiele", navActus: "News", navBoutique: "Shop", navTelecharger: "Herunterladen", navSupport: "Support", navVersions: "Versionen", navInstaller: "Installieren", navQuestions: "Fragen", langue: "Sprache",
+    surtitre: "Origins-Launcher · Version {v}", titre: "Betritt Tempest",
+    sous: "Der Launcher installiert das Spiel und hält es aktuell. Deine Freunde, deine Nachrichten und die Server-News warten schon.",
+    cta: { windows: "Für Windows herunterladen", mac: "Für Mac herunterladen", linux: "Für Linux herunterladen" },
+    info: { win: "Windows 10 und 11 · 64 Bit", mac_arm: "Apple-Chip (M1 und neuer) · .dmg", mac_x64: "Mac mit Intel-Prozessor · .dmg", appimage: "AppImage · jede Distribution", deb: ".deb-Paket · Ubuntu, Debian, Mint" },
+    autre: { mac_arm: "Mac mit Intel-Prozessor?", mac_x64: "Mac mit Apple-Chip?", appimage: "Lieber das .deb-Paket?", deb: "Lieber das AppImage?" },
+    lance: "„{f}“ wird heruntergeladen.", reessayer: "Erneut versuchen", bientot: "Bald verfügbar", bientotInfo: "Diese Version kommt bald.",
+    tonSysteme: "Dein System", detecte: "Erkannt", compte: "Du brauchst ein Microsoft-Konto mit Minecraft: Java Edition.",
+    telTitre: "Der Launcher wird auf deinem Computer installiert", telTexte: "Öffne diese Seite auf deinem PC oder Mac, um ihn herunterzuladen.", copierLien: "Link kopieren", lienCopie: "Link kopiert ✓",
+    toutesVersions: "Alle Versionen", choisis: "Wähle dein System", memeLauncher: "Überall derselbe Launcher: Dein Origins-Profil und deine Freunde begleiten dich von Computer zu Computer.",
+    ici: "Dein System", unite: "MB",
+    cartes: {
+      windows: { nom: "Windows", besoin: "Windows 10 und 11, 64 Bit", pied: "Windows warnt dich beim ersten Start vielleicht: Das ist normal, siehe Schritt 2 weiter unten.",
+                 rangs: { win: ["Windows-Installer", "Windows 10 und 11"] }, avantages: ["Aktualisiert sich selbst", "Verknüpfung auf dem Desktop und im Startmenü", "Installationsordner frei wählbar"] },
+      mac: { nom: "macOS", besoin: "Apple-Chip oder Intel-Prozessor", pied: "Welcher ist es? Apple-Menü > Über diesen Mac, Zeile „Chip“ oder „Prozessor“.",
+             rangs: { mac_arm: ["Apple-Chip", "M1, M2, M3, M4 und neuer"], mac_x64: ["Intel-Prozessor", "Ältere Macs"] } },
+      linux: { nom: "Linux", besoin: "64 Bit (x86_64)", pied: "Das AppImage startet ohne Installation; das .deb-Paket wird wie jede App installiert.",
+               rangs: { appimage: ["AppImage", "Jede Distribution"], deb: [".deb-Paket", "Ubuntu, Debian, Mint, Pop!_OS"] } }
+    },
+    en3: "In 3 Schritten", installerTitre: "Launcher installieren", copier: "Kopieren", copie: "Kopiert",
+    connexion: "Wähle deine Sprache, melde dich mit Microsoft an und erstelle dein Origins-Profil. Danach installierst du Tempest auf der Startseite.",
+    etapes: {
+      windows: [["Datei öffnen", "Starte „Origins-Launcher-Setup.exe“ aus deinen Downloads, wähle den Installationsordner und folge den Schritten."],
+                ["Wenn Windows warnt", "Der Launcher ist noch nicht signiert: Windows zeigt vielleicht „Der Computer wurde durch Windows geschützt“. Klicke auf „Weitere Informationen“ und dann auf „Trotzdem ausführen“."],
+                ["Anmelden", null]],
+      mac: [[".dmg öffnen", "Ziehe Origins Launcher in den Ordner Programme und öffne ihn über das Launchpad oder den Finder."],
+            ["Erlauben", "Falls er blockiert wird: Systemeinstellungen > Datenschutz & Sicherheit > „Trotzdem öffnen“. Meldet macOS, die App sei beschädigt, tippe im Terminal:", "xattr -cr \"/Applications/Origins Launcher.app\""],
+            ["Anmelden", null]],
+      appimage: [["Ausführbar machen", "Rechtsklick auf die Datei > Eigenschaften > „Ausführen erlauben“, oder im Terminal, im Ordner der Datei:", "chmod +x Origins-Launcher.AppImage"],
+                 ["Starten", "Doppelklicken: Nichts zu installieren. Startet es nicht, installiere das Paket libfuse2 (libfuse2t64 ab Ubuntu 24.04)."],
+                 ["Anmelden", null]],
+      deb: [["Paket installieren", "Doppelklicke darauf, um es in der Softwareverwaltung zu öffnen, oder im Terminal, im Ordner der Datei:", "sudo apt install ./origins-launcher_amd64.deb"],
+            ["Starten", "Origins Launcher erscheint wie jede andere App in deiner Anwendungsliste."],
+            ["Anmelden", null]]
+    },
+    questionsSurtitre: "Fragen", souci: "Ein Problem?", souciTexte: "Antworten auf das, was wir am häufigsten gefragt werden.", souciDiscord: " Sonst schau auf unserem Discord vorbei.", rejoindreDiscord: "Dem Discord beitreten",
+    faq: [["Ist er kostenlos?", "Ja, der Launcher ist kostenlos. Du brauchst nur ein Microsoft-Konto mit Minecraft: Java Edition."],
+          ["Muss ich ihn bei jedem Update neu herunterladen?", "Unter Windows nicht: Der Launcher sucht beim Start und alle 10 Minuten nach Updates und installiert sie, wenn du fertig gespielt hast. Unter Mac und Linux komm hierher zurück, wenn eine neue Version erscheint."],
+          ["Windows oder mein Virenschutz blockiert die Datei", "Der Launcher ist noch nicht signiert, deshalb warnt Windows vielleicht. Klicke auf „Weitere Informationen“ und dann auf „Trotzdem ausführen“. Lade ihn nur von dieser Seite herunter."],
+          ["Ich kann mich nicht anmelden", "Prüfe, ob dein Microsoft-Konto Minecraft: Java Edition besitzt. Klappt es immer noch nicht, schreib uns mit einem Screenshot des Fehlers."]],
+    mentions: "Kein offizielles Minecraft-Produkt. Nicht von Mojang oder Microsoft genehmigt oder mit ihnen verbunden.", piedVersion: "Launcher {v}"
+  },
+  pt: {
+    nom: "Português (Brasil)", navAccueil: "Início", navJeux: "Jogos", navActus: "Notícias", navBoutique: "Loja", navTelecharger: "Baixar", navSupport: "Suporte", navVersions: "Versões", navInstaller: "Instalar", navQuestions: "Dúvidas", langue: "Idioma",
+    surtitre: "Launcher Origins · versão {v}", titre: "Entre em Tempest",
+    sous: "O launcher instala o jogo e o mantém atualizado. Seus amigos, suas mensagens e as novidades do servidor te esperam.",
+    cta: { windows: "Baixar para Windows", mac: "Baixar para Mac", linux: "Baixar para Linux" },
+    info: { win: "Windows 10 e 11 · 64 bits", mac_arm: "Chip Apple (M1 ou mais recente) · .dmg", mac_x64: "Mac com processador Intel · .dmg", appimage: "AppImage · qualquer distribuição", deb: "Pacote .deb · Ubuntu, Debian, Mint" },
+    autre: { mac_arm: "Mac com processador Intel?", mac_x64: "Mac com chip Apple?", appimage: "Prefere o pacote .deb?", deb: "Prefere a AppImage?" },
+    lance: "Baixando “{f}”.", reessayer: "Tentar de novo", bientot: "Em breve", bientotInfo: "Esta versão chega em breve.",
+    tonSysteme: "Seu sistema", detecte: "Detectado", compte: "Você precisa de uma conta Microsoft com Minecraft: Java Edition.",
+    telTitre: "O launcher é instalado no seu computador", telTexte: "Abra esta página no seu PC ou Mac para baixá-lo.", copierLien: "Copiar o link", lienCopie: "Link copiado ✓",
+    toutesVersions: "Todas as versões", choisis: "Escolha seu sistema", memeLauncher: "O mesmo launcher em todo lugar: seu perfil Origins e seus amigos te acompanham de um computador para outro.",
+    ici: "Seu sistema", unite: "MB",
+    cartes: {
+      windows: { nom: "Windows", besoin: "Windows 10 e 11, 64 bits", pied: "O Windows pode te avisar na primeira vez: é normal, veja o passo 2 mais abaixo.",
+                 rangs: { win: ["Instalador do Windows", "Windows 10 e 11"] }, avantages: ["Atualiza sozinho", "Atalho na área de trabalho e no menu Iniciar", "Você escolhe a pasta de instalação"] },
+      mac: { nom: "macOS", besoin: "Chip Apple ou processador Intel", pied: "Qual escolher? Menu Apple > Sobre Este Mac, linha “Chip” ou “Processador”.",
+             rangs: { mac_arm: ["Chip Apple", "M1, M2, M3, M4 e mais recentes"], mac_x64: ["Processador Intel", "Macs mais antigos"] } },
+      linux: { nom: "Linux", besoin: "64 bits (x86_64)", pied: "A AppImage abre sem instalar nada; o pacote .deb se instala como qualquer aplicativo.",
+               rangs: { appimage: ["AppImage", "Qualquer distribuição"], deb: ["Pacote .deb", "Ubuntu, Debian, Mint, Pop!_OS"] } }
+    },
+    en3: "Em 3 passos", installerTitre: "Instalar o launcher", copier: "Copiar", copie: "Copiado",
+    connexion: "Escolha seu idioma, entre com a Microsoft e crie seu perfil Origins. Depois instale Tempest pela tela inicial.",
+    etapes: {
+      windows: [["Abra o arquivo", "Execute “Origins-Launcher-Setup.exe” a partir dos seus downloads, escolha a pasta de instalação e siga os passos."],
+                ["Se o Windows avisar", "O launcher ainda não é assinado: o Windows pode mostrar “O Windows protegeu o computador”. Clique em “Mais informações” e depois em “Executar assim mesmo”."],
+                ["Entre na sua conta", null]],
+      mac: [["Abra o .dmg", "Arraste o Origins Launcher para a pasta Aplicativos e abra-o pelo Launchpad ou pelo Finder."],
+            ["Autorize", "Se ele for bloqueado: Ajustes do Sistema > Privacidade e Segurança > “Abrir Mesmo Assim”. Se o macOS disser que o app está danificado, digite no Terminal:", "xattr -cr \"/Applications/Origins Launcher.app\""],
+            ["Entre na sua conta", null]],
+      appimage: [["Torne-o executável", "Clique com o botão direito no arquivo > Propriedades > “Permitir execução”, ou num terminal, na pasta do arquivo:", "chmod +x Origins-Launcher.AppImage"],
+                 ["Abra", "Clique duas vezes: nada para instalar. Se não abrir, instale o pacote libfuse2 (libfuse2t64 no Ubuntu 24.04 e mais recentes)."],
+                 ["Entre na sua conta", null]],
+      deb: [["Instale o pacote", "Clique duas vezes para abri-lo na loja de aplicativos, ou num terminal, na pasta do arquivo:", "sudo apt install ./origins-launcher_amd64.deb"],
+            ["Abra", "O Origins Launcher aparece na sua lista de aplicativos, como os outros."],
+            ["Entre na sua conta", null]]
+    },
+    questionsSurtitre: "Dúvidas", souci: "Algum problema?", souciTexte: "As respostas para o que mais nos perguntam.", souciDiscord: " Se não, venha falar com a gente no Discord.", rejoindreDiscord: "Entrar no Discord",
+    faq: [["É grátis?", "Sim, o launcher é grátis. Você só precisa de uma conta Microsoft com Minecraft: Java Edition."],
+          ["Preciso baixar de novo a cada atualização?", "No Windows, não: o launcher procura atualizações ao abrir e a cada 10 minutos, e instala quando você termina de jogar. No Mac e no Linux, volte aqui quando sair uma nova versão."],
+          ["O Windows ou meu antivírus bloqueia o arquivo", "O launcher ainda não é assinado, então o Windows pode te avisar. Clique em “Mais informações” e depois em “Executar assim mesmo”. Baixe-o somente nesta página."],
+          ["Não consigo entrar", "Confira se sua conta Microsoft tem o Minecraft: Java Edition. Se ainda não funcionar, escreva para a gente com uma captura do erro."]],
+    mentions: "Não é um produto oficial do Minecraft. Não aprovado pela Mojang ou pela Microsoft, nem associado a elas.", piedVersion: "Launcher {v}"
+  }
+};
+const ORDRE_LANGUES = ["fr", "en", "es", "de", "pt"];
+
+/* ---------- État ---------- */
+const etat = { langue: "fr", os: "windows", detecte: "windows", mobile: false, mac: "mac_arm", linux: "appimage",
+               version: "", tailles: {}, dispo: {}, lance: false };
+
+function lireStockage(cle) { try { return localStorage.getItem(cle); } catch (e) { return null; } }
+function ecrireStockage(cle, valeur) { try { localStorage.setItem(cle, valeur); } catch (e) { /* stockage indisponible : on oublie */ } }
+function t() { return TEXTES[etat.langue]; }
+function remplir(modele, valeurs) { return modele.replace(/\{(\w+)\}/g, (m, k) => (valeurs[k] !== undefined ? valeurs[k] : "")); }
+function el(id) { return document.getElementById(id); }
+function icone(nom, taille) { return '<svg width="' + taille + '" height="' + taille + '" aria-hidden="true"><use href="#i-' + nom + '"/></svg>'; }
+function echapper(s) { return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+function cleChoisie() { return etat.os === "windows" ? "win" : etat.os === "mac" ? etat.mac : etat.linux; }
+function url(cle) { return CONFIG.dossier + CONFIG.fichiers[cle]; }
+function taille(cle) {
+  const o = etat.tailles[cle];
+  if (!o) return "";
+  const n = o / 1048576;
+  return " · " + n.toLocaleString(etat.langue, { maximumFractionDigits: 0 }) + NBSP + t().unite;
+}
+
+/* ---------- Système et langue détectés ---------- */
+function detecterSysteme() {
+  const ua = navigator.userAgent || "";
+  const plateforme = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
+  etat.mobile = /Android|iPhone|iPad|iPod/i.test(ua) || (navigator.userAgentData && navigator.userAgentData.mobile) === true;
+  if (/Win/i.test(plateforme) || /Windows/i.test(ua)) etat.detecte = "windows";
+  else if (/Mac/i.test(plateforme) || /Mac OS X/i.test(ua)) etat.detecte = "mac";
+  else if (/Linux|X11|CrOS/i.test(plateforme + ua)) etat.detecte = "linux";
+  etat.os = etat.detecte;
+  if (/Ubuntu|Debian|Mint/i.test(ua)) etat.linux = "deb";
+}
+async function detecterPuceMac() {
+  if (etat.detecte !== "mac") return;
+  try {
+    if (navigator.userAgentData && navigator.userAgentData.getHighEntropyValues) {
+      const v = await navigator.userAgentData.getHighEntropyValues(["architecture"]);
+      if (v.architecture === "x86") { etat.mac = "mac_x64"; return rendre(); }
+      if (v.architecture === "arm") { etat.mac = "mac_arm"; return rendre(); }
+    }
+    const gl = document.createElement("canvas").getContext("webgl");
+    const ext = gl && gl.getExtension("WEBGL_debug_renderer_info");
+    const carte = ext ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : "";
+    if (/Intel|AMD|Radeon/i.test(carte)) { etat.mac = "mac_x64"; rendre(); }
+  } catch (e) { /* on garde la puce Apple, la plus courante */ }
+}
+function detecterLangue() {
+  const gardee = lireStockage("origins-langue");
+  if (gardee && TEXTES[gardee]) return gardee;
+  for (const l of navigator.languages || [navigator.language || "fr"]) {
+    const court = String(l).slice(0, 2).toLowerCase();
+    if (TEXTES[court]) return court;
+  }
+  return "fr";
+}
+
+/* ---------- Ce qui est en ligne : version, tailles, fichiers présents ---------- */
+async function lireManifeste() {
+  try {
+    const r = await fetch(CONFIG.dossier + "latest.yml", { cache: "no-store" });
+    if (!r.ok) return;
+    const yml = await r.text();
+    const v = /^version:\s*['"]?([^'"\s]+)/m.exec(yml);
+    const s = /^\s*size:\s*(\d+)/m.exec(yml);
+    if (v) etat.version = v[1];
+    if (s) etat.tailles.win = Number(s[1]);
+  } catch (e) { /* pas de manifeste : la page marche sans la version */ }
+}
+async function verifierFichiers() {
+  await Promise.all(Object.keys(CONFIG.fichiers).map(async (cle) => {
+    try {
+      const r = await fetch(url(cle), { method: "HEAD", cache: "no-store" });
+      etat.dispo[cle] = r.ok;
+      const longueur = Number(r.headers.get("content-length"));
+      if (r.ok && longueur && !etat.tailles[cle]) etat.tailles[cle] = longueur;
+    } catch (e) { etat.dispo[cle] = false; }
+  }));
+}
+
+/* ---------- Affichage ---------- */
+function appliquerTextes() {
+  const T = t();
+  document.documentElement.lang = etat.langue === "pt" ? "pt-BR" : etat.langue;
+  document.querySelectorAll("[data-t]").forEach((n) => { const v = T[n.dataset.t]; if (typeof v === "string") n.textContent = v; });
+  el("surtitre").textContent = remplir(T.surtitre, { v: etat.version || "…" }).replace(/ · version …$| · versión …$| · Version …$| · versão …$/, "");
+  el("pied-version").textContent = etat.version ? remplir(T.piedVersion, { v: etat.version }) : "";
+  el("code-langue").textContent = etat.langue.toUpperCase();
+  const souci = document.querySelector('[data-t="souciTexte"]');
+  if (souci) souci.textContent = T.souciTexte + (CONFIG.discord ? T.souciDiscord : "");
+  el("liste-langues").innerHTML = ORDRE_LANGUES.map((l) => '<li><button role="option" type="button" data-langue="' + l + '" aria-selected="' + (l === etat.langue) + '">' +
+    TEXTES[l].nom + '<small>' + l.toUpperCase() + '</small></button></li>').join("");
+}
+
+function rendreCta() {
+  const T = t();
+  const cle = cleChoisie();
+  const dispo = etat.dispo[cle] !== false;
+  const cta = el("cta");
+  el("cta-texte").textContent = dispo ? T.cta[etat.os] : T.bientot;
+  cta.href = dispo ? url(cle) : "#";
+  cta.setAttribute("aria-disabled", String(!dispo));
+  if (dispo) cta.setAttribute("download", ""); else cta.removeAttribute("download");
+  el("cta-info").textContent = dispo ? T.info[cle] + taille(cle) : T.bientotInfo;
+  const variante = el("variante");
+  variante.hidden = etat.os === "windows";
+  variante.textContent = etat.os === "windows" ? "" : T.autre[cle];
+  el("ligne-info").hidden = etat.lance;
+  el("etat").hidden = !etat.lance;
+  el("etat-texte").textContent = remplir(T.lance, { f: CONFIG.fichiers[cle] });
+  el("pilules").innerHTML = ["windows", "mac", "linux"].map((o) => '<button type="button" role="radio" data-os="' + o + '" aria-checked="' + (o === etat.os) + '">' +
+    T.cartes[o].nom + (o === etat.detecte && !etat.mobile ? "<small>" + T.detecte + "</small>" : "") + "</button>").join("");
+  el("dock").hidden = etat.mobile;
+  el("telephone").hidden = !etat.mobile;
+}
+
+function rang(cle, icone_, titre, detail, etiquette) {
+  const dispo = etat.dispo[cle] !== false;
+  const ici = cle === cleChoisie();
+  return '<a class="rang' + (ici ? " ici" : "") + '" href="' + (dispo ? url(cle) : "#") + '"' + (dispo ? " download" : "") + ' data-cle="' + cle + '" aria-disabled="' + !dispo + '">' +
+    '<span class="ico">' + icone(icone_, 22) + '</span><span class="txt"><strong>' + echapper(titre) + '</strong><span>' + echapper(dispo ? detail + taille(cle) : t().bientot) + '</span></span>' +
+    '<span class="etiquette">' + etiquette + '</span><span class="rond">' + icone("telecharger", 18) + '</span></a>';
+}
+function rendreCartes() {
+  const T = t();
+  const C = T.cartes;
+  const carte = (os, icone_, contenu) => '<article class="carte' + (os === etat.os ? " ici" : "") + '" aria-label="' + C[os].nom + '">' +
+    (os === etat.os ? '<span class="badge">' + T.ici + '</span>' : "") +
+    '<div class="carte-tete"><span class="pastille-icone">' + icone(icone_, 28) + '</span><div><h3>' + C[os].nom + '</h3><p>' + echapper(C[os].besoin) + '</p></div></div>' +
+    '<div class="rangs">' + contenu + '</div><p class="carte-pied">' + icone("info", 16) + '<span>' + echapper(C[os].pied) + '</span></p></article>';
+  const R = (os, cle) => C[os].rangs[cle];
+  el("cartes").innerHTML =
+    carte("windows", "fenetre", rang("win", "fenetre", R("windows", "win")[0], R("windows", "win")[1], ".EXE") +
+      '<ul class="avantages">' + C.windows.avantages.map((a) => '<li><span>' + icone("coche", 14) + '</span>' + echapper(a) + '</li>').join("") + '</ul>') +
+    carte("mac", "portable", rang("mac_arm", "puce", R("mac", "mac_arm")[0], R("mac", "mac_arm")[1], ".DMG") + rang("mac_x64", "puce", R("mac", "mac_x64")[0], R("mac", "mac_x64")[1], ".DMG")) +
+    carte("linux", "terminal", rang("appimage", "cube", R("linux", "appimage")[0], R("linux", "appimage")[1], ".APPIMAGE") + rang("deb", "boite", R("linux", "deb")[0], R("linux", "deb")[1], ".DEB"));
+}
+
+function rendreEtapes() {
+  const T = t();
+  const cle = etat.os === "windows" ? "windows" : etat.os === "mac" ? "mac" : etat.linux;
+  el("onglets").innerHTML = [["windows", "fenetre"], ["mac", "portable"], ["linux", "terminal"]].map(([o, i]) =>
+    '<button type="button" role="tab" data-os="' + o + '" aria-selected="' + (o === etat.os) + '">' + icone(i, 18) + T.cartes[o].nom + '</button>').join("");
+  el("formats").hidden = etat.os !== "linux";
+  el("formats").innerHTML = [["appimage", "AppImage"], ["deb", T.cartes.linux.rangs.deb[0]]].map(([f, nom]) =>
+    '<button type="button" role="radio" data-format="' + f + '" aria-checked="' + (f === etat.linux) + '">' + echapper(nom) + '</button>').join("");
+  el("etapes").innerHTML = T.etapes[cle].map(([titre, texte, code], i) =>
+    '<li><span class="numero" aria-hidden="true">' + (i + 1) + '</span><h3>' + echapper(titre) + '</h3><p>' + echapper(texte || T.connexion) + '</p>' +
+    (code ? '<div class="code"><code>' + echapper(code) + '</code><button type="button" data-copier="' + echapper(code) + '">' + icone("copie", 14) + '<span>' + T.copier + '</span></button></div>' : "") + '</li>').join("");
+}
+
+function rendreFaq() {
+  el("faq").innerHTML = t().faq.map(([q, r], i) => '<details' + (i === 0 ? " open" : "") + '><summary>' + echapper(q) + icone("chevron", 18) + '</summary><p>' + echapper(r) + '</p></details>').join("");
+}
+
+function rendre() { appliquerTextes(); rendreCta(); rendreCartes(); rendreEtapes(); }
+
+/* ---------- Clics ---------- */
+document.addEventListener("click", (e) => {
+  const cible = e.target.closest("button, a");
+  if (!cible) {
+    if (!el("liste-langues").hidden) { el("liste-langues").hidden = true; el("bouton-langue").setAttribute("aria-expanded", "false"); }
+    return;
+  }
+  if (cible.id === "bouton-langue") {
+    const ouvert = el("liste-langues").hidden;
+    el("liste-langues").hidden = !ouvert;
+    cible.setAttribute("aria-expanded", String(ouvert));
+    return;
+  }
+  if (cible.dataset.langue) {
+    etat.langue = cible.dataset.langue;
+    ecrireStockage("origins-langue", etat.langue);
+    el("liste-langues").hidden = true;
+    rendre(); rendreFaq();
+    return;
+  }
+  if (cible.dataset.os) { etat.os = cible.dataset.os; etat.lance = false; rendre(); return; }
+  if (cible.dataset.format) { etat.linux = cible.dataset.format; rendre(); return; }
+  if (cible.id === "variante") {
+    if (etat.os === "mac") etat.mac = etat.mac === "mac_arm" ? "mac_x64" : "mac_arm";
+    else etat.linux = etat.linux === "appimage" ? "deb" : "appimage";
+    etat.lance = false; rendre(); return;
+  }
+  if (cible.id === "cta" || cible.dataset.cle) {
+    if (cible.getAttribute("aria-disabled") === "true") { e.preventDefault(); return; }
+    if (cible.dataset.cle) {
+      const cle = cible.dataset.cle;
+      etat.os = cle === "win" ? "windows" : cle.indexOf("mac") === 0 ? "mac" : "linux";
+      if (etat.os === "mac") etat.mac = cle;
+      if (etat.os === "linux") etat.linux = cle;
+    }
+    etat.lance = true;
+    setTimeout(rendre, 0);
+    return;
+  }
+  if (cible.id === "reessayer") { window.location.href = url(cleChoisie()); return; }
+  if (cible.dataset.copier !== undefined || cible.id === "copier-lien") {
+    const texte = cible.id === "copier-lien" ? window.location.href : cible.dataset.copier;
+    const fini = () => {
+      const span = cible.querySelector("span");
+      if (span) { span.textContent = cible.id === "copier-lien" ? t().lienCopie : t().copie; }
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(texte).then(fini, fini); else fini();
+  }
+});
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") { el("liste-langues").hidden = true; el("bouton-langue").setAttribute("aria-expanded", "false"); } });
+
+/* ---------- Démarrage ---------- */
+(async function demarrer() {
+  if (CONFIG.discord) document.querySelectorAll(".lien-discord").forEach((a) => { a.href = CONFIG.discord; a.hidden = false; });
+  etat.langue = detecterLangue();
+  detecterSysteme();
+  rendre(); rendreFaq();
+  await Promise.all([lireManifeste(), verifierFichiers()]);
+  rendre();
+  detecterPuceMac();
+})();
+</script>
+</body>
+</html>

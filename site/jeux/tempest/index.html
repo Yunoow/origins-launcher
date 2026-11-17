@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tempest · Origins</title>
+<meta name="description" content="Tempest, le premier monde d'Origins : un monde fantasy Minecraft avec quêtes, métiers, mobs et donjons.">
+<meta name="theme-color" content="#0f0b08">
+<link rel="icon" href="/commun/images/oeil.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="/commun/site.css">
+<style>
+/* Page Tempest (maquette « Site Origins · Tempest », design/site/Site-Tempest.dc.html). */
+
+/* 1. En-tête peint, avec la fiche du serveur */
+.hero-jeu {
+  position: relative; padding: 140px 0 90px;
+  background: linear-gradient(90deg, rgba(15, 11, 8, 0.92) 0%, rgba(15, 11, 8, 0.6) 50%, rgba(15, 11, 8, 0.25) 100%),
+              linear-gradient(180deg, rgba(15, 11, 8, 0) 70%, var(--ebene) 100%),
+              url("/commun/images/tempest-fond.jpg") center 30% / cover no-repeat;
+}
+.hero-jeu .contenant { display: grid; grid-template-columns: minmax(0, 1fr) 410px; gap: 48px; align-items: center; }
+.hero-jeu .logo-jeu { display: block; width: 240px; height: auto; margin: 18px 0 0 30px; filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.55)); }
+.hero-jeu .pastille { margin-top: 18px; }
+.hero-jeu h1 { margin: 16px 0 0; max-width: 620px; font: 800 clamp(32px, 4vw, 46px)/1.1 var(--titre); color: #fff; text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5); }
+.hero-jeu .chapo { font-size: 17px; max-width: 660px; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6); }
+.hero-jeu .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+
+.fiche {
+  padding: 24px; border-radius: 20px; background: var(--verre);
+  border: 1px solid rgba(201, 161, 74, 0.4); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+.fiche h2 { margin: 0 0 8px; font: 800 21px var(--titre); color: #fff; }
+.fiche dl { margin: 0; }
+.fiche .ligne { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--filet); font-size: 14.5px; }
+.fiche dt { color: var(--doux); }
+.fiche dd { margin: 0; font-weight: 800; color: #fff; text-align: right; }
+.fiche p { margin: 14px 0 0; font-size: 13px; color: var(--doux); }
+
+/* 2. Tempest en quelques mots */
+.grille-atouts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.carte-atout { padding: 26px; background: var(--carte); }
+.carte-atout .rond {
+  width: 54px; height: 54px; border-radius: 15px; display: flex; align-items: center; justify-content: center;
+  background: rgba(201, 161, 74, 0.14); border: 1px solid rgba(201, 161, 74, 0.3); color: var(--or);
+}
+.carte-atout .rond .icone { width: 24px; height: 24px; }
+.carte-atout h3 { margin: 22px 0 8px; font: 800 22px var(--titre); color: #fff; }
+.carte-atout p { margin: 0; color: var(--texte); font-size: 15px; }
+
+/* 3. Rejoindre en 3 étapes */
+.etapes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; counter-reset: etape; }
+.etape { padding: 26px; position: relative; }
+.etape .numero {
+  width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: var(--or); color: var(--sur-or); font: 800 19px var(--titre);
+}
+.etape h3 { margin: 18px 0 6px; font: 800 20px var(--titre); color: #fff; }
+.etape p { margin: 0; color: var(--doux); font-size: 15px; }
+.etape a { color: var(--or); }
+
+@media (max-width: 1080px) {
+  .hero-jeu .contenant { grid-template-columns: 1fr; }
+  .fiche { max-width: 520px; }
+  .grille-atouts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 860px) {
+  .hero-jeu { padding: 100px 0 56px; background: linear-gradient(180deg, rgba(15, 11, 8, 0.55), rgba(15, 11, 8, 0.92) 70%, var(--ebene)), url("/commun/images/tempest-fond.jpg") center top / cover no-repeat; }
+  .hero-jeu .logo-jeu { width: 170px; margin-left: 0; }
+  .grille-atouts, .etapes { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .hero-jeu .actions .bouton { width: 100%; }
+}
+</style>
+</head>
+<body data-page="jeux" data-titre="titrePage">
+<div id="site-tete"></div>
+
+<main>
+  <!-- 1. En-tête -->
+  <section class="hero-jeu" aria-labelledby="titre-jeu">
+    <div class="contenant">
+      <div>
+        <div class="kicker" data-t="heroKicker">NOS JEUX · LE PREMIER MONDE</div>
+        <img class="logo-jeu" src="/commun/images/tempest-logo.png" alt="Tempest" width="240" height="192">
+        <div><span class="pastille" data-t="statut">EN DÉVELOPPEMENT · OUVERT À L'ÉQUIPE ET AUX TESTEURS</span></div>
+        <h1 id="titre-jeu" data-t="heroTitre">Un monde fantasy qui se construit avec vous</h1>
+        <p class="chapo" data-t="heroTexte">Des quêtes, des métiers, des mobs et des donjons, avec des écrans faits pour lui. L'équipe et les testeurs y jouent déjà ; il ouvrira à tout le monde quand il sera prêt.</p>
+        <div class="actions">
+          <a class="bouton bouton-blanc" href="/telecharger/"><svg class="icone" aria-hidden="true"><use href="#i-jouer"/></svg><span data-t="jouerLauncher">JOUER AVEC LE LAUNCHER</span></a>
+          <a class="bouton bouton-contour" id="discord-tempest" href="#" target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" style="color: var(--or)"><use href="#i-bulle"/></svg><span data-t="rejoindreDiscord">Rejoindre le Discord de Tempest</span></a>
+        </div>
+      </div>
+      <aside class="fiche" aria-labelledby="titre-fiche">
+        <h2 id="titre-fiche" data-t="ficheTitre">Le serveur</h2>
+        <dl>
+          <div class="ligne"><dt data-t="ficheAcces">Accès</dt><dd data-t="ficheAccesValeur">Équipe et testeurs</dd></div>
+          <div class="ligne"><dt data-t="ficheVersion">Version du jeu</dt><dd data-t="ficheVersionValeur">Gérée par le launcher</dd></div>
+          <div class="ligne"><dt data-t="ficheEdition">Édition</dt><dd>Minecraft : Java Edition</dd></div>
+          <div class="ligne"><dt data-t="ficheLangues">Langues</dt><dd>FR · EN · ES · DE · PT</dd></div>
+        </dl>
+        <p data-t="ficheNote">Le launcher installe les mods et les packs de Tempest : rien à faire à la main.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 2. Tempest en quelques mots -->
+  <section class="section" aria-labelledby="titre-atouts">
+    <div class="contenant">
+      <div class="tete-section"><div><div class="kicker" data-t="atoutsKicker">CE QUI T'ATTEND</div><h2 class="titre-section" id="titre-atouts" data-t="atoutsTitre">Tempest, en quelques mots</h2></div></div>
+      <div class="grille-atouts">
+        <article class="carte carte-atout"><span class="rond"><svg class="icone" aria-hidden="true"><use href="#i-livre"/></svg></span><h3 data-t="a1Titre">Quêtes</h3><p data-t="a1Texte">Un journal de quêtes au style du Grand Sage : les étapes, les récompenses et les PNJ qui te les confient.</p></article>
+        <article class="carte carte-atout"><span class="rond"><svg class="icone" aria-hidden="true"><use href="#i-sac"/></svg></span><h3 data-t="a2Titre">Métiers</h3><p data-t="a2Texte">Mineur, Bûcheron, Agriculteur et Pêcheur : récolte, monte de niveau, débloque de meilleurs outils. Tape /metiers.</p></article>
+        <article class="carte carte-atout"><span class="rond"><svg class="icone" aria-hidden="true"><use href="#i-fantome"/></svg></span><h3 data-t="a3Titre">Mobs et PNJ</h3><p data-t="a3Texte">Des monstres avec leur propre modèle 3D, comme le loup famélique, et les PNJ de Jura-Tempest et de Hjalvik.</p></article>
+        <article class="carte carte-atout"><span class="rond"><svg class="icone" aria-hidden="true"><use href="#i-bouclier"/></svg></span><h3 data-t="a4Titre">Équipement</h3><p data-t="a4Texte">Armures, artefacts et panoplies : tes stats et tes bonus se lisent sur l'écran d'équipement, touche E.</p></article>
+        <article class="carte carte-atout"><span class="rond"><svg class="icone" aria-hidden="true"><use href="#i-groupe"/></svg></span><h3 data-t="a5Titre">En groupe</h3><p data-t="a5Texte">Joue avec tes amis : ton groupe et la vie de chacun s'affichent à l'écran, et le butin arrive tout seul.</p></article>
+        <article class="carte carte-atout"><span class="rond"><svg class="icone" aria-hidden="true"><use href="#i-globe"/></svg></span><h3 data-t="a6Titre">Dans ta langue</h3><p data-t="a6Texte">Le jeu, ses écrans et ses messages en français, anglais, espagnol, allemand et portugais.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Rejoindre en 3 étapes -->
+  <section class="section" aria-labelledby="titre-etapes" style="background: var(--ebene-fonce)">
+    <div class="contenant">
+      <div class="tete-section">
+        <div><div class="kicker" data-t="etapesKicker">EN 3 ÉTAPES</div><h2 class="titre-section" id="titre-etapes" data-t="etapesTitre">Rejoindre Tempest</h2></div>
+        <a class="lien-or" href="/telecharger/"><span data-t="toutesVersions">Toutes les versions du launcher</span> →</a>
+      </div>
+      <ol class="etapes" style="list-style: none; margin: 0; padding: 0">
+        <li class="carte etape"><span class="numero">1</span><h3 data-t="e1Titre">Télécharge le launcher</h3><p data-t="e1Texte">Pour Windows, macOS ou Linux. Il est gratuit et se met à jour tout seul.</p></li>
+        <li class="carte etape"><span class="numero">2</span><h3 data-t="e2Titre">Connecte-toi</h3><p data-t="e2Texte">Avec ton compte Microsoft qui possède Minecraft : Java Edition. Ton profil Origins se crée tout seul.</p></li>
+        <li class="carte etape"><span class="numero">3</span><h3 data-t="e3Titre">Joue</h3><p data-t="e3Texte">Choisis Tempest, puis JOUER : le launcher installe le jeu, les mods et les packs, et te connecte au serveur.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 4. Actus de Tempest -->
+  <section class="section" aria-labelledby="titre-actus">
+    <div class="contenant">
+      <div class="tete-section">
+        <div><div class="kicker" data-t="actusKicker">ACTUS DE TEMPEST</div><h2 class="titre-section" id="titre-actus" data-t="actusTitre">Ce qui a changé</h2></div>
+        <a class="lien-or" href="/actus/"><span data-t="toutesActus">Toutes les actus</span> →</a>
+      </div>
+      <div class="grille-actus" id="grille-actus"></div>
+    </div>
+  </section>
+</main>
+
+<div id="site-pied"></div>
+
+<script>
+/* Textes de la page Tempest, dans les 5 langues du launcher. */
+window.TEXTES_PAGE = {
+  fr: {
+    titrePage: "Tempest",
+    heroKicker: "NOS JEUX · LE PREMIER MONDE", statut: "EN DÉVELOPPEMENT · OUVERT À L'ÉQUIPE ET AUX TESTEURS",
+    heroTitre: "Un monde fantasy qui se construit avec vous",
+    heroTexte: "Des quêtes, des métiers, des mobs et des donjons, avec des écrans faits pour lui. L'équipe et les testeurs y jouent déjà ; il ouvrira à tout le monde quand il sera prêt.",
+    jouerLauncher: "JOUER AVEC LE LAUNCHER", rejoindreDiscord: "Rejoindre le Discord de Tempest",
+    ficheTitre: "Le serveur", ficheAcces: "Accès", ficheAccesValeur: "Équipe et testeurs", ficheVersion: "Version du jeu", ficheVersionValeur: "Gérée par le launcher",
+    ficheEdition: "Édition", ficheLangues: "Langues", ficheNote: "Le launcher installe les mods et les packs de Tempest : rien à faire à la main.",
+    atoutsKicker: "CE QUI T'ATTEND", atoutsTitre: "Tempest, en quelques mots",
+    a1Titre: "Quêtes", a1Texte: "Un journal de quêtes au style du Grand Sage : les étapes, les récompenses et les PNJ qui te les confient.",
+    a2Titre: "Métiers", a2Texte: "Mineur, Bûcheron, Agriculteur et Pêcheur : récolte, monte de niveau, débloque de meilleurs outils. Tape /metiers.",
+    a3Titre: "Mobs et PNJ", a3Texte: "Des monstres avec leur propre modèle 3D, comme le loup famélique, et les PNJ de Jura-Tempest et de Hjalvik.",
+    a4Titre: "Équipement", a4Texte: "Armures, artefacts et panoplies : tes stats et tes bonus se lisent sur l'écran d'équipement, touche E.",
+    a5Titre: "En groupe", a5Texte: "Joue avec tes amis : ton groupe et la vie de chacun s'affichent à l'écran, et le butin arrive tout seul.",
+    a6Titre: "Dans ta langue", a6Texte: "Le jeu, ses écrans et ses messages en français, anglais, espagnol, allemand et portugais.",
+    etapesKicker: "EN 3 ÉTAPES", etapesTitre: "Rejoindre Tempest", toutesVersions: "Toutes les versions du launcher",
+    e1Titre: "Télécharge le launcher", e1Texte: "Pour Windows, macOS ou Linux. Il est gratuit et se met à jour tout seul.",
+    e2Titre: "Connecte-toi", e2Texte: "Avec ton compte Microsoft qui possède Minecraft : Java Edition. Ton profil Origins se crée tout seul.",
+    e3Titre: "Joue", e3Texte: "Choisis Tempest, puis JOUER : le launcher installe le jeu, les mods et les packs, et te connecte au serveur.",
+    actusKicker: "ACTUS DE TEMPEST", actusTitre: "Ce qui a changé", toutesActus: "Toutes les actus", actusVide: "Les actus arrivent bientôt."
+  },
+  en: {
+    titrePage: "Tempest",
+    heroKicker: "OUR GAMES · THE FIRST WORLD", statut: "IN DEVELOPMENT · OPEN TO THE TEAM AND TESTERS",
+    heroTitre: "A fantasy world built with you",
+    heroTexte: "Quests, professions, mobs and dungeons, with screens made just for it. The team and testers already play it; it will open to everyone when it's ready.",
+    jouerLauncher: "PLAY WITH THE LAUNCHER", rejoindreDiscord: "Join the Tempest Discord",
+    ficheTitre: "The server", ficheAcces: "Access", ficheAccesValeur: "Team and testers", ficheVersion: "Game version", ficheVersionValeur: "Handled by the launcher",
+    ficheEdition: "Edition", ficheLangues: "Languages", ficheNote: "The launcher installs Tempest's mods and packs: nothing to do by hand.",
+    atoutsKicker: "WHAT AWAITS YOU", atoutsTitre: "Tempest in a few words",
+    a1Titre: "Quests", a1Texte: "A quest log in the Great Sage style: the steps, the rewards and the NPCs who give them to you.",
+    a2Titre: "Professions", a2Texte: "Miner, Lumberjack, Farmer and Fisher: gather, level up, unlock better tools. Type /metiers.",
+    a3Titre: "Mobs and NPCs", a3Texte: "Monsters with their own 3D model, like the starving wolf, and the NPCs of Jura-Tempest and Hjalvik.",
+    a4Titre: "Gear", a4Texte: "Armour, artefacts and sets: your stats and bonuses show on the equipment screen, key E.",
+    a5Titre: "In a group", a5Texte: "Play with your friends: your group and everyone's health show on screen, and loot comes to you on its own.",
+    a6Titre: "In your language", a6Texte: "The game, its screens and its messages in French, English, Spanish, German and Portuguese.",
+    etapesKicker: "IN 3 STEPS", etapesTitre: "Join Tempest", toutesVersions: "All launcher versions",
+    e1Titre: "Download the launcher", e1Texte: "For Windows, macOS or Linux. It's free and updates itself.",
+    e2Titre: "Sign in", e2Texte: "With the Microsoft account that owns Minecraft: Java Edition. Your Origins profile is created on its own.",
+    e3Titre: "Play", e3Texte: "Pick Tempest, then PLAY: the launcher installs the game, the mods and the packs, and connects you to the server.",
+    actusKicker: "TEMPEST NEWS", actusTitre: "What changed", toutesActus: "All the news", actusVide: "News is coming soon."
+  },
+  es: {
+    titrePage: "Tempest",
+    heroKicker: "NUESTROS JUEGOS · EL PRIMER MUNDO", statut: "EN DESARROLLO · ABIERTO AL EQUIPO Y A LOS TESTERS",
+    heroTitre: "Un mundo de fantasía que se construye contigo",
+    heroTexte: "Misiones, oficios, mobs y mazmorras, con pantallas hechas para él. El equipo y los testers ya juegan; se abrirá a todo el mundo cuando esté listo.",
+    jouerLauncher: "JUGAR CON EL LAUNCHER", rejoindreDiscord: "Unirse al Discord de Tempest",
+    ficheTitre: "El servidor", ficheAcces: "Acceso", ficheAccesValeur: "Equipo y testers", ficheVersion: "Versión del juego", ficheVersionValeur: "La gestiona el launcher",
+    ficheEdition: "Edición", ficheLangues: "Idiomas", ficheNote: "El launcher instala los mods y los packs de Tempest: nada que hacer a mano.",
+    atoutsKicker: "LO QUE TE ESPERA", atoutsTitre: "Tempest en pocas palabras",
+    a1Titre: "Misiones", a1Texte: "Un diario de misiones al estilo del Gran Sabio: las etapas, las recompensas y los PNJ que te las encargan.",
+    a2Titre: "Oficios", a2Texte: "Minero, Leñador, Agricultor y Pescador: recolecta, sube de nivel, desbloquea mejores herramientas. Escribe /metiers.",
+    a3Titre: "Mobs y PNJ", a3Texte: "Monstruos con su propio modelo 3D, como el lobo famélico, y los PNJ de Jura-Tempest y de Hjalvik.",
+    a4Titre: "Equipo", a4Texte: "Armaduras, artefactos y conjuntos: tus estadísticas y bonus se ven en la pantalla de equipo, tecla E.",
+    a5Titre: "En grupo", a5Texte: "Juega con tus amigos: tu grupo y la vida de cada uno se ven en pantalla, y el botín llega solo.",
+    a6Titre: "En tu idioma", a6Texte: "El juego, sus pantallas y sus mensajes en francés, inglés, español, alemán y portugués.",
+    etapesKicker: "EN 3 PASOS", etapesTitre: "Unirse a Tempest", toutesVersions: "Todas las versiones del launcher",
+    e1Titre: "Descarga el launcher", e1Texte: "Para Windows, macOS o Linux. Es gratis y se actualiza solo.",
+    e2Titre: "Inicia sesión", e2Texte: "Con la cuenta de Microsoft que tiene Minecraft: Java Edition. Tu perfil de Origins se crea solo.",
+    e3Titre: "Juega", e3Texte: "Elige Tempest y luego JUGAR: el launcher instala el juego, los mods y los packs, y te conecta al servidor.",
+    actusKicker: "NOTICIAS DE TEMPEST", actusTitre: "Lo que ha cambiado", toutesActus: "Todas las noticias", actusVide: "Las noticias llegan pronto."
+  },
+  de: {
+    titrePage: "Tempest",
+    heroKicker: "UNSERE SPIELE · DIE ERSTE WELT", statut: "IN ENTWICKLUNG · OFFEN FÜR TEAM UND TESTER",
+    heroTitre: "Eine Fantasywelt, die mit euch entsteht",
+    heroTexte: "Quests, Berufe, Mobs und Dungeons, mit eigens gemachten Bildschirmen. Team und Tester spielen schon; für alle öffnet es, wenn es fertig ist.",
+    jouerLauncher: "MIT DEM LAUNCHER SPIELEN", rejoindreDiscord: "Dem Tempest-Discord beitreten",
+    ficheTitre: "Der Server", ficheAcces: "Zugang", ficheAccesValeur: "Team und Tester", ficheVersion: "Spielversion", ficheVersionValeur: "Vom Launcher verwaltet",
+    ficheEdition: "Edition", ficheLangues: "Sprachen", ficheNote: "Der Launcher installiert die Mods und Pakete von Tempest: nichts von Hand zu tun.",
+    atoutsKicker: "WAS DICH ERWARTET", atoutsTitre: "Tempest in wenigen Worten",
+    a1Titre: "Quests", a1Texte: "Ein Questbuch im Stil des Großen Weisen: die Schritte, die Belohnungen und die NPCs, die sie dir geben.",
+    a2Titre: "Berufe", a2Texte: "Bergmann, Holzfäller, Bauer und Fischer: sammeln, aufsteigen, bessere Werkzeuge freischalten. Tippe /metiers.",
+    a3Titre: "Mobs und NPCs", a3Texte: "Monster mit eigenem 3D-Modell, wie der ausgehungerte Wolf, und die NPCs von Jura-Tempest und Hjalvik.",
+    a4Titre: "Ausrüstung", a4Texte: "Rüstungen, Artefakte und Sets: deine Werte und Boni stehen im Ausrüstungsbildschirm, Taste E.",
+    a5Titre: "In der Gruppe", a5Texte: "Spiel mit deinen Freunden: deine Gruppe und das Leben aller stehen auf dem Bildschirm, und die Beute kommt von selbst.",
+    a6Titre: "In deiner Sprache", a6Texte: "Das Spiel, seine Bildschirme und Nachrichten auf Französisch, Englisch, Spanisch, Deutsch und Portugiesisch.",
+    etapesKicker: "IN 3 SCHRITTEN", etapesTitre: "Tempest beitreten", toutesVersions: "Alle Launcher-Versionen",
+    e1Titre: "Launcher herunterladen", e1Texte: "Für Windows, macOS oder Linux. Er ist kostenlos und aktualisiert sich selbst.",
+    e2Titre: "Anmelden", e2Texte: "Mit dem Microsoft-Konto, das Minecraft: Java Edition besitzt. Dein Origins-Profil entsteht von selbst.",
+    e3Titre: "Spielen", e3Texte: "Wähle Tempest, dann SPIELEN: Der Launcher installiert Spiel, Mods und Pakete und verbindet dich mit dem Server.",
+    actusKicker: "TEMPEST-NEWS", actusTitre: "Was sich geändert hat", toutesActus: "Alle News", actusVide: "Die News kommen bald."
+  },
+  pt: {
+    titrePage: "Tempest",
+    heroKicker: "NOSSOS JOGOS · O PRIMEIRO MUNDO", statut: "EM DESENVOLVIMENTO · ABERTO À EQUIPE E AOS TESTADORES",
+    heroTitre: "Um mundo de fantasia construído com você",
+    heroTexte: "Missões, profissões, mobs e masmorras, com telas feitas para ele. A equipe e os testadores já jogam; ele abrirá para todos quando estiver pronto.",
+    jouerLauncher: "JOGAR COM O LAUNCHER", rejoindreDiscord: "Entrar no Discord do Tempest",
+    ficheTitre: "O servidor", ficheAcces: "Acesso", ficheAccesValeur: "Equipe e testadores", ficheVersion: "Versão do jogo", ficheVersionValeur: "Gerenciada pelo launcher",
+    ficheEdition: "Edição", ficheLangues: "Idiomas", ficheNote: "O launcher instala os mods e os pacotes do Tempest: nada para fazer à mão.",
+    atoutsKicker: "O QUE TE ESPERA", atoutsTitre: "Tempest em poucas palavras",
+    a1Titre: "Missões", a1Texte: "Um diário de missões no estilo do Grande Sábio: as etapas, as recompensas e os NPCs que as confiam a você.",
+    a2Titre: "Profissões", a2Texte: "Minerador, Lenhador, Agricultor e Pescador: colete, suba de nível, desbloqueie ferramentas melhores. Digite /metiers.",
+    a3Titre: "Mobs e NPCs", a3Texte: "Monstros com seu próprio modelo 3D, como o lobo faminto, e os NPCs de Jura-Tempest e de Hjalvik.",
+    a4Titre: "Equipamento", a4Texte: "Armaduras, artefatos e conjuntos: seus atributos e bônus aparecem na tela de equipamento, tecla E.",
+    a5Titre: "Em grupo", a5Texte: "Jogue com seus amigos: seu grupo e a vida de cada um aparecem na tela, e o saque chega sozinho.",
+    a6Titre: "No seu idioma", a6Texte: "O jogo, suas telas e mensagens em francês, inglês, espanhol, alemão e português.",
+    etapesKicker: "EM 3 PASSOS", etapesTitre: "Entrar no Tempest", toutesVersions: "Todas as versões do launcher",
+    e1Titre: "Baixe o launcher", e1Texte: "Para Windows, macOS ou Linux. É grátis e se atualiza sozinho.",
+    e2Titre: "Entre", e2Texte: "Com a conta Microsoft que tem o Minecraft: Java Edition. Seu perfil Origins é criado sozinho.",
+    e3Titre: "Jogue", e3Texte: "Escolha Tempest e depois JOGAR: o launcher instala o jogo, os mods e os pacotes, e te conecta ao servidor.",
+    actusKicker: "NOTÍCIAS DO TEMPEST", actusTitre: "O que mudou", toutesActus: "Todas as notícias", actusVide: "As notícias chegam em breve."
+  }
+};
+
+let actusTempest = null;
+window.rendrePage = function () { Site.grilleActus(document.getElementById("grille-actus"), actusTempest); };
+</script>
+<script src="/commun/site.js"></script>
+<script>
+document.getElementById("discord-tempest").href = SITE.discordTempest;
+Site.actus("tempest").then((liste) => { actusTempest = liste.slice(0, 3); window.rendrePage(); });
+</script>
+</body>
+</html>

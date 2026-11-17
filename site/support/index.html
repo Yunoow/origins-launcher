@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support · Origins</title>
+<meta name="description" content="Besoin d'aide avec le launcher Origins ou Tempest ? Réponses rapides et contact de l'équipe.">
+<meta name="theme-color" content="#0f0b08">
+<link rel="icon" href="/commun/images/oeil.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="/commun/site.css">
+<style>
+/* Page Support, version publique (maquette « Site Origins · Support », design/site/Site-Support.dc.html).
+   Les tickets sur le site arrivent plus tard (connexion par le launcher) : en attendant, l'aide passe par Discord. */
+.tete-page { padding: 56px 0 28px; }
+.titre-page { margin: 8px 0 0; font: 800 clamp(32px, 4vw, 46px)/1.1 var(--titre); color: #fff; }
+
+.contacts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.contact { padding: 28px 30px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; background: var(--carte); }
+.contact.principal { border-color: rgba(201, 161, 74, 0.45); background: linear-gradient(160deg, rgba(96, 74, 37, 0.55), rgba(25, 18, 13, 0.95)); }
+.contact .rond {
+  width: 52px; height: 52px; border-radius: 15px; display: flex; align-items: center; justify-content: center;
+  background: rgba(201, 161, 74, 0.16); border: 1px solid rgba(201, 161, 74, 0.35); color: var(--or);
+}
+.contact .rond .icone { width: 24px; height: 24px; }
+.contact h2 { margin: 6px 0 0; font: 800 24px var(--titre); color: #fff; }
+.contact p { margin: 0; color: var(--texte); }
+.contact ul { margin: 0; padding-left: 20px; color: var(--doux); font-size: 14.5px; }
+.contact .bouton { margin-top: 8px; }
+
+.bientot-tickets { margin-top: 20px; padding: 22px 26px; display: flex; align-items: center; gap: 18px; }
+.bientot-tickets .rond { flex: none; width: 44px; height: 44px; border-radius: 13px; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.06); color: var(--doux); }
+.bientot-tickets p { margin: 4px 0 0; color: var(--doux); font-size: 14.5px; }
+.bientot-tickets strong { font: 800 17px var(--titre); color: #fff; }
+
+/* Réponses rapides */
+.questions { display: flex; flex-direction: column; gap: 12px; }
+.question { padding: 0; overflow: hidden; }
+.question summary {
+  list-style: none; cursor: pointer; padding: 18px 22px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  font: 800 17px var(--titre); color: #fff;
+}
+.question summary::-webkit-details-marker { display: none; }
+.question summary .icone { color: var(--or); transition: transform .2s; }
+.question[open] summary .icone { transform: rotate(180deg); }
+.question .reponse { padding: 0 22px 20px; color: var(--texte); font-size: 15px; }
+.question .reponse p { margin: 0; }
+.question .reponse a { color: var(--or); }
+
+@media (max-width: 860px) {
+  .tete-page { padding: 32px 0 20px; }
+  .contacts { grid-template-columns: 1fr; }
+  .contact { padding: 22px; }
+  .bientot-tickets { align-items: flex-start; }
+}
+</style>
+</head>
+<body data-page="support" data-titre="titrePage">
+<div id="site-tete" data-style="plein"></div>
+
+<main>
+  <section class="tete-page">
+    <div class="contenant">
+      <div class="kicker" data-t="kicker">SUPPORT</div>
+      <h1 class="titre-page" data-t="titre">Besoin d'aide ?</h1>
+      <p class="chapo" data-t="chapo">L'équipe te répond sur Discord. Choisis le bon endroit selon ton souci : ça va plus vite.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 8px" aria-label="Contacter l'équipe">
+    <div class="contenant">
+      <div class="contacts">
+        <article class="carte contact principal">
+          <span class="rond"><svg class="icone" aria-hidden="true"><use href="#i-ecran"/></svg></span>
+          <h2 data-t="originsTitre">Launcher, compte ou achat</h2>
+          <p data-t="originsTexte">Ouvre un ticket sur le Discord d'Origins, le serveur du projet.</p>
+          <ul>
+            <li data-t="originsL1">Le launcher ne s'installe pas ou ne se met pas à jour</li>
+            <li data-t="originsL2">Connexion, profil Origins, amis et messages</li>
+            <li data-t="originsL3">Achats et boutique</li>
+          </ul>
+          <a class="bouton bouton-blanc bouton-petit" id="lien-origins" href="#" target="_blank" rel="noopener"><svg class="icone" aria-hidden="true"><use href="#i-bulle"/></svg><span data-t="originsBouton">DISCORD D'ORIGINS</span></a>
+        </article>
+        <article class="carte contact">
+          <span class="rond"><svg class="icone" aria-hidden="true"><use href="#i-epee"/></svg></span>
+          <h2 data-t="tempestTitre">Un souci en jeu sur Tempest</h2>
+          <p data-t="tempestTexte">Tout ce qui touche au jeu lui-même se règle sur le Discord de Tempest.</p>
+          <ul>
+            <li data-t="tempestL1">Un bug en jeu, un mob, une quête ou un objet</li>
+            <li data-t="tempestL2">Les packs de ressources et les modèles</li>
+            <li data-t="tempestL3">Signaler un joueur</li>
+          </ul>
+          <a class="bouton bouton-contour bouton-petit" id="lien-tempest" href="#" target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" style="color: var(--or)"><use href="#i-bulle"/></svg><span data-t="tempestBouton">Discord de Tempest</span></a>
+        </article>
+      </div>
+      <div class="carte bientot-tickets">
+        <span class="rond"><svg class="icone" aria-hidden="true"><use href="#i-courrier"/></svg></span>
+        <div><strong data-t="bientotTitre">Bientôt : les tickets sur le site</strong> <span class="pastille" data-t="bientot" style="margin-left: 6px">BIENTÔT</span>
+          <p data-t="bientotTexte">Tu pourras ouvrir un ticket ici avec ton profil Origins : l'équipe te répondra sur le site et tu seras prévenu dans le launcher.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0" aria-labelledby="titre-questions">
+    <div class="contenant">
+      <div class="tete-section">
+        <div><div class="kicker" data-t="questionsKicker">RÉPONSES RAPIDES</div><h2 class="titre-section" id="titre-questions" data-t="questionsTitre">Avant d'écrire à l'équipe</h2></div>
+        <a class="lien-or" href="/telecharger/#questions"><span data-t="autresQuestions">Questions sur l'installation</span> →</a>
+      </div>
+      <div class="questions">
+        <details class="carte question" open>
+          <summary><span data-t="q1">Le jeu ne se lance pas</span><svg class="icone" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <div class="reponse"><p data-t="r1">Le launcher affiche maintenant pourquoi. Essaie Réessayer ; si ça bloque toujours, ouvre un ticket sur le Discord d'Origins avec une capture de ce message.</p></div>
+        </details>
+        <details class="carte question">
+          <summary><span data-t="q2">La connexion Microsoft ne marche pas</span><svg class="icone" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <div class="reponse"><p data-t="r2">Il faut le compte Microsoft qui possède Minecraft : Java Edition. Ferme complètement le launcher, rouvre-le et reconnecte-toi.</p></div>
+        </details>
+        <details class="carte question">
+          <summary><span data-t="q3">Les mobs ont l'apparence d'animaux</span><svg class="icone" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <div class="reponse"><p data-t="r3">Accepte les packs proposés à la connexion au serveur, puis active une fois le pack des modèles dans Options → Packs de ressources.</p></div>
+        </details>
+        <details class="carte question">
+          <summary><span data-t="q4">Comment installer le launcher ?</span><svg class="icone" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <div class="reponse"><p><span data-t="r4">Tout est expliqué pas à pas, pour Windows, macOS et Linux, sur la page Télécharger.</span> <a href="/telecharger/#installer" data-t="r4Lien">Installer le launcher</a></p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-pied"></div>
+
+<script>
+window.TEXTES_PAGE = {
+  fr: {
+    titrePage: "Support", kicker: "SUPPORT", titre: "Besoin d'aide ?", chapo: "L'équipe te répond sur Discord. Choisis le bon endroit selon ton souci : ça va plus vite.",
+    originsTitre: "Launcher, compte ou achat", originsTexte: "Ouvre un ticket sur le Discord d'Origins, le serveur du projet.",
+    originsL1: "Le launcher ne s'installe pas ou ne se met pas à jour", originsL2: "Connexion, profil Origins, amis et messages", originsL3: "Achats et boutique", originsBouton: "DISCORD D'ORIGINS",
+    tempestTitre: "Un souci en jeu sur Tempest", tempestTexte: "Tout ce qui touche au jeu lui-même se règle sur le Discord de Tempest.",
+    tempestL1: "Un bug en jeu, un mob, une quête ou un objet", tempestL2: "Les packs de ressources et les modèles", tempestL3: "Signaler un joueur", tempestBouton: "Discord de Tempest",
+    bientotTitre: "Bientôt : les tickets sur le site", bientot: "BIENTÔT",
+    bientotTexte: "Tu pourras ouvrir un ticket ici avec ton profil Origins : l'équipe te répondra sur le site et tu seras prévenu dans le launcher.",
+    questionsKicker: "RÉPONSES RAPIDES", questionsTitre: "Avant d'écrire à l'équipe", autresQuestions: "Questions sur l'installation",
+    q1: "Le jeu ne se lance pas", r1: "Le launcher affiche maintenant pourquoi. Essaie Réessayer ; si ça bloque toujours, ouvre un ticket sur le Discord d'Origins avec une capture de ce message.",
+    q2: "La connexion Microsoft ne marche pas", r2: "Il faut le compte Microsoft qui possède Minecraft : Java Edition. Ferme complètement le launcher, rouvre-le et reconnecte-toi.",
+    q3: "Les mobs ont l'apparence d'animaux", r3: "Accepte les packs proposés à la connexion au serveur, puis active une fois le pack des modèles dans Options → Packs de ressources.",
+    q4: "Comment installer le launcher ?", r4: "Tout est expliqué pas à pas, pour Windows, macOS et Linux, sur la page Télécharger.", r4Lien: "Installer le launcher"
+  },
+  en: {
+    titrePage: "Support", kicker: "SUPPORT", titre: "Need help?", chapo: "The team answers you on Discord. Pick the right place for your problem: it's quicker.",
+    originsTitre: "Launcher, account or purchase", originsTexte: "Open a ticket on the Origins Discord, the project's server.",
+    originsL1: "The launcher won't install or update", originsL2: "Sign-in, Origins profile, friends and messages", originsL3: "Purchases and shop", originsBouton: "ORIGINS DISCORD",
+    tempestTitre: "An in-game problem on Tempest", tempestTexte: "Anything about the game itself is handled on the Tempest Discord.",
+    tempestL1: "An in-game bug, a mob, a quest or an item", tempestL2: "Resource packs and models", tempestL3: "Reporting a player", tempestBouton: "Tempest Discord",
+    bientotTitre: "Coming soon: tickets on the website", bientot: "SOON",
+    bientotTexte: "You'll be able to open a ticket here with your Origins profile: the team will answer on the website and you'll be notified in the launcher.",
+    questionsKicker: "QUICK ANSWERS", questionsTitre: "Before writing to the team", autresQuestions: "Installation questions",
+    q1: "The game won't start", r1: "The launcher now shows why. Try Retry; if it's still stuck, open a ticket on the Origins Discord with a screenshot of that message.",
+    q2: "Microsoft sign-in doesn't work", r2: "You need the Microsoft account that owns Minecraft: Java Edition. Fully close the launcher, open it again and sign in again.",
+    q3: "Mobs look like animals", r3: "Accept the packs offered when you join the server, then enable the models pack once in Options → Resource Packs.",
+    q4: "How do I install the launcher?", r4: "Everything is explained step by step, for Windows, macOS and Linux, on the Download page.", r4Lien: "Install the launcher"
+  },
+  es: {
+    titrePage: "Soporte", kicker: "SOPORTE", titre: "¿Necesitas ayuda?", chapo: "El equipo te responde en Discord. Elige el lugar adecuado según tu problema: es más rápido.",
+    originsTitre: "Launcher, cuenta o compra", originsTexte: "Abre un ticket en el Discord de Origins, el servidor del proyecto.",
+    originsL1: "El launcher no se instala o no se actualiza", originsL2: "Inicio de sesión, perfil de Origins, amigos y mensajes", originsL3: "Compras y tienda", originsBouton: "DISCORD DE ORIGINS",
+    tempestTitre: "Un problema en el juego en Tempest", tempestTexte: "Todo lo que tiene que ver con el juego se resuelve en el Discord de Tempest.",
+    tempestL1: "Un bug en el juego, un mob, una misión o un objeto", tempestL2: "Los packs de recursos y los modelos", tempestL3: "Reportar a un jugador", tempestBouton: "Discord de Tempest",
+    bientotTitre: "Pronto: los tickets en la web", bientot: "PRONTO",
+    bientotTexte: "Podrás abrir un ticket aquí con tu perfil de Origins: el equipo te responderá en la web y recibirás un aviso en el launcher.",
+    questionsKicker: "RESPUESTAS RÁPIDAS", questionsTitre: "Antes de escribir al equipo", autresQuestions: "Preguntas sobre la instalación",
+    q1: "El juego no se inicia", r1: "El launcher ahora muestra el motivo. Prueba Reintentar; si sigue bloqueado, abre un ticket en el Discord de Origins con una captura de ese mensaje.",
+    q2: "El inicio de sesión de Microsoft no funciona", r2: "Necesitas la cuenta de Microsoft que tiene Minecraft: Java Edition. Cierra el launcher por completo, vuelve a abrirlo e inicia sesión de nuevo.",
+    q3: "Los mobs parecen animales", r3: "Acepta los packs que se ofrecen al conectarte al servidor y activa una vez el pack de modelos en Opciones → Packs de recursos.",
+    q4: "¿Cómo instalo el launcher?", r4: "Todo está explicado paso a paso, para Windows, macOS y Linux, en la página Descargar.", r4Lien: "Instalar el launcher"
+  },
+  de: {
+    titrePage: "Support", kicker: "SUPPORT", titre: "Brauchst du Hilfe?", chapo: "Das Team antwortet dir auf Discord. Wähle den richtigen Ort für dein Problem: Das geht schneller.",
+    originsTitre: "Launcher, Konto oder Kauf", originsTexte: "Öffne ein Ticket im Origins-Discord, dem Server des Projekts.",
+    originsL1: "Der Launcher lässt sich nicht installieren oder aktualisieren", originsL2: "Anmeldung, Origins-Profil, Freunde und Nachrichten", originsL3: "Käufe und Shop", originsBouton: "ORIGINS-DISCORD",
+    tempestTitre: "Ein Problem im Spiel auf Tempest", tempestTexte: "Alles, was das Spiel selbst betrifft, wird im Tempest-Discord geklärt.",
+    tempestL1: "Ein Bug im Spiel, ein Mob, eine Quest oder ein Gegenstand", tempestL2: "Ressourcenpakete und Modelle", tempestL3: "Einen Spieler melden", tempestBouton: "Tempest-Discord",
+    bientotTitre: "Bald: Tickets auf der Website", bientot: "BALD",
+    bientotTexte: "Du kannst hier bald mit deinem Origins-Profil ein Ticket öffnen: Das Team antwortet auf der Website und du wirst im Launcher benachrichtigt.",
+    questionsKicker: "SCHNELLE ANTWORTEN", questionsTitre: "Bevor du dem Team schreibst", autresQuestions: "Fragen zur Installation",
+    q1: "Das Spiel startet nicht", r1: "Der Launcher zeigt jetzt den Grund an. Versuche Erneut versuchen; wenn es weiter hängt, öffne ein Ticket im Origins-Discord mit einem Screenshot dieser Meldung.",
+    q2: "Die Microsoft-Anmeldung funktioniert nicht", r2: "Du brauchst das Microsoft-Konto, das Minecraft: Java Edition besitzt. Schließe den Launcher ganz, öffne ihn wieder und melde dich erneut an.",
+    q3: "Mobs sehen aus wie Tiere", r3: "Nimm die beim Betreten des Servers angebotenen Pakete an und aktiviere einmal das Modellpaket unter Optionen → Ressourcenpakete.",
+    q4: "Wie installiere ich den Launcher?", r4: "Alles wird Schritt für Schritt für Windows, macOS und Linux auf der Seite Herunterladen erklärt.", r4Lien: "Launcher installieren"
+  },
+  pt: {
+    titrePage: "Suporte", kicker: "SUPORTE", titre: "Precisa de ajuda?", chapo: "A equipe te responde no Discord. Escolha o lugar certo para o seu problema: é mais rápido.",
+    originsTitre: "Launcher, conta ou compra", originsTexte: "Abra um ticket no Discord do Origins, o servidor do projeto.",
+    originsL1: "O launcher não instala ou não atualiza", originsL2: "Login, perfil Origins, amigos e mensagens", originsL3: "Compras e loja", originsBouton: "DISCORD DO ORIGINS",
+    tempestTitre: "Um problema no jogo no Tempest", tempestTexte: "Tudo o que é do próprio jogo se resolve no Discord do Tempest.",
+    tempestL1: "Um bug no jogo, um mob, uma missão ou um item", tempestL2: "Os pacotes de recursos e os modelos", tempestL3: "Denunciar um jogador", tempestBouton: "Discord do Tempest",
+    bientotTitre: "Em breve: os tickets no site", bientot: "EM BREVE",
+    bientotTexte: "Você poderá abrir um ticket aqui com o seu perfil Origins: a equipe vai responder no site e você será avisado no launcher.",
+    questionsKicker: "RESPOSTAS RÁPIDAS", questionsTitre: "Antes de escrever para a equipe", autresQuestions: "Perguntas sobre a instalação",
+    q1: "O jogo não abre", r1: "O launcher agora mostra o motivo. Tente Tentar de novo; se continuar travado, abra um ticket no Discord do Origins com uma captura dessa mensagem.",
+    q2: "O login da Microsoft não funciona", r2: "Você precisa da conta Microsoft que tem o Minecraft: Java Edition. Feche o launcher por completo, abra de novo e entre outra vez.",
+    q3: "Os mobs parecem animais", r3: "Aceite os pacotes oferecidos ao entrar no servidor e ative uma vez o pacote de modelos em Opções → Pacotes de recursos.",
+    q4: "Como instalo o launcher?", r4: "Tudo é explicado passo a passo, para Windows, macOS e Linux, na página Baixar.", r4Lien: "Instalar o launcher"
+  }
+};
+</script>
+<script src="/commun/site.js"></script>
+<script>
+document.getElementById("lien-origins").href = SITE.discord;
+document.getElementById("lien-tempest").href = SITE.discordTempest;
+</script>
+</body>
+</html>

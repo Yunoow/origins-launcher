@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Origins · Des mondes à part, dans Minecraft</title>
+<meta name="description" content="Origins réunit nos serveurs Minecraft dans un seul launcher. Premier monde : Tempest.">
+<meta name="theme-color" content="#0f0b08">
+<link rel="icon" href="/commun/images/oeil.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800&display=swap">
+<link rel="stylesheet" href="/commun/site.css">
+<style>
+/* Accueil du site Origins (maquette « Site Origins · Accueil », design/site/Site-Accueil.dc.html). */
+
+/* 1. Grand en-tête peint */
+.hero {
+  position: relative; min-height: min(880px, 100vh);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+  padding: 120px var(--gouttiere) 60px;
+  background: linear-gradient(180deg, rgba(15, 11, 8, 0) 60%, var(--ebene) 100%), url("/commun/images/fond-origins.jpg") center 30% / cover no-repeat;
+}
+.hero .kicker { margin-bottom: 18px; }
+.marque { display: flex; align-items: center; justify-content: center; }
+.marque img { width: clamp(80px, 9vw, 116px); height: auto; }
+.marque span {
+  margin-left: calc(clamp(80px, 9vw, 116px) * -0.11);
+  font: 800 clamp(54px, 6.4vw, 80px)/1 var(--titre); color: #fff;
+  -webkit-text-stroke: 2.6px #0a1024; paint-order: stroke fill;
+}
+.hero h1 { margin: 22px 0 0; font: 800 clamp(30px, 4.4vw, 56px)/1.08 var(--titre); color: #fff; text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5); }
+.hero .chapo { margin: 16px auto 0; max-width: 640px; font-size: 18px; color: var(--texte); text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6); }
+.hero .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 30px; }
+.hero .petit { margin-top: 16px; font-size: 13.5px; color: var(--doux); }
+.decouvrir {
+  position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  font: 800 12px var(--police); letter-spacing: 0.22em; color: var(--doux); text-decoration: none;
+}
+.decouvrir:hover { color: #fff; }
+
+/* 2. Tempest */
+.carte-jeu {
+  position: relative; overflow: hidden; border-radius: 22px; border: 1px solid var(--filet);
+  padding: 40px 56px 44px; min-height: 460px;
+  background: linear-gradient(90deg, rgba(15, 11, 8, 0.94) 0%, rgba(15, 11, 8, 0.7) 45%, rgba(15, 11, 8, 0.1) 100%), url("/commun/images/tempest-fond.jpg") center / cover no-repeat;
+}
+.carte-jeu .logo-jeu { width: 190px; height: auto; filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.5)); }
+.carte-jeu p { max-width: 560px; margin: 18px 0 0; font-size: 17px; color: #fff; }
+.atouts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.atout {
+  display: inline-flex; align-items: center; gap: 8px; height: 38px; padding: 0 14px; border-radius: 12px;
+  background: rgba(15, 11, 8, 0.55); border: 1px solid var(--filet-fort); font-weight: 800; font-size: 14px; color: #fff;
+}
+.atout .icone { color: var(--or); }
+.carte-jeu .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+
+/* 3. Actus : cartes communes (commun/site.css) */
+
+/* 4. Le launcher */
+.bloc-launcher { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 56px; align-items: center; }
+.liste-avantages { list-style: none; margin: 26px 0 0; padding: 0; display: flex; flex-direction: column; gap: 18px; }
+.liste-avantages li { display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; }
+.liste-avantages .rond {
+  width: 44px; height: 44px; border-radius: 13px; display: flex; align-items: center; justify-content: center;
+  background: rgba(201, 161, 74, 0.14); border: 1px solid rgba(201, 161, 74, 0.35); color: var(--or);
+}
+.liste-avantages strong { display: block; font: 800 17px/1.25 var(--titre); color: #fff; }
+.liste-avantages span { font-size: 14.5px; color: var(--doux); }
+.bloc-launcher .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 30px; }
+.capture-launcher {
+  border-radius: 16px; overflow: hidden; border: 1px solid var(--filet-fort);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55), 0 0 0 6px rgba(201, 161, 74, 0.08);
+}
+.capture-launcher img { display: block; width: 100%; height: auto; }
+
+/* 5. Boutique */
+.grille-produits { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.produit { overflow: hidden; }
+.produit-image { height: 160px; display: flex; align-items: center; justify-content: center; color: #fff; }
+.produit-image .icone { width: 54px; height: 54px; stroke-width: 1.4; }
+.produit-corps { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 4px; }
+.produit-corps strong { font: 800 16px var(--titre); color: #fff; }
+.produit-bas { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; font-size: 13px; color: var(--doux); }
+.bientot { padding: 2px 8px; border-radius: 6px; background: rgba(255, 255, 255, 0.08); font-size: 11px; font-weight: 800; letter-spacing: 0.08em; color: var(--doux); }
+
+/* 6. Support et communauté */
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.encart { padding: 28px 30px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.encart h3 { margin: 0; font: 800 24px var(--titre); color: #fff; }
+.encart p { margin: 0; color: var(--doux); }
+
+@media (max-width: 1080px) {
+  .grille-produits { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bloc-launcher { grid-template-columns: 1fr; gap: 36px; }
+}
+@media (max-width: 860px) {
+  .hero { min-height: auto; padding: 110px var(--gouttiere) 80px; }
+  .hero .chapo { font-size: 16px; }
+  .carte-jeu { padding: 28px 22px; min-height: 0; background: linear-gradient(180deg, rgba(15, 11, 8, 0.75), rgba(15, 11, 8, 0.95)), url("/commun/images/tempest-fond.jpg") center / cover no-repeat; }
+  .carte-jeu .logo-jeu { width: 140px; }
+  .duo { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .grille-produits { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .produit-image { height: 110px; }
+  .hero .actions .bouton { width: 100%; }
+}
+</style>
+</head>
+<body data-page="accueil" data-titre="titrePage">
+<div id="site-tete"></div>
+
+<main>
+  <!-- 1. Grand en-tête -->
+  <section class="hero" aria-labelledby="titre-hero">
+    <div class="kicker" data-t="heroKicker">ORIGINS · NOS MONDES MINECRAFT</div>
+    <div class="marque" role="img" aria-label="Origins"><img src="/commun/images/oeil-regard.svg" alt=""><span aria-hidden="true">RIGINS</span></div>
+    <h1 id="titre-hero" data-t="heroTitre">Des mondes à part, dans Minecraft</h1>
+    <p class="chapo" data-t="heroTexte">Origins réunit nos serveurs dans un seul launcher : il installe le jeu, le garde à jour, et tu y retrouves tes amis et les actus. Premier monde : Tempest.</p>
+    <div class="actions">
+      <a class="bouton bouton-blanc" href="/telecharger/"><svg class="icone" aria-hidden="true"><use href="#i-telecharger"/></svg><span data-t="telechargerLauncher">TÉLÉCHARGER LE LAUNCHER</span></a>
+      <a class="bouton bouton-contour" id="hero-discord" href="#" target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" style="color: var(--or)"><use href="#i-bulle"/></svg><span data-t="rejoindreDiscord">Rejoindre le Discord</span></a>
+    </div>
+    <p class="petit" data-t="heroPetit">Gratuit · Windows, macOS et Linux · Il faut Minecraft : Java Edition</p>
+    <a class="decouvrir" href="#jeux"><span data-t="decouvrir">DÉCOUVRIR</span><svg class="icone" aria-hidden="true"><use href="#i-chevron"/></svg></a>
+  </section>
+
+  <!-- 2. Tempest -->
+  <section class="section" id="jeux" aria-labelledby="titre-jeux">
+    <div class="contenant">
+      <div class="tete-section"><div><div class="kicker" data-t="jeuxKicker">NOS JEUX</div><h2 class="titre-section" id="titre-jeux" data-t="jeuxTitre">Tempest, le premier monde</h2></div></div>
+      <article class="carte-jeu">
+        <img class="logo-jeu" src="/commun/images/tempest-logo.png" alt="Tempest" width="190" height="152">
+        <div style="margin-top: 14px"><span class="pastille" data-t="tempestStatut">EN DÉVELOPPEMENT · OUVERT À L'ÉQUIPE ET AUX TESTEURS</span></div>
+        <p data-t="tempestTexte">Un monde fantasy qui se construit avec vous : des quêtes, des métiers, des mobs et des donjons, avec des écrans faits pour lui.</p>
+        <div class="atouts">
+          <span class="atout"><svg class="icone" aria-hidden="true"><use href="#i-epee"/></svg><span data-t="atoutQuetes">Quêtes</span></span>
+          <span class="atout"><svg class="icone" aria-hidden="true"><use href="#i-pioche"/></svg><span data-t="atoutMetiers">Métiers</span></span>
+          <span class="atout"><svg class="icone" aria-hidden="true"><use href="#i-crane"/></svg><span data-t="atoutMobs">Mobs et donjons</span></span>
+          <span class="atout"><svg class="icone" aria-hidden="true"><use href="#i-langues"/></svg><span data-t="atoutLangues">5 langues</span></span>
+        </div>
+        <div class="actions">
+          <a class="bouton bouton-blanc" href="/telecharger/" data-t="jouerLauncher">JOUER AVEC LE LAUNCHER</a>
+          <a class="bouton bouton-contour" href="/jeux/tempest/" data-t="decouvrirTempest">Découvrir Tempest</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 3. Actus -->
+  <section class="section" id="actus" aria-labelledby="titre-actus" style="padding-top: 0">
+    <div class="contenant">
+      <div class="tete-section">
+        <div><div class="kicker" data-t="actusKicker">ACTUS</div><h2 class="titre-section" id="titre-actus" data-t="actusTitre">Les dernières nouvelles</h2><p class="chapo" data-t="actusTexte">Les mêmes que dans le launcher, dans ta langue.</p></div>
+        <a class="lien-or" href="/actus/"><span data-t="toutesActus">Toutes les actus</span> →</a>
+      </div>
+      <div class="grille-actus" id="grille-actus"></div>
+    </div>
+  </section>
+
+  <!-- 4. Le launcher -->
+  <section class="section" aria-labelledby="titre-launcher" style="background: var(--ebene-fonce)">
+    <div class="contenant bloc-launcher">
+      <div>
+        <div class="kicker" data-t="launcherKicker">LE LAUNCHER</div>
+        <h2 class="titre-section" id="titre-launcher" data-t="launcherTitre">Tout Origins dans une fenêtre</h2>
+        <ul class="liste-avantages">
+          <li><span class="rond"><svg class="icone" aria-hidden="true"><use href="#i-telecharger"/></svg></span><div><strong data-t="av1Titre">Installe Tempest et le garde à jour</strong><span data-t="av1Texte">Un clic pour jouer ; les mises à jour se font toutes seules.</span></div></li>
+          <li><span class="rond"><svg class="icone" aria-hidden="true"><use href="#i-bulle"/></svg></span><div><strong data-t="av2Titre">Tes amis et tes messages</strong><span data-t="av2Texte">Ajoute tes amis par leur Origins ID ; tes MP suivent entre le jeu et le launcher.</span></div></li>
+          <li><span class="rond"><svg class="icone" aria-hidden="true"><use href="#i-globe"/></svg></span><div><strong data-t="av3Titre">Les actus du serveur</strong><span data-t="av3Texte">Ce qui change, dans ta langue, dès que ça sort.</span></div></li>
+          <li><span class="rond"><svg class="icone" aria-hidden="true"><use href="#i-profil"/></svg></span><div><strong data-t="av4Titre">Ton profil Origins</strong><span data-t="av4Texte">Ton nom, ton avatar et ton Origins ID, les mêmes partout.</span></div></li>
+        </ul>
+        <div class="actions">
+          <a class="bouton bouton-blanc" href="/telecharger/"><svg class="icone" aria-hidden="true"><use href="#i-telecharger"/></svg><span data-t="telecharger">TÉLÉCHARGER</span></a>
+          <span class="discret" data-t="systemes">Windows, macOS et Linux</span>
+        </div>
+      </div>
+      <figure class="capture-launcher" style="margin: 0"><img src="/commun/images/launcher.jpg" alt="" data-t-aria="captureLauncher" width="1280" height="760" loading="lazy"></figure>
+    </div>
+  </section>
+
+  <!-- 5. Boutique -->
+  <section class="section" aria-labelledby="titre-boutique">
+    <div class="contenant">
+      <div class="tete-section">
+        <div><div class="kicker" data-t="boutiqueKicker">BOUTIQUE</div><h2 class="titre-section" id="titre-boutique" data-t="boutiqueTitre">Soutiens Origins</h2><p class="chapo" data-t="boutiqueTexte">Des cosmétiques pour te démarquer, rien qui donne un avantage en jeu.</p></div>
+        <a class="lien-or" href="/boutique/"><span data-t="voirBoutique">Voir la boutique</span> →</a>
+      </div>
+      <div class="grille-produits">
+        <a class="carte produit" href="/boutique/"><div class="produit-image" style="background: linear-gradient(160deg, rgba(40,90,170,0.5), rgba(0,0,0,0.35)), #251910"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M12 8l1.5 2.5L16 12l-2.5 1.5L12 16l-1.5-2.5L8 12l2.5-1.5z"/></svg></div><div class="produit-corps"><strong data-t="pAura">Aura de magicule</strong><div class="produit-bas"><span>Tempest</span><span class="bientot" data-t="bientot">BIENTÔT</span></div></div></a>
+        <a class="carte produit" href="/boutique/"><div class="produit-image" style="background: linear-gradient(160deg, rgba(60,80,140,0.5), rgba(0,0,0,0.35)), #251910"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="9" r="2"/><circle cx="12" cy="6" r="2"/><circle cx="17" cy="9" r="2"/><path d="M8 17c0-2.5 1.8-5 4-5s4 2.5 4 5c0 1.5-1.2 2.5-2.5 2.5-.9 0-1-.5-1.5-.5s-.6.5-1.5.5C9.2 19.5 8 18.5 8 17z"/></svg></div><div class="produit-corps"><strong data-t="pFamilier">Familier lumineux</strong><div class="produit-bas"><span>Tempest</span><span class="bientot" data-t="bientot">BIENTÔT</span></div></div></a>
+        <a class="carte produit" href="/boutique/"><div class="produit-image" style="background: linear-gradient(160deg, rgba(150,110,30,0.5), rgba(0,0,0,0.35)), #251910"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18c1.2 0 1.6-1 1.1-1.9-.6-1.1.1-2.1 1.3-2.1H17a4 4 0 0 0 4-4c0-5.5-4-10-9-10z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/></svg></div><div class="produit-corps"><strong data-t="pThemes">Thèmes du launcher</strong><div class="produit-bas"><span>Origins</span><span class="bientot" data-t="bientot">BIENTÔT</span></div></div></a>
+        <a class="carte produit" href="/boutique/"><div class="produit-image" style="background: linear-gradient(160deg, rgba(140,70,110,0.5), rgba(0,0,0,0.35)), #251910"><svg class="icone" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></div><div class="produit-corps"><strong data-t="pCadre">Cadre d'avatar</strong><div class="produit-bas"><span>Origins</span><span class="bientot" data-t="bientot">BIENTÔT</span></div></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Support et communauté -->
+  <section class="section" style="padding-top: 0">
+    <div class="contenant duo">
+      <div class="carte encart">
+        <h3 data-t="souciTitre">Un souci ?</h3>
+        <p data-t="souciTexte">Écris à l'équipe : on t'aide à installer, à jouer ou à régler un problème.</p>
+        <a class="bouton bouton-contour bouton-petit" href="/support/"><svg class="icone" aria-hidden="true"><use href="#i-aide"/></svg><span data-t="support">Support</span></a>
+      </div>
+      <div class="carte encart">
+        <h3 data-t="communauteTitre">La communauté</h3>
+        <p data-t="communauteTexte">Annonces, entraide et tests en avant-première, sur le Discord d'Origins. Facultatif.</p>
+        <a class="bouton bouton-contour bouton-petit" id="encart-discord" href="#" target="_blank" rel="noopener"><svg class="icone" aria-hidden="true" style="color: var(--or)"><use href="#i-bulle"/></svg>Discord</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div id="site-pied"></div>
+
+<script>
+/* Textes de l'Accueil, dans les 5 langues du launcher. */
+window.TEXTES_PAGE = {
+  fr: {
+    titrePage: "Des mondes à part, dans Minecraft",
+    heroKicker: "ORIGINS · NOS MONDES MINECRAFT", heroTitre: "Des mondes à part, dans Minecraft",
+    heroTexte: "Origins réunit nos serveurs dans un seul launcher : il installe le jeu, le garde à jour, et tu y retrouves tes amis et les actus. Premier monde : Tempest.",
+    telechargerLauncher: "TÉLÉCHARGER LE LAUNCHER", rejoindreDiscord: "Rejoindre le Discord",
+    heroPetit: "Gratuit · Windows, macOS et Linux · Il faut Minecraft : Java Edition", decouvrir: "DÉCOUVRIR",
+    jeuxKicker: "NOS JEUX", jeuxTitre: "Tempest, le premier monde",
+    tempestStatut: "EN DÉVELOPPEMENT · OUVERT À L'ÉQUIPE ET AUX TESTEURS",
+    tempestTexte: "Un monde fantasy qui se construit avec vous : des quêtes, des métiers, des mobs et des donjons, avec des écrans faits pour lui.",
+    atoutQuetes: "Quêtes", atoutMetiers: "Métiers", atoutMobs: "Mobs et donjons", atoutLangues: "5 langues",
+    jouerLauncher: "JOUER AVEC LE LAUNCHER", decouvrirTempest: "Découvrir Tempest",
+    actusKicker: "ACTUS", actusTitre: "Les dernières nouvelles", actusTexte: "Les mêmes que dans le launcher, dans ta langue.",
+    toutesActus: "Toutes les actus", actusVide: "Les actus arrivent bientôt.",
+    launcherKicker: "LE LAUNCHER", launcherTitre: "Tout Origins dans une fenêtre",
+    av1Titre: "Installe Tempest et le garde à jour", av1Texte: "Un clic pour jouer ; les mises à jour se font toutes seules.",
+    av2Titre: "Tes amis et tes messages", av2Texte: "Ajoute tes amis par leur Origins ID ; tes MP suivent entre le jeu et le launcher.",
+    av3Titre: "Les actus du serveur", av3Texte: "Ce qui change, dans ta langue, dès que ça sort.",
+    av4Titre: "Ton profil Origins", av4Texte: "Ton nom, ton avatar et ton Origins ID, les mêmes partout.",
+    telecharger: "TÉLÉCHARGER", systemes: "Windows, macOS et Linux", captureLauncher: "Le launcher Origins",
+    boutiqueKicker: "BOUTIQUE", boutiqueTitre: "Soutiens Origins", boutiqueTexte: "Des cosmétiques pour te démarquer, rien qui donne un avantage en jeu.",
+    voirBoutique: "Voir la boutique", pAura: "Aura de magicule", pFamilier: "Familier lumineux", pThemes: "Thèmes du launcher", pCadre: "Cadre d'avatar", bientot: "BIENTÔT",
+    souciTitre: "Un souci ?", souciTexte: "Écris à l'équipe : on t'aide à installer, à jouer ou à régler un problème.", support: "Support",
+    communauteTitre: "La communauté", communauteTexte: "Annonces, entraide et tests en avant-première, sur le Discord d'Origins. Facultatif."
+  },
+  en: {
+    titrePage: "Worlds apart, in Minecraft",
+    heroKicker: "ORIGINS · OUR MINECRAFT WORLDS", heroTitre: "Worlds apart, in Minecraft",
+    heroTexte: "Origins brings our servers together in one launcher: it installs the game, keeps it up to date, and that's where you find your friends and the news. First world: Tempest.",
+    telechargerLauncher: "DOWNLOAD THE LAUNCHER", rejoindreDiscord: "Join the Discord",
+    heroPetit: "Free · Windows, macOS and Linux · Requires Minecraft: Java Edition", decouvrir: "DISCOVER",
+    jeuxKicker: "OUR GAMES", jeuxTitre: "Tempest, the first world",
+    tempestStatut: "IN DEVELOPMENT · OPEN TO THE TEAM AND TESTERS",
+    tempestTexte: "A fantasy world built with you: quests, professions, mobs and dungeons, with screens made just for it.",
+    atoutQuetes: "Quests", atoutMetiers: "Professions", atoutMobs: "Mobs and dungeons", atoutLangues: "5 languages",
+    jouerLauncher: "PLAY WITH THE LAUNCHER", decouvrirTempest: "Discover Tempest",
+    actusKicker: "NEWS", actusTitre: "The latest news", actusTexte: "The same as in the launcher, in your language.",
+    toutesActus: "All the news", actusVide: "News is coming soon.",
+    launcherKicker: "THE LAUNCHER", launcherTitre: "All of Origins in one window",
+    av1Titre: "Installs Tempest and keeps it up to date", av1Texte: "One click to play; updates happen on their own.",
+    av2Titre: "Your friends and your messages", av2Texte: "Add friends by their Origins ID; your DMs follow you between the game and the launcher.",
+    av3Titre: "Server news", av3Texte: "What changes, in your language, as soon as it's out.",
+    av4Titre: "Your Origins profile", av4Texte: "Your name, your avatar and your Origins ID, the same everywhere.",
+    telecharger: "DOWNLOAD", systemes: "Windows, macOS and Linux", captureLauncher: "The Origins launcher",
+    boutiqueKicker: "SHOP", boutiqueTitre: "Support Origins", boutiqueTexte: "Cosmetics to stand out, nothing that gives an in-game advantage.",
+    voirBoutique: "See the shop", pAura: "Magicule aura", pFamilier: "Glowing pet", pThemes: "Launcher themes", pCadre: "Avatar frame", bientot: "SOON",
+    souciTitre: "A problem?", souciTexte: "Write to the team: we help you install, play or fix a problem.", support: "Support",
+    communauteTitre: "The community", communauteTexte: "Announcements, help and early tests, on the Origins Discord. Optional."
+  },
+  es: {
+    titrePage: "Mundos aparte, en Minecraft",
+    heroKicker: "ORIGINS · NUESTROS MUNDOS DE MINECRAFT", heroTitre: "Mundos aparte, en Minecraft",
+    heroTexte: "Origins reúne nuestros servidores en un solo launcher: instala el juego, lo mantiene actualizado, y ahí encuentras a tus amigos y las noticias. Primer mundo: Tempest.",
+    telechargerLauncher: "DESCARGAR EL LAUNCHER", rejoindreDiscord: "Unirse al Discord",
+    heroPetit: "Gratis · Windows, macOS y Linux · Necesitas Minecraft: Java Edition", decouvrir: "DESCUBRIR",
+    jeuxKicker: "NUESTROS JUEGOS", jeuxTitre: "Tempest, el primer mundo",
+    tempestStatut: "EN DESARROLLO · ABIERTO AL EQUIPO Y A LOS TESTERS",
+    tempestTexte: "Un mundo de fantasía que se construye contigo: misiones, oficios, mobs y mazmorras, con pantallas hechas para él.",
+    atoutQuetes: "Misiones", atoutMetiers: "Oficios", atoutMobs: "Mobs y mazmorras", atoutLangues: "5 idiomas",
+    jouerLauncher: "JUGAR CON EL LAUNCHER", decouvrirTempest: "Descubrir Tempest",
+    actusKicker: "NOTICIAS", actusTitre: "Las últimas noticias", actusTexte: "Las mismas que en el launcher, en tu idioma.",
+    toutesActus: "Todas las noticias", actusVide: "Las noticias llegan pronto.",
+    launcherKicker: "EL LAUNCHER", launcherTitre: "Todo Origins en una ventana",
+    av1Titre: "Instala Tempest y lo mantiene al día", av1Texte: "Un clic para jugar; las actualizaciones se hacen solas.",
+    av2Titre: "Tus amigos y tus mensajes", av2Texte: "Añade amigos por su Origins ID; tus MD te siguen entre el juego y el launcher.",
+    av3Titre: "Las noticias del servidor", av3Texte: "Lo que cambia, en tu idioma, en cuanto sale.",
+    av4Titre: "Tu perfil de Origins", av4Texte: "Tu nombre, tu avatar y tu Origins ID, los mismos en todas partes.",
+    telecharger: "DESCARGAR", systemes: "Windows, macOS y Linux", captureLauncher: "El launcher de Origins",
+    boutiqueKicker: "TIENDA", boutiqueTitre: "Apoya a Origins", boutiqueTexte: "Cosméticos para destacar, nada que dé ventaja en el juego.",
+    voirBoutique: "Ver la tienda", pAura: "Aura de magícula", pFamilier: "Mascota luminosa", pThemes: "Temas del launcher", pCadre: "Marco de avatar", bientot: "PRONTO",
+    souciTitre: "¿Un problema?", souciTexte: "Escribe al equipo: te ayudamos a instalar, jugar o resolver un problema.", support: "Soporte",
+    communauteTitre: "La comunidad", communauteTexte: "Anuncios, ayuda y pruebas anticipadas, en el Discord de Origins. Opcional."
+  },
+  de: {
+    titrePage: "Welten für sich, in Minecraft",
+    heroKicker: "ORIGINS · UNSERE MINECRAFT-WELTEN", heroTitre: "Welten für sich, in Minecraft",
+    heroTexte: "Origins vereint unsere Server in einem Launcher: Er installiert das Spiel, hält es aktuell, und dort findest du deine Freunde und die News. Erste Welt: Tempest.",
+    telechargerLauncher: "LAUNCHER HERUNTERLADEN", rejoindreDiscord: "Dem Discord beitreten",
+    heroPetit: "Kostenlos · Windows, macOS und Linux · Minecraft: Java Edition nötig", decouvrir: "ENTDECKEN",
+    jeuxKicker: "UNSERE SPIELE", jeuxTitre: "Tempest, die erste Welt",
+    tempestStatut: "IN ENTWICKLUNG · OFFEN FÜR TEAM UND TESTER",
+    tempestTexte: "Eine Fantasywelt, die mit euch entsteht: Quests, Berufe, Mobs und Dungeons, mit eigens gemachten Bildschirmen.",
+    atoutQuetes: "Quests", atoutMetiers: "Berufe", atoutMobs: "Mobs und Dungeons", atoutLangues: "5 Sprachen",
+    jouerLauncher: "MIT DEM LAUNCHER SPIELEN", decouvrirTempest: "Tempest entdecken",
+    actusKicker: "NEWS", actusTitre: "Die neuesten News", actusTexte: "Dieselben wie im Launcher, in deiner Sprache.",
+    toutesActus: "Alle News", actusVide: "Die News kommen bald.",
+    launcherKicker: "DER LAUNCHER", launcherTitre: "Ganz Origins in einem Fenster",
+    av1Titre: "Installiert Tempest und hält es aktuell", av1Texte: "Ein Klick zum Spielen; Updates laufen von selbst.",
+    av2Titre: "Deine Freunde und Nachrichten", av2Texte: "Füge Freunde per Origins-ID hinzu; deine PNs folgen dir zwischen Spiel und Launcher.",
+    av3Titre: "Server-News", av3Texte: "Was sich ändert, in deiner Sprache, sobald es erscheint.",
+    av4Titre: "Dein Origins-Profil", av4Texte: "Dein Name, dein Avatar und deine Origins-ID, überall gleich.",
+    telecharger: "HERUNTERLADEN", systemes: "Windows, macOS und Linux", captureLauncher: "Der Origins-Launcher",
+    boutiqueKicker: "SHOP", boutiqueTitre: "Unterstütze Origins", boutiqueTexte: "Kosmetik, um aufzufallen, nichts, was im Spiel einen Vorteil gibt.",
+    voirBoutique: "Zum Shop", pAura: "Magicula-Aura", pFamilier: "Leuchtendes Haustier", pThemes: "Launcher-Designs", pCadre: "Avatar-Rahmen", bientot: "BALD",
+    souciTitre: "Ein Problem?", souciTexte: "Schreib dem Team: Wir helfen beim Installieren, Spielen oder Lösen eines Problems.", support: "Support",
+    communauteTitre: "Die Community", communauteTexte: "Ankündigungen, Hilfe und frühe Tests auf dem Origins-Discord. Freiwillig."
+  },
+  pt: {
+    titrePage: "Mundos à parte, no Minecraft",
+    heroKicker: "ORIGINS · NOSSOS MUNDOS DE MINECRAFT", heroTitre: "Mundos à parte, no Minecraft",
+    heroTexte: "O Origins reúne nossos servidores em um só launcher: ele instala o jogo, mantém atualizado, e é lá que você encontra seus amigos e as notícias. Primeiro mundo: Tempest.",
+    telechargerLauncher: "BAIXAR O LAUNCHER", rejoindreDiscord: "Entrar no Discord",
+    heroPetit: "Grátis · Windows, macOS e Linux · Precisa do Minecraft: Java Edition", decouvrir: "DESCOBRIR",
+    jeuxKicker: "NOSSOS JOGOS", jeuxTitre: "Tempest, o primeiro mundo",
+    tempestStatut: "EM DESENVOLVIMENTO · ABERTO À EQUIPE E AOS TESTADORES",
+    tempestTexte: "Um mundo de fantasia construído com você: missões, profissões, mobs e masmorras, com telas feitas para ele.",
+    atoutQuetes: "Missões", atoutMetiers: "Profissões", atoutMobs: "Mobs e masmorras", atoutLangues: "5 idiomas",
+    jouerLauncher: "JOGAR COM O LAUNCHER", decouvrirTempest: "Descobrir o Tempest",
+    actusKicker: "NOTÍCIAS", actusTitre: "As últimas notícias", actusTexte: "As mesmas do launcher, no seu idioma.",
+    toutesActus: "Todas as notícias", actusVide: "As notícias chegam em breve.",
+    launcherKicker: "O LAUNCHER", launcherTitre: "Todo o Origins em uma janela",
+    av1Titre: "Instala o Tempest e mantém atualizado", av1Texte: "Um clique para jogar; as atualizações acontecem sozinhas.",
+    av2Titre: "Seus amigos e suas mensagens", av2Texte: "Adicione amigos pelo Origins ID; suas DMs seguem entre o jogo e o launcher.",
+    av3Titre: "As notícias do servidor", av3Texte: "O que muda, no seu idioma, assim que sai.",
+    av4Titre: "Seu perfil Origins", av4Texte: "Seu nome, seu avatar e seu Origins ID, os mesmos em todo lugar.",
+    telecharger: "BAIXAR", systemes: "Windows, macOS e Linux", captureLauncher: "O launcher Origins",
+    boutiqueKicker: "LOJA", boutiqueTitre: "Apoie o Origins", boutiqueTexte: "Cosméticos para se destacar, nada que dê vantagem no jogo.",
+    voirBoutique: "Ver a loja", pAura: "Aura de magícula", pFamilier: "Mascote luminoso", pThemes: "Temas do launcher", pCadre: "Moldura de avatar", bientot: "EM BREVE",
+    souciTitre: "Algum problema?", souciTexte: "Escreva para a equipe: ajudamos a instalar, jogar ou resolver um problema.", support: "Suporte",
+    communauteTitre: "A comunidade", communauteTexte: "Anúncios, ajuda e testes antecipados, no Discord do Origins. Opcional."
+  }
+};
+
+/* Les 3 dernières actus (l'API Origins, les mêmes que dans le launcher). */
+let actusChargees = null;
+async function chargerActus() {
+  actusChargees = (await Site.actus("tempest")).slice(0, 3);
+  dessinerActus();
+}
+function dessinerActus() {
+  Site.grilleActus(document.getElementById("grille-actus"), actusChargees);
+}
+
+window.rendrePage = function () { dessinerActus(); };
+</script>
+<script src="/commun/site.js"></script>
+<script>
+document.getElementById("hero-discord").href = SITE.discord;
+document.getElementById("encart-discord").href = SITE.discord;
+chargerActus();
+</script>
+</body>
+</html>
