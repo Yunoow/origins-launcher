@@ -526,7 +526,7 @@ function el(id) { return document.getElementById(id); }
 function icone(nom, taille) { return '<svg width="' + taille + '" height="' + taille + '" aria-hidden="true"><use href="#i-' + nom + '"/></svg>'; }
 function echapper(s) { return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
 function cleChoisie() { return etat.os === "windows" ? "win" : etat.os === "mac" ? etat.mac : etat.linux; }
-function url(cle) { return CONFIG.dossier + CONFIG.fichiers[cle]; }
+function url(cle) { return CONFIG.dossier + encodeURIComponent(CONFIG.fichiers[cle]); }
 function taille(cle) {
   const o = etat.tailles[cle];
   if (!o) return "";
@@ -579,6 +579,9 @@ async function lireManifeste() {
     const s = /^\s*size:\s*(\d+)/m.exec(yml);
     if (v) etat.version = v[1];
     if (s) etat.tailles.win = Number(s[1]);
+    // Le nom réel de l'installeur Windows (« Origins Launcher Setup 0.6.3.exe ») : secours si le nom fixe manque.
+    const p = /^path:\s*['"]?(.+?)['"]?\s*$/m.exec(yml);
+    if (p && /\.exe$/i.test(p[1]) && !/[\/\\]/.test(p[1])) etat.cheminWin = p[1];
   } catch (e) { /* pas de manifeste : la page marche sans la version */ }
 }
 async function verifierFichiers() {
@@ -727,6 +730,11 @@ document.addEventListener("keydown", (e) => { if (e.key === "Escape") { el("list
   detecterSysteme();
   rendre(); rendreFaq();
   await Promise.all([lireManifeste(), verifierFichiers()]);
+  // Installeur Windows en ligne sans son nom fixe (mis en ligne avant ce nom) : on prend celui de latest.yml.
+  if (!etat.dispo.win && etat.cheminWin) {
+    CONFIG.fichiers.win = etat.cheminWin;
+    try { etat.dispo.win = (await fetch(url("win"), { method: "HEAD", cache: "no-store" })).ok; } catch (e) { /* reste indisponible */ }
+  }
   rendre();
   detecterPuceMac();
 })();
