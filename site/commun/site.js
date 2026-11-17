@@ -305,9 +305,11 @@ function fermerMenuCompte() {
 function dessinerCompte() {
   const zone = document.getElementById("zone-compte");
   if (!zone) return;
-  if (!CONNEXION || !compteCharge) { zone.innerHTML = ""; return; }
+  if (!compteCharge) { zone.innerHTML = ""; return; }
   const moi = Site.moi;
   if (!moi) {
+    // Pas connecté : le bouton « Se connecter » seulement quand la connexion est ouverte (ou en mode essai).
+    if (!CONNEXION) { zone.innerHTML = ""; return; }
     const ici = location.pathname + location.search;
     const suite = location.pathname.startsWith("/connexion/") || ici === "/" ? "" : "?suite=" + encodeURIComponent(ici);
     zone.innerHTML = `<a class="bouton-connexion" href="/connexion/${suite}">${Site.icone("profil")}<span>${Site.echapper(Site.t("seConnecter"))}</span></a>`;
@@ -342,7 +344,9 @@ function dessinerCompte() {
 }
 
 async function chargerCompte() {
-  if (!CONNEXION) return null;
+  // Toujours en HTTPS (ou en local) : quelqu'un qui a déjà une session (par exemple venu du launcher) se voit connecté
+  // tout de suite, même si la connexion n'est pas encore ouverte au public. Jamais en http : le cookie n'y existe pas.
+  if (location.protocol !== "https:" && !["localhost", "127.0.0.1"].includes(location.hostname)) return null;
   const r = await Site.appel("/site/moi").catch(() => ({ ok: false }));
   Site.moi = r.ok ? r.json : null;
   compteCharge = true;
