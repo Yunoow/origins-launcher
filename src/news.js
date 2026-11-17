@@ -12,12 +12,18 @@ const updateHistoryI18n = {
 
     fr: [
         {
-            version: "0.6.4", date: "4 NOVEMBRE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.4",
-            text: "Un seul launcher à la fois.",
+            version: "0.7.0", date: "17 NOVEMBRE 2026", type: "LAUNCHER", title: "Launcher Update 0.7.0",
+            text: "Un tout nouveau look, le launcher sur Mac et Linux, et ton profil Origins sur le site.",
             changes: [
-                "Rouvrir le launcher pendant une partie ne lance plus un deuxième launcher : celui qui tourne déjà revient à l'écran",
-                "Fini les icônes du launcher en double à côté de l'horloge",
-                "Si le jeu ne se lance pas, le launcher affiche maintenant pourquoi, et le bouton Réessayer marche à nouveau"
+                "Nouveau design : thème Or et ébène par défaut, et de nouvelles pages (accueil, jeux, actus, boutique, contacts, paramètres)",
+                "Nouveau logo et nouvelle icône Origins",
+                "Le launcher arrive sur Mac et Linux : tout est sur la page Télécharger du site",
+                "« Ouvrir sur le site » (clique sur ton avatar) : tu arrives sur le site Origins déjà connecté",
+                "Te connecter au site depuis ton navigateur : la demande arrive dans la cloche, tu l'acceptes ici",
+                "Discord facultatif : lie-le à ton profil si tu veux, depuis ton profil",
+                "Java 21 s'installe tout seul s'il manque ; si le jeu ne se lance pas, le launcher te dit pourquoi",
+                "Un seul launcher à la fois, et plus d'icônes en double à côté de l'horloge",
+                "Boutons Discord d'Origins et de Tempest, et curseur de mémoire du jeu corrigé"
             ]
         },
         {
@@ -162,12 +168,18 @@ const updateHistoryI18n = {
 
     en: [
         {
-            version: "0.6.4", date: "NOVEMBER 4, 2026", type: "LAUNCHER", title: "Launcher Update 0.6.4",
-            text: "Only one launcher at a time.",
+            version: "0.7.0", date: "NOVEMBER 17, 2026", type: "LAUNCHER", title: "Launcher Update 0.7.0",
+            text: "A brand-new look, the launcher on Mac and Linux, and your Origins profile on the website.",
             changes: [
-                "Opening the launcher again during a game no longer starts a second launcher: the one already running comes back on screen",
-                "No more duplicate launcher icons next to the clock",
-                "If the game doesn't start, the launcher now shows why, and the Retry button works again"
+                "New design: Gold and ebony theme by default, and new pages (home, games, news, shop, contacts, settings)",
+                "New Origins logo and icon",
+                "The launcher comes to Mac and Linux: everything is on the website's Download page",
+                "“Open on the website” (click your avatar): you arrive on the Origins website already signed in",
+                "Sign in to the website from your browser: the request arrives under the bell, you accept it here",
+                "Optional Discord: link it to your profile if you want, from your profile",
+                "Java 21 installs itself if it's missing; if the game won't start, the launcher tells you why",
+                "Only one launcher at a time, and no more duplicate icons next to the clock",
+                "Origins and Tempest Discord buttons, and a fixed game memory slider"
             ]
         },
         {
@@ -279,12 +291,18 @@ const updateHistoryI18n = {
 
     es: [
         {
-            version: "0.6.4", date: "4 DE NOVIEMBRE DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.4",
-            text: "Un solo launcher a la vez.",
+            version: "0.7.0", date: "17 DE NOVIEMBRE DE 2026", type: "LAUNCHER", title: "Launcher Update 0.7.0",
+            text: "Un aspecto totalmente nuevo, el launcher en Mac y Linux, y tu perfil de Origins en la web.",
             changes: [
-                "Volver a abrir el launcher durante una partida ya no abre un segundo launcher: vuelve a la pantalla el que ya estaba abierto",
-                "Se acabaron los iconos del launcher duplicados junto al reloj",
-                "Si el juego no arranca, el launcher ahora muestra el motivo, y el botón Reintentar vuelve a funcionar"
+                "Nuevo diseño: tema Oro y ébano por defecto, y páginas nuevas (inicio, juegos, noticias, tienda, contactos, ajustes)",
+                "Nuevo logo e icono de Origins",
+                "El launcher llega a Mac y Linux: todo está en la página Descargar de la web",
+                "«Abrir en la web» (haz clic en tu avatar): llegas a la web de Origins con la sesión ya iniciada",
+                "Inicia sesión en la web desde tu navegador: la solicitud llega a la campana y la aceptas aquí",
+                "Discord opcional: vincúlalo a tu perfil si quieres, desde tu perfil",
+                "Java 21 se instala solo si falta; si el juego no se inicia, el launcher te dice por qué",
+                "Un solo launcher a la vez, y sin iconos duplicados junto al reloj",
+                "Botones de Discord de Origins y de Tempest, y control de memoria del juego corregido"
             ]
         },
         {
@@ -396,12 +414,18 @@ const updateHistoryI18n = {
 
     de: [
         {
-            version: "0.6.4", date: "4. NOVEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.6.4",
-            text: "Nur noch ein Launcher gleichzeitig.",
+            version: "0.7.0", date: "17. NOVEMBER 2026", type: "LAUNCHER", title: "Launcher Update 0.7.0",
+            text: "Ein ganz neuer Look, der Launcher für Mac und Linux und dein Origins-Profil auf der Website.",
             changes: [
-                "Wird der Launcher während einer Partie erneut geöffnet, startet kein zweiter Launcher mehr: der bereits laufende kommt wieder in den Vordergrund",
-                "Keine doppelten Launcher-Symbole mehr neben der Uhr",
-                "Startet das Spiel nicht, zeigt der Launcher jetzt den Grund an, und die Schaltfläche „Erneut versuchen“ funktioniert wieder"
+                "Neues Design: Gold und Ebenholz als Standard und neue Seiten (Start, Spiele, News, Shop, Kontakte, Einstellungen)",
+                "Neues Origins-Logo und neues Symbol",
+                "Der Launcher kommt auf Mac und Linux: alles auf der Download-Seite der Website",
+                "„Auf der Website öffnen“ (klicke auf dein Avatar): Du kommst schon angemeldet auf die Origins-Website",
+                "Melde dich im Browser auf der Website an: Die Anfrage kommt unter der Glocke an, du nimmst sie hier an",
+                "Discord freiwillig: Verknüpfe ihn mit deinem Profil, wenn du willst",
+                "Java 21 installiert sich selbst, wenn es fehlt; startet das Spiel nicht, sagt dir der Launcher warum",
+                "Nur ein Launcher gleichzeitig und keine doppelten Symbole mehr neben der Uhr",
+                "Discord-Buttons für Origins und Tempest, und der Speicher-Regler des Spiels ist repariert"
             ]
         },
         {
@@ -513,12 +537,18 @@ const updateHistoryI18n = {
 
     pt: [
         {
-            version: "0.6.4", date: "4 DE NOVEMBRO DE 2026", type: "LAUNCHER", title: "Launcher Update 0.6.4",
-            text: "Só um launcher de cada vez.",
+            version: "0.7.0", date: "17 DE NOVEMBRO DE 2026", type: "LAUNCHER", title: "Launcher Update 0.7.0",
+            text: "Um visual totalmente novo, o launcher no Mac e no Linux, e o seu perfil Origins no site.",
             changes: [
-                "Abrir o launcher de novo durante uma partida não abre mais um segundo launcher: o que já está aberto volta para a tela",
-                "Chega de ícones do launcher duplicados ao lado do relógio",
-                "Se o jogo não abrir, o launcher agora mostra o motivo, e o botão Tentar novamente volta a funcionar"
+                "Novo design: tema Ouro e ébano por padrão, e novas páginas (início, jogos, notícias, loja, contatos, configurações)",
+                "Novo logo e novo ícone do Origins",
+                "O launcher chega ao Mac e ao Linux: tudo está na página Baixar do site",
+                "“Abrir no site” (clique no seu avatar): você chega ao site do Origins já conectado",
+                "Entre no site pelo navegador: o pedido chega no sino e você aceita aqui",
+                "Discord opcional: vincule ao seu perfil se quiser, pelo seu perfil",
+                "O Java 21 se instala sozinho se faltar; se o jogo não abrir, o launcher diz por quê",
+                "Só um launcher de cada vez, e sem ícones duplicados ao lado do relógio",
+                "Botões do Discord do Origins e do Tempest, e o controle de memória do jogo corrigido"
             ]
         },
         {
@@ -635,7 +665,7 @@ const updateHistory = updateHistoryI18n.fr;
 const newsContent = {
 
     fr: [
-        { version: "0.6.4", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.4", text: "Un seul launcher à la fois, plus d'icônes en double.", date: "VERSION 0.6.4" },
+        { version: "0.7.0", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.7.0", text: "Nouveau design, Mac et Linux, et ton profil Origins sur le site.", date: "VERSION 0.7.0" },
         { version: "0.6.3", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.3", text: "MP reliés en direct entre le jeu et le launcher.", date: "VERSION 0.6.3" },
         { version: "0.6.2", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.2", text: "Mémoire du jeu réglable, mises à jour et actus qui arrivent toutes seules.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "NOTES DE MISE À JOUR", title: "Launcher Update 0.6.1", text: "Nouveau chat en jeu et MP avec tes amis du launcher, directement en jeu.", date: "VERSION 0.6.1" },
@@ -650,7 +680,7 @@ const newsContent = {
     ],
 
     en: [
-        { version: "0.6.4", type: "PATCH NOTES", title: "Launcher Update 0.6.4", text: "Only one launcher at a time, no more duplicate icons.", date: "VERSION 0.6.4" },
+        { version: "0.7.0", type: "PATCH NOTES", title: "Launcher Update 0.7.0", text: "New design, Mac and Linux, and your Origins profile on the website.", date: "VERSION 0.7.0" },
         { version: "0.6.3", type: "PATCH NOTES", title: "Launcher Update 0.6.3", text: "DMs linked live between the game and the launcher.", date: "VERSION 0.6.3" },
         { version: "0.6.2", type: "PATCH NOTES", title: "Launcher Update 0.6.2", text: "Adjustable game memory, updates and news that arrive on their own.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "PATCH NOTES", title: "Launcher Update 0.6.1", text: "New in-game chat, and private messages with your launcher friends right in the game.", date: "VERSION 0.6.1" },
@@ -665,7 +695,7 @@ const newsContent = {
     ],
 
     es: [
-        { version: "0.6.4", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.4", text: "Un solo launcher a la vez, sin iconos duplicados.", date: "VERSIÓN 0.6.4" },
+        { version: "0.7.0", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.7.0", text: "Nuevo diseño, Mac y Linux, y tu perfil de Origins en la web.", date: "VERSIÓN 0.7.0" },
         { version: "0.6.3", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.3", text: "MP conectados en directo entre el juego y el launcher.", date: "VERSION 0.6.3" },
         { version: "0.6.2", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.2", text: "Memoria del juego ajustable, actualizaciones y noticias que llegan solas.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "NOTAS DEL PARCHE", title: "Launcher Update 0.6.1", text: "Nuevo chat en el juego y mensajes privados con tus amigos del launcher, directamente en el juego.", date: "VERSIÓN 0.6.1" },
@@ -680,7 +710,7 @@ const newsContent = {
     ],
 
     de: [
-        { version: "0.6.4", type: "PATCH-NOTIZEN", title: "Launcher Update 0.6.4", text: "Nur ein Launcher gleichzeitig, keine doppelten Symbole mehr.", date: "VERSION 0.6.4" },
+        { version: "0.7.0", type: "PATCH-NOTIZEN", title: "Launcher Update 0.7.0", text: "Neues Design, Mac und Linux und dein Origins-Profil auf der Website.", date: "VERSION 0.7.0" },
         { version: "0.6.3", type: "PATCH-NOTIZEN", title: "Launcher Update 0.6.3", text: "PNs live zwischen Spiel und Launcher verbunden.", date: "VERSION 0.6.3" },
         { version: "0.6.2", type: "PATCH-NOTIZEN", title: "Launcher Update 0.6.2", text: "Einstellbarer Spielspeicher, Updates und News, die von selbst kommen.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "PATCHNOTES", title: "Launcher Update 0.6.1", text: "Neuer Chat im Spiel und private Nachrichten mit deinen Launcher-Freunden direkt im Spiel.", date: "VERSION 0.6.1" },
@@ -695,7 +725,7 @@ const newsContent = {
     ],
 
     pt: [
-        { version: "0.6.4", type: "NOTAS DA ATUALIZAÇÃO", title: "Launcher Update 0.6.4", text: "Só um launcher de cada vez, sem ícones duplicados.", date: "VERSÃO 0.6.4" },
+        { version: "0.7.0", type: "NOTAS DA ATUALIZAÇÃO", title: "Launcher Update 0.7.0", text: "Novo design, Mac e Linux, e o seu perfil Origins no site.", date: "VERSÃO 0.7.0" },
         { version: "0.6.3", type: "NOTAS DA ATUALIZAÇÃO", title: "Launcher Update 0.6.3", text: "MPs ligadas ao vivo entre o jogo e o launcher.", date: "VERSION 0.6.3" },
         { version: "0.6.2", type: "NOTAS DA ATUALIZAÇÃO", title: "Launcher Update 0.6.2", text: "Memória do jogo ajustável, atualizações e novidades que chegam sozinhas.", date: "VERSION 0.6.2" },
         { version: "0.6.1", type: "NOTAS DE ATUALIZAÇÃO", title: "Launcher Update 0.6.1", text: "Novo chat no jogo e mensagens privadas com seus amigos do launcher, direto no jogo.", date: "VERSÃO 0.6.1" },
