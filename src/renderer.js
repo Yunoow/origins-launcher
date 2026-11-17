@@ -2364,7 +2364,108 @@ function showMicrosoftOnboarding() {
     originsMicrosoftStep.hidden = false;
     originsProfileStep.hidden = true;
     setOnboardingStatus("");
+    renderKnownMicrosoftAccounts();
 
+}
+
+
+/* ---------- Plusieurs comptes Microsoft sur ce PC ---------- */
+
+// Ce qu'on sait du profil Origins de chaque compte Microsoft (nom, avatar), pour la liste.
+const MS_ACCOUNTS_KEY = "origins-comptes-microsoft";
+const MS_ACTIVE_KEY = "origins-compte-microsoft-actif";
+
+function readKnownProfiles() {
+    try { return JSON.parse(localStorage.getItem(MS_ACCOUNTS_KEY) || "{}") || {}; } catch (_) { return {}; }
+}
+
+async function rememberProfileForActiveAccount(profile) {
+    let id = localStorage.getItem(MS_ACTIVE_KEY);
+    if (!id && profile && window.origins?.profile?.microsoftAccounts) {
+        // Connecté avant le multi-compte : le compte actif, ou le seul connu.
+        try {
+            const accounts = await window.origins.profile.microsoftAccounts();
+            const found = accounts.find((a) => a.active) || (accounts.length === 1 ? accounts[0] : null);
+            if (found) { id = found.id; localStorage.setItem(MS_ACTIVE_KEY, id); }
+        } catch (_) {}
+    }
+    if (!id || !profile) return;
+    const known = readKnownProfiles();
+    known[id] = { displayName: profile.displayName || "", avatarUrl: profile.avatarUrl || "" };
+    try { localStorage.setItem(MS_ACCOUNTS_KEY, JSON.stringify(known)); } catch (_) {}
+}
+
+function setMicrosoftStepTexts(hasAccounts) {
+    const label = document.getElementById("originsMicrosoftLabel");
+    const intro = originsMicrosoftStep?.querySelector(":scope > p");
+    const pairs = [
+        [label, hasAccounts ? "onbAddMicrosoft" : "onbMicrosoftButton"],
+        [intro, hasAccounts ? "onbAccountsText" : "onbWelcomeText"]
+    ];
+    for (const [el, key] of pairs) {
+        if (!el) continue;
+        el.dataset.i18n = key;
+        el.textContent = t(key);
+    }
+}
+
+async function renderKnownMicrosoftAccounts() {
+    const box = document.getElementById("originsKnownAccounts");
+    const list = document.getElementById("originsKnownList");
+    if (!box || !list || !window.origins?.profile?.microsoftAccounts) return;
+
+    let accounts = [];
+    try { accounts = await window.origins.profile.microsoftAccounts(); } catch (_) {}
+
+    const known = readKnownProfiles();
+    list.replaceChildren();
+
+    for (const account of accounts) {
+        const origins = known[account.id] || null;
+        const row = document.createElement("div");
+        row.className = "origins-known-row";
+
+        const pick = document.createElement("button");
+        pick.type = "button";
+        pick.className = "origins-known-pick";
+        pick.addEventListener("click", () => signInWithMicrosoft(account.id));
+
+        const avatar = document.createElement("span");
+        avatar.className = "origins-known-avatar";
+        const shownName = origins?.displayName || account.name || account.email;
+        if (origins?.avatarUrl) avatar.style.backgroundImage = `url("${ORIGINS_PUBLIC_BASE}${origins.avatarUrl}")`;
+        else avatar.textContent = (shownName || "?").trim().charAt(0).toUpperCase();
+
+        const text = document.createElement("span");
+        text.className = "origins-known-text";
+        const name = document.createElement("strong");
+        name.textContent = shownName;
+        const mail = document.createElement("small");
+        mail.textContent = origins ? account.email : `${account.email} · ${t("onbAccountNoProfile")}`;
+        text.append(name, mail);
+        pick.append(avatar, text);
+
+        const forget = document.createElement("button");
+        forget.type = "button";
+        forget.className = "origins-known-forget";
+        forget.title = t("onbForgetAccount");
+        forget.setAttribute("aria-label", `${t("onbForgetAccount")} : ${account.email}`);
+        forget.textContent = "×";
+        forget.addEventListener("click", async () => {
+            await window.origins.profile.microsoftForget(account.id);
+            const rest = readKnownProfiles();
+            delete rest[account.id];
+            try { localStorage.setItem(MS_ACCOUNTS_KEY, JSON.stringify(rest)); } catch (_) {}
+            if (localStorage.getItem(MS_ACTIVE_KEY) === account.id) localStorage.removeItem(MS_ACTIVE_KEY);
+            renderKnownMicrosoftAccounts();
+        });
+
+        row.append(pick, forget);
+        list.append(row);
+    }
+
+    box.hidden = accounts.length === 0;
+    setMicrosoftStepTexts(accounts.length > 0);
 }
 
 
@@ -2400,7 +2501,8 @@ function hideOriginsOnboarding() {
 
 
 
-async function signInWithMicrosoft() {
+// choix : l'id d'un compte de la liste, ou "nouveau" pour en ajouter un.
+async function signInWithMicrosoft(choix = "nouveau") {
 
     if (!window.origins?.profile?.microsoftLogin) {
 
@@ -2410,11 +2512,12 @@ async function signInWithMicrosoft() {
     }
 
     originsMicrosoftButton.disabled = true;
+    document.querySelectorAll(".origins-known-row button").forEach((b) => { b.disabled = true; });
     setOnboardingStatus(t("onbWaitingMicrosoft"));
 
     try {
 
-        const auth = await window.origins.profile.microsoftLogin();
+        const auth = await window.origins.profile.microsoftLogin(choix);
 
         if (!auth?.token) {
 
@@ -2423,6 +2526,7 @@ async function signInWithMicrosoft() {
         }
 
         localStorage.setItem("origins-token", auth.token);
+        if (auth.microsoftAccount) localStorage.setItem(MS_ACTIVE_KEY, auth.microsoftAccount);
 
         const data = await window.origins.profile.get(auth.token);
 
@@ -2449,6 +2553,7 @@ async function signInWithMicrosoft() {
     } finally {
 
         originsMicrosoftButton.disabled = false;
+        document.querySelectorAll(".origins-known-row button").forEach((b) => { b.disabled = false; });
 
     }
 
@@ -2513,7 +2618,7 @@ async function createFirstOriginsProfile() {
 
 
 
-originsMicrosoftButton?.addEventListener("click", signInWithMicrosoft);
+originsMicrosoftButton?.addEventListener("click", () => signInWithMicrosoft("nouveau"));
 
 originsCreateProfileButton?.addEventListener("click", createFirstOriginsProfile);
 
@@ -2535,7 +2640,11 @@ loginButton.addEventListener("click", async () => {
 
     if (existing) {
 
+        // Se déconnecter / changer de compte : on oublie le compte actif, sans
+        // effacer les autres ; l'écran suivant les propose avec « Ajouter ».
         localStorage.removeItem("origins-token");
+        localStorage.removeItem(MS_ACTIVE_KEY);
+        try { await window.origins?.profile?.microsoftSignOut?.(); } catch (_) {}
         renderOriginsProfile(null);
         closeAccount();
         showMicrosoftOnboarding();
@@ -2613,6 +2722,7 @@ function avatarSrc(profile) {
 function renderOriginsProfile(profile) {
 
     originsProfile = profile || null;
+    if (profile) rememberProfileForActiveAccount(profile);
 
     const name = profile?.displayName || (t("notSignedIn"));
 

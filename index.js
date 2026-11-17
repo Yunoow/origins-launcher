@@ -375,20 +375,71 @@ async function minecraftAuthorizationFromMicrosoftAccessToken(
     return cachedMinecraftAuthorization;
 }
 
-async function acquireMicrosoftSession() {
+/*
+ * Plusieurs comptes Microsoft (Yunoow, 17/11) : le cache MSAL garde tous les
+ * comptes déjà connectés ; on retient lequel est actif, pour que le jeu se
+ * lance avec le bon et que « Changer de compte » ne reprenne pas le premier.
+ */
+function getActiveMicrosoftPath() {
+    return path.join(app.getPath("userData"), "compte-microsoft-actif.json");
+}
+
+function readActiveMicrosoftId() {
+    try {
+        return JSON.parse(fs.readFileSync(getActiveMicrosoftPath(), "utf8")).id || null;
+    } catch (_) {
+        return null;
+    }
+}
+
+function writeActiveMicrosoftId(id) {
+    try {
+        if (id) fs.writeFileSync(getActiveMicrosoftPath(), JSON.stringify({ id }));
+        else fs.rmSync(getActiveMicrosoftPath(), { force: true });
+    } catch (error) {
+        console.warn("Impossible de retenir le compte Microsoft actif :", error?.message || error);
+    }
+}
+
+function setActiveMicrosoftAccount(id) {
+    if (id !== readActiveMicrosoftId()) {
+        // Autre compte : l'autorisation Minecraft de l'ancien ne vaut plus.
+        cachedMinecraftAuthorization = null;
+        cachedMinecraftProfile = null;
+    }
+    writeActiveMicrosoftId(id);
+}
+
+async function listMicrosoftAccounts() {
+    const accounts = await microsoftAuth.getTokenCache().getAllAccounts();
+    return accounts;
+}
+
+/*
+ * choix : rien (lancement du jeu : le compte actif), l'id d'un compte connu,
+ * ou "nouveau" (Microsoft demande quel compte utiliser, même si le navigateur
+ * est déjà connecté).
+ */
+async function acquireMicrosoftSession(choix) {
     let result = null;
+    let wanted = null;
 
     try {
-        const accounts =
-            await microsoftAuth
-                .getTokenCache()
-                .getAllAccounts();
+        const accounts = await listMicrosoftAccounts();
+        const id = choix === "nouveau" ? null : (choix || readActiveMicrosoftId());
 
-        if (accounts.length > 0) {
+        wanted =
+            choix === "nouveau"
+                ? null
+                : accounts.find((account) => account.homeAccountId === id) ||
+                  (choix ? null : accounts[0]) ||
+                  null;
+
+        if (wanted) {
             result =
                 await microsoftAuth
                     .acquireTokenSilent({
-                        account: accounts[0],
+                        account: wanted,
                         scopes: MICROSOFT_SCOPES
                     });
 
@@ -410,6 +461,12 @@ async function acquireMicrosoftSession() {
                 .acquireTokenInteractive({
                     scopes: MICROSOFT_SCOPES,
 
+                    // Compte connu dont la session a expiré : on le propose ;
+                    // sinon Microsoft affiche le choix du compte.
+                    ...(wanted
+                        ? { loginHint: wanted.username }
+                        : { prompt: "select_account" }),
+
                     openBrowser:
                         async (url) => {
                             await shell.openExternal(url);
@@ -429,6 +486,10 @@ async function acquireMicrosoftSession() {
 
     if (!result?.accessToken) {
         throw new Error("MICROSOFT_ACCESS_TOKEN_MISSING");
+    }
+
+    if (result.account?.homeAccountId) {
+        setActiveMicrosoftAccount(result.account.homeAccountId);
     }
 
     return result;
@@ -732,9 +793,11 @@ ipcMain.handle("origins:clipboard-write-text", async (_event, text) => {
 
 ipcMain.handle(
     "origins:microsoft-login",
-    async () => {
+    async (_event, choix) => {
         const result =
-            await acquireMicrosoftSession();
+            await acquireMicrosoftSession(
+                typeof choix === "string" && choix.length < 300 ? choix : undefined
+            );
 
         const origins =
             await originsApi(
@@ -755,11 +818,40 @@ ipcMain.handle(
 
         return {
             ...origins,
+            microsoftAccount:
+                result.account?.homeAccountId || null,
             minecraft:
                 cachedMinecraftProfile
         };
     }
 );
+
+// Comptes Microsoft déjà connectés sur ce PC (pour « Choisis ton compte »).
+ipcMain.handle("origins:microsoft-accounts", async () => {
+    const active = readActiveMicrosoftId();
+    const accounts = await listMicrosoftAccounts();
+    return accounts.map((account) => ({
+        id: account.homeAccountId,
+        email: account.username || "",
+        name: account.name || "",
+        active: account.homeAccountId === active
+    }));
+});
+
+// Oublier un compte sur ce PC (ses jetons sont retirés du cache).
+ipcMain.handle("origins:microsoft-forget", async (_event, id) => {
+    const accounts = await listMicrosoftAccounts();
+    const account = accounts.find((item) => item.homeAccountId === id);
+    if (account) await microsoftAuth.getTokenCache().removeAccount(account);
+    if (id && id === readActiveMicrosoftId()) setActiveMicrosoftAccount(null);
+    return true;
+});
+
+// Se déconnecter : plus de compte actif (les comptes restent dans la liste).
+ipcMain.handle("origins:microsoft-signout", async () => {
+    setActiveMicrosoftAccount(null);
+    return true;
+});
 
 
 ipcMain.handle("origins:profile-get", async (_event, token) => {

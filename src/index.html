@@ -170,11 +170,17 @@
                     Origins profile to this launcher.
                 </p>
 
+                <!-- Comptes Microsoft déjà connectés sur ce PC (multi-compte) -->
+                <div class="origins-known-accounts" id="originsKnownAccounts" hidden>
+                    <span class="origins-known-title" data-i18n="onbChooseAccount">Choose your account</span>
+                    <div class="origins-known-list" id="originsKnownList"></div>
+                </div>
+
                 <button class="origins-microsoft-button" id="originsMicrosoftButton" type="button">
                     <span class="origins-microsoft-mark" aria-hidden="true">
                         <i></i><i></i><i></i><i></i>
                     </span>
-                    <span data-i18n="onbMicrosoftButton">CONTINUE WITH MICROSOFT</span>
+                    <span id="originsMicrosoftLabel" data-i18n="onbMicrosoftButton">CONTINUE WITH MICROSOFT</span>
                 </button>
 
                 <span class="origins-onboarding-note" data-i18n="onbSecureNote">SECURE MICROSOFT SIGN-IN</span>

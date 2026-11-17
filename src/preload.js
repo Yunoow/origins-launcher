@@ -79,7 +79,10 @@ contextBridge.exposeInMainWorld("origins", {
     },
 
     profile: {
-        microsoftLogin: () => ipcRenderer.invoke("origins:microsoft-login"),
+        microsoftLogin: (choix) => ipcRenderer.invoke("origins:microsoft-login", choix),
+        microsoftAccounts: () => ipcRenderer.invoke("origins:microsoft-accounts"),
+        microsoftForget: (id) => ipcRenderer.invoke("origins:microsoft-forget", id),
+        microsoftSignOut: () => ipcRenderer.invoke("origins:microsoft-signout"),
         get: (token) => ipcRenderer.invoke("origins:profile-get", token),
         create: (token, displayName) => ipcRenderer.invoke("origins:profile-create", token, displayName),
         updateName: (token, displayName) => ipcRenderer.invoke("origins:profile-update", token, displayName),
